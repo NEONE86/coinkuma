@@ -1,0 +1,23 @@
+name: Public code-only validation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recovered synthetic unit and regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Compile and CLI smoke checks
+        run: |
+          python -m compileall -q one.py one_trading tests
+          python one.py --help
+          python one.py status --workspace workspace_ci
