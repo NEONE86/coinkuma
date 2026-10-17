@@ -44,6 +44,16 @@ class ArchiveTests(unittest.TestCase):
     def test_bar_cannot_extend_into_next_utc_day(self):
         with self.assertRaises(ValueError):normalise_row([0,1,2,.5,1,10,DAY,11])
 
+    def test_bad_source_row_is_preserved_without_losing_valid_month_rows(self):
+        with tempfile.TemporaryDirectory() as d:
+            st=Store(str(Path(d)/'m.db'));st.db.executescript(SCHEMA)
+            p=payload([[0,1,2,.5,1,-10,DAY-1,11],
+                       [DAY,1,2,.5,1,10,2*DAY-1,11]])
+            ingest_zip(st,'XUSDT',p,0,2*DAY)
+            self.assertEqual(st.db.execute('SELECT count(*) FROM rejected_candles').fetchone()[0],1)
+            self.assertEqual(st.db.execute('SELECT open_ms FROM candles').fetchone()[0],DAY)
+            st.close()
+
     def test_derived_table_tampering_is_detected(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'m.db';st=Store(str(p));st.db.executescript(SCHEMA)
@@ -141,5 +151,16 @@ class ChronologyTests(unittest.TestCase):
         expected=(1-C['slippage_rate'])*(1-C['fee_rate'])/((1+C['slippage_rate'])*(1+C['fee_rate']))-1
         self.assertAlmostEqual(r['summary']['btc']['total_return'],expected)
         self.assertEqual(len(r['equity']),30)
+
+    def test_complete_run_ignores_prices_after_test_boundary(self):
+        p=self.panel();c={**C,'min_training_samples':10,'min_training_dates':5}
+        start=ms('2019-01-01');end=start+30*DAY
+        before=run(p,c,start,end)
+        self.assertGreater(before['summary']['model_refits'],0)
+        h=copy.deepcopy(p.h)
+        for s in h:
+            h[s]=[b if b.open_ms<end else Bar(b.open_ms,b.close_ms,1e6,2e6,5e5,1e6,1e10,1e16) for b in h[s]]
+        after=run(HistoricalPanel(h,c),c,start,end)
+        self.assertEqual(before,after)
 
 if __name__=='__main__':unittest.main()

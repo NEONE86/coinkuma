@@ -37,7 +37,12 @@ PROTOCOL = {
 
 # Publicly documented ticker reuse. No old/new LUNA price splice in features/labels.
 IDENTITY_BOUNDARIES = {'LUNAUSDT':[ms('2022-05-31')]}
-EXCLUDED = STABLE_BASES | EXCLUDED_BASES | {'1INCHUP','1INCHDOWN','SXPUP','SXPDOWN'}
+EXCLUDED = STABLE_BASES | EXCLUDED_BASES | {'1INCHUP','1INCHDOWN','SXPUP','SXPDOWN',
+    'AUD','BRL','BIDR','IDRT','NGN','RUB','UAH','TRY','ZAR','BKRW','GBP'}
+EXCLUDED |= {base+suffix for base in ['1INCH','AAVE','ADA','BCH','BNB','BTC','DOT',
+    'EOS','ETH','FIL','LINK','LTC','SUSHI','SXP','TRX','UNI','XLM','XRP','XTZ','YFI']
+    for suffix in ['UP','DOWN']}
+EXCLUDED |= {'BULL','BEAR','ETHBULL','ETHBEAR','EOSBULL','EOSBEAR','XRPBULL','XRPBEAR'}
 
 
 def iso(t): return datetime.fromtimestamp(t/1000,timezone.utc).isoformat()

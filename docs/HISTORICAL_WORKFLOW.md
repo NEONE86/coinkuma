@@ -27,11 +27,11 @@ It reuses TLS connections to avoid repeatedly establishing the same connection.
 Binance's archive index is broader than today's exchangeInfo, but **not the entire
 crypto market or a certified historical listing register**. Missing/removed archive
 objects, non-USDT pairs, other venues, DEX-only assets, extinct venues and token
-identity changes still limit coverage. A first observed trade in January 2018 is
-left-censored, not proof that a pair listed then. A last observed trade is not by
+identity changes still limit coverage. A first observed daily bucket in January 2018 is
+left-censored, not proof that a pair listed then. A last observed daily bucket is not by
 itself proof of delisting. Current market-cap ranks are not used.
 
-`market_events` distinguishes observed first/last trades from manually reviewed
+`market_events` distinguishes observed first/last daily buckets from manually reviewed
 listing/delisting notices. The small notice seed is stored with its source URL,
 review time and conservative publication availability bound. It is not a complete
 announcement history and is not used to improve strategy performance. Ticker reuse
@@ -58,7 +58,7 @@ Primary source specifications:
 
 ## Reproduce
 
-Python 3.10+ standard library only; no added dependency. Run from the repository
+Linux / Python 3.10+ standard library only; no added dependency. Collection uses a POSIX single-writer lock. Run from the repository
 root. Keep the exact run's dataset and source manifests for strict reproducibility:
 upstream archive files can be revised. Fetching fresh bytes in the future is not
 necessarily the same experiment.
@@ -67,7 +67,7 @@ necessarily the same experiment.
 python -m unittest discover -s tests -v
 python -m one_trading.historical_data \
   --db output/market/market.sqlite3 --cache output/market/cache \
-  --start 2018-01-01 --end 2026-10-01 --workers 16
+  --start 2018-01-01 --end 2026-10-01 --workers 16 --memory-build
 python -m one_trading.reference_data --output output/reference \
   --start 2018-01-01 --end 2026-10-01
 python -m one_trading.walkforward \
@@ -103,7 +103,8 @@ parity is made between these runners.
 The collector verifies each Binance ZIP against the publisher's `.CHECKSUM`.
 Milliseconds and microseconds normalize to milliseconds. Daily bars shortened by
 suspension/delisting preserve their actual end timestamp. No gap candles are
-interpolated. Before replay, all raw hashes are verified and **every normalized
+interpolated. Invalid OHLC/negative-volume source rows are retained in
+`rejected_candles` and excluded from features; no numbers are repaired. Before replay, all raw hashes are verified and **every normalized
 candle is regenerated from the original ZIP and compared with the database**.
 The source manifest and canonical normalized-candle digest are independent of
 thread completion order and SQLite page layout. A local hash alone cannot prove
@@ -162,3 +163,11 @@ historical publication time or source authenticity.
 A price-model failure rejects that implementation under the tested protocol. It
 neither validates nor falsifies a yet-unimplemented fundamental revaluation engine.
 Do not promote this system to funded trading on the basis of offline test counts.
+
+Memory-build mode reconstructs the database from the frozen HTTP cache in RAM,
+checks SQLite integrity, and atomically exports a standalone file. It requires a
+new output database path; it never overwrites a prior dataset. This mode was used
+after two file-backed builds failed database integrity checks. Those failed
+builds were rejected before any performance calculation. The precise underlying
+filesystem cause was not established. Avoid opening a writable collection DB
+from another process while it is being built.
