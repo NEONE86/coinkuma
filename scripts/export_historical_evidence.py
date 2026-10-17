@@ -27,7 +27,7 @@ def main():
         'collection':{k:v for k,v in collection.items() if k!='coverage'},
         'reference':reference,'crossvenue_comparison':cross})
     with (out/'coverage.csv').open('w',newline='') as f:
-        w=csv.writer(f);w.writerow(['symbol','daily_bars','first_daily_bucket_UTC','last_daily_bucket_UTC','internal_missing_days'])
+        w=csv.writer(f,lineterminator="\n");w.writerow(['symbol','daily_bars','first_daily_bucket_UTC','last_daily_bucket_UTC','internal_missing_days'])
         for r in collection['coverage']:w.writerow([r['symbol'],r['bars'],day(r['first_ms']),day(r['last_ms']),r['missing_days']])
     base=results['base']['continuous'];stress=results['stress']['continuous']
     lines=['# ONE real-data walk-forward results — 2026-10-17','',
