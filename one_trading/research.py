@@ -88,8 +88,14 @@ def cap_snapshot(output):
 
 
 def load_history(dbpath):
-    connection = sqlite3.connect(dbpath)
+    connection = sqlite3.connect(f"file:{Path(dbpath).resolve()}?mode=ro", uri=True)
     try:
+        # Bulk archives retain original ZIP/index/checksum bytes in snapshots;
+        # do not disguise a normalized CSV as an exchange JSON response.
+        if connection.execute("SELECT 1 FROM sqlite_master WHERE name='archive_meta'").fetchone():
+            from .historical_data import load_histories
+            histories, evidence = load_histories(dbpath)
+            return histories, {"source_manifest_sha256": evidence["source_manifest_sha256"]}
         clock = connection.execute("SELECT raw FROM snapshots WHERE path='/api/v3/time' ORDER BY id DESC LIMIT 1").fetchone()
         if not clock:
             raise ValueError("No successful public snapshot in database")
