@@ -1,0 +1,1347 @@
+{
+  "base": {
+    "continuous": {
+      "total_return": 0.11874490500858204,
+      "max_drawdown": -0.034554995104471686,
+      "start": "2019-01-01T00:00:00+00:00",
+      "end_exclusive": "2026-10-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 21.503268801628952,
+        "max_drawdown": -0.7662925431645935
+      },
+      "excess_return_percentage_points": -2138.4523896620367,
+      "final_cash": 11187.449050085821,
+      "fees_paid": 63.65165396145228,
+      "slippage_cost": 63.65296871512132,
+      "fill_count": 334,
+      "turnover_notional": 63651.65396145223,
+      "average_daily_exposure": 0.007723383908178752,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 404,
+      "first_model_eligible_execution": "2019-01-05T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 723,
+          "strategy_compounded_selected_days": -4.508843255524031e-05,
+          "btc_compounded_selected_days": 0.40414951657420906
+        },
+        "TRANSITION": {
+          "days": 977,
+          "strategy_compounded_selected_days": 0.02166546305738204,
+          "btc_compounded_selected_days": -0.600545779452702
+        },
+        "BULL": {
+          "days": 1130,
+          "strategy_compounded_selected_days": 0.09507014790262502,
+          "btc_compounded_selected_days": 39.12039857935048
+        }
+      },
+      "execution_notes": {
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 8,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 9,
+        "NEOUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "XLMUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "QTUMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "QTUMUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "NEOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 11,
+        "ICXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ICXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XRPUSDT:ENTRY_INVALIDATED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 11,
+        "HOTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "DASHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:ENTRY_GAP_TOO_HIGH": 8,
+        "LTCUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 4,
+        "RVNUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "RVNUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "LTCUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "EOSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "RVNUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 12,
+        "EOSUSDT:ENTRY_INVALIDATED": 1,
+        "BTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BTTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BTTUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "DASHUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "DASHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BCHUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "XTZUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "XTZUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "XTZUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "BATUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "FETUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BATUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BATUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ONTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ONTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "QTUMUSDT:ENTRY_INVALIDATED": 1,
+        "SANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "AAVEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 4,
+        "AAVEUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ETHUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ADAUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "ADAUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "FTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "FTTUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "IOSTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ALGOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "ADAUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ALGOUSDT:ENTRY_GAP_TOO_HIGH": 8,
+        "IOSTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "UNIUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "UNIUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "UNIUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 13,
+        "ALGOUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "EGLDUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "CAKEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "CAKEUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ATOMUSDT:ENTRY_INVALIDATED": 1,
+        "AXSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "AXSUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "DOGEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "DOGEUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "SHIBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SHIBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "SHIBUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BCHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BCHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BNBUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "DOGEUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "APTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "APTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "APTUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "RUNEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "RUNEUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "MATICUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ARBUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ARBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ARBUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "LINKUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LINKUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ATOMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "LINKUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ATOMUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ATOMUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BNBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 4,
+        "BNBUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "TRXUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "PAXGUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "PAXGUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "TRUMPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "TRUMPUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XLMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "VANAUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BANKUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BANKUSDT:STALE_POSITION_INTENT_SKIPPED": 2
+      },
+      "decisions_by_state": {
+        "WAIT": 44245,
+        "REJECT": 31082,
+        "LATE": 28942,
+        "PROBE_CANDIDATE": 154,
+        "HOLD": 563,
+        "WAIT_CAPACITY": 213,
+        "ADD_OR_HOLD": 146,
+        "EXIT": 71
+      }
+    },
+    "2019": {
+      "total_return": 0.012529422572928661,
+      "max_drawdown": -0.006686672011475436,
+      "start": "2019-01-01T00:00:00+00:00",
+      "end_exclusive": "2020-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 0.9362499913845455,
+        "max_drawdown": -0.4941254639600421
+      },
+      "excess_return_percentage_points": -92.37205688116168,
+      "final_cash": 10125.294225729287,
+      "fees_paid": 3.9790160998439204,
+      "slippage_cost": 3.9791493522348595,
+      "fill_count": 19,
+      "turnover_notional": 3979.0160998439205,
+      "average_daily_exposure": 0.0029439619562021562,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2019-01-05T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 94,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.1925155487733181
+        },
+        "TRANSITION": {
+          "days": 129,
+          "strategy_compounded_selected_days": -0.0012107690766244295,
+          "btc_compounded_selected_days": 0.07524964033602721
+        },
+        "BULL": {
+          "days": 142,
+          "strategy_compounded_selected_days": 0.013756848015722412,
+          "btc_compounded_selected_days": 0.5100386818412097
+        }
+      },
+      "execution_notes": {
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "NEOUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "XLMUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "QTUMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "NEOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ICXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ICXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XRPUSDT:ENTRY_INVALIDATED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 3003,
+        "REJECT": 2538,
+        "LATE": 1218,
+        "PROBE_CANDIDATE": 13,
+        "HOLD": 32,
+        "WAIT_CAPACITY": 6,
+        "ADD_OR_HOLD": 11,
+        "EXIT": 7
+      }
+    },
+    "2020": {
+      "total_return": 0.02788988966026995,
+      "max_drawdown": -0.014277072703469229,
+      "start": "2020-01-01T00:00:00+00:00",
+      "end_exclusive": "2021-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 3.0037811834516495,
+        "max_drawdown": -0.5359790262519867
+      },
+      "excess_return_percentage_points": -297.58912937913794,
+      "final_cash": 10278.8988966027,
+      "fees_paid": 11.24235466456811,
+      "slippage_cost": 11.242656048474808,
+      "fill_count": 81,
+      "turnover_notional": 11242.354664568109,
+      "average_daily_exposure": 0.014907865907988956,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 53,
+      "first_model_eligible_execution": "2020-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 40,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.03435721746959697
+        },
+        "TRANSITION": {
+          "days": 116,
+          "strategy_compounded_selected_days": 0.009538325154226035,
+          "btc_compounded_selected_days": 0.17471521479780394
+        },
+        "BULL": {
+          "days": 210,
+          "strategy_compounded_selected_days": 0.018178175160650234,
+          "btc_compounded_selected_days": 2.2950893181739027
+        }
+      },
+      "execution_notes": {
+        "HOTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "DASHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:ENTRY_GAP_TOO_HIGH": 8,
+        "LTCUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "RVNUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "RVNUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "LTCUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "EOSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "RVNUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "EOSUSDT:ENTRY_INVALIDATED": 1,
+        "BTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BTTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BTTUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "DASHUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "DASHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BCHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "XTZUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "XTZUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "XTZUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "QTUMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "BATUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "FETUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "QTUMUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "BATUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BATUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ONTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ONTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "QTUMUSDT:ENTRY_INVALIDATED": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 7078,
+        "LATE": 4948,
+        "REJECT": 2398,
+        "PROBE_CANDIDATE": 41,
+        "HOLD": 156,
+        "WAIT_CAPACITY": 4,
+        "EXIT": 19,
+        "ADD_OR_HOLD": 31
+      }
+    },
+    "2021": {
+      "total_return": -0.021706612498078925,
+      "max_drawdown": -0.030457802479019747,
+      "start": "2021-01-01T00:00:00+00:00",
+      "end_exclusive": "2022-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 0.5915163989297125,
+        "max_drawdown": -0.5314140778607944
+      },
+      "excess_return_percentage_points": -61.322301142779146,
+      "final_cash": 9782.933875019211,
+      "fees_paid": 12.062328326539534,
+      "slippage_cost": 12.062135384877575,
+      "fill_count": 71,
+      "turnover_notional": 12062.32832653953,
+      "average_daily_exposure": 0.008631597714446897,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2021-01-01T00:00:00+00:00",
+      "regime": {
+        "BULL": {
+          "days": 182,
+          "strategy_compounded_selected_days": -0.021194470720996228,
+          "btc_compounded_selected_days": 0.7274098382378489
+        },
+        "TRANSITION": {
+          "days": 101,
+          "strategy_compounded_selected_days": -0.0010788048678759266,
+          "btc_compounded_selected_days": -0.3608674124568624
+        },
+        "BEAR": {
+          "days": 82,
+          "strategy_compounded_selected_days": 0.0005561734810874963,
+          "btc_compounded_selected_days": 0.44153359353604116
+        }
+      },
+      "execution_notes": {
+        "SANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "AAVEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ETHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "AAVEUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ADAUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ADAUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "FTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "FTTUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "IOSTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ALGOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "ADAUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ALGOUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "IOSTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "UNIUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "FTTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "UNIUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "UNIUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "ALGOUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "EGLDUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "CAKEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "CAKEUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ATOMUSDT:ENTRY_INVALIDATED": 1,
+        "AXSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "AXSUSDT:STALE_POSITION_INTENT_SKIPPED": 1
+      },
+      "decisions_by_state": {
+        "LATE": 6025,
+        "WAIT": 2408,
+        "REJECT": 6034,
+        "PROBE_CANDIDATE": 30,
+        "HOLD": 96,
+        "ADD_OR_HOLD": 24,
+        "EXIT": 8,
+        "WAIT_CAPACITY": 72
+      }
+    },
+    "2022": {
+      "total_return": 0.009059149885618067,
+      "max_drawdown": -0.0035239321480927677,
+      "start": "2022-01-01T00:00:00+00:00",
+      "end_exclusive": "2023-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": -0.6434994158860063,
+        "max_drawdown": -0.6693123705410324
+      },
+      "excess_return_percentage_points": 65.25585657716245,
+      "final_cash": 10090.59149885618,
+      "fees_paid": 2.857531241571327,
+      "slippage_cost": 2.857627548228779,
+      "fill_count": 18,
+      "turnover_notional": 2857.531241571327,
+      "average_daily_exposure": 0.002406814128694185,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2022-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 233,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": -0.4479019462360977
+        },
+        "TRANSITION": {
+          "days": 132,
+          "strategy_compounded_selected_days": 0.009059149885617623,
+          "btc_compounded_selected_days": -0.35428031002180127
+        }
+      },
+      "execution_notes": {
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "DOGEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "DOGEUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "SHIBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ADAUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ADAUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "SHIBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ADAUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "SHIBUSDT:ENTRY_GAP_TOO_HIGH": 1
+      },
+      "decisions_by_state": {
+        "REJECT": 8480,
+        "LATE": 2135,
+        "WAIT": 4003,
+        "PROBE_CANDIDATE": 8,
+        "HOLD": 31,
+        "WAIT_CAPACITY": 11,
+        "ADD_OR_HOLD": 4,
+        "EXIT": 8
+      }
+    },
+    "2023": {
+      "total_return": 0.0,
+      "max_drawdown": 0.0,
+      "start": "2023-01-01T00:00:00+00:00",
+      "end_exclusive": "2024-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 1.5459659662728193,
+        "max_drawdown": -0.20002746848357122
+      },
+      "excess_return_percentage_points": -154.59659662728194,
+      "final_cash": 10000.0,
+      "fees_paid": 0.0,
+      "slippage_cost": 0,
+      "fill_count": 0,
+      "turnover_notional": 0,
+      "average_daily_exposure": 0.0,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2023-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 39,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.12951085150030606
+        },
+        "TRANSITION": {
+          "days": 122,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": -0.025908052314832175
+        },
+        "BULL": {
+          "days": 204,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 1.313994023343688
+        }
+      },
+      "execution_notes": {},
+      "decisions_by_state": {
+        "WAIT": 7857,
+        "LATE": 4783,
+        "REJECT": 2040
+      }
+    },
+    "2024": {
+      "total_return": 0.10263234207550731,
+      "max_drawdown": -0.01972452800595048,
+      "start": "2024-01-01T00:00:00+00:00",
+      "end_exclusive": "2025-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 1.2042230929023359,
+        "max_drawdown": -0.2615137505386781
+      },
+      "excess_return_percentage_points": -110.15907508268286,
+      "final_cash": 11026.323420755072,
+      "fees_paid": 17.01977455083428,
+      "slippage_cost": 17.020834914863595,
+      "fill_count": 93,
+      "turnover_notional": 17019.774550834274,
+      "average_daily_exposure": 0.019119950335920077,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2024-01-01T00:00:00+00:00",
+      "regime": {
+        "BULL": {
+          "days": 195,
+          "strategy_compounded_selected_days": 0.10088643803495101,
+          "btc_compounded_selected_days": 0.7310302530180834
+        },
+        "TRANSITION": {
+          "days": 129,
+          "strategy_compounded_selected_days": 0.0015859074834936315,
+          "btc_compounded_selected_days": -0.02567600206532772
+        },
+        "BEAR": {
+          "days": 42,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.3069154450926075
+        }
+      },
+      "execution_notes": {
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "LTCUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "ETHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "LTCUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "ETHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "BCHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BCHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BNBUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "DOGEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "DOGEUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "DOGEUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "BCHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 9,
+        "DOTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "RUNEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "RUNEUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "MATICUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ARBUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ARBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ARBUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "LINKUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LINKUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ATOMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "LINKUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ATOMUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ATOMUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BNBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "BNBUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "TRXUSDT:ENTRY_GAP_TOO_HIGH": 4
+      },
+      "decisions_by_state": {
+        "WAIT": 6863,
+        "LATE": 4698,
+        "REJECT": 2754,
+        "PROBE_CANDIDATE": 42,
+        "WAIT_CAPACITY": 115,
+        "HOLD": 163,
+        "ADD_OR_HOLD": 68,
+        "EXIT": 18
+      }
+    },
+    "2025": {
+      "total_return": -0.005891898348650337,
+      "max_drawdown": -0.007512399013962612,
+      "start": "2025-01-01T00:00:00+00:00",
+      "end_exclusive": "2026-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": -0.067086354883923,
+        "max_drawdown": -0.3202251526449772
+      },
+      "excess_return_percentage_points": 6.119445653527267,
+      "final_cash": 9941.081016513497,
+      "fees_paid": 6.440842314138059,
+      "slippage_cost": 6.440796276792725,
+      "fill_count": 27,
+      "turnover_notional": 6440.84231413806,
+      "average_daily_exposure": 0.0062570382482940124,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2025-01-01T00:00:00+00:00",
+      "regime": {
+        "TRANSITION": {
+          "days": 129,
+          "strategy_compounded_selected_days": 3.472022548689502e-05,
+          "btc_compounded_selected_days": -0.1189430318750413
+        },
+        "BULL": {
+          "days": 155,
+          "strategy_compounded_selected_days": -0.005083388352349116,
+          "btc_compounded_selected_days": -0.03957223532378573
+        },
+        "BEAR": {
+          "days": 81,
+          "strategy_compounded_selected_days": -0.0008473317718583617,
+          "btc_compounded_selected_days": 0.1024851502733588
+        }
+      },
+      "execution_notes": {
+        "SHIBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "SHIBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ETHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "PAXGUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BNBUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "PAXGUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BNBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BNBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 7815,
+        "LATE": 2844,
+        "REJECT": 3959,
+        "PROBE_CANDIDATE": 9,
+        "HOLD": 34,
+        "EXIT": 7,
+        "ADD_OR_HOLD": 13
+      }
+    },
+    "2026": {
+      "total_return": 0.00120229622232082,
+      "max_drawdown": -0.004962342992704816,
+      "start": "2026-01-01T00:00:00+00:00",
+      "end_exclusive": "2026-10-01T00:00:00+00:00",
+      "btc": {
+        "total_return": -0.04972647374483585,
+        "max_drawdown": -0.3953209523332114
+      },
+      "excess_return_percentage_points": 5.092876996715667,
+      "final_cash": 10012.02296222321,
+      "fees_paid": 4.243596854609863,
+      "slippage_cost": 4.243617364786108,
+      "fill_count": 14,
+      "turnover_notional": 4243.596854609863,
+      "average_daily_exposure": 0.005677404082232725,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 39,
+      "first_model_eligible_execution": "2026-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 112,
+          "strategy_compounded_selected_days": 0.0002518749016102717,
+          "btc_compounded_selected_days": -0.13504324114244515
+        },
+        "TRANSITION": {
+          "days": 119,
+          "strategy_compounded_selected_days": 0.0009501819937141054,
+          "btc_compounded_selected_days": -0.08726311407623644
+        },
+        "BULL": {
+          "days": 42,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.20367331355009521
+        }
+      },
+      "execution_notes": {
+        "TRUMPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "TRUMPUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "XLMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 5607,
+        "LATE": 2395,
+        "PROBE_CANDIDATE": 7,
+        "HOLD": 27,
+        "REJECT": 2960,
+        "EXIT": 4
+      }
+    }
+  },
+  "stress": {
+    "continuous": {
+      "total_return": 0.10061264375071866,
+      "max_drawdown": -0.03207875313208408,
+      "start": "2019-01-01T00:00:00+00:00",
+      "end_exclusive": "2026-10-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 21.36865294664084,
+        "max_drawdown": -0.7662925431645935
+      },
+      "excess_return_percentage_points": -2126.804030289012,
+      "final_cash": 11006.126437507186,
+      "fees_paid": 84.22248445101447,
+      "slippage_cost": 126.34467691890944,
+      "fill_count": 252,
+      "turnover_notional": 42111.24222550724,
+      "average_daily_exposure": 0.00522128801857051,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 404,
+      "first_model_eligible_execution": "2019-01-05T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 723,
+          "strategy_compounded_selected_days": -0.0005516732180101958,
+          "btc_compounded_selected_days": 0.3999510647268498
+        },
+        "TRANSITION": {
+          "days": 977,
+          "strategy_compounded_selected_days": 0.013500738726610395,
+          "btc_compounded_selected_days": -0.6005457794527
+        },
+        "BULL": {
+          "days": 1130,
+          "strategy_compounded_selected_days": 0.08655091737012577,
+          "btc_compounded_selected_days": 38.99999730345494
+        }
+      },
+      "execution_notes": {
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 6,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 5,
+        "NEOUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "QTUMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "QTUMUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "NEOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 8,
+        "ICXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ICXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 10,
+        "HOTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "DASHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:ENTRY_GAP_TOO_HIGH": 8,
+        "EOSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "RVNUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "RVNUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BTTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "DASHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "LTCUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "DASHUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "XTZUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "XTZUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "FETUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BATUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BATUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BATUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XTZUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ICXUSDT:ENTRY_INVALIDATED": 1,
+        "BATUSDT:ENTRY_INVALIDATED": 1,
+        "SANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "AAVEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "AAVEUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ETHUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ADAUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "ADAUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "FTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "FTTUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "IOSTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ALGOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "ADAUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ALGOUSDT:STALE_POSITION_INTENT_SKIPPED": 5,
+        "IOSTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "UNIUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "UNIUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "UNIUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ALGOUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 10,
+        "EGLDUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ATOMUSDT:ENTRY_INVALIDATED": 1,
+        "ETHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "DOGEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "DOGEUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "SHIBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SHIBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "SHIBUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LTCUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "BNBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "BNBUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "BNBUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "BCHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BCHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "DOGEUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "APTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "APTUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "BCHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "OPUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "RUNEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "RUNEUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "MATICUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ARBUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ARBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ARBUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "LINKUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LINKUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ATOMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "LINKUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ATOMUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "TRXUSDT:ENTRY_GAP_TOO_HIGH": 4
+      },
+      "decisions_by_state": {
+        "WAIT": 44453,
+        "REJECT": 31089,
+        "LATE": 28979,
+        "PROBE_CANDIDATE": 119,
+        "HOLD": 437,
+        "WAIT_CAPACITY": 179,
+        "ADD_OR_HOLD": 94,
+        "EXIT": 55
+      }
+    },
+    "2019": {
+      "total_return": 0.009843765995706688,
+      "max_drawdown": -0.008720171022999157,
+      "start": "2019-01-01T00:00:00+00:00",
+      "end_exclusive": "2020-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 0.9246672319926259,
+        "max_drawdown": -0.4941254639600421
+      },
+      "excess_return_percentage_points": -91.48234659969192,
+      "final_cash": 10098.437659957068,
+      "fees_paid": 7.515304232370523,
+      "slippage_cost": 11.274011391335852,
+      "fill_count": 19,
+      "turnover_notional": 3757.652116185262,
+      "average_daily_exposure": 0.0027610408567000917,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2019-01-05T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 94,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.1853818518157837
+        },
+        "TRANSITION": {
+          "days": 129,
+          "strategy_compounded_selected_days": -0.0014086486476696525,
+          "btc_compounded_selected_days": 0.07524964033602832
+        },
+        "BULL": {
+          "days": 142,
+          "strategy_compounded_selected_days": 0.011268287701609037,
+          "btc_compounded_selected_days": 0.510038681841207
+        }
+      },
+      "execution_notes": {
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "NEOUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "QTUMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "NEOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ICXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ICXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 3007,
+        "REJECT": 2538,
+        "LATE": 1219,
+        "PROBE_CANDIDATE": 12,
+        "HOLD": 30,
+        "WAIT_CAPACITY": 4,
+        "ADD_OR_HOLD": 10,
+        "EXIT": 8
+      }
+    },
+    "2020": {
+      "total_return": 0.036533142729064716,
+      "max_drawdown": -0.008044363297067703,
+      "start": "2020-01-01T00:00:00+00:00",
+      "end_exclusive": "2021-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 2.9798303329353613,
+        "max_drawdown": -0.5359790262519866
+      },
+      "excess_return_percentage_points": -294.3297190206296,
+      "final_cash": 10365.331427290648,
+      "fees_paid": 17.41483072053843,
+      "slippage_cost": 26.12592593046265,
+      "fill_count": 71,
+      "turnover_notional": 8707.415360269217,
+      "average_daily_exposure": 0.01052162768784007,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 53,
+      "first_model_eligible_execution": "2020-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 40,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.031264456393051754
+        },
+        "TRANSITION": {
+          "days": 116,
+          "strategy_compounded_selected_days": 0.00887029703591713,
+          "btc_compounded_selected_days": 0.17471521479780172
+        },
+        "BULL": {
+          "days": 210,
+          "strategy_compounded_selected_days": 0.02741962547061072,
+          "btc_compounded_selected_days": 2.285200758435053
+        }
+      },
+      "execution_notes": {
+        "HOTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "DASHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:ENTRY_GAP_TOO_HIGH": 8,
+        "EOSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "EOSUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "RVNUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "RVNUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BTTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "DASHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "LTCUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "DASHUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "QTUMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "QTUMUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XTZUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "XTZUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "FETUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BATUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "FETUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BATUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "BATUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "BANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XTZUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ICXUSDT:ENTRY_INVALIDATED": 1,
+        "BATUSDT:ENTRY_INVALIDATED": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 7151,
+        "LATE": 4950,
+        "REJECT": 2398,
+        "PROBE_CANDIDATE": 26,
+        "HOLD": 115,
+        "EXIT": 17,
+        "ADD_OR_HOLD": 18
+      }
+    },
+    "2021": {
+      "total_return": -0.018115025954986264,
+      "max_drawdown": -0.02151200934726938,
+      "start": "2021-01-01T00:00:00+00:00",
+      "end_exclusive": "2022-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 0.5819958558184812,
+        "max_drawdown": -0.5314140778607943
+      },
+      "excess_return_percentage_points": -60.01108817734675,
+      "final_cash": 9818.849740450138,
+      "fees_paid": 18.82099988054713,
+      "slippage_cost": 28.230292930119706,
+      "fill_count": 60,
+      "turnover_notional": 9410.499940273563,
+      "average_daily_exposure": 0.007254612208218264,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2021-01-01T00:00:00+00:00",
+      "regime": {
+        "BULL": {
+          "days": 182,
+          "strategy_compounded_selected_days": -0.016914564392352616,
+          "btc_compounded_selected_days": 0.7222448277166096
+        },
+        "TRANSITION": {
+          "days": 101,
+          "strategy_compounded_selected_days": -0.0012211162114222907,
+          "btc_compounded_selected_days": -0.36086741245686293
+        },
+        "BEAR": {
+          "days": 82,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.4372075526677055
+        }
+      },
+      "execution_notes": {
+        "SANDUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SANDUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "AAVEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "AAVEUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "ETHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ADAUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ADAUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "FTTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "FTTUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "IOSTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ALGOUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "ADAUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ALGOUSDT:ENTRY_GAP_TOO_HIGH": 6,
+        "IOSTUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "UNIUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "FTTUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "UNIUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "UNIUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "ALGOUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "EGLDUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ATOMUSDT:ENTRY_INVALIDATED": 1,
+        "ETHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "AXSUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ETHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "AXSUSDT:STALE_POSITION_INTENT_SKIPPED": 1
+      },
+      "decisions_by_state": {
+        "LATE": 6031,
+        "WAIT": 2422,
+        "REJECT": 6036,
+        "PROBE_CANDIDATE": 28,
+        "HOLD": 91,
+        "ADD_OR_HOLD": 18,
+        "WAIT_CAPACITY": 65,
+        "EXIT": 6
+      }
+    },
+    "2022": {
+      "total_return": 0.011627599331551552,
+      "max_drawdown": -0.002891864102406716,
+      "start": "2022-01-01T00:00:00+00:00",
+      "end_exclusive": "2023-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": -0.6456320229911037,
+        "max_drawdown": -0.6693123705410324
+      },
+      "excess_return_percentage_points": 65.72596223226552,
+      "final_cash": 10116.275993315516,
+      "fees_paid": 3.852082094579513,
+      "slippage_cost": 5.779256307854668,
+      "fill_count": 13,
+      "turnover_notional": 1926.041047289756,
+      "average_daily_exposure": 0.002050947592061654,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2022-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 233,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": -0.45120462871302425
+        },
+        "TRANSITION": {
+          "days": 132,
+          "strategy_compounded_selected_days": 0.011627599331551552,
+          "btc_compounded_selected_days": -0.3542803100218014
+        }
+      },
+      "execution_notes": {
+        "DOGEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "DOGEUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "SHIBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ADAUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ADAUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "SHIBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "ADAUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "SHIBUSDT:ENTRY_GAP_TOO_HIGH": 1
+      },
+      "decisions_by_state": {
+        "REJECT": 8480,
+        "LATE": 2135,
+        "WAIT": 4011,
+        "PROBE_CANDIDATE": 7,
+        "HOLD": 29,
+        "WAIT_CAPACITY": 8,
+        "ADD_OR_HOLD": 2,
+        "EXIT": 8
+      }
+    },
+    "2023": {
+      "total_return": 0.0,
+      "max_drawdown": 0.0,
+      "start": "2023-01-01T00:00:00+00:00",
+      "end_exclusive": "2024-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 1.530735850668652,
+        "max_drawdown": -0.2000274684835711
+      },
+      "excess_return_percentage_points": -153.07358506686518,
+      "final_cash": 10000.0,
+      "fees_paid": 0.0,
+      "slippage_cost": 0,
+      "fill_count": 0,
+      "turnover_notional": 0,
+      "average_daily_exposure": 0.0,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2023-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 39,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.12613357802257608
+        },
+        "TRANSITION": {
+          "days": 122,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": -0.02590805231483262
+        },
+        "BULL": {
+          "days": 204,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 1.3070497296005796
+        }
+      },
+      "execution_notes": {},
+      "decisions_by_state": {
+        "WAIT": 7857,
+        "LATE": 4783,
+        "REJECT": 2040
+      }
+    },
+    "2024": {
+      "total_return": 0.06540614405836309,
+      "max_drawdown": -0.017332078497797943,
+      "start": "2024-01-01T00:00:00+00:00",
+      "end_exclusive": "2025-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": 1.191037302924388,
+        "max_drawdown": -0.261513750538678
+      },
+      "excess_return_percentage_points": -112.56311588660249,
+      "final_cash": 10654.061440583631,
+      "fees_paid": 23.88790955736932,
+      "slippage_cost": 35.838288424800375,
+      "fill_count": 71,
+      "turnover_notional": 11943.954778684662,
+      "average_daily_exposure": 0.014703209444186599,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2024-01-01T00:00:00+00:00",
+      "regime": {
+        "BULL": {
+          "days": 195,
+          "strategy_compounded_selected_days": 0.06540614405836287,
+          "btc_compounded_selected_days": 0.7258544173411612
+        },
+        "TRANSITION": {
+          "days": 129,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": -0.02859994740587868
+        },
+        "BEAR": {
+          "days": 42,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.3069154450926077
+        }
+      },
+      "execution_notes": {
+        "XRPUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 4,
+        "LTCUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "LTCUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "XRPUSDT:STALE_POSITION_INTENT_SKIPPED": 3,
+        "ETHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 3,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 4,
+        "BNBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "BNBUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "BNBUSDT:ENTRY_GAP_TOO_HIGH": 4,
+        "XRPUSDT:ENTRY_GAP_TOO_HIGH": 5,
+        "BCHUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BCHUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "DOGEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "DOGEUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "APTUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "DOGEUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "APTUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "BCHUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LTCUSDT:ENTRY_GAP_TOO_HIGH": 3,
+        "OPUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "RUNEUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "RUNEUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "MATICUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "ARBUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "ARBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ARBUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "LINKUSDT:ENTRY_GAP_TOO_HIGH": 1,
+        "LINKUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "ATOMUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "LINKUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "ATOMUSDT:STALE_POSITION_INTENT_SKIPPED": 2,
+        "TRXUSDT:ENTRY_GAP_TOO_HIGH": 4
+      },
+      "decisions_by_state": {
+        "WAIT": 6903,
+        "LATE": 4718,
+        "REJECT": 2756,
+        "PROBE_CANDIDATE": 39,
+        "WAIT_CAPACITY": 100,
+        "HOLD": 150,
+        "ADD_OR_HOLD": 42,
+        "EXIT": 13
+      }
+    },
+    "2025": {
+      "total_return": 0.00043626160594456564,
+      "max_drawdown": -0.0011792622247362994,
+      "start": "2025-01-01T00:00:00+00:00",
+      "end_exclusive": "2026-01-01T00:00:00+00:00",
+      "btc": {
+        "total_return": -0.07266709824500717,
+        "max_drawdown": -0.3202251526449772
+      },
+      "excess_return_percentage_points": 7.310335985095174,
+      "final_cash": 10004.362616059445,
+      "fees_paid": 2.5792026748744905,
+      "slippage_cost": 3.868901308792049,
+      "fill_count": 7,
+      "turnover_notional": 1289.6013374372453,
+      "average_daily_exposure": 0.001052400494649892,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 52,
+      "first_model_eligible_execution": "2025-01-01T00:00:00+00:00",
+      "regime": {
+        "TRANSITION": {
+          "days": 129,
+          "strategy_compounded_selected_days": -5.539908817353556e-05,
+          "btc_compounded_selected_days": -0.12157742031572394
+        },
+        "BULL": {
+          "days": 155,
+          "strategy_compounded_selected_days": 0.0012829549123374306,
+          "btc_compounded_selected_days": -0.039572235323784954
+        },
+        "BEAR": {
+          "days": 81,
+          "strategy_compounded_selected_days": -0.0007902531200335572,
+          "btc_compounded_selected_days": 0.09917659344318719
+        }
+      },
+      "execution_notes": {
+        "BNBUSDT:ENTRY_GAP_TOO_HIGH": 2,
+        "BNBUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "BNBUSDT:STALE_POSITION_INTENT_SKIPPED": 1,
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 1,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 1
+      },
+      "decisions_by_state": {
+        "WAIT": 7859,
+        "LATE": 2844,
+        "REJECT": 3959,
+        "PROBE_CANDIDATE": 4,
+        "HOLD": 7,
+        "ADD_OR_HOLD": 4,
+        "EXIT": 3
+      }
+    },
+    "2026": {
+      "total_return": -0.0022616624144193853,
+      "max_drawdown": -0.0032130184851545396,
+      "start": "2026-01-01T00:00:00+00:00",
+      "end_exclusive": "2026-10-01T00:00:00+00:00",
+      "btc": {
+        "total_return": -0.0554110649185483,
+        "max_drawdown": -0.3953209523332114
+      },
+      "excess_return_percentage_points": 5.314940250412892,
+      "final_cash": 9977.383375855807,
+      "fees_paid": 4.751204420245423,
+      "slippage_cost": 7.126709981980263,
+      "fill_count": 6,
+      "turnover_notional": 2375.6022101227113,
+      "average_daily_exposure": 0.0024826813243628873,
+      "latched_drawdown_halt": false,
+      "writeoff_count": 0,
+      "writeoff_cost_basis": 0,
+      "model_refits": 39,
+      "first_model_eligible_execution": "2026-01-01T00:00:00+00:00",
+      "regime": {
+        "BEAR": {
+          "days": 112,
+          "strategy_compounded_selected_days": 0.00023876858964655412,
+          "btc_compounded_selected_days": -0.13762948944381403
+        },
+        "TRANSITION": {
+          "days": 119,
+          "strategy_compounded_selected_days": -0.002499834122197786,
+          "btc_compounded_selected_days": -0.08726311407623621
+        },
+        "BULL": {
+          "days": 42,
+          "strategy_compounded_selected_days": 0.0,
+          "btc_compounded_selected_days": 0.2000610911434204
+        }
+      },
+      "execution_notes": {
+        "TRXUSDT:POSITION_NOT_OBSERVED_BY_PLAN": 2,
+        "TRXUSDT:STALE_POSITION_INTENT_SKIPPED": 2
+      },
+      "decisions_by_state": {
+        "WAIT": 5626,
+        "LATE": 2397,
+        "PROBE_CANDIDATE": 3,
+        "HOLD": 12,
+        "REJECT": 2960,
+        "EXIT": 2
+      }
+    }
+  }
+}

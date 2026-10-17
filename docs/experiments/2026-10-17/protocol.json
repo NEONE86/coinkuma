@@ -1,0 +1,89 @@
+{
+  "protocol": {
+    "id": "ONE-new-archive-walkforward-v1",
+    "initial_warmup": "2018; test begins 2019-01-01 UTC",
+    "universe": "Binance archived USDT spot, top 40 by trailing 30 completed-day mean quote volume at signal close",
+    "history_requirement": "240 consecutive UTC candles, positive current volume, no known identity boundary inside window",
+    "model": "unchanged v0.3.1 price-only Ridge, matured 28-day labels, 540-day rolling training, refit every 7 days",
+    "execution": "signal D close observed D+1, fills earliest D+2 open; no retroactive same-open entry",
+    "cost_cases": {
+      "base": {
+        "fee_rate": 0.001,
+        "slippage_rate": 0.001
+      },
+      "stress": {
+        "fee_rate": 0.002,
+        "slippage_rate": 0.003
+      }
+    },
+    "missing_market": "fail mode rejects held missing bars; zero mode writes off full cost basis after first missing/nontrading UTC day, no synthetic sale",
+    "folds": "continuous 2019+ and independent calendar-year accounts; annual folds are NOT stitched into an investable equity curve",
+    "regime": "prior-day BTC close vs SMA200 and trailing 28-day return: both positive=BULL, both negative=BEAR, otherwise TRANSITION",
+    "benchmark": "BTC buy at same test-start open and liquidate same test-end close, same fee/slippage; no cash yield",
+    "tuning": "no parameter search; fixed protocol before performance inspection",
+    "scope": "historical walk-forward, archive-availability universe; incomplete listing notices; NOT untouched OOS, whole-market coverage or alpha approval"
+  },
+  "config": {
+    "version": "ONE-EXECUTION-v0.3.1",
+    "mode": "EXPERIMENTAL_PAPER_ONLY",
+    "initial_cash": 10000.0,
+    "fee_rate": 0.001,
+    "slippage_rate": 0.001,
+    "max_positions": 4,
+    "max_position_weight": 0.2,
+    "max_gross_weight": 0.8,
+    "probe_risk": 0.0025,
+    "confirmed_risk": 0.005,
+    "max_open_risk": 0.02,
+    "daily_loss_limit": 0.03,
+    "drawdown_halt": 0.15,
+    "min_order_notional": 20.0,
+    "min_hold_days": 7,
+    "max_hold_days": 84,
+    "horizon_days": 28,
+    "min_training_dates": 90,
+    "min_training_samples": 500,
+    "training_window_days": 540,
+    "refit_days": 7,
+    "ridge_alpha": 2.0,
+    "min_predicted_net_log_return": 0.02,
+    "min_predicted_excess_log_return": 0.005,
+    "max_entry_risk_fraction": 0.18,
+    "min_entry_risk_fraction": 0.03,
+    "max_buy_extension_7d": 0.12,
+    "max_buy_extension_30d": 0.35,
+    "max_buy_extension_sma20": 0.1,
+    "profit_take_R": 3.0,
+    "universe_limit": 40,
+    "history_days": 999,
+    "scan_interval_seconds": 900,
+    "max_clock_skew_seconds": 120,
+    "max_quote_age_seconds": 300,
+    "watchlist": [
+      "CAKEUSDT",
+      "UNIUSDT",
+      "RAYUSDT",
+      "JTOUSDT",
+      "MINAUSDT"
+    ],
+    "excluded_symbols": [],
+    "notes": "All amounts and limits are virtual research defaults, not the user's capital mandate. Frozen before replay."
+  },
+  "start": "2019-01-01T00:00:00+00:00",
+  "end_exclusive": "2026-10-01T00:00:00+00:00",
+  "missing_policy": "zero",
+  "code_sha256": {
+    "one_trading/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_trading/governance.py": "886a6870e072b7b1941735a6fba3e9633a8e621dbdb8f951a09f12d8337740e7",
+    "one_trading/historical_data.py": "309e2404d8efe0cc8db07ff38f6780e13bc080d5a10b72f6453eac913db6b211",
+    "one_trading/learning.py": "c001e39ed24f473765aa404de3b3fb051c5d076fb4c3de42edc6f92c11104766",
+    "one_trading/observer.py": "8d514c417b6479ee8340401cd96b29ad24d5cf6588d9cf5699f6439bae08103f",
+    "one_trading/portfolio.py": "e0c04a924b720672ff4178592446c28ed8bfb3a67bf71ebd31a21f1c49f7ead4",
+    "one_trading/reference_data.py": "f8e1446e16ad969b8fb9ef9e3f7c921c482336dcdadfd65cae7102152af20346",
+    "one_trading/replay.py": "a2b94afa4eea6391fadf8c165f9818c0d807b7cb45ef6e39278afbdd143bb6b0",
+    "one_trading/research.py": "c182b49aa6c9aa2962de464cf1cf8a57717a029d4802f1012454d55a4d1f54dd",
+    "one_trading/runtime.py": "27861901f596126965ff1a176af5aa15906733ad6000f85e2e7e386535ed4d7e",
+    "one_trading/walkforward.py": "33d8380005bf07491a501f4fea4dbaa2b4ac16060defe95f008ea132140384b4"
+  },
+  "registered_at_utc": "2026-10-17T15:04:53.349040+00:00"
+}

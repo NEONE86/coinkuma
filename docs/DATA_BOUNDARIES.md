@@ -39,3 +39,13 @@ selection, estimated costs and omitted real-market execution effects remain risk
 
 There is no real-order adapter. Test success and software reproducibility cannot
 establish that a trading strategy will earn money.
+
+## Separate new-data workflow
+
+The added historical workflow accepts a versioned extension of the snapshot schema:
+original bulk ZIP/index/checksum bytes remain in `snapshots`, and normalized bars
+are source-linked in `candles`. `research.load_history` dispatches explicitly for
+this schema; it does not manufacture exchange-clock or API-response evidence.
+See [historical workflow](HISTORICAL_WORKFLOW.md) and
+[new experiment results](experiments/2026-10-17/RESULTS.md). The original-data
+reproduction limitation above remains unchanged.

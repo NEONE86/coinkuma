@@ -72,3 +72,18 @@ not a buy recommendation.
 See [lineage and export scope](docs/EXPORT_SCOPE.md) and
 [test scope](docs/TEST_SPEC.md). Strategy and execution modules are unchanged by
 this publication; packaging and public documentation are separate additions.
+
+## New historical-data experiment
+
+The separate [historical workflow](docs/HISTORICAL_WORKFLOW.md) collects official
+bulk data with raw-byte/checksum provenance, rebuilds the candidate universe from
+historical liquidity, and runs continuous plus yearly walk-forward comparisons.
+Use `python -m one_trading.walkforward --help` for the new runner. This new dataset
+does not reproduce the missing original experiments. Historical listing coverage
+and the fundamental revaluation engine remain incomplete; see the workflow for
+the precise scope and assumptions.
+
+The first new-data [result report](docs/experiments/2026-10-17/RESULTS.md) records
+756 Binance histories and the 2019–September 2026 evaluation. Base continuous
+return was +11.87%, versus BTC +2,150.33%; average market exposure was only 0.77%.
+This does not meet the intended capital-growth objective.
