@@ -1,0 +1,132 @@
+{
+  "archive": {
+    "snapshot_count": 57217,
+    "sha256": "b3f1c4a1153ddc2cf9afedb5c6aa94a3bd2abe26f24b0a4e7a6a9f726826be10",
+    "regenerated_candles": 844092
+  },
+  "collection": {
+    "markets": 756,
+    "daily_bars": 844092,
+    "source_count": 57217,
+    "source_manifest_sha256": "810d1b1265dbb9531df2b6b89718c1a106efafcdde858eb6a6924b078c0228bf",
+    "normalized_candles_sha256": "b139383a4eacb5cf9150354576eb9cf2f44937c9a3e019bacfa88f3e37d2b98f",
+    "shortened_daily_bars": 297,
+    "rejected_candles": 7,
+    "markets_with_gaps": 26,
+    "errors": [],
+    "planned_zip_count": 28228,
+    "processed_zip_count": 28228
+  },
+  "reference": {
+    "scope": "5 fixed major USD spot reference pairs; no claim of complete Bitstamp historical universe",
+    "quote_volume": "unavailable, stored NULL, not used as Ridge universe input",
+    "coverage": [
+      {
+        "symbol": "BCHUSD",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000
+      },
+      {
+        "symbol": "BTCUSD",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000
+      },
+      {
+        "symbol": "ETHUSD",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000
+      },
+      {
+        "symbol": "LTCUSD",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000
+      },
+      {
+        "symbol": "XRPUSD",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000
+      }
+    ],
+    "official_notices": [
+      {
+        "url": "https://www.binance.com/en/support/announcement/detail/f73b083ba6834771b07dbe5319917ae5",
+        "symbols": [
+          "ANTUSDT",
+          "MULTIUSDT",
+          "XMRUSDT"
+        ],
+        "kind": "official_delisting",
+        "effective": "2024-02-20T03:00:00",
+        "published": "2024-02-06T07:00:00",
+        "known_from_conservative": "2024-02-08T00:00:00",
+        "last_update": "2024-02-07",
+        "verified_fact": "Spot trading ceases; the separate futures and margin dates are not spot dates.",
+        "raw_snapshot_saved": false,
+        "fetch_error": "not_a_complete_html_response",
+        "fact_reviewed_at_utc": "2026-10-17",
+        "used_in_strategy": false
+      },
+      {
+        "url": "https://www.binance.com/en/support/announcement/detail/836af23f13f24be08d99ec157ed1edac",
+        "symbols": [
+          "SCRTUSDT"
+        ],
+        "kind": "official_pair_listing",
+        "effective": "2022-01-21T12:00:00",
+        "published": "2022-01-20T10:57:00",
+        "known_from_conservative": "2022-01-21T00:00:00",
+        "last_update": null,
+        "verified_fact": "SCRT/USDT opens; this is a pair listing, not token creation or first listing on any exchange.",
+        "raw_snapshot_saved": false,
+        "fetch_error": "not_a_complete_html_response",
+        "fact_reviewed_at_utc": "2026-10-17",
+        "used_in_strategy": false
+      }
+    ]
+  },
+  "crossvenue_comparison": {
+    "warning": "Different venues and USD vs USDT; discrepancies are not automatically bad data",
+    "pairs": {
+      "btcusd": {
+        "matched_days": 3195,
+        "median_absolute_close_basis": 0.0005690754076649318,
+        "p99_absolute_close_basis": 0.022700677404349445,
+        "max_absolute_close_basis": 0.05834618498153121,
+        "over_5_percent_days": 2
+      },
+      "ethusd": {
+        "matched_days": 3195,
+        "median_absolute_close_basis": 0.0006027028906557819,
+        "p99_absolute_close_basis": 0.0233170606372044,
+        "max_absolute_close_basis": 0.05471319998487556,
+        "over_5_percent_days": 3
+      },
+      "ltcusd": {
+        "matched_days": 3195,
+        "median_absolute_close_basis": 0.0008589388201305503,
+        "p99_absolute_close_basis": 0.025080198308544688,
+        "max_absolute_close_basis": 0.05552952202436723,
+        "over_5_percent_days": 4
+      },
+      "xrpusd": {
+        "matched_days": 3072,
+        "median_absolute_close_basis": 0.0006794867197942867,
+        "p99_absolute_close_basis": 0.021421264817377716,
+        "max_absolute_close_basis": 0.05678646196789949,
+        "over_5_percent_days": 1
+      },
+      "bchusd": {
+        "matched_days": 2304,
+        "median_absolute_close_basis": 0.0008899816229129276,
+        "p99_absolute_close_basis": 0.007110536522301425,
+        "max_absolute_close_basis": 0.02555608140085186,
+        "over_5_percent_days": 0
+      }
+    }
+  }
+}

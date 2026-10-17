@@ -29,3 +29,14 @@ It does not run the original database-dependent replay comparisons.
 
 Not validated here: Windows, Docker, real network operation, continuous forward
 paper performance, exchange execution, or profitability on unseen data.
+
+## Added historical workflow tests
+
+The new `tests/test_historical.py` adds 21 independent regressions (120 total):
+time-unit normalization, shortened terminal bars, malformed-row quarantine, source
+checksums, derived-table tamper detection, incomplete/missing archives, cache
+integrity, historical liquidity/availability, gap resets, retained loss labels,
+writeoff accounting, prior-day regimes, benchmark cost/date matching, and complete
+run invariance to future data. These remain synthetic software tests. Real-data
+experiment evidence is documented separately in
+[the result report](experiments/2026-10-17/RESULTS.md).
