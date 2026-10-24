@@ -1,0 +1,1376 @@
+{
+  "base_continuous": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 98.94829466900504,
+      "signal_plans_checked": 405,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true,
+      "fills_on_zero_volume_bars": 0,
+      "fill_market_bars_present": true,
+      "historical_universe_independently_recomputed": true,
+      "universe_dates_checked": 405,
+      "future_data_deleted_at": "2023-01-01",
+      "prefix_equity_fills_writeoffs_plans_identical": true,
+      "days_checked": 1461,
+      "fills_checked": 61
+    },
+    "metrics": {
+      "total_return": 0.016266099585555693,
+      "cagr": 0.002084639999324178,
+      "daily_close_mdd": -0.11796122523834873,
+      "average_daily_exposure": 0.026660976944990887,
+      "closed_campaign_count": 113,
+      "fill_count": 268,
+      "win_rate": 0.30973451327433627,
+      "average_win": 71.6103283063631,
+      "average_loss": -30.047442241886678,
+      "payoff_ratio": 2.383242065327511,
+      "profit_factor": 1.0694034908520884,
+      "net_expectancy_per_campaign": 1.4394778394296284,
+      "annual_returns": {
+        "2019": -0.0063078168196443185,
+        "2020": 0.050522840440975214,
+        "2021": -0.01614529798987996,
+        "2022": 0.0,
+        "2023": -0.025248621557457662,
+        "2024": 0.006841894484493682,
+        "2025": 0.0018968288954803736,
+        "2026": 0.006331256991694012
+      },
+      "monthly_returns": {
+        "2019-01": 0.0,
+        "2019-02": 0.0,
+        "2019-03": 0.0,
+        "2019-04": 0.0,
+        "2019-05": 0.0,
+        "2019-06": 0.0,
+        "2019-07": 0.0,
+        "2019-08": 0.0,
+        "2019-09": -0.004280588397987728,
+        "2019-10": -4.7627782402415164e-05,
+        "2019-11": -0.001988410378774619,
+        "2019-12": 0.0,
+        "2020-01": 0.0,
+        "2020-02": -0.004493643586481522,
+        "2020-03": 0.0,
+        "2020-04": 0.0,
+        "2020-05": 0.0,
+        "2020-06": -0.025827017459746582,
+        "2020-07": 0.06053273138351556,
+        "2020-08": 0.04638237625997843,
+        "2020-09": -0.021808261830527975,
+        "2020-10": -0.0021002875791303888,
+        "2020-11": 0.0,
+        "2020-12": 0.0,
+        "2021-01": 0.0,
+        "2021-02": 0.0,
+        "2021-03": 0.0,
+        "2021-04": 0.0,
+        "2021-05": 0.0,
+        "2021-06": 0.0,
+        "2021-07": 0.0,
+        "2021-08": 0.0,
+        "2021-09": 0.0,
+        "2021-10": 0.0,
+        "2021-11": -0.01614529798987996,
+        "2021-12": 0.0,
+        "2022-01": 0.0,
+        "2022-02": 0.0,
+        "2022-03": 0.0,
+        "2022-04": 0.0,
+        "2022-05": 0.0,
+        "2022-06": 0.0,
+        "2022-07": 0.0,
+        "2022-08": 0.0,
+        "2022-09": 0.0,
+        "2022-10": 0.0,
+        "2022-11": 0.0,
+        "2022-12": 0.0,
+        "2023-01": 0.0,
+        "2023-02": -0.0008691803991454083,
+        "2023-03": -0.016940981525955356,
+        "2023-04": 0.0008428328391598683,
+        "2023-05": -0.011423043037705916,
+        "2023-06": -0.01376031783538445,
+        "2023-07": -0.011158611293902498,
+        "2023-08": -0.01467852645074652,
+        "2023-09": 0.0,
+        "2023-10": 0.0,
+        "2023-11": -0.0045942599996532385,
+        "2023-12": 0.04864465372982818,
+        "2024-01": -0.019793012823800527,
+        "2024-02": 0.016915496510832018,
+        "2024-03": 0.008060277061035626,
+        "2024-04": -0.00015327901591555282,
+        "2024-05": -0.00023566233971072936,
+        "2024-06": -0.015596692878019902,
+        "2024-07": -0.0005279315212167734,
+        "2024-08": -0.0012676718257539354,
+        "2024-09": 0.0,
+        "2024-10": -0.0006159829617851109,
+        "2024-11": 0.02780312031292942,
+        "2024-12": -0.006870495514804675,
+        "2025-01": -0.0007248772095309608,
+        "2025-02": -0.00042365987929016136,
+        "2025-03": -0.0005388003148435461,
+        "2025-04": 0.0,
+        "2025-05": 0.007562387858333519,
+        "2025-06": -0.010877597380888449,
+        "2025-07": 0.007193662126527833,
+        "2025-08": 0.006121330523696011,
+        "2025-09": -0.005656213861763071,
+        "2025-10": -0.0012625664647432089,
+        "2025-11": 0.0006513866562185555,
+        "2025-12": 0.0,
+        "2026-01": 0.0,
+        "2026-02": 0.0,
+        "2026-03": 0.0,
+        "2026-04": 0.0,
+        "2026-05": 0.0,
+        "2026-06": 0.0,
+        "2026-07": 0.0,
+        "2026-08": 0.0,
+        "2026-09": 0.006331256991694012
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.12903225806451613,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 93,
+      "monthly_mean_95pct_interval": [
+        -0.0017220954988606655,
+        0.0026264085518731594
+      ],
+      "monthly_median_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.021222495152739943,
+        0.030334974891407712
+      ],
+      "fraction_resamples_positive_cagr": 0.52425,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_continuous": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 191.529720742413,
+      "signal_plans_checked": 405,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true,
+      "fills_on_zero_volume_bars": 0,
+      "fill_market_bars_present": true,
+      "historical_universe_independently_recomputed": true,
+      "universe_dates_checked": 405,
+      "future_data_deleted_at": "2023-01-01",
+      "prefix_equity_fills_writeoffs_plans_identical": true,
+      "days_checked": 1461,
+      "fills_checked": 61
+    },
+    "metrics": {
+      "total_return": -0.004628367286834467,
+      "cagr": -0.0005985612211357738,
+      "daily_close_mdd": -0.12323639681040655,
+      "average_daily_exposure": 0.02649470643054241,
+      "closed_campaign_count": 113,
+      "fill_count": 264,
+      "win_rate": 0.30973451327433627,
+      "average_win": 69.1269621634015,
+      "average_loss": -31.611889084453644,
+      "payoff_ratio": 2.186739361849695,
+      "profit_factor": 0.9812292008299913,
+      "net_expectancy_per_campaign": -0.40959002538346806,
+      "annual_returns": {
+        "2019": -0.006547615172052601,
+        "2020": 0.04772018101926645,
+        "2021": -0.01671182506439417,
+        "2022": 0.0,
+        "2023": -0.03317318234535671,
+        "2024": 0.001221774368136641,
+        "2025": -0.0011372394856076218,
+        "2026": 0.005836244136767643
+      },
+      "monthly_returns": {
+        "2019-01": 0.0,
+        "2019-02": 0.0,
+        "2019-03": 0.0,
+        "2019-04": 0.0,
+        "2019-05": 0.0,
+        "2019-06": 0.0,
+        "2019-07": 0.0,
+        "2019-08": 0.0,
+        "2019-09": -0.00436502581347209,
+        "2019-10": -0.00013165423800454157,
+        "2019-11": -0.002060775257439751,
+        "2019-12": 0.0,
+        "2020-01": 0.0,
+        "2020-02": -0.004784891685720383,
+        "2020-03": 0.0,
+        "2020-04": 0.0,
+        "2020-05": 0.0,
+        "2020-06": -0.02623555576195069,
+        "2020-07": 0.05802150506367232,
+        "2020-08": 0.04670284731899654,
+        "2020-09": -0.02163362347173159,
+        "2020-10": -0.002173539378167888,
+        "2020-11": 0.0,
+        "2020-12": 0.0,
+        "2021-01": 0.0,
+        "2021-02": 0.0,
+        "2021-03": 0.0,
+        "2021-04": 0.0,
+        "2021-05": 0.0,
+        "2021-06": 0.0,
+        "2021-07": 0.0,
+        "2021-08": 0.0,
+        "2021-09": 0.0,
+        "2021-10": 0.0,
+        "2021-11": -0.01671182506439417,
+        "2021-12": 0.0,
+        "2022-01": 0.0,
+        "2022-02": 0.0,
+        "2022-03": 0.0,
+        "2022-04": 0.0,
+        "2022-05": 0.0,
+        "2022-06": 0.0,
+        "2022-07": 0.0,
+        "2022-08": 0.0,
+        "2022-09": 0.0,
+        "2022-10": 0.0,
+        "2022-11": 0.0,
+        "2022-12": 0.0,
+        "2023-01": 0.0,
+        "2023-02": -0.001225958596736132,
+        "2023-03": -0.017010121370458875,
+        "2023-04": -0.0009213999200696765,
+        "2023-05": -0.013630037168146703,
+        "2023-06": -0.012828833822430274,
+        "2023-07": -0.012104996446433147,
+        "2023-08": -0.016364592603259065,
+        "2023-09": 0.0,
+        "2023-10": 0.0,
+        "2023-11": -0.005486657807551865,
+        "2023-12": 0.04747793322428162,
+        "2024-01": -0.020943353426108535,
+        "2024-02": 0.016792023013680435,
+        "2024-03": 0.008008627075277053,
+        "2024-04": -0.00023239939984831537,
+        "2024-05": -0.0006635112067006066,
+        "2024-06": -0.017727766427360403,
+        "2024-07": -0.001186202537907577,
+        "2024-08": -0.0014014652734782862,
+        "2024-09": 0.0,
+        "2024-10": -0.0008985461247243975,
+        "2024-11": 0.027482705485101455,
+        "2024-12": -0.007058080132978817,
+        "2025-01": -0.0008982205098676532,
+        "2025-02": -0.0005074993689087037,
+        "2025-03": -0.0007827728800344769,
+        "2025-04": 0.0,
+        "2025-05": 0.007115995307587886,
+        "2025-06": -0.011016622353241634,
+        "2025-07": 0.006617507492129526,
+        "2025-08": 0.004450414708115691,
+        "2025-09": -0.0036206428401368562,
+        "2025-10": -0.002925788269521279,
+        "2025-11": 0.0005596014605984134,
+        "2025-12": 0.0,
+        "2026-01": 0.0,
+        "2026-02": 0.0,
+        "2026-03": 0.0,
+        "2026-04": 0.0,
+        "2026-05": 0.0,
+        "2026-06": 0.0,
+        "2026-07": 0.0,
+        "2026-08": 0.0,
+        "2026-09": 0.005836244136767643
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.11827956989247312,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 93,
+      "monthly_mean_95pct_interval": [
+        -0.0019916639870281683,
+        0.0023444770116850433
+      ],
+      "monthly_median_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.02408085401148394,
+        0.02704081104929068
+      ],
+      "fraction_resamples_positive_cagr": 0.453,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2019": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 1.4482996451053332,
+      "signal_plans_checked": 53,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.0063078168196443185,
+      "cagr": -0.006312123577832507,
+      "daily_close_mdd": -0.007407536433448492,
+      "average_daily_exposure": 0.0019649974933530724,
+      "closed_campaign_count": 2,
+      "fill_count": 4,
+      "win_rate": 0.0,
+      "average_win": null,
+      "average_loss": -31.53908409822236,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "net_expectancy_per_campaign": -31.53908409822236,
+      "annual_returns": {
+        "2019": -0.0063078168196443185
+      },
+      "monthly_returns": {
+        "2019-01": 0.0,
+        "2019-02": 0.0,
+        "2019-03": 0.0,
+        "2019-04": 0.0,
+        "2019-05": 0.0,
+        "2019-06": 0.0,
+        "2019-07": 0.0,
+        "2019-08": 0.0,
+        "2019-09": -0.004280588397987728,
+        "2019-10": -4.7627782402415164e-05,
+        "2019-11": -0.001988410378774619,
+        "2019-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.0,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.0012477549099954206,
+        0.0
+      ],
+      "monthly_median_95pct_interval": [
+        -4.7627782402415164e-05,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.014890627278483417,
+        0.0
+      ],
+      "fraction_resamples_positive_cagr": 0.0,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2020": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 13.469635318554191,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.050522840440975214,
+      "cagr": 0.05041674302758814,
+      "daily_close_mdd": -0.03966315478811633,
+      "average_daily_exposure": 0.0441862325523779,
+      "closed_campaign_count": 20,
+      "fill_count": 49,
+      "win_rate": 0.45,
+      "average_win": 96.1497061971949,
+      "average_loss": -32.73808648772785,
+      "payoff_ratio": 2.936937265201417,
+      "profit_factor": 2.4029486715284323,
+      "net_expectancy_per_campaign": 25.261420220487384,
+      "annual_returns": {
+        "2020": 0.050522840440975214
+      },
+      "monthly_returns": {
+        "2020-01": 0.0,
+        "2020-02": -0.004493643586481411,
+        "2020-03": 0.0,
+        "2020-04": 0.0,
+        "2020-05": 0.0,
+        "2020-06": -0.025827017459745916,
+        "2020-07": 0.060532731383515115,
+        "2020-08": 0.046382376259978875,
+        "2020-09": -0.02180826183052864,
+        "2020-10": -0.0021002875791302777,
+        "2020-11": 0.0,
+        "2020-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.16666666666666666,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.004678973208831104,
+        0.016702146830268206
+      ],
+      "monthly_median_95pct_interval": [
+        -0.0010501437895651389,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.05525152626916504,
+        0.21194011886322298
+      ],
+      "fraction_resamples_positive_cagr": 0.7075,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2021": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 2.5379800356936797,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.016145297989879737,
+      "cagr": -0.016156266596897395,
+      "daily_close_mdd": -0.016145297989879737,
+      "average_daily_exposure": 0.0013239705990833787,
+      "closed_campaign_count": 4,
+      "fill_count": 8,
+      "win_rate": 0.0,
+      "average_win": null,
+      "average_loss": -40.36324497469926,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "net_expectancy_per_campaign": -40.36324497469926,
+      "annual_returns": {
+        "2021": -0.016145297989879737
+      },
+      "monthly_returns": {
+        "2021-01": 0.0,
+        "2021-02": 0.0,
+        "2021-03": 0.0,
+        "2021-04": 0.0,
+        "2021-05": 0.0,
+        "2021-06": 0.0,
+        "2021-07": 0.0,
+        "2021-08": 0.0,
+        "2021-09": 0.0,
+        "2021-10": 0.0,
+        "2021-11": -0.016145297989879737,
+        "2021-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.0,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.004036324497469934,
+        0.0
+      ],
+      "monthly_median_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.04765809063336913,
+        0.0
+      ],
+      "fraction_resamples_positive_cagr": 0.0,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2022": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 0.0,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.0,
+      "cagr": 0.0,
+      "daily_close_mdd": 0.0,
+      "average_daily_exposure": 0.0,
+      "closed_campaign_count": 0,
+      "fill_count": 0,
+      "win_rate": null,
+      "average_win": null,
+      "average_loss": null,
+      "payoff_ratio": null,
+      "profit_factor": null,
+      "net_expectancy_per_campaign": null,
+      "annual_returns": {
+        "2022": 0.0
+      },
+      "monthly_returns": {
+        "2022-01": 0.0,
+        "2022-02": 0.0,
+        "2022-03": 0.0,
+        "2022-04": 0.0,
+        "2022-05": 0.0,
+        "2022-06": 0.0,
+        "2022-07": 0.0,
+        "2022-08": 0.0,
+        "2022-09": 0.0,
+        "2022-10": 0.0,
+        "2022-11": 0.0,
+        "2022-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.0,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "monthly_median_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "fraction_resamples_positive_cagr": 0.0,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2023": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 37.08025902518478,
+      "signal_plans_checked": 53,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.025553280483483487,
+      "cagr": -0.02557055702786637,
+      "daily_close_mdd": -0.07723334867519793,
+      "average_daily_exposure": 0.06764389375865244,
+      "closed_campaign_count": 38,
+      "fill_count": 88,
+      "win_rate": 0.23684210526315788,
+      "average_win": 71.399050567359,
+      "average_loss": -30.969802066933156,
+      "payoff_ratio": 2.3054409715970596,
+      "profit_factor": 0.7154816808404667,
+      "net_expectancy_per_campaign": -6.724547495653435,
+      "annual_returns": {
+        "2023": -0.025553280483483487
+      },
+      "monthly_returns": {
+        "2023-01": 0.0,
+        "2023-02": -0.0008691803991454083,
+        "2023-03": -0.016940981525955356,
+        "2023-04": 0.0008428328391598683,
+        "2023-05": -0.011423043037705805,
+        "2023-06": -0.013760317835384561,
+        "2023-07": -0.01115861129390261,
+        "2023-08": -0.01467852645074652,
+        "2023-09": 0.0,
+        "2023-10": 0.0,
+        "2023-11": -0.004594259999653683,
+        "2023-12": 0.04831689943160078
+      },
+      "median_monthly_return": -0.0027317201993995455,
+      "positive_month_fraction": 0.16666666666666666,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.010282837239210302,
+        0.009523129121910612
+      ],
+      "monthly_median_95pct_interval": [
+        -0.011423043037705805,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.11680373231202806,
+        0.11707273553371807
+      ],
+      "fraction_resamples_positive_cagr": 0.305,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2024": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 19.748341591212775,
+      "signal_plans_checked": 53,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.014364605692259724,
+      "cagr": 0.014334960047290846,
+      "daily_close_mdd": -0.023967844088720214,
+      "average_daily_exposure": 0.034177365832895934,
+      "closed_campaign_count": 22,
+      "fill_count": 52,
+      "win_rate": 0.2727272727272727,
+      "average_win": 94.45629087237157,
+      "average_loss": -26.443230519477467,
+      "payoff_ratio": 3.5720405191338958,
+      "profit_factor": 1.3395151946752109,
+      "net_expectancy_per_campaign": 6.5293662237540895,
+      "annual_returns": {
+        "2024": 0.014364605692259724
+      },
+      "monthly_returns": {
+        "2024-01": -0.010522306258456182,
+        "2024-02": 0.01499831053484657,
+        "2024-03": 0.00804859920047174,
+        "2024-04": -0.0001530531907237842,
+        "2024-05": -0.0002356623397109514,
+        "2024-06": -0.01559669287801968,
+        "2024-07": -0.0005279315212164404,
+        "2024-08": -0.0012676718257540465,
+        "2024-09": 0.0,
+        "2024-10": -0.0006159829617849999,
+        "2024-11": 0.027803120312929197,
+        "2024-12": -0.006941214150264385
+      },
+      "median_monthly_return": -0.0003817969304636959,
+      "positive_month_fraction": 0.25,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.003475269114321833,
+        0.0060787664397341235
+      ],
+      "monthly_median_95pct_interval": [
+        -0.0037785985560246926,
+        0.003947773004873978
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.04123111868919773,
+        0.07440084693629327
+      ],
+      "fraction_resamples_positive_cagr": 0.685,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2025": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 23.47843041541842,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.0026615380309522596,
+      "cagr": 0.0026633634276722606,
+      "daily_close_mdd": -0.04413107918221282,
+      "average_daily_exposure": 0.05092889020989291,
+      "closed_campaign_count": 27,
+      "fill_count": 67,
+      "win_rate": 0.37037037037037035,
+      "average_win": 46.55757581769477,
+      "average_loss": -25.821198698083844,
+      "payoff_ratio": 1.8030756961391472,
+      "profit_factor": 1.0606327624347924,
+      "net_expectancy_per_campaign": 0.9857548262786034,
+      "annual_returns": {
+        "2025": 0.0026615380309522596
+      },
+      "monthly_returns": {
+        "2025-01": 3.7830878975464444e-05,
+        "2025-02": -0.00042365987929016136,
+        "2025-03": -0.0005388003148435461,
+        "2025-04": 0.0,
+        "2025-05": 0.007562387858333519,
+        "2025-06": -0.010877597380888004,
+        "2025-07": 0.007193662126527833,
+        "2025-08": 0.006121330523695789,
+        "2025-09": -0.005656213861763071,
+        "2025-10": -0.001262566464743431,
+        "2025-11": 0.0006513866562185555,
+        "2025-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.4166666666666667,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.000916000209894461,
+        0.0015325620294071678
+      ],
+      "monthly_median_95pct_interval": [
+        -0.0006312832323717155,
+        0.0033863585899571724
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.011073505378650757,
+        0.018293631459887074
+      ],
+      "fraction_resamples_positive_cagr": 0.6135,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "base_2026": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 1.3900572486095903,
+      "signal_plans_checked": 39,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.006331256991694234,
+      "cagr": 0.008479713738785977,
+      "daily_close_mdd": -0.003811104566005641,
+      "average_daily_exposure": 0.003000688842288836,
+      "closed_campaign_count": 2,
+      "fill_count": 4,
+      "win_rate": 1.0,
+      "average_win": 31.656284958470934,
+      "average_loss": null,
+      "payoff_ratio": null,
+      "profit_factor": null,
+      "net_expectancy_per_campaign": 31.656284958470934,
+      "annual_returns": {
+        "2026": 0.006331256991694234
+      },
+      "monthly_returns": {
+        "2026-01": 0.0,
+        "2026-02": 0.0,
+        "2026-03": 0.0,
+        "2026-04": 0.0,
+        "2026-05": 0.0,
+        "2026-06": 0.0,
+        "2026-07": 0.0,
+        "2026-08": 0.0,
+        "2026-09": 0.006331256991694234
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.1111111111111111,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "status": "INSUFFICIENT_MONTHS"
+    }
+  },
+  "stress_2019": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 2.81853594549065,
+      "signal_plans_checked": 53,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.006547615172052601,
+      "cagr": -0.006552085115833495,
+      "daily_close_mdd": -0.007466196830747784,
+      "average_daily_exposure": 0.0019248723509083458,
+      "closed_campaign_count": 2,
+      "fill_count": 4,
+      "win_rate": 0.0,
+      "average_win": null,
+      "average_loss": -32.73807586026206,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "net_expectancy_per_campaign": -32.73807586026206,
+      "annual_returns": {
+        "2019": -0.006547615172052601
+      },
+      "monthly_returns": {
+        "2019-01": 0.0,
+        "2019-02": 0.0,
+        "2019-03": 0.0,
+        "2019-04": 0.0,
+        "2019-05": 0.0,
+        "2019-06": 0.0,
+        "2019-07": 0.0,
+        "2019-08": 0.0,
+        "2019-09": -0.00436502581347209,
+        "2019-10": -0.00013165423800454157,
+        "2019-11": -0.002060775257439751,
+        "2019-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.0,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.0012959012843224704,
+        0.0
+      ],
+      "monthly_median_95pct_interval": [
+        -0.00013165423800454157,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.015460865787381763,
+        0.0
+      ],
+      "fraction_resamples_positive_cagr": 0.0,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2020": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 26.122810230177745,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.047720181019266006,
+      "cagr": 0.047620101583266905,
+      "daily_close_mdd": -0.04003159144496915,
+      "average_daily_exposure": 0.043390713036607645,
+      "closed_campaign_count": 20,
+      "fill_count": 49,
+      "win_rate": 0.45,
+      "average_win": 93.94069234529825,
+      "average_loss": -33.47858371954744,
+      "payoff_ratio": 2.805993620645555,
+      "profit_factor": 2.2958129623463632,
+      "net_expectancy_per_campaign": 23.86009050963312,
+      "annual_returns": {
+        "2020": 0.047720181019266006
+      },
+      "monthly_returns": {
+        "2020-01": 0.0,
+        "2020-02": -0.004784891685720161,
+        "2020-03": 0.0,
+        "2020-04": 0.0,
+        "2020-05": 0.0,
+        "2020-06": -0.026235555761951135,
+        "2020-07": 0.05802150506367254,
+        "2020-08": 0.04670284731899654,
+        "2020-09": -0.0216336234717317,
+        "2020-10": -0.00217353937816811,
+        "2020-11": 0.0,
+        "2020-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.16666666666666666,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.004765342422603329,
+        0.016098542953156336
+      ],
+      "monthly_median_95pct_interval": [
+        -0.001086769689084055,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.056054345319071934,
+        0.20366105116210842
+      ],
+      "fraction_resamples_positive_cagr": 0.69125,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2021": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 5.031424626710653,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.016711825064393948,
+      "cagr": -0.016723175271526225,
+      "daily_close_mdd": -0.016711825064393948,
+      "average_daily_exposure": 0.0013064269766489688,
+      "closed_campaign_count": 4,
+      "fill_count": 8,
+      "win_rate": 0.0,
+      "average_win": null,
+      "average_loss": -41.779562660985206,
+      "payoff_ratio": null,
+      "profit_factor": 0.0,
+      "net_expectancy_per_campaign": -41.779562660985206,
+      "annual_returns": {
+        "2021": -0.016711825064393948
+      },
+      "monthly_returns": {
+        "2021-01": 0.0,
+        "2021-02": 0.0,
+        "2021-03": 0.0,
+        "2021-04": 0.0,
+        "2021-05": 0.0,
+        "2021-06": 0.0,
+        "2021-07": 0.0,
+        "2021-08": 0.0,
+        "2021-09": 0.0,
+        "2021-10": 0.0,
+        "2021-11": -0.016711825064393948,
+        "2021-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.0,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.004177956266098487,
+        0.0
+      ],
+      "monthly_median_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.049302287265917004,
+        0.0
+      ],
+      "fraction_resamples_positive_cagr": 0.0,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2022": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 0.0,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.0,
+      "cagr": 0.0,
+      "daily_close_mdd": 0.0,
+      "average_daily_exposure": 0.0,
+      "closed_campaign_count": 0,
+      "fill_count": 0,
+      "win_rate": null,
+      "average_win": null,
+      "average_loss": null,
+      "payoff_ratio": null,
+      "profit_factor": null,
+      "net_expectancy_per_campaign": null,
+      "annual_returns": {
+        "2022": 0.0
+      },
+      "monthly_returns": {
+        "2022-01": 0.0,
+        "2022-02": 0.0,
+        "2022-03": 0.0,
+        "2022-04": 0.0,
+        "2022-05": 0.0,
+        "2022-06": 0.0,
+        "2022-07": 0.0,
+        "2022-08": 0.0,
+        "2022-09": 0.0,
+        "2022-10": 0.0,
+        "2022-11": 0.0,
+        "2022-12": 0.0
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.0,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "monthly_median_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        0.0,
+        0.0
+      ],
+      "fraction_resamples_positive_cagr": 0.0,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2023": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 71.23222436812756,
+      "signal_plans_checked": 53,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.03396321936999325,
+      "cagr": -0.03398608199439079,
+      "daily_close_mdd": -0.08255276503981768,
+      "average_daily_exposure": 0.06759179917610188,
+      "closed_campaign_count": 38,
+      "fill_count": 86,
+      "win_rate": 0.23684210526315788,
+      "average_win": 67.94282036957642,
+      "average_loss": -32.79715782848668,
+      "payoff_ratio": 2.0716069582884167,
+      "profit_factor": 0.6429125042964051,
+      "net_expectancy_per_campaign": -8.937689307892791,
+      "annual_returns": {
+        "2023": -0.03396321936999325
+      },
+      "monthly_returns": {
+        "2023-01": 0.0,
+        "2023-02": -0.001225958596736243,
+        "2023-03": -0.017010121370458653,
+        "2023-04": -0.0009213999200697875,
+        "2023-05": -0.013630037168146703,
+        "2023-06": -0.012828833822430163,
+        "2023-07": -0.012104996446433591,
+        "2023-08": -0.016364592603258954,
+        "2023-09": 0.0,
+        "2023-10": 0.0,
+        "2023-11": -0.005486657807551976,
+        "2023-12": 0.046621992600143436
+      },
+      "median_monthly_return": -0.0033563082021441093,
+      "positive_month_fraction": 0.08333333333333333,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.011032873680842955,
+        0.00876416036754829
+      ],
+      "monthly_median_95pct_interval": [
+        -0.012828833822430163,
+        0.0
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.12485575341774542,
+        0.10717865124765641
+      ],
+      "fraction_resamples_positive_cagr": 0.28775,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2024": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 38.82295344416919,
+      "signal_plans_checked": 53,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.009053551569673468,
+      "cagr": 0.009034915651924491,
+      "daily_close_mdd": -0.027317785567365305,
+      "average_daily_exposure": 0.034147829906000036,
+      "closed_campaign_count": 22,
+      "fill_count": 51,
+      "win_rate": 0.2727272727272727,
+      "average_win": 90.96904415163952,
+      "average_loss": -28.454921825818996,
+      "payoff_ratio": 3.1969528754458714,
+      "profit_factor": 1.198857328292202,
+      "net_expectancy_per_campaign": 4.115250713487874,
+      "annual_returns": {
+        "2024": 0.009053551569673468
+      },
+      "monthly_returns": {
+        "2024-01": -0.01130215644256427,
+        "2024-02": 0.014938362162488339,
+        "2024-03": 0.007996486757408272,
+        "2024-04": -0.00023204104164520345,
+        "2024-05": -0.0006635112067003845,
+        "2024-06": -0.017727766427360292,
+        "2024-07": -0.001186202537907577,
+        "2024-08": -0.0014014652734782862,
+        "2024-09": 0.0,
+        "2024-10": -0.0008985461247242865,
+        "2024-11": 0.027482705485101677,
+        "2024-12": -0.007227940662816179
+      },
+      "median_monthly_return": -0.0007810286657123355,
+      "positive_month_fraction": 0.25,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.004224317033713224,
+        0.005852043835009452
+      ],
+      "monthly_median_95pct_interval": [
+        -0.004207071600361878,
+        0.0038822228578815343
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.04996914171049154,
+        0.07140608118147324
+      ],
+      "fraction_resamples_positive_cagr": 0.6035,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2025": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 46.841433627215046,
+      "signal_plans_checked": 52,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": -0.0003034852687656686,
+      "cagr": -0.00030369310382105663,
+      "daily_close_mdd": -0.04915594230225717,
+      "average_daily_exposure": 0.050624245794986804,
+      "closed_campaign_count": 27,
+      "fill_count": 66,
+      "win_rate": 0.37037037037037035,
+      "average_win": 47.38501145299737,
+      "average_loss": -28.052056895154344,
+      "payoff_ratio": 1.6891813541552656,
+      "profit_factor": 0.9936360906795679,
+      "net_expectancy_per_campaign": -0.11240195139445029,
+      "annual_returns": {
+        "2025": -0.0003034852687656686
+      },
+      "monthly_returns": {
+        "2025-01": -6.426678305559985e-05,
+        "2025-02": -0.0005074993689088148,
+        "2025-03": -0.0007827728800343658,
+        "2025-04": 0.0,
+        "2025-05": 0.007115995307587886,
+        "2025-06": -0.011016622353241856,
+        "2025-07": 0.006617507492129304,
+        "2025-08": 0.004450414708116135,
+        "2025-09": -0.0036206428401375224,
+        "2025-10": -0.002925788269521279,
+        "2025-11": 0.0005596014605984134,
+        "2025-12": 0.0
+      },
+      "median_monthly_return": -3.2133391527799926e-05,
+      "positive_month_fraction": 0.3333333333333333,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "method": "circular_monthly_moving_block_percentile",
+      "block_months": 3,
+      "replications": 4000,
+      "seed": 20261025,
+      "n_months": 12,
+      "monthly_mean_95pct_interval": [
+        -0.0010904491729857486,
+        0.0012867661037301859
+      ],
+      "monthly_median_95pct_interval": [
+        -0.0014628941347606395,
+        0.002505008084357274
+      ],
+      "annualized_geometric_return_95pct_interval": [
+        -0.01302926728810367,
+        0.015388950257910204
+      ],
+      "fraction_resamples_positive_cagr": 0.45225,
+      "interpretation": "Historical resampling uncertainty only, NOT a calibrated probability of future success. Regime changes, research selection and strategy adaptation are not represented."
+    }
+  },
+  "stress_2026": {
+    "checks": {
+      "cash_reconciles": true,
+      "inventory_reconciles": true,
+      "campaign_pnl_reconciles": true,
+      "fees": 2.701233366374641,
+      "signal_plans_checked": 39,
+      "plan_chronology": true,
+      "buy_delay": true,
+      "reported_summary_matches": true
+    },
+    "metrics": {
+      "total_return": 0.005836244136767421,
+      "cagr": 0.007816071286039117,
+      "daily_close_mdd": -0.003795626047310763,
+      "average_daily_exposure": 0.0029292012265199657,
+      "closed_campaign_count": 2,
+      "fill_count": 4,
+      "win_rate": 1.0,
+      "average_win": 29.18122068383795,
+      "average_loss": null,
+      "payoff_ratio": null,
+      "profit_factor": null,
+      "net_expectancy_per_campaign": 29.18122068383795,
+      "annual_returns": {
+        "2026": 0.005836244136767421
+      },
+      "monthly_returns": {
+        "2026-01": 0.0,
+        "2026-02": 0.0,
+        "2026-03": 0.0,
+        "2026-04": 0.0,
+        "2026-05": 0.0,
+        "2026-06": 0.0,
+        "2026-07": 0.0,
+        "2026-08": 0.0,
+        "2026-09": 0.005836244136767421
+      },
+      "median_monthly_return": 0.0,
+      "positive_month_fraction": 0.1111111111111111,
+      "month_fraction_at_least_25pct": 0.0,
+      "month_fraction_at_least_50pct": 0.0
+    },
+    "bootstrap": {
+      "status": "INSUFFICIENT_MONTHS"
+    }
+  }
+}

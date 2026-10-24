@@ -40,3 +40,17 @@ writeoff accounting, prior-day regimes, benchmark cost/date matching, and comple
 run invariance to future data. These remain synthetic software tests. Real-data
 experiment evidence is documented separately in
 [the result report](experiments/2026-10-17/RESULTS.md).
+
+## Cashflow Alpha additions
+
+The current complete suite has 143 tests: 120 inherited tests, 12 fixed-swing
+regressions, 5 independent audit regressions and 6 cashflow arithmetic regressions.
+The additions exercise non-vacuous future-prefix invariance, delayed weekly plans,
+multi-fill campaign identity, original-entry risk anchoring, missing-market losses,
+independent cash/inventory reconciliation and the distinction between realized PnL,
+marked equity and withdrawal arithmetic. These remain software tests.
+
+Separately, the [real-data independent review](CASHFLOW_ALPHA_INDEPENDENT_REVIEW.md)
+checks all 18 accounts, reconstructs historical universes and physically truncates
+future actual prices before rerunning. Despite passing these checks, the
+[strategy result](experiments/2026-10-25/RESULTS.md) is **REJECTED**.

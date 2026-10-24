@@ -1,0 +1,46 @@
+{
+  "classification": "REJECTED",
+  "scope": "This frozen first price-proxy swing strategy and the fixed-capital cashflow test; not rejection of all future strategies or compounding routes.",
+  "research_checks": {
+    "stress_cagr_positive": false,
+    "stress_profit_factor_over_1_2": false,
+    "stress_campaigns_at_least_100": true,
+    "calendar_folds_at_least_5": true,
+    "positive_calendar_fold_fraction_at_least_60pct": false,
+    "stress_daily_close_drawdown_within_15pct": true,
+    "no_permanent_halt": true,
+    "independent_validation_completed": true
+  },
+  "minimum_cashflow_checks": {
+    "median_month_at_least_25pct": false,
+    "positive_month_fraction_at_least_75pct": false,
+    "post2024_nonnegative": true
+  },
+  "failed_checks": [
+    "stress_cagr_positive",
+    "stress_profit_factor_over_1_2",
+    "positive_calendar_fold_fraction_at_least_60pct",
+    "median_month_at_least_25pct",
+    "positive_month_fraction_at_least_75pct"
+  ],
+  "positive_stress_calendar_folds": 3,
+  "calendar_fold_count": 8,
+  "live_authorized": false,
+  "next_experiment_branch": "edge_discrimination_before_capital_scaling",
+  "next_experiment_numeric_gates": {
+    "minimum_completed_campaigns": 200,
+    "stress_profit_factor_min_exclusive": 1.3,
+    "stress_mean_campaign_pnl_positive": true,
+    "block_resampled_lower95pct_mean_monthly_return_min_exclusive": 0,
+    "calendar_fold_positive_fraction_min": 0.6,
+    "drawdown_trigger": 0.15,
+    "forward_paper_min_days": 90,
+    "leverage_until_evidence": 1.0,
+    "selection_rule": "These are next-test design gates, not a claim v1 meets them. Do not retune v1 or substitute a leveraged spot-return multiple."
+  },
+  "limitations": [
+    "Historical fixed-policy walk-forward, not untouched OOS.",
+    "No publication-timed fundamental evidence, no validated leveraged futures.",
+    "Tax, KRW FX and full execution costs remain outside net simulation returns."
+  ]
+}

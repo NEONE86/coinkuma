@@ -87,3 +87,17 @@ The first new-data [result report](docs/experiments/2026-10-17/RESULTS.md) recor
 756 Binance histories and the 2019–September 2026 evaluation. Base continuous
 return was +11.87%, versus BTC +2,150.33%; average market exposure was only 0.77%.
 This does not meet the intended capital-growth objective.
+
+## Cashflow Alpha research
+
+The separate [Cashflow Alpha workflow](docs/CASHFLOW_ALPHA.md) implements a fixed
+early-recovery price-proxy swing strategy on the PR #2 historical infrastructure.
+The [frozen protocol](docs/CASHFLOW_ALPHA_PROTOCOL.json) specifies chronology,
+spot costs, 0.5% position risk, 3% daily loss and 15% permanent drawdown-halt
+triggers. It does not authorize live orders or treat price signals as fundamental
+valuation evidence. The [actual results](docs/experiments/2026-10-25/RESULTS.md)
+reject v1: +1.63% cumulative under base costs, -0.46% under stress costs,
+113 closed campaigns and approximately 2.65% average exposure over 2019–September
+2026. [Independent validation](docs/CASHFLOW_ALPHA_INDEPENDENT_REVIEW.md) reconciles
+all 18 accounts and verifies real-data future-prefix invariance. Passing these
+software checks does not establish a profitable strategy.

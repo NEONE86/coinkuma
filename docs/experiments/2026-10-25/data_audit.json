@@ -1,0 +1,80 @@
+{
+  "audited_at_utc": "2026-10-24T15:37:54.507241+00:00",
+  "archive": {
+    "snapshot_count": 57217,
+    "sha256": "e32ea8d3db3e3cb6af3a4e33b544ebeecb42ef83e3af0a972e942f8793d24018",
+    "regenerated_candles": 844092,
+    "publisher_zip_checksums_verified": 28228
+  },
+  "collection": {
+    "markets": 756,
+    "daily_bars": 844092,
+    "source_count": 57217,
+    "source_manifest_sha256": "810d1b1265dbb9531df2b6b89718c1a106efafcdde858eb6a6924b078c0228bf",
+    "normalized_candles_sha256": "b139383a4eacb5cf9150354576eb9cf2f44937c9a3e019bacfa88f3e37d2b98f",
+    "shortened_daily_bars": 297,
+    "rejected_candles": 7,
+    "markets_with_gaps": 26
+  },
+  "year_coverage": [
+    {
+      "year": "2018",
+      "bars": 5166,
+      "markets": 24
+    },
+    {
+      "year": "2019",
+      "bars": 19451,
+      "markets": 90
+    },
+    {
+      "year": "2020",
+      "bars": 51809,
+      "markets": 245
+    },
+    {
+      "year": "2021",
+      "bars": 101579,
+      "markets": 353
+    },
+    {
+      "year": "2022",
+      "bars": 124163,
+      "markets": 374
+    },
+    {
+      "year": "2023",
+      "bars": 129123,
+      "markets": 394
+    },
+    {
+      "year": "2024",
+      "bars": 139293,
+      "markets": 433
+    },
+    {
+      "year": "2025",
+      "bars": 150002,
+      "markets": 489
+    },
+    {
+      "year": "2026",
+      "bars": 123506,
+      "markets": 554
+    }
+  ],
+  "zero_volume_rows": 4,
+  "invalid_normalized_rows": 0,
+  "histories_ending_before_dataset_end": 253,
+  "extreme_consecutive_close_ratio_rows": 46,
+  "extreme_ratio_definition": "Current close / previous consecutive daily close >=5 or <=0.2. Flags only; crashes, rallies and identity events require review, not automatic exclusion.",
+  "pr2_normalized_sha256": "b139383a4eacb5cf9150354576eb9cf2f44937c9a3e019bacfa88f3e37d2b98f",
+  "matches_pr2_normalized_candles": true,
+  "limits": [
+    "Archive availability is not a certified historical listing register.",
+    "Last observed candle does not prove delisting; missing markets require explicit handling.",
+    "Checksums verify captured bytes, not historical publication time or complete token identity.",
+    "Cross-venue major-pair checks do not validate every asset or USDT/USD parity.",
+    "Zero-volume and shortened bars are retained, not price-repaired."
+  ]
+}

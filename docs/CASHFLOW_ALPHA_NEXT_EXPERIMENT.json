@@ -1,0 +1,115 @@
+{
+  "id": "ONE-Cashflow-Alpha-next-two-challengers",
+  "status": "DESIGNED_NOT_RUN",
+  "v1_status": "REJECTED; do not modify or relabel its result",
+  "reason": {
+    "stress_profit_factor": 0.9812292008299913,
+    "stress_trade_count": 113,
+    "stress_win_rate": 0.30973451327433627,
+    "stress_payoff_ratio": 2.186739361849695,
+    "base_candidate_signal_count": 180,
+    "base_universe_symbol_week_count": 26940,
+    "base_candidate_fraction": 0.006681514476614699,
+    "base_average_exposure": 0.026660976944990887,
+    "interpretation": "Both weak cost-adjusted selection and insufficient opportunity density; simply increasing exposure or leverage is not justified. Rejection reasons overlap and are not causal ablation estimates."
+  },
+  "trial_budget": {
+    "challenger_count": 2,
+    "parameter_grid_search": false,
+    "changes_after_results": "new experiment version; keep failed results",
+    "same_time_randomized_selection_controls": 200,
+    "control_seeds": "0 through 199; historical eligible pool, identical execution/cost/risk policy; no future membership"
+  },
+  "common": {
+    "universe": "Historical top80 USDT spot by trailing30 mean quote volume, minimum1m USDT; 240 consecutive days; ended markets retained",
+    "market_gate": "BTC prior completed daily close above SMA200; weekly/monthly context uses only completed bars",
+    "per_position_risk": 0.005,
+    "aggregate_open_risk": 0.03,
+    "max_positions": 8,
+    "max_position_weight": 0.20,
+    "max_gross_weight": 0.95,
+    "daily_loss_trigger": 0.03,
+    "permanent_drawdown_trigger": 0.15,
+    "execution": "D signal close, D+1 observation, earliest D+2 open; inherited gap rejection and stop-first execution",
+    "base_cost_per_side": {"fee":0.001,"slippage":0.001},
+    "stress_cost_per_side": {"fee":0.002,"slippage":0.003},
+    "initial_stop": "signal close minus2.5 ATR14; reject if distance outside3%..18%; size again at actual simulated execution",
+    "missing_held": "full-loss writeoff when unobservable at close; no hindsight last-price liquidation",
+    "instrument": "unborrowed spot; funding0; no leverage test until edge gates pass",
+    "classification": "price proxies, not fundamental revaluation evidence"
+  },
+  "challenger_A": {
+    "name": "relative_strength_recovery",
+    "hypothesis": "A recovery of relative strength after a sustained below-trend period identifies early repricing more efficiently than a narrow absolute56day range.",
+    "observation_frequency": "weekly after completed Sunday",
+    "entry_all": [
+      "At least14 of the28 days immediately preceding the last7 completed days closed below their own causal SMA50",
+      "At least one close in last7 completed days crossed from below to above causal SMA50; latest close remains above SMA50",
+      "Latest close is10%..60% below trailing180day high",
+      "28day asset return minus BTC28day return is at least0.03",
+      "Asset7day return <=0.12 and28day return between0 and0.30",
+      "Mean true range of last10 days / mean true range of preceding30 days <=0.90",
+      "Latest completed weekly close is above preceding weekly close"
+    ],
+    "rank": "descending28day relative return; symbol ascending for ties",
+    "exit": "BTC market gate fails, or close below SMA50 after7days held, or84days held; weekly delayed plan",
+    "partial_profit": "half at3 initial R; inherited stop-first convention",
+    "trailing_stop": "weekly max(existing stop,20day low minus0.25 ATR14)",
+    "adds": false
+  },
+  "challenger_B": {
+    "name": "established_trend_controlled_pullback",
+    "hypothesis": "Buying a bounded pullback in a sustained trend produces more repeated opportunities without unconditional breakout chasing.",
+    "observation_frequency": "daily; regime inputs still completed weekly/monthly context",
+    "entry_all": [
+      "SMA50 > SMA200 and latest SMA50 > its value20completed days earlier",
+      "Latest close is8%..25% below trailing60day high",
+      "Latest close/SMA20 is between0.95 and1.03",
+      "Latest close exceeds previous close and latest daily open",
+      "Asset7day return <=0.08 and28day return between-0.15 and0.25",
+      "90day asset return minus BTC90day return is positive"
+    ],
+    "rank": "descending90day relative return; symbol ascending for ties",
+    "exit": "BTC market gate fails, or close below SMA50, or21days held; daily delayed plan",
+    "partial_profit": "half at3 initial R; inherited stop-first convention",
+    "trailing_stop": "daily delayed max(existing stop,10day low minus0.25 ATR14)",
+    "adds": false
+  },
+  "chronology": {
+    "warmup": "2018",
+    "development_diagnostics": "2019-01-01 through2021-12-31",
+    "locked_historical_validation": "2022-01-01 through2024-12-31",
+    "locked_historical_challenge": "2025-01-01 through2026-09-30",
+    "selection_rule": "Freeze both complete specs and code hashes before running. Evaluate both, retain both failures. Select at most one only if all gates pass; otherwise select none. No splicing winners across years.",
+    "warning": "These periods were already inspected for v1; historical validation is not untouched OOS. A genuinely new forward paper interval of at least90days starts only after code freeze, without orders."
+  },
+  "edge_gates_before_forward_paper": {
+    "stress_profit_factor_min_exclusive": 1.30,
+    "total_closed_campaigns_min": 200,
+    "challenge_closed_campaigns_min": 50,
+    "stress_mean_closed_campaign_pnl_min_exclusive": 0,
+    "positive_calendar_fold_fraction_min": 0.60,
+    "max_drawdown_magnitude_max": 0.15,
+    "permanent_halt_allowed": false,
+    "block_resampled_lower95pct_mean_monthly_net_return_min_exclusive": 0,
+    "random_selection_control_percentile_min": 0.975,
+    "chronology_accounting_missing_market_checks": "all pass",
+    "interpretation": "Two challengers:97.5th percentile control hurdle is a conservative multiplicity-aware screen, not a proof of future profitability. Monthly blocks handle only part of dependence."
+  },
+  "capital_growth_relevance_gates": {
+    "stress_mean_full_month_net_return_min": 0.01,
+    "positive_full_month_fraction_min": 0.55,
+    "interpretation": "Economic research hurdle only:1% monthly on20m is200k, still far below5m. Even passing requires a capital-growth phase; it does not authorize withdrawals or leverage."
+  },
+  "discarded": [
+    "Multiplying v1 exposure or applying2x/3x leverage while stress expectancy is negative",
+    "Removing several v1 filters and selecting whichever historical variant looks best",
+    "Claiming a low-priced or compressed chart proves fundamental undervaluation",
+    "Treating historical monthly median0 as a dependable cashflow stream"
+  ],
+  "fundamental_followup_if_both_fail": {
+    "minimum_timestamped_events": 200,
+    "required_fields": ["event/publication/collection/effective timestamps","asset identity","usage or revenue change","token value capture","supply/unlock change","source URL and raw snapshot"],
+    "scope": "A separate point-in-time catalyst dataset, not backfilled present-day fundamentals"
+  }
+}
