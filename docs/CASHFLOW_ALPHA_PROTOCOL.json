@@ -1,0 +1,19 @@
+{
+  "id": "ONE-Cashflow-Alpha-v1",
+  "frozen_before_new_strategy_market_results": true,
+  "frozen_date_seoul": "2026-10-25",
+  "base_commit": "f9b26daad87167e7ebee45c68000dac9bea57500",
+  "scope": "First fixed-policy early-revaluation PRICE PROXY; not fundamental valuation or live authorization",
+  "period": {"warmup_start": "2018-01-01", "test_start": "2019-01-01", "test_end_exclusive": "2026-10-01"},
+  "instrument": "Unlevered USDT spot; no borrowing; actual funding cost is zero",
+  "universe": {"source": "all discoverable historical Binance USDT archive directories including ended markets", "min_consecutive_days": 240, "trailing_quote_volume_days": 30, "top_n": 80, "min_mean_quote_volume_usdt": 1000000},
+  "entry": {"btc_above_sma200": true, "close_above_sma50": true, "completed_four_week_return_min": 0, "completed_one_month_return_min": -0.10, "drawdown_from_180day_high_min": 0.05, "drawdown_from_180day_high_max": 0.55, "range56_high_low_ratio_minus_one_max": 0.65, "return7_max": 0.12, "return28_min": 0, "return28_max": 0.30, "extension_above_sma20_max": 0.10, "relative28_vs_btc_min": 0},
+  "risk": {"per_position_risk": 0.005, "aggregate_open_risk": 0.03, "max_positions": 8, "max_position_weight": 0.20, "max_gross_weight": 0.95, "daily_loss_trigger": 0.03, "permanent_drawdown_halt": 0.15, "initial_stop": "20day low minus 0.25 ATR14", "initial_stop_distance_min": 0.03, "initial_stop_distance_max": 0.18},
+  "execution": {"weekly": "completed Sunday signal, Monday observation, Tuesday D+2 open", "cost_base_per_side": {"fee": 0.001, "slippage": 0.001}, "cost_stress_per_side": {"fee": 0.002, "slippage": 0.003}, "missing_held": "mark at prior price at open, no executable quote, full writeoff at close; other observable symbols remain executable", "gap_stop": "worse of stop and opening price", "partial_profit": "half at inherited 3R, stop first if both touched", "max_hold_days": 84, "add": "14 days held and >=1 initial R profit, no extension, same risk cap", "exit": "risk off, below SMA50 after seven days, or time limit; delayed weekly plan"},
+  "evaluation": "Continuous account plus independent calendar-year forward folds with preceding-history warmup. Fixed rules; no fitted parameters or hindsight-selected winner. Reset folds are diagnostics and never stitched.",
+  "research_candidate_gates": {"stress_cagr_min_exclusive": 0, "stress_profit_factor_min_exclusive": 1.2, "stress_roundtrip_campaigns_min": 100, "calendar_folds_min": 5, "positive_fold_fraction_min": 0.60, "max_drawdown_magnitude_max": 0.15, "permanent_halt_allowed": false, "independent_accounting_and_chronology_checks": "all pass"},
+  "minimum_cashflow_target_gates": {"median_full_calendar_month_net_return_min": 0.25, "positive_month_fraction_min": 0.75, "post2024_return_min": 0, "interpretation": "necessary historical research hurdle for 5m KRW on 20m capital, not a promise of monthly withdrawals or a confidence guarantee"},
+  "decision": "REJECTED if observed strategy fails empirical gates; NEEDS MORE EVIDENCE if empirical gates pass but coverage/chronology/forward evidence unresolved; PASSED only means specified research test passed and never live approval",
+  "forbidden": ["main modification", "live orders", "reporting test count as profitability", "retuning v1 after inspecting its results", "manufactured fundamentals", "calling leveraged spot-return multiples futures returns"],
+  "uncertainty": "Already-known historical period, incomplete migration identities and archive coverage, no order-book replay, no taxes or KRW/USDT conversion. 3%/15% are triggers, not guaranteed maximum losses."
+}

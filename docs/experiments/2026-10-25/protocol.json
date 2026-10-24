@@ -1,0 +1,161 @@
+{
+  "protocol": {
+    "id": "ONE-Cashflow-Alpha-v1",
+    "frozen_before_new_strategy_market_results": true,
+    "frozen_date_seoul": "2026-10-25",
+    "base_commit": "f9b26daad87167e7ebee45c68000dac9bea57500",
+    "scope": "First fixed-policy early-revaluation PRICE PROXY; not fundamental valuation or live authorization",
+    "period": {
+      "warmup_start": "2018-01-01",
+      "test_start": "2019-01-01",
+      "test_end_exclusive": "2026-10-01"
+    },
+    "instrument": "Unlevered USDT spot; no borrowing; actual funding cost is zero",
+    "universe": {
+      "source": "all discoverable historical Binance USDT archive directories including ended markets",
+      "min_consecutive_days": 240,
+      "trailing_quote_volume_days": 30,
+      "top_n": 80,
+      "min_mean_quote_volume_usdt": 1000000
+    },
+    "entry": {
+      "btc_above_sma200": true,
+      "close_above_sma50": true,
+      "completed_four_week_return_min": 0,
+      "completed_one_month_return_min": -0.1,
+      "drawdown_from_180day_high_min": 0.05,
+      "drawdown_from_180day_high_max": 0.55,
+      "range56_high_low_ratio_minus_one_max": 0.65,
+      "return7_max": 0.12,
+      "return28_min": 0,
+      "return28_max": 0.3,
+      "extension_above_sma20_max": 0.1,
+      "relative28_vs_btc_min": 0
+    },
+    "risk": {
+      "per_position_risk": 0.005,
+      "aggregate_open_risk": 0.03,
+      "max_positions": 8,
+      "max_position_weight": 0.2,
+      "max_gross_weight": 0.95,
+      "daily_loss_trigger": 0.03,
+      "permanent_drawdown_halt": 0.15,
+      "initial_stop": "20day low minus 0.25 ATR14",
+      "initial_stop_distance_min": 0.03,
+      "initial_stop_distance_max": 0.18
+    },
+    "execution": {
+      "weekly": "completed Sunday signal, Monday observation, Tuesday D+2 open",
+      "cost_base_per_side": {
+        "fee": 0.001,
+        "slippage": 0.001
+      },
+      "cost_stress_per_side": {
+        "fee": 0.002,
+        "slippage": 0.003
+      },
+      "missing_held": "mark at prior price at open, no executable quote, full writeoff at close; other observable symbols remain executable",
+      "gap_stop": "worse of stop and opening price",
+      "partial_profit": "half at inherited 3R, stop first if both touched",
+      "max_hold_days": 84,
+      "add": "14 days held and >=1 initial R profit, no extension, same risk cap",
+      "exit": "risk off, below SMA50 after seven days, or time limit; delayed weekly plan"
+    },
+    "evaluation": "Continuous account plus independent calendar-year forward folds with preceding-history warmup. Fixed rules; no fitted parameters or hindsight-selected winner. Reset folds are diagnostics and never stitched.",
+    "research_candidate_gates": {
+      "stress_cagr_min_exclusive": 0,
+      "stress_profit_factor_min_exclusive": 1.2,
+      "stress_roundtrip_campaigns_min": 100,
+      "calendar_folds_min": 5,
+      "positive_fold_fraction_min": 0.6,
+      "max_drawdown_magnitude_max": 0.15,
+      "permanent_halt_allowed": false,
+      "independent_accounting_and_chronology_checks": "all pass"
+    },
+    "minimum_cashflow_target_gates": {
+      "median_full_calendar_month_net_return_min": 0.25,
+      "positive_month_fraction_min": 0.75,
+      "post2024_return_min": 0,
+      "interpretation": "necessary historical research hurdle for 5m KRW on 20m capital, not a promise of monthly withdrawals or a confidence guarantee"
+    },
+    "decision": "REJECTED if observed strategy fails empirical gates; NEEDS MORE EVIDENCE if empirical gates pass but coverage/chronology/forward evidence unresolved; PASSED only means specified research test passed and never live approval",
+    "forbidden": [
+      "main modification",
+      "live orders",
+      "reporting test count as profitability",
+      "retuning v1 after inspecting its results",
+      "manufactured fundamentals",
+      "calling leveraged spot-return multiples futures returns"
+    ],
+    "uncertainty": "Already-known historical period, incomplete migration identities and archive coverage, no order-book replay, no taxes or KRW/USDT conversion. 3%/15% are triggers, not guaranteed maximum losses."
+  },
+  "protocol_sha256": "31a8eb51c895262db4276d2af65308b7b6648b273e7c7b0008bf07c1a850e8e2",
+  "config": {
+    "version": "ONE-Cashflow-Alpha-v1",
+    "mode": "EXPERIMENTAL_PAPER_ONLY",
+    "initial_cash": 10000.0,
+    "fee_rate": 0.001,
+    "slippage_rate": 0.001,
+    "max_positions": 8,
+    "max_position_weight": 0.2,
+    "max_gross_weight": 0.95,
+    "probe_risk": 0.005,
+    "confirmed_risk": 0.005,
+    "max_open_risk": 0.03,
+    "daily_loss_limit": 0.03,
+    "drawdown_halt": 0.15,
+    "min_order_notional": 20.0,
+    "min_hold_days": 7,
+    "max_hold_days": 84,
+    "horizon_days": 28,
+    "min_training_dates": 90,
+    "min_training_samples": 500,
+    "training_window_days": 540,
+    "refit_days": 7,
+    "ridge_alpha": 2.0,
+    "min_predicted_net_log_return": 0.02,
+    "min_predicted_excess_log_return": 0.005,
+    "max_entry_risk_fraction": 0.18,
+    "min_entry_risk_fraction": 0.03,
+    "max_buy_extension_7d": 0.12,
+    "max_buy_extension_30d": 0.35,
+    "max_buy_extension_sma20": 0.1,
+    "profit_take_R": 3.0,
+    "universe_limit": 80,
+    "history_days": 999,
+    "scan_interval_seconds": 900,
+    "max_clock_skew_seconds": 120,
+    "max_quote_age_seconds": 300,
+    "watchlist": [
+      "CAKEUSDT",
+      "UNIUSDT",
+      "RAYUSDT",
+      "JTOUSDT",
+      "MINAUSDT"
+    ],
+    "excluded_symbols": [],
+    "notes": "Frozen cashflow-alpha research policy; unborrowed spot only.",
+    "min_quote_volume": 1000000.0
+  },
+  "run_started_utc": "2026-10-24T15:37:18.410675+00:00",
+  "git_head_at_run": "cefd770eb6e6a34ab1569232d9b6bdf299a878d9",
+  "code_sha256": {
+    "one_trading/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_trading/cashflow_alpha.py": "b3fb3cd0a8159b4098a9bc01bb9ba36052d79f197690b78bb5644b4abb5c31ce",
+    "one_trading/governance.py": "886a6870e072b7b1941735a6fba3e9633a8e621dbdb8f951a09f12d8337740e7",
+    "one_trading/historical_data.py": "309e2404d8efe0cc8db07ff38f6780e13bc080d5a10b72f6453eac913db6b211",
+    "one_trading/learning.py": "c001e39ed24f473765aa404de3b3fb051c5d076fb4c3de42edc6f92c11104766",
+    "one_trading/observer.py": "8d514c417b6479ee8340401cd96b29ad24d5cf6588d9cf5699f6439bae08103f",
+    "one_trading/portfolio.py": "e0c04a924b720672ff4178592446c28ed8bfb3a67bf71ebd31a21f1c49f7ead4",
+    "one_trading/reference_data.py": "f8e1446e16ad969b8fb9ef9e3f7c921c482336dcdadfd65cae7102152af20346",
+    "one_trading/replay.py": "a2b94afa4eea6391fadf8c165f9818c0d807b7cb45ef6e39278afbdd143bb6b0",
+    "one_trading/research.py": "c182b49aa6c9aa2962de464cf1cf8a57717a029d4802f1012454d55a4d1f54dd",
+    "one_trading/runtime.py": "27861901f596126965ff1a176af5aa15906733ad6000f85e2e7e386535ed4d7e",
+    "one_trading/walkforward.py": "33d8380005bf07491a501f4fea4dbaa2b4ac16060defe95f008ea132140384b4",
+    "scripts/run_cashflow_alpha.py": "6a01738306868dfc6e86460230f416c01ffa091d107446f5f764eac78e167ca8"
+  },
+  "archive_sha256": "e32ea8d3db3e3cb6af3a4e33b544ebeecb42ef83e3af0a972e942f8793d24018",
+  "start": "2019-01-01",
+  "end_exclusive": "2026-10-01",
+  "live_orders": false
+}

@@ -1,0 +1,1880 @@
+{
+  "base": {
+    "scope": "Historical deterministic return-path analysis, not future probability or a new withdrawal backtest of the execution engine",
+    "cashflow_math": {
+      "initial_capital_krw": 20000000,
+      "per_trade_risk_fraction": 0.005,
+      "minimum_target_krw_per_month": 5000000,
+      "upper_target_krw_per_month": 10000000,
+      "required_simple_monthly_return_at_unchanged_capital": [
+        0.25,
+        0.5
+      ],
+      "required_monthly_initial_equity_risk_units": [
+        50,
+        100
+      ]
+    },
+    "monthly_observations": {
+      "full_calendar_months": 93,
+      "first": "2019-01",
+      "last": "2026-09",
+      "net_return_mean": 0.00024065605069094467,
+      "net_return_median": 0.0,
+      "net_return_min": -0.025827017459746582,
+      "net_return_max": 0.06053273138351556,
+      "positive_months": 12,
+      "positive_month_fraction": 0.12903225806451613,
+      "months_at_least_25pct": 0,
+      "months_at_least_50pct": 0,
+      "median_return_scaled_to_20m_krw": 0.0,
+      "best_month_return_scaled_to_20m_krw": 1210654.6276703111,
+      "worst_month_return_scaled_to_20m_krw": -516540.3491949316,
+      "post2024_total_return": 0.015138367544764053,
+      "rolling12_worst_return": -0.07046550518754036,
+      "rolling12_median_return": 0.0,
+      "rolling12_best_return": 0.08324172745963687
+    },
+    "capital_at_historical_median_monthly_return": {
+      "for_5m_monthly_krw": null,
+      "for_10m_monthly_krw": null,
+      "interpretation": "Algebra only; undefined if median <=0. Median is not a dependable withdrawal rate and ignores losing months, tax and FX."
+    },
+    "cashflow_gate_checks": {
+      "median_month_at_least_25pct": false,
+      "positive_month_fraction_at_least_75pct": false,
+      "post2024_nonnegative": true
+    },
+    "withdrawal_overlays": [
+      {
+        "withdrawal_krw_per_month": 5000000,
+        "initial_capital_krw": 20000000,
+        "window_months": 12,
+        "historical_window_count": 82,
+        "fully_funded_with_capital_remaining_count": 0,
+        "fully_funded_with_capital_remaining_fraction": 0.0,
+        "depleted_count": 82,
+        "depletion_month_min": 4,
+        "depletion_month_median": 4.0,
+        "depletion_month_max": 5,
+        "return_path_15pct_drawdown_window_count": 0,
+        "original_halt_overlap_window_count": 0,
+        "ending_capital_krw_p10": 0.0,
+        "ending_capital_krw_median": 0.0,
+        "ending_capital_krw_p90": 0.0,
+        "windows_where_no_finite_capital_preserves_principal": 44,
+        "principal_preserving_capital_median_on_positive_return_windows_krw": 2760730052.610739,
+        "capital_requirement_interpretation": "Frozen-path algebra, not recommended capital. Losing/flat windows cannot pay withdrawals while preserving principal at any positive capital.",
+        "capital_requirements": [
+          {
+            "start_month": "2019-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60106707.6595809,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60138446.949304685,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60192899.14572409,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60247351.34214349,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60301803.538562894,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60356255.7349823,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60544710.23639889,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60437019.87275307,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2806055148.6074014
+          },
+          {
+            "start_month": "2019-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60112470.976813585,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 926092673.9991367
+          },
+          {
+            "start_month": "2019-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59614382.1416726,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1237983653.2171016
+          },
+          {
+            "start_month": "2019-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59380560.38839708,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1285391157.5817542
+          },
+          {
+            "start_month": "2019-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59022022.249380395,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1227246566.5193
+          },
+          {
+            "start_month": "2020-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58781557.03293747,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1222246566.5193
+          },
+          {
+            "start_month": "2020-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58541091.81649454,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1217246566.5193
+          },
+          {
+            "start_month": "2020-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58016176.145310044,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1107801038.7810066
+          },
+          {
+            "start_month": "2020-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57754323.27591235,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1102801038.7810066
+          },
+          {
+            "start_month": "2020-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57492470.40651466,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1097801038.7810066
+          },
+          {
+            "start_month": "2020-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57230617.53711697,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1092801038.7810066
+          },
+          {
+            "start_month": "2020-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 55368296.30068713,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 720519032.4808606
+          },
+          {
+            "start_month": "2020-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58615070.89322912,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2795997253.1024885
+          },
+          {
+            "start_month": "2020-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61456007.649810225,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60126282.48428103,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60082051.23153294,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60164102.46306588,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60246153.69459882,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60328204.926131755,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60410256.157664694,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60492307.38919763,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60574358.620730564,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60656409.8522635,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60738461.083796434,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60820512.31532937,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60902563.546862304,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60984614.77839524,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60004349.682654634,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60094938.943940945,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60181241.30256951,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60326316.07171827,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60543176.498441584,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60818906.748314716,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61173230.582209535,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61527554.416104354,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61881878.24999917,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62260914.776243195,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62390427.91218663,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62623519.70101448,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62710659.62584576,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61662332.64244169,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61733352.14758555,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60991054.63390088,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 8216546407.454413
+          },
+          {
+            "start_month": "2023-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60123941.6763174,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 10791663493.24981
+          },
+          {
+            "start_month": "2023-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59372300.1376092,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 3676674765.7600665
+          },
+          {
+            "start_month": "2023-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58354005.22321466,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1987574363.2516556
+          },
+          {
+            "start_month": "2023-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58207208.18683171,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1982574363.2516556
+          },
+          {
+            "start_month": "2023-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58063402.48339456,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2018814313.1878684
+          },
+          {
+            "start_month": "2023-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57499766.32076916,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 968407999.1784742
+          },
+          {
+            "start_month": "2024-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60262845.53765193,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 8868180838.75345
+          },
+          {
+            "start_month": "2024-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58941323.767418884,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2289187994.7588573
+          },
+          {
+            "start_month": "2024-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59894106.39227335,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 6769358271.929324
+          },
+          {
+            "start_month": "2024-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60375268.296942115,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 188532824885.74866
+          },
+          {
+            "start_month": "2024-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60363646.69840461,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 127492729387.3463
+          },
+          {
+            "start_month": "2024-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60308374.6407215,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 7346326618.531481
+          },
+          {
+            "start_month": "2024-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59303057.69496018,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 4582518482.032269
+          },
+          {
+            "start_month": "2024-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59169207.83676307,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2885123305.9028077
+          },
+          {
+            "start_month": "2024-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58955691.63181812,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2128224989.7397225
+          },
+          {
+            "start_month": "2024-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58844836.61422168,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2654135008.504227
+          },
+          {
+            "start_month": "2024-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58700899.41669293,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2725462852.11899
+          },
+          {
+            "start_month": "2024-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60358026.03847709,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59933870.30256018,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 31656811398.59697
+          },
+          {
+            "start_month": "2025-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59877341.8929386,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 22882396638.81105
+          },
+          {
+            "start_month": "2025-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59836777.79618756,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 19687723696.18551
+          },
+          {
+            "start_month": "2025-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59786655.43844758,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 16716728886.772842
+          },
+          {
+            "start_month": "2025-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59768773.155423366,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 16711728886.772842
+          },
+          {
+            "start_month": "2025-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60240562.22334888,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59550480.76231861,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 8553921038.049809
+          },
+          {
+            "start_month": "2025-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59979775.8285456,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60378453.106360115,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60008525.162512034,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 10559489739.658669
+          }
+        ]
+      },
+      {
+        "withdrawal_krw_per_month": 10000000,
+        "initial_capital_krw": 20000000,
+        "window_months": 12,
+        "historical_window_count": 82,
+        "fully_funded_with_capital_remaining_count": 0,
+        "fully_funded_with_capital_remaining_fraction": 0.0,
+        "depleted_count": 82,
+        "depletion_month_min": 2,
+        "depletion_month_median": 2.0,
+        "depletion_month_max": 3,
+        "return_path_15pct_drawdown_window_count": 0,
+        "original_halt_overlap_window_count": 0,
+        "ending_capital_krw_p10": 0.0,
+        "ending_capital_krw_median": 0.0,
+        "ending_capital_krw_p90": 0.0,
+        "windows_where_no_finite_capital_preserves_principal": 44,
+        "principal_preserving_capital_median_on_positive_return_windows_krw": 5521460105.221478,
+        "capital_requirement_interpretation": "Frozen-path algebra, not recommended capital. Losing/flat windows cannot pay withdrawals while preserving principal at any positive capital.",
+        "capital_requirements": [
+          {
+            "start_month": "2019-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120213415.3191618,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120276893.89860937,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120385798.29144818,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120494702.68428698,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120603607.07712579,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120712511.4699646,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121089420.47279778,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120874039.74550614,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5612110297.214803
+          },
+          {
+            "start_month": "2019-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120224941.95362717,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1852185347.9982734
+          },
+          {
+            "start_month": "2019-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119228764.2833452,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2475967306.434203
+          },
+          {
+            "start_month": "2019-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118761120.77679417,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2570782315.1635084
+          },
+          {
+            "start_month": "2019-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118044044.49876079,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2454493133.0386
+          },
+          {
+            "start_month": "2020-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117563114.06587493,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2444493133.0386
+          },
+          {
+            "start_month": "2020-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117082183.63298908,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2434493133.0386
+          },
+          {
+            "start_month": "2020-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116032352.29062009,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2215602077.562013
+          },
+          {
+            "start_month": "2020-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 115508646.5518247,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2205602077.562013
+          },
+          {
+            "start_month": "2020-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 114984940.81302932,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2195602077.562013
+          },
+          {
+            "start_month": "2020-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 114461235.07423393,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2185602077.562013
+          },
+          {
+            "start_month": "2020-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 110736592.60137425,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1441038064.9617212
+          },
+          {
+            "start_month": "2020-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117230141.78645824,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5591994506.204977
+          },
+          {
+            "start_month": "2020-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 122912015.29962045,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120252564.96856207,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120164102.46306588,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120328204.92613176,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120492307.38919763,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120656409.85226351,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120820512.31532939,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120984614.77839527,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121148717.24146113,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121312819.704527,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121476922.16759287,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121641024.63065875,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121805127.09372461,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121969229.55679049,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120008699.36530927,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120189877.88788189,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120362482.60513902,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120652632.14343654,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121086352.99688317,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121637813.49662943,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 122346461.16441907,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 123055108.83220871,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 123763756.49999835,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 124521829.55248639,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 124780855.82437326,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 125247039.40202896,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 125421319.25169152,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 123324665.28488338,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 123466704.2951711,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121982109.26780176,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 16433092814.908827
+          },
+          {
+            "start_month": "2023-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120247883.3526348,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 21583326986.49962
+          },
+          {
+            "start_month": "2023-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118744600.2752184,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 7353349531.520133
+          },
+          {
+            "start_month": "2023-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116708010.44642933,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 3975148726.503311
+          },
+          {
+            "start_month": "2023-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116414416.37366343,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 3965148726.503311
+          },
+          {
+            "start_month": "2023-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116126804.96678913,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 4037628626.3757367
+          },
+          {
+            "start_month": "2023-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 114999532.64153832,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1936815998.3569484
+          },
+          {
+            "start_month": "2024-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120525691.07530385,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 17736361677.5069
+          },
+          {
+            "start_month": "2024-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117882647.53483777,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 4578375989.5177145
+          },
+          {
+            "start_month": "2024-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119788212.7845467,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 13538716543.858648
+          },
+          {
+            "start_month": "2024-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120750536.59388423,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 377065649771.4973
+          },
+          {
+            "start_month": "2024-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120727293.39680922,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 254985458774.6926
+          },
+          {
+            "start_month": "2024-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120616749.281443,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 14692653237.062962
+          },
+          {
+            "start_month": "2024-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118606115.38992035,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 9165036964.064537
+          },
+          {
+            "start_month": "2024-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118338415.67352614,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5770246611.805615
+          },
+          {
+            "start_month": "2024-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117911383.26363625,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 4256449979.479445
+          },
+          {
+            "start_month": "2024-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117689673.22844335,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5308270017.008454
+          },
+          {
+            "start_month": "2024-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117401798.83338585,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5450925704.23798
+          },
+          {
+            "start_month": "2024-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120716052.07695419,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119867740.60512036,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 63313622797.19394
+          },
+          {
+            "start_month": "2025-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119754683.7858772,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 45764793277.6221
+          },
+          {
+            "start_month": "2025-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119673555.59237511,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 39375447392.37102
+          },
+          {
+            "start_month": "2025-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119573310.87689516,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 33433457773.545685
+          },
+          {
+            "start_month": "2025-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119537546.31084673,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 33423457773.545685
+          },
+          {
+            "start_month": "2025-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120481124.44669776,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119100961.52463722,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 17107842076.099619
+          },
+          {
+            "start_month": "2025-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119959551.6570912,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120756906.21272023,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120017050.32502407,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 21118979479.317337
+          }
+        ]
+      }
+    ],
+    "original_run_halt": {
+      "latched_drawdown_halt": false,
+      "first_halted_date": null,
+      "halted_daily_rows": 0,
+      "interpretation": "Original strategy halt only. Shifted windows reuse its realized path; they are not fresh-account reruns."
+    },
+    "next_experiment_branch": "edge_discrimination_before_capital_scaling",
+    "next_experiment_numeric_gates": {
+      "minimum_completed_campaigns": 200,
+      "stress_profit_factor_min_exclusive": 1.3,
+      "stress_mean_campaign_pnl_positive": true,
+      "block_resampled_lower95pct_mean_monthly_return_min_exclusive": 0,
+      "calendar_fold_positive_fraction_min": 0.6,
+      "drawdown_trigger": 0.15,
+      "forward_paper_min_days": 90,
+      "leverage_until_evidence": 1.0,
+      "selection_rule": "These are next-test design gates, not a claim v1 meets them. Do not retune v1 or substitute a leveraged spot-return multiple."
+    },
+    "limitations": [
+      "KRW merely rescales USDT percentage returns; no FX path, taxes, operational expenses or remittance costs",
+      "Equity returns include unrealized PnL; realized_trade_pnl columns are separately reported",
+      "Withdrawal overlay preserves percentage returns and omits additional sales/costs/minimum-order effects; therefore is not execution-valid",
+      "Overlapping historical windows are dependent observations, never estimates of future success probability",
+      "Drawdowns exclude withdrawals; an overlay trigger is diagnostic and does not fabricate a new strategy liquidation"
+    ],
+    "input_sha256": "f53b13c9b7e17102dc487c586bf6793d36b7470f537488ee146332050a9b4d9c"
+  },
+  "stress": {
+    "scope": "Historical deterministic return-path analysis, not future probability or a new withdrawal backtest of the execution engine",
+    "cashflow_math": {
+      "initial_capital_krw": 20000000,
+      "per_trade_risk_fraction": 0.005,
+      "minimum_target_krw_per_month": 5000000,
+      "upper_target_krw_per_month": 10000000,
+      "required_simple_monthly_return_at_unchanged_capital": [
+        0.25,
+        0.5
+      ],
+      "required_monthly_initial_equity_risk_units": [
+        50,
+        100
+      ]
+    },
+    "monthly_observations": {
+      "full_calendar_months": 93,
+      "first": "2019-01",
+      "last": "2026-09",
+      "net_return_mean": 1.648435623036779e-05,
+      "net_return_median": 0.0,
+      "net_return_min": -0.02623555576195069,
+      "net_return_max": 0.05802150506367232,
+      "positive_months": 11,
+      "positive_month_fraction": 0.11827956989247312,
+      "months_at_least_25pct": 0,
+      "months_at_least_50pct": 0,
+      "median_return_scaled_to_20m_krw": 0.0,
+      "best_month_return_scaled_to_20m_krw": 1160430.1012734463,
+      "worst_month_return_scaled_to_20m_krw": -524711.1152390138,
+      "post2024_total_return": 0.005919874826285421,
+      "rolling12_worst_return": -0.07699552707653035,
+      "rolling12_median_return": -0.0018648157784280084,
+      "rolling12_best_return": 0.08112133063942806
+    },
+    "capital_at_historical_median_monthly_return": {
+      "for_5m_monthly_krw": null,
+      "for_10m_monthly_krw": null,
+      "interpretation": "Algebra only; undefined if median <=0. Median is not a dependable withdrawal rate and ignores losing months, tax and FX."
+    },
+    "cashflow_gate_checks": {
+      "median_month_at_least_25pct": false,
+      "positive_month_fraction_at_least_75pct": false,
+      "post2024_nonnegative": true
+    },
+    "withdrawal_overlays": [
+      {
+        "withdrawal_krw_per_month": 5000000,
+        "initial_capital_krw": 20000000,
+        "window_months": 12,
+        "historical_window_count": 82,
+        "fully_funded_with_capital_remaining_count": 0,
+        "fully_funded_with_capital_remaining_fraction": 0.0,
+        "depleted_count": 82,
+        "depletion_month_min": 4,
+        "depletion_month_median": 4.0,
+        "depletion_month_max": 5,
+        "return_path_15pct_drawdown_window_count": 0,
+        "original_halt_overlap_window_count": 0,
+        "ending_capital_krw_p10": 0.0,
+        "ending_capital_krw_median": 0.0,
+        "ending_capital_krw_p90": 0.0,
+        "windows_where_no_finite_capital_preserves_principal": 49,
+        "principal_preserving_capital_median_on_positive_return_windows_krw": 2742189465.3134003,
+        "capital_requirement_interpretation": "Frozen-path algebra, not recommended capital. Losing/flat windows cannot pay withdrawals while preserving principal at any positive capital.",
+        "capital_requirements": [
+          {
+            "start_month": "2019-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60110410.56209715,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60143364.407052614,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60200516.175458156,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60257667.9438637,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60314819.71226924,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60371971.48067479,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60565375.078772545,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60473974.35888378,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 3308178230.5700126
+          },
+          {
+            "start_month": "2019-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60163556.7868709,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 969074598.3989135
+          },
+          {
+            "start_month": "2019-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59673296.93274939,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1310669256.4867492
+          },
+          {
+            "start_month": "2019-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59447562.14304148,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1364236242.7975461
+          },
+          {
+            "start_month": "2019-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59097320.65302313,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1297510909.8463447
+          },
+          {
+            "start_month": "2020-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58869587.22818425,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1292510909.8463447
+          },
+          {
+            "start_month": "2020-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58641853.803345375,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1287510909.8463447
+          },
+          {
+            "start_month": "2020-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58110690.681150064,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1159578307.827527
+          },
+          {
+            "start_month": "2020-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57860122.47765365,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1154578307.8275268
+          },
+          {
+            "start_month": "2020-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57609554.27415724,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1149578307.8275268
+          },
+          {
+            "start_month": "2020-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57358986.07066083,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1144578307.8275268
+          },
+          {
+            "start_month": "2020-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 55478969.00692388,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 739380090.5691395
+          },
+          {
+            "start_month": "2020-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58591109.572270475,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2742189465.3134003
+          },
+          {
+            "start_month": "2020-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61449173.34563835,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60130696.43654146,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60084979.284254536,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60169958.56850907,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60254937.85276361,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60339917.137018144,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60424896.42127268,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60509875.705527216,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60594854.98978174,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60679834.27403627,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60764813.55829081,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60849792.842545345,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60934772.12679987,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61019751.4110544,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60006137.31708032,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60098903.1999394,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60196365.8845086,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60364267.25686433,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60599328.35813858,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60898536.353363946,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61285906.46568033,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61673276.57799672,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62060646.690313116,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62477738.53187624,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62649295.53536229,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62931479.177732095,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 63042908.920006454,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62030342.06643225,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 62029500.97723201,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 61174743.88348116,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 32915519875.920696
+          },
+          {
+            "start_month": "2023-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60405540.959940076,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59635100.4848579,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 7600387892.588689
+          },
+          {
+            "start_month": "2023-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58545631.96035928,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2577640169.4700084
+          },
+          {
+            "start_month": "2023-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58432067.560149774,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2572640169.4700084
+          },
+          {
+            "start_month": "2023-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58322897.796495825,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2671201981.4097314
+          },
+          {
+            "start_month": "2023-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 57736795.67805209,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1084852591.4664972
+          },
+          {
+            "start_month": "2024-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60471917.990553245,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 49555632045.43578
+          },
+          {
+            "start_month": "2024-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59099138.46584837,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2779964447.5415096
+          },
+          {
+            "start_month": "2024-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60069939.53435898,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 13909570423.405571
+          },
+          {
+            "start_month": "2024-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60573225.70727757,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2024-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60580189.796505034,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2024-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60522250.20442592,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 17054327106.580576
+          },
+          {
+            "start_month": "2024-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59397772.83169246,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5760839004.352931
+          },
+          {
+            "start_month": "2024-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59237399.60367182,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 3294061629.970759
+          },
+          {
+            "start_month": "2024-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59035859.088740215,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2490515668.827179
+          },
+          {
+            "start_month": "2024-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58935076.04704668,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2923858769.12998
+          },
+          {
+            "start_month": "2024-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 58791298.164157875,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 3236622129.440689
+          },
+          {
+            "start_month": "2024-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60448316.48666571,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60027360.09635787,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59974638.74590126,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59942860.00607738,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 223392563582.6371
+          },
+          {
+            "start_month": "2025-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59890683.89820905,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 56990302599.10406
+          },
+          {
+            "start_month": "2025-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59885429.43550515,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 56985302599.104065
+          },
+          {
+            "start_month": "2025-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60341861.993463166,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 59651969.826311655,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 11869309051.38996
+          },
+          {
+            "start_month": "2025-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60054509.77043447,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60351856.58466631,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 60116130.52887323,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 17461874853.593792
+          }
+        ]
+      },
+      {
+        "withdrawal_krw_per_month": 10000000,
+        "initial_capital_krw": 20000000,
+        "window_months": 12,
+        "historical_window_count": 82,
+        "fully_funded_with_capital_remaining_count": 0,
+        "fully_funded_with_capital_remaining_fraction": 0.0,
+        "depleted_count": 82,
+        "depletion_month_min": 2,
+        "depletion_month_median": 2.0,
+        "depletion_month_max": 3,
+        "return_path_15pct_drawdown_window_count": 0,
+        "original_halt_overlap_window_count": 0,
+        "ending_capital_krw_p10": 0.0,
+        "ending_capital_krw_median": 0.0,
+        "ending_capital_krw_p90": 0.0,
+        "windows_where_no_finite_capital_preserves_principal": 49,
+        "principal_preserving_capital_median_on_positive_return_windows_krw": 5484378930.626801,
+        "capital_requirement_interpretation": "Frozen-path algebra, not recommended capital. Losing/flat windows cannot pay withdrawals while preserving principal at any positive capital.",
+        "capital_requirements": [
+          {
+            "start_month": "2019-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120220821.1241943,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120286728.81410523,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120401032.35091631,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120515335.8877274,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120629639.42453848,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120743942.96134958,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121130750.15754509,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2019-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120947948.71776757,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 6616356461.140025
+          },
+          {
+            "start_month": "2019-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120327113.5737418,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1938149196.797827
+          },
+          {
+            "start_month": "2019-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119346593.86549878,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2621338512.9734983
+          },
+          {
+            "start_month": "2019-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118895124.28608295,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2728472485.5950923
+          },
+          {
+            "start_month": "2019-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118194641.30604626,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2595021819.6926894
+          },
+          {
+            "start_month": "2020-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117739174.4563685,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2585021819.6926894
+          },
+          {
+            "start_month": "2020-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117283707.60669075,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2575021819.6926894
+          },
+          {
+            "start_month": "2020-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116221381.36230013,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2319156615.655054
+          },
+          {
+            "start_month": "2020-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 115720244.9553073,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2309156615.6550536
+          },
+          {
+            "start_month": "2020-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 115219108.54831448,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2299156615.6550536
+          },
+          {
+            "start_month": "2020-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 114717972.14132166,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2289156615.6550536
+          },
+          {
+            "start_month": "2020-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 110957938.01384775,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 1478760181.138279
+          },
+          {
+            "start_month": "2020-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117182219.14454095,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5484378930.626801
+          },
+          {
+            "start_month": "2020-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 122898346.6912767,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120261392.87308292,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2020-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120169958.56850907,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120339917.13701814,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120509875.70552722,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120679834.27403629,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120849792.84254536,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121019751.41105443,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121189709.97956347,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121359668.54807255,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121529627.11658162,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121699585.68509069,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121869544.25359973,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 122039502.8221088,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2021-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120000000.0,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120012274.63416064,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120197806.3998788,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120392731.7690172,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120728534.51372866,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121198656.71627717,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121797072.70672789,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 122571812.93136066,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 123346553.15599345,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 124121293.38062623,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2022-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 124955477.06375249,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 125298591.07072458,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 125862958.35546419,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 126085817.84001291,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 124060684.1328645,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 124059001.95446402,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 122349487.76696232,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 65831039751.84139
+          },
+          {
+            "start_month": "2023-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120811081.91988015,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2023-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119270200.9697158,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 15200775785.177378
+          },
+          {
+            "start_month": "2023-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117091263.92071857,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5155280338.940017
+          },
+          {
+            "start_month": "2023-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116864135.12029955,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5145280338.940017
+          },
+          {
+            "start_month": "2023-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 116645795.59299165,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5342403962.819463
+          },
+          {
+            "start_month": "2023-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 115473591.35610418,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 2169705182.9329944
+          },
+          {
+            "start_month": "2024-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120943835.98110649,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 99111264090.87157
+          },
+          {
+            "start_month": "2024-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118198276.93169674,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5559928895.083019
+          },
+          {
+            "start_month": "2024-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120139879.06871796,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 27819140846.811142
+          },
+          {
+            "start_month": "2024-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121146451.41455515,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2024-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121160379.59301007,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2024-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 121044500.40885185,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 34108654213.16115
+          },
+          {
+            "start_month": "2024-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118795545.66338491,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 11521678008.705862
+          },
+          {
+            "start_month": "2024-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118474799.20734364,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 6588123259.941518
+          },
+          {
+            "start_month": "2024-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 118071718.17748043,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 4981031337.654358
+          },
+          {
+            "start_month": "2024-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117870152.09409335,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 5847717538.25996
+          },
+          {
+            "start_month": "2024-11",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 117582596.32831575,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 6473244258.881378
+          },
+          {
+            "start_month": "2024-12",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120896632.97333142,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-01",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120054720.19271573,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-02",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119949277.49180251,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-03",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119885720.01215476,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 446785127165.2742
+          },
+          {
+            "start_month": "2025-04",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119781367.7964181,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 113980605198.20811
+          },
+          {
+            "start_month": "2025-05",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119770858.8710103,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 113970605198.20813
+          },
+          {
+            "start_month": "2025-06",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120683723.98692633,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-07",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 119303939.65262331,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 23738618102.77992
+          },
+          {
+            "start_month": "2025-08",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120109019.54086894,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-09",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120703713.16933262,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": null
+          },
+          {
+            "start_month": "2025-10",
+            "minimum_initial_capital_to_fund_window_ending_at_zero_krw": 120232261.05774646,
+            "initial_capital_to_fund_window_and_preserve_initial_principal_krw": 34923749707.187584
+          }
+        ]
+      }
+    ],
+    "original_run_halt": {
+      "latched_drawdown_halt": false,
+      "first_halted_date": null,
+      "halted_daily_rows": 0,
+      "interpretation": "Original strategy halt only. Shifted windows reuse its realized path; they are not fresh-account reruns."
+    },
+    "next_experiment_branch": "edge_discrimination_before_capital_scaling",
+    "next_experiment_numeric_gates": {
+      "minimum_completed_campaigns": 200,
+      "stress_profit_factor_min_exclusive": 1.3,
+      "stress_mean_campaign_pnl_positive": true,
+      "block_resampled_lower95pct_mean_monthly_return_min_exclusive": 0,
+      "calendar_fold_positive_fraction_min": 0.6,
+      "drawdown_trigger": 0.15,
+      "forward_paper_min_days": 90,
+      "leverage_until_evidence": 1.0,
+      "selection_rule": "These are next-test design gates, not a claim v1 meets them. Do not retune v1 or substitute a leveraged spot-return multiple."
+    },
+    "limitations": [
+      "KRW merely rescales USDT percentage returns; no FX path, taxes, operational expenses or remittance costs",
+      "Equity returns include unrealized PnL; realized_trade_pnl columns are separately reported",
+      "Withdrawal overlay preserves percentage returns and omits additional sales/costs/minimum-order effects; therefore is not execution-valid",
+      "Overlapping historical windows are dependent observations, never estimates of future success probability",
+      "Drawdowns exclude withdrawals; an overlay trigger is diagnostic and does not fabricate a new strategy liquidation"
+    ],
+    "input_sha256": "45c0b6120fc5ec5db342b3b26a1b26a59532ec70b82be13b32fd76314be7fd01"
+  }
+}

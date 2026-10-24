@@ -49,3 +49,14 @@ this schema; it does not manufacture exchange-clock or API-response evidence.
 See [historical workflow](HISTORICAL_WORKFLOW.md) and
 [new experiment results](experiments/2026-10-17/RESULTS.md). The original-data
 reproduction limitation above remains unchanged.
+
+## Cashflow Alpha v1 boundary
+
+The [Cashflow Alpha runner](CASHFLOW_ALPHA.md) reuses the new-data archive and
+spot broker while replacing entry logic. Its unlevered spot funding cost is zero;
+it has no validated futures leverage/funding/liquidation model. Completed-bar
+weekly decisions retain D+2 execution. Fixed-policy forward yearly folds are
+separate diagnostic accounts, never a stitched replacement for the continuous
+account. This experiment remains price/volume based, with incomplete migration
+identities and no publication-timed fundamental panel. Raw source bytes and
+individual simulation ledgers are retained outside Git.
