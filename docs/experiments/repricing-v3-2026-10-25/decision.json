@@ -1,0 +1,86 @@
+{
+  "demand": {
+    "research_decision": "REJECT",
+    "decision": "REJECT",
+    "research_gates": {
+      "validation_positive_return": false,
+      "validation_pf_gt1_30": false,
+      "validation_positive_expectancy": false,
+      "validation_paired_lower_positive": false,
+      "validation_sample_ge30": true,
+      "challenge_positive_return": false,
+      "challenge_pf_gt1_30": false,
+      "challenge_positive_expectancy": false,
+      "challenge_paired_lower_positive": false,
+      "challenge_sample_ge30": true
+    },
+    "live_relevance_gates": {
+      "research_edge": false,
+      "audit_passed": true,
+      "no_halt": false,
+      "max_drawdown": false,
+      "positive_month_fraction": false,
+      "mean_monthly_ge1pct": false,
+      "target5m_frequency_ge50pct": false
+    },
+    "actual_live_eligible": false,
+    "failed_research_gates": [
+      "validation_positive_return",
+      "validation_pf_gt1_30",
+      "validation_positive_expectancy",
+      "validation_paired_lower_positive",
+      "challenge_positive_return",
+      "challenge_pf_gt1_30",
+      "challenge_positive_expectancy",
+      "challenge_paired_lower_positive"
+    ],
+    "failed_relevance_gates": [
+      "research_edge",
+      "no_halt",
+      "max_drawdown",
+      "positive_month_fraction",
+      "mean_monthly_ge1pct",
+      "target5m_frequency_ge50pct"
+    ]
+  },
+  "compression": {
+    "research_decision": "REJECT",
+    "decision": "REJECT",
+    "research_gates": {
+      "validation_positive_return": true,
+      "validation_pf_gt1_30": true,
+      "validation_positive_expectancy": true,
+      "validation_paired_lower_positive": false,
+      "validation_sample_ge30": false,
+      "challenge_positive_return": false,
+      "challenge_pf_gt1_30": false,
+      "challenge_positive_expectancy": false,
+      "challenge_paired_lower_positive": true,
+      "challenge_sample_ge30": false
+    },
+    "live_relevance_gates": {
+      "research_edge": false,
+      "audit_passed": true,
+      "no_halt": true,
+      "max_drawdown": true,
+      "positive_month_fraction": false,
+      "mean_monthly_ge1pct": false,
+      "target5m_frequency_ge50pct": false
+    },
+    "actual_live_eligible": false,
+    "failed_research_gates": [
+      "validation_paired_lower_positive",
+      "validation_sample_ge30",
+      "challenge_positive_return",
+      "challenge_pf_gt1_30",
+      "challenge_positive_expectancy",
+      "challenge_sample_ge30"
+    ],
+    "failed_relevance_gates": [
+      "research_edge",
+      "positive_month_fraction",
+      "mean_monthly_ge1pct",
+      "target5m_frequency_ge50pct"
+    ]
+  }
+}

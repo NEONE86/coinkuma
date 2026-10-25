@@ -1,5 +1,10 @@
 # ONE Trading v0.3.1 — code-only research baseline
 
+Latest independent study: [Cashflow Alpha v3 — Repricing Opportunity Atlas](docs/experiments/repricing-v3-2026-10-25/RESULTS.md).
+Both fixed hypotheses are **REJECTED** after 473,267 historical label checks and
+30 account backtests. No validated edge or live-trading approval. See the
+[reproduction workflow](docs/REPRICING_V3.md); previous rejection results are preserved.
+
 Experimental historical replay and forward paper trading. **Profitability is not
 validated. No exchange-account access, real orders, or withdrawals are implemented.**
 Do not provide API keys or fund an account to run this code.
