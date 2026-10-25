@@ -1,0 +1,31 @@
+{
+  "id": "futures-evidence-extension-20261025",
+  "parent_pr5_head": "152ae3635527378e02d9de138535e3538b4ae5ec",
+  "branch": "research/futures-evidence-gate-20261025",
+  "unchanged_protocol": "docs/FUTURES_4H_PROTOCOL.json",
+  "evaluation": ["2022-01-01", "2026-10-01"],
+  "symbols": ["BTCUSDT", "ETHUSDT"],
+  "tardis_sample_days": ["2022-01-01", "2024-01-01", "2026-09-01"],
+  "tardis_daily_type": "derivative_ticker",
+  "tardis_raw_minute_offsets": [0, 720],
+  "funding_api_sample_days": ["2022-01-01", "2023-01-01", "2024-01-01", "2025-01-01", "2026-01-01", "2026-09-01"],
+  "funding_api_limit_per_request": 10,
+  "evidence_goals": [
+    "Acquire actual public historical local_timestamp samples, distinguish new OI events from forward-filled derivative ticker state",
+    "Match funding API exact millisecond times and decimal rates against frozen official ZIPs; count nonempty positive settlement marks without substituting hourly prices",
+    "Archive official and provider contract documentation; require complete effective-dated terms, not current exchangeInfo or unrelated quarterly contracts"
+  ],
+  "gate_requirements": {
+    "OI": "Continuous independently evidenced historical available/event times, including preceding24h, for the entire frozen evaluation and source mapping/version provenance; isolated first-of-month samples cannot pass",
+    "funding": "All actual settlement events and exact positive settlement marks across the entire fixed evaluation, plus historically available rates for signal inputs",
+    "terms": "Complete relevant effective-dated identity, listing/termination, price/quantity filters, maintenance margin and settlement conditions for BTCUSDT/ETHUSDT USD-M perpetuals",
+    "structure": "Historical available timestamps and mapping for price/flow/mark/index inputs as required by unchanged protocol"
+  },
+  "acquisition_limits": "Public unauthenticated documented samples only; no purchase/subscription, account access, order endpoints or rate-limit circumvention. Retain failures as evidence, not absence-of-existence proof.",
+  "normalization": "Preserve original source bytes and capture times. Vendor local time is provider-reported historical receipt, not original exchange publication or timestamp authentication. CSV carried-forward OI timestamps cannot be treated as fresh observations.",
+  "decision": "If any required continuous evidence is missing, NEEDS_MORE_EVIDENCE; no performance engine, PnL or control execution. Preserve prior reports. Only after all gates pass, implement and independently reproduce frozen strategy without rule/cost/period changes.",
+  "performance_viewed": false,
+  "orders": false,
+  "leverage": false,
+  "merge": false
+}
