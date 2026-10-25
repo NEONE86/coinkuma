@@ -1,0 +1,5069 @@
+{
+  "counts": {
+    "eligible_daily_rows": 473267,
+    "boundary_purged_daily_rows": 96204,
+    "immature_eligible_symbol_dates_excluded": 31791
+  },
+  "anchors": 2884,
+  "episodes": 2209,
+  "matching": {
+    "cases": 890,
+    "matched_cases": 643,
+    "control_rows": 1800
+  },
+  "markets": [
+    {
+      "symbol": "1000CATUSDT",
+      "eligible_daily_rows": 100,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "1000CHEEMSUSDT",
+      "eligible_daily_rows": 152,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "1000SATSUSDT",
+      "eligible_daily_rows": 597,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 87,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 92,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "1INCHUSDT",
+      "eligible_daily_rows": 1634,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 209,
+      "90d_3x_hits": 8,
+      "180d_2x_hits": 328,
+      "180d_3x_hits": 8
+    },
+    {
+      "symbol": "1MBABYDOGEUSDT",
+      "eligible_daily_rows": 296,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "A2ZUSDT",
+      "eligible_daily_rows": 7,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "eligible_daily_rows": 1757,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 178,
+      "90d_3x_hits": 2,
+      "180d_2x_hits": 399,
+      "180d_3x_hits": 88
+    },
+    {
+      "symbol": "ACAUSDT",
+      "eligible_daily_rows": 1080,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 264,
+      "90d_3x_hits": 45,
+      "180d_2x_hits": 410,
+      "180d_3x_hits": 126
+    },
+    {
+      "symbol": "ACEUSDT",
+      "eligible_daily_rows": 557,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 6,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 47,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ACHUSDT",
+      "eligible_daily_rows": 1254,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 285,
+      "90d_3x_hits": 88,
+      "180d_2x_hits": 512,
+      "180d_3x_hits": 261
+    },
+    {
+      "symbol": "ACMUSDT",
+      "eligible_daily_rows": 860,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 77,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 77,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ACTUSDT",
+      "eligible_daily_rows": 251,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 65,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 65,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ACXUSDT",
+      "eligible_daily_rows": 77,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ADAUSDT",
+      "eligible_daily_rows": 2649,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 587,
+      "90d_3x_hits": 256,
+      "180d_2x_hits": 1010,
+      "180d_3x_hits": 492
+    },
+    {
+      "symbol": "ADXUSDT",
+      "eligible_daily_rows": 915,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 82,
+      "90d_3x_hits": 46,
+      "180d_2x_hits": 249,
+      "180d_3x_hits": 134
+    },
+    {
+      "symbol": "AERGOUSDT",
+      "eligible_daily_rows": 328,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 50,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 108,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AEVOUSDT",
+      "eligible_daily_rows": 416,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 2,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 4,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AGIXUSDT",
+      "eligible_daily_rows": 262,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 106,
+      "90d_3x_hits": 79,
+      "180d_2x_hits": 135,
+      "180d_3x_hits": 128
+    },
+    {
+      "symbol": "AGLDUSDT",
+      "eligible_daily_rows": 1136,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 336,
+      "90d_3x_hits": 98,
+      "180d_2x_hits": 570,
+      "180d_3x_hits": 254
+    },
+    {
+      "symbol": "AIONUSDT",
+      "eligible_daily_rows": 622,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 220,
+      "90d_3x_hits": 48,
+      "180d_2x_hits": 295,
+      "180d_3x_hits": 76
+    },
+    {
+      "symbol": "AIUSDT",
+      "eligible_daily_rows": 477,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 53,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 54,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AIXBTUSDT",
+      "eligible_daily_rows": 209,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 5,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 5,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AKROUSDT",
+      "eligible_daily_rows": 1141,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 298,
+      "90d_3x_hits": 64,
+      "180d_2x_hits": 472,
+      "180d_3x_hits": 139
+    },
+    {
+      "symbol": "ALCXUSDT",
+      "eligible_daily_rows": 599,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 143,
+      "90d_3x_hits": 27,
+      "180d_2x_hits": 149,
+      "180d_3x_hits": 71
+    },
+    {
+      "symbol": "ALGOUSDT",
+      "eligible_daily_rows": 2238,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 463,
+      "90d_3x_hits": 251,
+      "180d_2x_hits": 840,
+      "180d_3x_hits": 579
+    },
+    {
+      "symbol": "ALICEUSDT",
+      "eligible_daily_rows": 1526,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 195,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 330,
+      "180d_3x_hits": 39
+    },
+    {
+      "symbol": "ALPACAUSDT",
+      "eligible_daily_rows": 744,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 151,
+      "90d_3x_hits": 81,
+      "180d_2x_hits": 243,
+      "180d_3x_hits": 167
+    },
+    {
+      "symbol": "ALPHAUSDT",
+      "eligible_daily_rows": 1293,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 260,
+      "90d_3x_hits": 44,
+      "180d_2x_hits": 346,
+      "180d_3x_hits": 54
+    },
+    {
+      "symbol": "ALPINEUSDT",
+      "eligible_daily_rows": 987,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 168,
+      "90d_3x_hits": 98,
+      "180d_2x_hits": 250,
+      "180d_3x_hits": 124
+    },
+    {
+      "symbol": "ALTUSDT",
+      "eligible_daily_rows": 544,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 66,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 69,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AMBUSDT",
+      "eligible_daily_rows": 486,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 125,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 204,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AMPUSDT",
+      "eligible_daily_rows": 1108,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 233,
+      "90d_3x_hits": 167,
+      "180d_2x_hits": 382,
+      "180d_3x_hits": 315
+    },
+    {
+      "symbol": "ANCUSDT",
+      "eligible_daily_rows": 98,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ANIMEUSDT",
+      "eligible_daily_rows": 183,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 2,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 2,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ANKRUSDT",
+      "eligible_daily_rows": 1961,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 509,
+      "90d_3x_hits": 168,
+      "180d_2x_hits": 857,
+      "180d_3x_hits": 318
+    },
+    {
+      "symbol": "ANTUSDT",
+      "eligible_daily_rows": 1024,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 238,
+      "90d_3x_hits": 34,
+      "180d_2x_hits": 408,
+      "180d_3x_hits": 93
+    },
+    {
+      "symbol": "APEUSDT",
+      "eligible_daily_rows": 1239,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 177,
+      "90d_3x_hits": 37,
+      "180d_2x_hits": 267,
+      "180d_3x_hits": 64
+    },
+    {
+      "symbol": "API3USDT",
+      "eligible_daily_rows": 1168,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 247,
+      "90d_3x_hits": 46,
+      "180d_2x_hits": 366,
+      "180d_3x_hits": 149
+    },
+    {
+      "symbol": "APTUSDT",
+      "eligible_daily_rows": 1023,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 120,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 264,
+      "180d_3x_hits": 39
+    },
+    {
+      "symbol": "ARBUSDT",
+      "eligible_daily_rows": 868,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 112,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 186,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ARDRUSDT",
+      "eligible_daily_rows": 951,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 239,
+      "90d_3x_hits": 88,
+      "180d_2x_hits": 351,
+      "180d_3x_hits": 101
+    },
+    {
+      "symbol": "ARKMUSDT",
+      "eligible_daily_rows": 751,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 54,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 64,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ARKUSDT",
+      "eligible_daily_rows": 458,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 38,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 107,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ARPAUSDT",
+      "eligible_daily_rows": 1949,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 469,
+      "90d_3x_hits": 254,
+      "180d_2x_hits": 741,
+      "180d_3x_hits": 420
+    },
+    {
+      "symbol": "ARUSDT",
+      "eligible_daily_rows": 1546,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 229,
+      "90d_3x_hits": 97,
+      "180d_2x_hits": 313,
+      "180d_3x_hits": 197
+    },
+    {
+      "symbol": "ASRUSDT",
+      "eligible_daily_rows": 1182,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 248,
+      "90d_3x_hits": 116,
+      "180d_2x_hits": 345,
+      "180d_3x_hits": 183
+    },
+    {
+      "symbol": "ASTRUSDT",
+      "eligible_daily_rows": 1078,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 136,
+      "90d_3x_hits": 90,
+      "180d_2x_hits": 249,
+      "180d_3x_hits": 189
+    },
+    {
+      "symbol": "ASTUSDT",
+      "eligible_daily_rows": 279,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 26,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 33,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ATAUSDT",
+      "eligible_daily_rows": 1075,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 194,
+      "90d_3x_hits": 56,
+      "180d_2x_hits": 385,
+      "180d_3x_hits": 151
+    },
+    {
+      "symbol": "ATMUSDT",
+      "eligible_daily_rows": 1081,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 87,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 127,
+      "180d_3x_hits": 1
+    },
+    {
+      "symbol": "ATOMUSDT",
+      "eligible_daily_rows": 2292,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 396,
+      "90d_3x_hits": 177,
+      "180d_2x_hits": 675,
+      "180d_3x_hits": 364
+    },
+    {
+      "symbol": "AUCTIONUSDT",
+      "eligible_daily_rows": 1252,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 298,
+      "90d_3x_hits": 210,
+      "180d_2x_hits": 469,
+      "180d_3x_hits": 374
+    },
+    {
+      "symbol": "AUDIOUSDT",
+      "eligible_daily_rows": 1558,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 275,
+      "90d_3x_hits": 72,
+      "180d_2x_hits": 390,
+      "180d_3x_hits": 120
+    },
+    {
+      "symbol": "AUSDT",
+      "eligible_daily_rows": 37,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AUTOUSDT",
+      "eligible_daily_rows": 390,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 26,
+      "90d_3x_hits": 3,
+      "180d_2x_hits": 28,
+      "180d_3x_hits": 3
+    },
+    {
+      "symbol": "AVAUSDT",
+      "eligible_daily_rows": 740,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 65,
+      "90d_3x_hits": 12,
+      "180d_2x_hits": 80,
+      "180d_3x_hits": 27
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "eligible_daily_rows": 1780,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 359,
+      "90d_3x_hits": 164,
+      "180d_2x_hits": 500,
+      "180d_3x_hits": 279
+    },
+    {
+      "symbol": "AWEUSDT",
+      "eligible_daily_rows": 41,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AXLUSDT",
+      "eligible_daily_rows": 513,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 20,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 20,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "AXSUSDT",
+      "eligible_daily_rows": 1737,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 322,
+      "90d_3x_hits": 72,
+      "180d_2x_hits": 423,
+      "180d_3x_hits": 97
+    },
+    {
+      "symbol": "BABYUSDT",
+      "eligible_daily_rows": 71,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 30,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 30,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BADGERUSDT",
+      "eligible_daily_rows": 1028,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 143,
+      "90d_3x_hits": 27,
+      "180d_2x_hits": 210,
+      "180d_3x_hits": 56
+    },
+    {
+      "symbol": "BAKEUSDT",
+      "eligible_daily_rows": 1326,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 364,
+      "90d_3x_hits": 127,
+      "180d_2x_hits": 446,
+      "180d_3x_hits": 217
+    },
+    {
+      "symbol": "BALUSDT",
+      "eligible_daily_rows": 1045,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 131,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 149,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "BANANAS31USDT",
+      "eligible_daily_rows": 133,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 99,
+      "90d_3x_hits": 82,
+      "180d_2x_hits": 112,
+      "180d_3x_hits": 103
+    },
+    {
+      "symbol": "BANANAUSDT",
+      "eligible_daily_rows": 370,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 3,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 15,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BANDUSDT",
+      "eligible_daily_rows": 1843,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 345,
+      "90d_3x_hits": 178,
+      "180d_2x_hits": 625,
+      "180d_3x_hits": 238
+    },
+    {
+      "symbol": "BARUSDT",
+      "eligible_daily_rows": 946,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 36,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 40,
+      "180d_3x_hits": 1
+    },
+    {
+      "symbol": "BATUSDT",
+      "eligible_daily_rows": 2114,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 242,
+      "90d_3x_hits": 99,
+      "180d_2x_hits": 558,
+      "180d_3x_hits": 242
+    },
+    {
+      "symbol": "BBUSDT",
+      "eligible_daily_rows": 411,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 67,
+      "90d_3x_hits": 11,
+      "180d_2x_hits": 107,
+      "180d_3x_hits": 14
+    },
+    {
+      "symbol": "BCHABCUSDT",
+      "eligible_daily_rows": 139,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BCHUSDT",
+      "eligible_daily_rows": 2079,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 364,
+      "90d_3x_hits": 81,
+      "180d_2x_hits": 672,
+      "180d_3x_hits": 297
+    },
+    {
+      "symbol": "BEAMUSDT",
+      "eligible_daily_rows": 654,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 178,
+      "90d_3x_hits": 41,
+      "180d_2x_hits": 214,
+      "180d_3x_hits": 68
+    },
+    {
+      "symbol": "BEAMXUSDT",
+      "eligible_daily_rows": 569,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 74,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 125,
+      "180d_3x_hits": 28
+    },
+    {
+      "symbol": "BELUSDT",
+      "eligible_daily_rows": 1606,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 394,
+      "90d_3x_hits": 127,
+      "180d_2x_hits": 794,
+      "180d_3x_hits": 265
+    },
+    {
+      "symbol": "BERAUSDT",
+      "eligible_daily_rows": 182,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 54,
+      "90d_3x_hits": 10,
+      "180d_2x_hits": 54,
+      "180d_3x_hits": 10
+    },
+    {
+      "symbol": "BETAUSDT",
+      "eligible_daily_rows": 954,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 65,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 135,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BICOUSDT",
+      "eligible_daily_rows": 923,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 156,
+      "90d_3x_hits": 2,
+      "180d_2x_hits": 251,
+      "180d_3x_hits": 75
+    },
+    {
+      "symbol": "BIFIUSDT",
+      "eligible_daily_rows": 270,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 10,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 40,
+      "180d_3x_hits": 30
+    },
+    {
+      "symbol": "BIGTIMEUSDT",
+      "eligible_daily_rows": 38,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BIOUSDT",
+      "eligible_daily_rows": 216,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 61,
+      "90d_3x_hits": 32,
+      "180d_2x_hits": 61,
+      "180d_3x_hits": 32
+    },
+    {
+      "symbol": "BLURUSDT",
+      "eligible_daily_rows": 533,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 61,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 94,
+      "180d_3x_hits": 9
+    },
+    {
+      "symbol": "BLZUSDT",
+      "eligible_daily_rows": 1325,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 321,
+      "90d_3x_hits": 83,
+      "180d_2x_hits": 440,
+      "180d_3x_hits": 168
+    },
+    {
+      "symbol": "BMTUSDT",
+      "eligible_daily_rows": 23,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BNBUSDT",
+      "eligible_daily_rows": 2649,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 352,
+      "90d_3x_hits": 161,
+      "180d_2x_hits": 810,
+      "180d_3x_hits": 299
+    },
+    {
+      "symbol": "BNSOLUSDT",
+      "eligible_daily_rows": 271,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BNTUSDT",
+      "eligible_daily_rows": 1006,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 184,
+      "90d_3x_hits": 169,
+      "180d_2x_hits": 201,
+      "180d_3x_hits": 191
+    },
+    {
+      "symbol": "BNXUSDT",
+      "eligible_daily_rows": 748,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 303,
+      "90d_3x_hits": 125,
+      "180d_2x_hits": 411,
+      "180d_3x_hits": 283
+    },
+    {
+      "symbol": "BOMEUSDT",
+      "eligible_daily_rows": 482,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 90,
+      "90d_3x_hits": 5,
+      "180d_2x_hits": 90,
+      "180d_3x_hits": 19
+    },
+    {
+      "symbol": "BONDUSDT",
+      "eligible_daily_rows": 822,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 220,
+      "90d_3x_hits": 123,
+      "180d_2x_hits": 295,
+      "180d_3x_hits": 172
+    },
+    {
+      "symbol": "BONKUSDT",
+      "eligible_daily_rows": 601,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 194,
+      "90d_3x_hits": 57,
+      "180d_2x_hits": 233,
+      "180d_3x_hits": 111
+    },
+    {
+      "symbol": "BROCCOLI714USDT",
+      "eligible_daily_rows": 133,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 44,
+      "90d_3x_hits": 40,
+      "180d_2x_hits": 52,
+      "180d_3x_hits": 40
+    },
+    {
+      "symbol": "BSWUSDT",
+      "eligible_daily_rows": 828,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 131,
+      "90d_3x_hits": 24,
+      "180d_2x_hits": 177,
+      "180d_3x_hits": 34
+    },
+    {
+      "symbol": "BTCSTUSDT",
+      "eligible_daily_rows": 375,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 84,
+      "90d_3x_hits": 78,
+      "180d_2x_hits": 174,
+      "180d_3x_hits": 81
+    },
+    {
+      "symbol": "BTGUSDT",
+      "eligible_daily_rows": 122,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 11,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 25,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "BTSUSDT",
+      "eligible_daily_rows": 761,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 80,
+      "90d_3x_hits": 29,
+      "180d_2x_hits": 84,
+      "180d_3x_hits": 37
+    },
+    {
+      "symbol": "BTTCUSDT",
+      "eligible_daily_rows": 913,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 146,
+      "90d_3x_hits": 28,
+      "180d_2x_hits": 243,
+      "180d_3x_hits": 46
+    },
+    {
+      "symbol": "BTTUSDT",
+      "eligible_daily_rows": 831,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 241,
+      "90d_3x_hits": 140,
+      "180d_2x_hits": 376,
+      "180d_3x_hits": 231
+    },
+    {
+      "symbol": "BURGERUSDT",
+      "eligible_daily_rows": 1165,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 255,
+      "90d_3x_hits": 68,
+      "180d_2x_hits": 432,
+      "180d_3x_hits": 115
+    },
+    {
+      "symbol": "BZRXUSDT",
+      "eligible_daily_rows": 238,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 39,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 43,
+      "180d_3x_hits": 2
+    },
+    {
+      "symbol": "C98USDT",
+      "eligible_daily_rows": 1389,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 167,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 313,
+      "180d_3x_hits": 54
+    },
+    {
+      "symbol": "CAKEUSDT",
+      "eligible_daily_rows": 1630,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 198,
+      "90d_3x_hits": 35,
+      "180d_2x_hits": 447,
+      "180d_3x_hits": 81
+    },
+    {
+      "symbol": "CATIUSDT",
+      "eligible_daily_rows": 189,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CELOUSDT",
+      "eligible_daily_rows": 1642,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 169,
+      "90d_3x_hits": 6,
+      "180d_2x_hits": 299,
+      "180d_3x_hits": 96
+    },
+    {
+      "symbol": "CELRUSDT",
+      "eligible_daily_rows": 1462,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 340,
+      "90d_3x_hits": 143,
+      "180d_2x_hits": 573,
+      "180d_3x_hits": 246
+    },
+    {
+      "symbol": "CETUSUSDT",
+      "eligible_daily_rows": 153,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 2,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 2,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CFXUSDT",
+      "eligible_daily_rows": 1537,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 307,
+      "90d_3x_hits": 131,
+      "180d_2x_hits": 578,
+      "180d_3x_hits": 344
+    },
+    {
+      "symbol": "CGPTUSDT",
+      "eligible_daily_rows": 64,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CHESSUSDT",
+      "eligible_daily_rows": 993,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 69,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 158,
+      "180d_3x_hits": 2
+    },
+    {
+      "symbol": "CHRUSDT",
+      "eligible_daily_rows": 1775,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 436,
+      "90d_3x_hits": 226,
+      "180d_2x_hits": 571,
+      "180d_3x_hits": 366
+    },
+    {
+      "symbol": "CHZUSDT",
+      "eligible_daily_rows": 2031,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 362,
+      "90d_3x_hits": 88,
+      "180d_2x_hits": 659,
+      "180d_3x_hits": 144
+    },
+    {
+      "symbol": "CITYUSDT",
+      "eligible_daily_rows": 805,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CKBUSDT",
+      "eligible_daily_rows": 1358,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 224,
+      "90d_3x_hits": 102,
+      "180d_2x_hits": 246,
+      "180d_3x_hits": 115
+    },
+    {
+      "symbol": "CLVUSDT",
+      "eligible_daily_rows": 874,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 179,
+      "90d_3x_hits": 99,
+      "180d_2x_hits": 314,
+      "180d_3x_hits": 178
+    },
+    {
+      "symbol": "COCOSUSDT",
+      "eligible_daily_rows": 559,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 146,
+      "90d_3x_hits": 140,
+      "180d_2x_hits": 179,
+      "180d_3x_hits": 178
+    },
+    {
+      "symbol": "COMBOUSDT",
+      "eligible_daily_rows": 413,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 4,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 9,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "COMPUSDT",
+      "eligible_daily_rows": 1859,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 232,
+      "90d_3x_hits": 70,
+      "180d_2x_hits": 425,
+      "180d_3x_hits": 112
+    },
+    {
+      "symbol": "COOKIEUSDT",
+      "eligible_daily_rows": 98,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "COSUSDT",
+      "eligible_daily_rows": 1386,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 439,
+      "90d_3x_hits": 145,
+      "180d_2x_hits": 576,
+      "180d_3x_hits": 277
+    },
+    {
+      "symbol": "COTIUSDT",
+      "eligible_daily_rows": 1870,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 408,
+      "90d_3x_hits": 248,
+      "180d_2x_hits": 553,
+      "180d_3x_hits": 375
+    },
+    {
+      "symbol": "COWUSDT",
+      "eligible_daily_rows": 203,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CREAMUSDT",
+      "eligible_daily_rows": 322,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 5,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 5,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CRVUSDT",
+      "eligible_daily_rows": 1818,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 304,
+      "90d_3x_hits": 97,
+      "180d_2x_hits": 505,
+      "180d_3x_hits": 260
+    },
+    {
+      "symbol": "CTKUSDT",
+      "eligible_daily_rows": 1312,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 187,
+      "90d_3x_hits": 19,
+      "180d_2x_hits": 322,
+      "180d_3x_hits": 35
+    },
+    {
+      "symbol": "CTSIUSDT",
+      "eligible_daily_rows": 1562,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 450,
+      "90d_3x_hits": 115,
+      "180d_2x_hits": 613,
+      "180d_3x_hits": 276
+    },
+    {
+      "symbol": "CTXCUSDT",
+      "eligible_daily_rows": 1392,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 499,
+      "90d_3x_hits": 277,
+      "180d_2x_hits": 755,
+      "180d_3x_hits": 536
+    },
+    {
+      "symbol": "CUSDT",
+      "eligible_daily_rows": 20,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 7,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 7,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "CVCUSDT",
+      "eligible_daily_rows": 1264,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 320,
+      "90d_3x_hits": 181,
+      "180d_2x_hits": 397,
+      "180d_3x_hits": 196
+    },
+    {
+      "symbol": "CVPUSDT",
+      "eligible_daily_rows": 563,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 168,
+      "90d_3x_hits": 61,
+      "180d_2x_hits": 239,
+      "180d_3x_hits": 98
+    },
+    {
+      "symbol": "CVXUSDT",
+      "eligible_daily_rows": 1097,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 247,
+      "90d_3x_hits": 67,
+      "180d_2x_hits": 403,
+      "180d_3x_hits": 146
+    },
+    {
+      "symbol": "CYBERUSDT",
+      "eligible_daily_rows": 718,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 98,
+      "90d_3x_hits": 84,
+      "180d_2x_hits": 193,
+      "180d_3x_hits": 169
+    },
+    {
+      "symbol": "DARUSDT",
+      "eligible_daily_rows": 921,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 205,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 286,
+      "180d_3x_hits": 56
+    },
+    {
+      "symbol": "DASHUSDT",
+      "eligible_daily_rows": 2320,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 491,
+      "90d_3x_hits": 230,
+      "180d_2x_hits": 779,
+      "180d_3x_hits": 443
+    },
+    {
+      "symbol": "DATAUSDT",
+      "eligible_daily_rows": 1074,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 185,
+      "90d_3x_hits": 76,
+      "180d_2x_hits": 200,
+      "180d_3x_hits": 82
+    },
+    {
+      "symbol": "DCRUSDT",
+      "eligible_daily_rows": 865,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 83,
+      "90d_3x_hits": 9,
+      "180d_2x_hits": 119,
+      "180d_3x_hits": 9
+    },
+    {
+      "symbol": "DEGOUSDT",
+      "eligible_daily_rows": 1285,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 330,
+      "90d_3x_hits": 121,
+      "180d_2x_hits": 495,
+      "180d_3x_hits": 211
+    },
+    {
+      "symbol": "DENTUSDT",
+      "eligible_daily_rows": 1414,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 358,
+      "90d_3x_hits": 96,
+      "180d_2x_hits": 484,
+      "180d_3x_hits": 142
+    },
+    {
+      "symbol": "DEXEUSDT",
+      "eligible_daily_rows": 879,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 122,
+      "90d_3x_hits": 92,
+      "180d_2x_hits": 206,
+      "180d_3x_hits": 130
+    },
+    {
+      "symbol": "DFUSDT",
+      "eligible_daily_rows": 662,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 74,
+      "90d_3x_hits": 43,
+      "180d_2x_hits": 159,
+      "180d_3x_hits": 111
+    },
+    {
+      "symbol": "DGBUSDT",
+      "eligible_daily_rows": 1175,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 152,
+      "90d_3x_hits": 7,
+      "180d_2x_hits": 213,
+      "180d_3x_hits": 16
+    },
+    {
+      "symbol": "DIAUSDT",
+      "eligible_daily_rows": 1075,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 103,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 252,
+      "180d_3x_hits": 26
+    },
+    {
+      "symbol": "DNTUSDT",
+      "eligible_daily_rows": 383,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 76,
+      "90d_3x_hits": 15,
+      "180d_2x_hits": 76,
+      "180d_3x_hits": 15
+    },
+    {
+      "symbol": "DOCKUSDT",
+      "eligible_daily_rows": 885,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 134,
+      "90d_3x_hits": 69,
+      "180d_2x_hits": 193,
+      "180d_3x_hits": 118
+    },
+    {
+      "symbol": "DODOUSDT",
+      "eligible_daily_rows": 1317,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 200,
+      "90d_3x_hits": 9,
+      "180d_2x_hits": 406,
+      "180d_3x_hits": 78
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "eligible_daily_rows": 2095,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 488,
+      "90d_3x_hits": 274,
+      "180d_2x_hits": 802,
+      "180d_3x_hits": 503
+    },
+    {
+      "symbol": "DOGSUSDT",
+      "eligible_daily_rows": 286,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 83,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "DOTUSDT",
+      "eligible_daily_rows": 1815,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 201,
+      "90d_3x_hits": 18,
+      "180d_2x_hits": 341,
+      "180d_3x_hits": 60
+    },
+    {
+      "symbol": "DREPUSDT",
+      "eligible_daily_rows": 744,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 204,
+      "90d_3x_hits": 57,
+      "180d_2x_hits": 290,
+      "180d_3x_hits": 67
+    },
+    {
+      "symbol": "DUSDT",
+      "eligible_daily_rows": 133,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 61,
+      "90d_3x_hits": 33,
+      "180d_2x_hits": 61,
+      "180d_3x_hits": 33
+    },
+    {
+      "symbol": "DUSKUSDT",
+      "eligible_daily_rows": 1713,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 577,
+      "90d_3x_hits": 256,
+      "180d_2x_hits": 876,
+      "180d_3x_hits": 562
+    },
+    {
+      "symbol": "DYDXUSDT",
+      "eligible_daily_rows": 1428,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 299,
+      "90d_3x_hits": 38,
+      "180d_2x_hits": 502,
+      "180d_3x_hits": 52
+    },
+    {
+      "symbol": "DYMUSDT",
+      "eligible_daily_rows": 471,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 51,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 51,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "EDUUSDT",
+      "eligible_daily_rows": 740,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 72,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 79,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "EGLDUSDT",
+      "eligible_daily_rows": 1749,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 287,
+      "90d_3x_hits": 95,
+      "180d_2x_hits": 415,
+      "180d_3x_hits": 166
+    },
+    {
+      "symbol": "EIGENUSDT",
+      "eligible_daily_rows": 310,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 4,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 7,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ELFUSDT",
+      "eligible_daily_rows": 851,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 207,
+      "90d_3x_hits": 23,
+      "180d_2x_hits": 327,
+      "180d_3x_hits": 69
+    },
+    {
+      "symbol": "ENAUSDT",
+      "eligible_daily_rows": 492,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 79,
+      "90d_3x_hits": 24,
+      "180d_2x_hits": 155,
+      "180d_3x_hits": 42
+    },
+    {
+      "symbol": "ENJUSDT",
+      "eligible_daily_rows": 2086,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 467,
+      "90d_3x_hits": 162,
+      "180d_2x_hits": 790,
+      "180d_3x_hits": 357
+    },
+    {
+      "symbol": "ENSUSDT",
+      "eligible_daily_rows": 1366,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 235,
+      "90d_3x_hits": 95,
+      "180d_2x_hits": 389,
+      "180d_3x_hits": 179
+    },
+    {
+      "symbol": "EOSUSDT",
+      "eligible_daily_rows": 2317,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 356,
+      "90d_3x_hits": 122,
+      "180d_2x_hits": 619,
+      "180d_3x_hits": 275
+    },
+    {
+      "symbol": "EPICUSDT",
+      "eligible_daily_rows": 92,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 7,
+      "180d_3x_hits": 2
+    },
+    {
+      "symbol": "EPSUSDT",
+      "eligible_daily_rows": 164,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 1,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 1,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "EPXUSDT",
+      "eligible_daily_rows": 392,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 31,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 46,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ERDUSDT",
+      "eligible_daily_rows": 137,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 82,
+      "90d_3x_hits": 71,
+      "180d_2x_hits": 91,
+      "180d_3x_hits": 84
+    },
+    {
+      "symbol": "ERNUSDT",
+      "eligible_daily_rows": 898,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 196,
+      "90d_3x_hits": 91,
+      "180d_2x_hits": 320,
+      "180d_3x_hits": 140
+    },
+    {
+      "symbol": "ETCUSDT",
+      "eligible_daily_rows": 2613,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 459,
+      "90d_3x_hits": 193,
+      "180d_2x_hits": 751,
+      "180d_3x_hits": 303
+    },
+    {
+      "symbol": "ETHFIUSDT",
+      "eligible_daily_rows": 507,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 74,
+      "90d_3x_hits": 26,
+      "180d_2x_hits": 85,
+      "180d_3x_hits": 36
+    },
+    {
+      "symbol": "ETHUSDT",
+      "eligible_daily_rows": 2649,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 426,
+      "90d_3x_hits": 84,
+      "180d_2x_hits": 787,
+      "180d_3x_hits": 297
+    },
+    {
+      "symbol": "FARMUSDT",
+      "eligible_daily_rows": 624,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 85,
+      "90d_3x_hits": 11,
+      "180d_2x_hits": 124,
+      "180d_3x_hits": 47
+    },
+    {
+      "symbol": "FETUSDT",
+      "eligible_daily_rows": 2298,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 687,
+      "90d_3x_hits": 459,
+      "180d_2x_hits": 1019,
+      "180d_3x_hits": 811
+    },
+    {
+      "symbol": "FIDAUSDT",
+      "eligible_daily_rows": 1343,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 375,
+      "90d_3x_hits": 145,
+      "180d_2x_hits": 509,
+      "180d_3x_hits": 255
+    },
+    {
+      "symbol": "FILUSDT",
+      "eligible_daily_rows": 1757,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 335,
+      "90d_3x_hits": 18,
+      "180d_2x_hits": 465,
+      "180d_3x_hits": 77
+    },
+    {
+      "symbol": "FIOUSDT",
+      "eligible_daily_rows": 1002,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 181,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 268,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "FIROUSDT",
+      "eligible_daily_rows": 674,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 81,
+      "90d_3x_hits": 23,
+      "180d_2x_hits": 134,
+      "180d_3x_hits": 56
+    },
+    {
+      "symbol": "FISUSDT",
+      "eligible_daily_rows": 1274,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 227,
+      "90d_3x_hits": 56,
+      "180d_2x_hits": 355,
+      "180d_3x_hits": 131
+    },
+    {
+      "symbol": "FLMUSDT",
+      "eligible_daily_rows": 1452,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 291,
+      "90d_3x_hits": 51,
+      "180d_2x_hits": 394,
+      "180d_3x_hits": 51
+    },
+    {
+      "symbol": "FLOKIUSDT",
+      "eligible_daily_rows": 825,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 217,
+      "90d_3x_hits": 63,
+      "180d_2x_hits": 255,
+      "180d_3x_hits": 68
+    },
+    {
+      "symbol": "FLOWUSDT",
+      "eligible_daily_rows": 1444,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 210,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 354,
+      "180d_3x_hits": 57
+    },
+    {
+      "symbol": "FLUXUSDT",
+      "eligible_daily_rows": 1106,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 196,
+      "90d_3x_hits": 34,
+      "180d_2x_hits": 250,
+      "180d_3x_hits": 144
+    },
+    {
+      "symbol": "FORMUSDT",
+      "eligible_daily_rows": 141,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 5,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 6,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "FORTHUSDT",
+      "eligible_daily_rows": 963,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 226,
+      "90d_3x_hits": 78,
+      "180d_2x_hits": 333,
+      "180d_3x_hits": 115
+    },
+    {
+      "symbol": "FORUSDT",
+      "eligible_daily_rows": 437,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 40,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 70,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "FRONTUSDT",
+      "eligible_daily_rows": 547,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 186,
+      "90d_3x_hits": 124,
+      "180d_2x_hits": 250,
+      "180d_3x_hits": 211
+    },
+    {
+      "symbol": "FTMUSDT",
+      "eligible_daily_rows": 1656,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 707,
+      "90d_3x_hits": 358,
+      "180d_2x_hits": 1023,
+      "180d_3x_hits": 677
+    },
+    {
+      "symbol": "FTTUSDT",
+      "eligible_daily_rows": 1413,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 328,
+      "90d_3x_hits": 154,
+      "180d_2x_hits": 464,
+      "180d_3x_hits": 281
+    },
+    {
+      "symbol": "FUNUSDT",
+      "eligible_daily_rows": 1180,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 308,
+      "90d_3x_hits": 144,
+      "180d_2x_hits": 401,
+      "180d_3x_hits": 194
+    },
+    {
+      "symbol": "FXSUSDT",
+      "eligible_daily_rows": 1215,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 227,
+      "90d_3x_hits": 37,
+      "180d_2x_hits": 413,
+      "180d_3x_hits": 55
+    },
+    {
+      "symbol": "GALAUSDT",
+      "eligible_daily_rows": 1424,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 282,
+      "90d_3x_hits": 124,
+      "180d_2x_hits": 406,
+      "180d_3x_hits": 258
+    },
+    {
+      "symbol": "GALUSDT",
+      "eligible_daily_rows": 564,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 142,
+      "90d_3x_hits": 35,
+      "180d_2x_hits": 251,
+      "180d_3x_hits": 150
+    },
+    {
+      "symbol": "GASUSDT",
+      "eligible_daily_rows": 716,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 48,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 115,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "GFTUSDT",
+      "eligible_daily_rows": 198,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 127,
+      "90d_3x_hits": 59,
+      "180d_2x_hits": 127,
+      "180d_3x_hits": 59
+    },
+    {
+      "symbol": "GHSTUSDT",
+      "eligible_daily_rows": 604,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 81,
+      "90d_3x_hits": 74,
+      "180d_2x_hits": 114,
+      "180d_3x_hits": 106
+    },
+    {
+      "symbol": "GLMRUSDT",
+      "eligible_daily_rows": 1078,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 174,
+      "90d_3x_hits": 32,
+      "180d_2x_hits": 271,
+      "180d_3x_hits": 45
+    },
+    {
+      "symbol": "GLMUSDT",
+      "eligible_daily_rows": 665,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 96,
+      "90d_3x_hits": 35,
+      "180d_2x_hits": 160,
+      "180d_3x_hits": 51
+    },
+    {
+      "symbol": "GMTUSDT",
+      "eligible_daily_rows": 1198,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 134,
+      "90d_3x_hits": 13,
+      "180d_2x_hits": 198,
+      "180d_3x_hits": 18
+    },
+    {
+      "symbol": "GMXUSDT",
+      "eligible_daily_rows": 895,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 124,
+      "90d_3x_hits": 59,
+      "180d_2x_hits": 229,
+      "180d_3x_hits": 104
+    },
+    {
+      "symbol": "GNOUSDT",
+      "eligible_daily_rows": 260,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 28,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 43,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "GNSUSDT",
+      "eligible_daily_rows": 349,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "GPSUSDT",
+      "eligible_daily_rows": 145,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 75,
+      "90d_3x_hits": 18,
+      "180d_2x_hits": 123,
+      "180d_3x_hits": 18
+    },
+    {
+      "symbol": "GRTUSDT",
+      "eligible_daily_rows": 1690,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 294,
+      "90d_3x_hits": 102,
+      "180d_2x_hits": 476,
+      "180d_3x_hits": 207
+    },
+    {
+      "symbol": "GTCUSDT",
+      "eligible_daily_rows": 1105,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 166,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 298,
+      "180d_3x_hits": 57
+    },
+    {
+      "symbol": "GTOUSDT",
+      "eligible_daily_rows": 665,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 363,
+      "90d_3x_hits": 185,
+      "180d_2x_hits": 398,
+      "180d_3x_hits": 253
+    },
+    {
+      "symbol": "GUNUSDT",
+      "eligible_daily_rows": 120,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 39,
+      "90d_3x_hits": 23,
+      "180d_2x_hits": 39,
+      "180d_3x_hits": 23
+    },
+    {
+      "symbol": "GUSDT",
+      "eligible_daily_rows": 208,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 12,
+      "180d_3x_hits": 10
+    },
+    {
+      "symbol": "GXSUSDT",
+      "eligible_daily_rows": 435,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 183,
+      "90d_3x_hits": 113,
+      "180d_2x_hits": 257,
+      "180d_3x_hits": 203
+    },
+    {
+      "symbol": "HAEDALUSDT",
+      "eligible_daily_rows": 2,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "HARDUSDT",
+      "eligible_daily_rows": 1016,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 122,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 177,
+      "180d_3x_hits": 6
+    },
+    {
+      "symbol": "HBARUSDT",
+      "eligible_daily_rows": 2069,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 415,
+      "90d_3x_hits": 211,
+      "180d_2x_hits": 727,
+      "180d_3x_hits": 359
+    },
+    {
+      "symbol": "HEIUSDT",
+      "eligible_daily_rows": 109,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 1,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 16,
+      "180d_3x_hits": 14
+    },
+    {
+      "symbol": "HFTUSDT",
+      "eligible_daily_rows": 788,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 96,
+      "90d_3x_hits": 31,
+      "180d_2x_hits": 142,
+      "180d_3x_hits": 32
+    },
+    {
+      "symbol": "HIFIUSDT",
+      "eligible_daily_rows": 722,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 221,
+      "90d_3x_hits": 96,
+      "180d_2x_hits": 344,
+      "180d_3x_hits": 175
+    },
+    {
+      "symbol": "HIGHUSDT",
+      "eligible_daily_rows": 1120,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 257,
+      "90d_3x_hits": 154,
+      "180d_2x_hits": 495,
+      "180d_3x_hits": 338
+    },
+    {
+      "symbol": "HIVEUSDT",
+      "eligible_daily_rows": 1191,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 338,
+      "90d_3x_hits": 213,
+      "180d_2x_hits": 436,
+      "180d_3x_hits": 277
+    },
+    {
+      "symbol": "HMSTRUSDT",
+      "eligible_daily_rows": 247,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 28,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "HNTUSDT",
+      "eligible_daily_rows": 512,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 143,
+      "90d_3x_hits": 28,
+      "180d_2x_hits": 166,
+      "180d_3x_hits": 108
+    },
+    {
+      "symbol": "HOMEUSDT",
+      "eligible_daily_rows": 47,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 26,
+      "90d_3x_hits": 26,
+      "180d_2x_hits": 47,
+      "180d_3x_hits": 26
+    },
+    {
+      "symbol": "HOOKUSDT",
+      "eligible_daily_rows": 850,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 35,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 81,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "HOTUSDT",
+      "eligible_daily_rows": 1861,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 357,
+      "90d_3x_hits": 87,
+      "180d_2x_hits": 554,
+      "180d_3x_hits": 213
+    },
+    {
+      "symbol": "HUMAUSDT",
+      "eligible_daily_rows": 73,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 30,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 31,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "HYPERUSDT",
+      "eligible_daily_rows": 85,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 17,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 17,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ICPUSDT",
+      "eligible_daily_rows": 1549,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 211,
+      "90d_3x_hits": 104,
+      "180d_2x_hits": 372,
+      "180d_3x_hits": 182
+    },
+    {
+      "symbol": "ICXUSDT",
+      "eligible_daily_rows": 1936,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 359,
+      "90d_3x_hits": 109,
+      "180d_2x_hits": 650,
+      "180d_3x_hits": 292
+    },
+    {
+      "symbol": "IDEXUSDT",
+      "eligible_daily_rows": 945,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 196,
+      "90d_3x_hits": 23,
+      "180d_2x_hits": 334,
+      "180d_3x_hits": 28
+    },
+    {
+      "symbol": "IDUSDT",
+      "eligible_daily_rows": 753,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 139,
+      "90d_3x_hits": 75,
+      "180d_2x_hits": 157,
+      "180d_3x_hits": 99
+    },
+    {
+      "symbol": "ILVUSDT",
+      "eligible_daily_rows": 1186,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 147,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 221,
+      "180d_3x_hits": 6
+    },
+    {
+      "symbol": "IMXUSDT",
+      "eligible_daily_rows": 1297,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 231,
+      "90d_3x_hits": 94,
+      "180d_2x_hits": 389,
+      "180d_3x_hits": 222
+    },
+    {
+      "symbol": "INITUSDT",
+      "eligible_daily_rows": 105,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 11,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 11,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "INJUSDT",
+      "eligible_daily_rows": 1751,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 408,
+      "90d_3x_hits": 118,
+      "180d_2x_hits": 675,
+      "180d_3x_hits": 334
+    },
+    {
+      "symbol": "IOSTUSDT",
+      "eligible_daily_rows": 1995,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 409,
+      "90d_3x_hits": 176,
+      "180d_2x_hits": 567,
+      "180d_3x_hits": 281
+    },
+    {
+      "symbol": "IOTAUSDT",
+      "eligible_daily_rows": 2443,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 430,
+      "90d_3x_hits": 181,
+      "180d_2x_hits": 747,
+      "180d_3x_hits": 382
+    },
+    {
+      "symbol": "IOTXUSDT",
+      "eligible_daily_rows": 1783,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 395,
+      "90d_3x_hits": 272,
+      "180d_2x_hits": 570,
+      "180d_3x_hits": 450
+    },
+    {
+      "symbol": "IOUSDT",
+      "eligible_daily_rows": 421,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 53,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 67,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "IQUSDT",
+      "eligible_daily_rows": 338,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 43,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 117,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "IRISUSDT",
+      "eligible_daily_rows": 912,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 85,
+      "90d_3x_hits": 3,
+      "180d_2x_hits": 119,
+      "180d_3x_hits": 26
+    },
+    {
+      "symbol": "JASMYUSDT",
+      "eligible_daily_rows": 1354,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 356,
+      "90d_3x_hits": 122,
+      "180d_2x_hits": 501,
+      "180d_3x_hits": 227
+    },
+    {
+      "symbol": "JOEUSDT",
+      "eligible_daily_rows": 1025,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 249,
+      "90d_3x_hits": 62,
+      "180d_2x_hits": 407,
+      "180d_3x_hits": 158
+    },
+    {
+      "symbol": "JSTUSDT",
+      "eligible_daily_rows": 1657,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 231,
+      "90d_3x_hits": 8,
+      "180d_2x_hits": 488,
+      "180d_3x_hits": 34
+    },
+    {
+      "symbol": "JTOUSDT",
+      "eligible_daily_rows": 609,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 90,
+      "90d_3x_hits": 7,
+      "180d_2x_hits": 133,
+      "180d_3x_hits": 45
+    },
+    {
+      "symbol": "JUPUSDT",
+      "eligible_daily_rows": 554,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 1,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 13,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "JUVUSDT",
+      "eligible_daily_rows": 1135,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 99,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 172,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KAIAUSDT",
+      "eligible_daily_rows": 269,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KAITOUSDT",
+      "eligible_daily_rows": 168,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 73,
+      "180d_3x_hits": 65
+    },
+    {
+      "symbol": "KAVAUSDT",
+      "eligible_daily_rows": 2071,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 282,
+      "90d_3x_hits": 101,
+      "180d_2x_hits": 410,
+      "180d_3x_hits": 163
+    },
+    {
+      "symbol": "KDAUSDT",
+      "eligible_daily_rows": 1036,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 181,
+      "90d_3x_hits": 96,
+      "180d_2x_hits": 332,
+      "180d_3x_hits": 245
+    },
+    {
+      "symbol": "KEEPUSDT",
+      "eligible_daily_rows": 6,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KERNELUSDT",
+      "eligible_daily_rows": 86,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 10,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 19,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KEYUSDT",
+      "eligible_daily_rows": 1139,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 315,
+      "90d_3x_hits": 87,
+      "180d_2x_hits": 466,
+      "180d_3x_hits": 199
+    },
+    {
+      "symbol": "KLAYUSDT",
+      "eligible_daily_rows": 984,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 118,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 160,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KMDUSDT",
+      "eligible_daily_rows": 792,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 114,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 123,
+      "180d_3x_hits": 6
+    },
+    {
+      "symbol": "KMNOUSDT",
+      "eligible_daily_rows": 45,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KNCUSDT",
+      "eligible_daily_rows": 1468,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 175,
+      "90d_3x_hits": 39,
+      "180d_2x_hits": 259,
+      "180d_3x_hits": 105
+    },
+    {
+      "symbol": "KP3RUSDT",
+      "eligible_daily_rows": 547,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 7,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 7,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "KSMUSDT",
+      "eligible_daily_rows": 1644,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 213,
+      "90d_3x_hits": 29,
+      "180d_2x_hits": 358,
+      "180d_3x_hits": 62
+    },
+    {
+      "symbol": "LAUSDT",
+      "eligible_daily_rows": 29,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "LAYERUSDT",
+      "eligible_daily_rows": 171,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 47,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 56,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "LAZIOUSDT",
+      "eligible_daily_rows": 950,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 107,
+      "90d_3x_hits": 47,
+      "180d_2x_hits": 145,
+      "180d_3x_hits": 56
+    },
+    {
+      "symbol": "LDOUSDT",
+      "eligible_daily_rows": 1186,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 133,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 258,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "LEVERUSDT",
+      "eligible_daily_rows": 827,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 202,
+      "90d_3x_hits": 27,
+      "180d_2x_hits": 285,
+      "180d_3x_hits": 104
+    },
+    {
+      "symbol": "LINAUSDT",
+      "eligible_daily_rows": 1224,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 240,
+      "90d_3x_hits": 45,
+      "180d_2x_hits": 355,
+      "180d_3x_hits": 116
+    },
+    {
+      "symbol": "LINKUSDT",
+      "eligible_daily_rows": 2395,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 507,
+      "90d_3x_hits": 79,
+      "180d_2x_hits": 912,
+      "180d_3x_hits": 412
+    },
+    {
+      "symbol": "LISTAUSDT",
+      "eligible_daily_rows": 303,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 105,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 180,
+      "180d_3x_hits": 37
+    },
+    {
+      "symbol": "LITUSDT",
+      "eligible_daily_rows": 1202,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 244,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 472,
+      "180d_3x_hits": 6
+    },
+    {
+      "symbol": "LOKAUSDT",
+      "eligible_daily_rows": 849,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 135,
+      "90d_3x_hits": 19,
+      "180d_2x_hits": 199,
+      "180d_3x_hits": 19
+    },
+    {
+      "symbol": "LOOMUSDT",
+      "eligible_daily_rows": 276,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "LPTUSDT",
+      "eligible_daily_rows": 1423,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 301,
+      "90d_3x_hits": 110,
+      "180d_2x_hits": 436,
+      "180d_3x_hits": 193
+    },
+    {
+      "symbol": "LQTYUSDT",
+      "eligible_daily_rows": 785,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 143,
+      "90d_3x_hits": 66,
+      "180d_2x_hits": 240,
+      "180d_3x_hits": 147
+    },
+    {
+      "symbol": "LRCUSDT",
+      "eligible_daily_rows": 1794,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 370,
+      "90d_3x_hits": 128,
+      "180d_2x_hits": 537,
+      "180d_3x_hits": 216
+    },
+    {
+      "symbol": "LSKUSDT",
+      "eligible_daily_rows": 1104,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 249,
+      "90d_3x_hits": 62,
+      "180d_2x_hits": 263,
+      "180d_3x_hits": 66
+    },
+    {
+      "symbol": "LTCUSDT",
+      "eligible_daily_rows": 2649,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 348,
+      "90d_3x_hits": 89,
+      "180d_2x_hits": 618,
+      "180d_3x_hits": 261
+    },
+    {
+      "symbol": "LTOUSDT",
+      "eligible_daily_rows": 1124,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 337,
+      "90d_3x_hits": 116,
+      "180d_2x_hits": 472,
+      "180d_3x_hits": 197
+    },
+    {
+      "symbol": "LUMIAUSDT",
+      "eligible_daily_rows": 217,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 22,
+      "90d_3x_hits": 5,
+      "180d_2x_hits": 30,
+      "180d_3x_hits": 5
+    },
+    {
+      "symbol": "LUNAUSDT",
+      "eligible_daily_rows": 1551,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 476,
+      "90d_3x_hits": 149,
+      "180d_2x_hits": 651,
+      "180d_3x_hits": 257
+    },
+    {
+      "symbol": "LUNCUSDT",
+      "eligible_daily_rows": 1063,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 285,
+      "90d_3x_hits": 125,
+      "180d_2x_hits": 492,
+      "180d_3x_hits": 266
+    },
+    {
+      "symbol": "MAGICUSDT",
+      "eligible_daily_rows": 956,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 203,
+      "90d_3x_hits": 19,
+      "180d_2x_hits": 260,
+      "180d_3x_hits": 51
+    },
+    {
+      "symbol": "MANAUSDT",
+      "eligible_daily_rows": 1790,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 282,
+      "90d_3x_hits": 116,
+      "180d_2x_hits": 488,
+      "180d_3x_hits": 233
+    },
+    {
+      "symbol": "MANTAUSDT",
+      "eligible_daily_rows": 540,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 14,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 67,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MASKUSDT",
+      "eligible_daily_rows": 1423,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 273,
+      "90d_3x_hits": 138,
+      "180d_2x_hits": 492,
+      "180d_3x_hits": 227
+    },
+    {
+      "symbol": "MATICUSDT",
+      "eligible_daily_rows": 1726,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 351,
+      "90d_3x_hits": 195,
+      "180d_2x_hits": 590,
+      "180d_3x_hits": 303
+    },
+    {
+      "symbol": "MAVUSDT",
+      "eligible_daily_rows": 640,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 27,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 35,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MBLUSDT",
+      "eligible_daily_rows": 1451,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 249,
+      "90d_3x_hits": 64,
+      "180d_2x_hits": 386,
+      "180d_3x_hits": 90
+    },
+    {
+      "symbol": "MBOXUSDT",
+      "eligible_daily_rows": 1205,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 127,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 201,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "MCOUSDT",
+      "eligible_daily_rows": 11,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MCUSDT",
+      "eligible_daily_rows": 285,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 29,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 48,
+      "180d_3x_hits": 1
+    },
+    {
+      "symbol": "MDTUSDT",
+      "eligible_daily_rows": 1535,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 430,
+      "90d_3x_hits": 138,
+      "180d_2x_hits": 657,
+      "180d_3x_hits": 324
+    },
+    {
+      "symbol": "MDXUSDT",
+      "eligible_daily_rows": 709,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 104,
+      "90d_3x_hits": 42,
+      "180d_2x_hits": 160,
+      "180d_3x_hits": 52
+    },
+    {
+      "symbol": "MEMEUSDT",
+      "eligible_daily_rows": 637,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 100,
+      "90d_3x_hits": 10,
+      "180d_2x_hits": 136,
+      "180d_3x_hits": 14
+    },
+    {
+      "symbol": "METISUSDT",
+      "eligible_daily_rows": 471,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 3,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 3,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MEUSDT",
+      "eligible_daily_rows": 197,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MFTUSDT",
+      "eligible_daily_rows": 764,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 231,
+      "90d_3x_hits": 68,
+      "180d_2x_hits": 328,
+      "180d_3x_hits": 138
+    },
+    {
+      "symbol": "MINAUSDT",
+      "eligible_daily_rows": 1429,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 267,
+      "90d_3x_hits": 29,
+      "180d_2x_hits": 416,
+      "180d_3x_hits": 114
+    },
+    {
+      "symbol": "MIRUSDT",
+      "eligible_daily_rows": 367,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 189,
+      "90d_3x_hits": 80,
+      "180d_2x_hits": 215,
+      "180d_3x_hits": 170
+    },
+    {
+      "symbol": "MITHUSDT",
+      "eligible_daily_rows": 673,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 278,
+      "90d_3x_hits": 253,
+      "180d_2x_hits": 397,
+      "180d_3x_hits": 339
+    },
+    {
+      "symbol": "MKRUSDT",
+      "eligible_daily_rows": 1642,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 151,
+      "90d_3x_hits": 12,
+      "180d_2x_hits": 371,
+      "180d_3x_hits": 31
+    },
+    {
+      "symbol": "MLNUSDT",
+      "eligible_daily_rows": 803,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 70,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 196,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MOBUSDT",
+      "eligible_daily_rows": 346,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 42,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 42,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "MOVEUSDT",
+      "eligible_daily_rows": 225,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "MOVRUSDT",
+      "eligible_daily_rows": 1021,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 151,
+      "90d_3x_hits": 76,
+      "180d_2x_hits": 211,
+      "180d_3x_hits": 108
+    },
+    {
+      "symbol": "MTLUSDT",
+      "eligible_daily_rows": 1480,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 482,
+      "90d_3x_hits": 148,
+      "180d_2x_hits": 658,
+      "180d_3x_hits": 203
+    },
+    {
+      "symbol": "MUBARAKUSDT",
+      "eligible_daily_rows": 133,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 41,
+      "180d_3x_hits": 11
+    },
+    {
+      "symbol": "MULTIUSDT",
+      "eligible_daily_rows": 283,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 64,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 76,
+      "180d_3x_hits": 3
+    },
+    {
+      "symbol": "NANOUSDT",
+      "eligible_daily_rows": 497,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 153,
+      "90d_3x_hits": 106,
+      "180d_2x_hits": 196,
+      "180d_3x_hits": 156
+    },
+    {
+      "symbol": "NBSUSDT",
+      "eligible_daily_rows": 439,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 145,
+      "90d_3x_hits": 22,
+      "180d_2x_hits": 185,
+      "180d_3x_hits": 57
+    },
+    {
+      "symbol": "NEARUSDT",
+      "eligible_daily_rows": 1758,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 432,
+      "90d_3x_hits": 146,
+      "180d_2x_hits": 590,
+      "180d_3x_hits": 308
+    },
+    {
+      "symbol": "NEIROUSDT",
+      "eligible_daily_rows": 325,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 41,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 41,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NEOUSDT",
+      "eligible_daily_rows": 2640,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 520,
+      "90d_3x_hits": 120,
+      "180d_2x_hits": 947,
+      "180d_3x_hits": 260
+    },
+    {
+      "symbol": "NEWTUSDT",
+      "eligible_daily_rows": 5,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NEXOUSDT",
+      "eligible_daily_rows": 730,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NFPUSDT",
+      "eligible_daily_rows": 416,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 50,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 57,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NILUSDT",
+      "eligible_daily_rows": 102,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 26,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 26,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NKNUSDT",
+      "eligible_daily_rows": 1397,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 396,
+      "90d_3x_hits": 93,
+      "180d_2x_hits": 525,
+      "180d_3x_hits": 128
+    },
+    {
+      "symbol": "NMRUSDT",
+      "eligible_daily_rows": 1496,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 271,
+      "90d_3x_hits": 78,
+      "180d_2x_hits": 447,
+      "180d_3x_hits": 190
+    },
+    {
+      "symbol": "NOTUSDT",
+      "eligible_daily_rows": 396,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 8,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 9,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NPXSUSDT",
+      "eligible_daily_rows": 87,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 69,
+      "90d_3x_hits": 62,
+      "180d_2x_hits": 69,
+      "180d_3x_hits": 62
+    },
+    {
+      "symbol": "NTRNUSDT",
+      "eligible_daily_rows": 427,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 5,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 6,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NULSUSDT",
+      "eligible_daily_rows": 1135,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 278,
+      "90d_3x_hits": 160,
+      "180d_2x_hits": 389,
+      "180d_3x_hits": 250
+    },
+    {
+      "symbol": "NUUSDT",
+      "eligible_daily_rows": 19,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "NXPCUSDT",
+      "eligible_daily_rows": 30,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "OAXUSDT",
+      "eligible_daily_rows": 283,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 53,
+      "90d_3x_hits": 22,
+      "180d_2x_hits": 84,
+      "180d_3x_hits": 22
+    },
+    {
+      "symbol": "OCEANUSDT",
+      "eligible_daily_rows": 1174,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 263,
+      "90d_3x_hits": 116,
+      "180d_2x_hits": 461,
+      "180d_3x_hits": 341
+    },
+    {
+      "symbol": "OGNUSDT",
+      "eligible_daily_rows": 1774,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 325,
+      "90d_3x_hits": 130,
+      "180d_2x_hits": 489,
+      "180d_3x_hits": 172
+    },
+    {
+      "symbol": "OGUSDT",
+      "eligible_daily_rows": 1545,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 296,
+      "90d_3x_hits": 222,
+      "180d_2x_hits": 606,
+      "180d_3x_hits": 494
+    },
+    {
+      "symbol": "OMGUSDT",
+      "eligible_daily_rows": 1469,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 439,
+      "90d_3x_hits": 206,
+      "180d_2x_hits": 658,
+      "180d_3x_hits": 364
+    },
+    {
+      "symbol": "OMNIUSDT",
+      "eligible_daily_rows": 292,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 108,
+      "90d_3x_hits": 64,
+      "180d_2x_hits": 144,
+      "180d_3x_hits": 87
+    },
+    {
+      "symbol": "OMUSDT",
+      "eligible_daily_rows": 1188,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 293,
+      "90d_3x_hits": 176,
+      "180d_2x_hits": 431,
+      "180d_3x_hits": 304
+    },
+    {
+      "symbol": "ONDOUSDT",
+      "eligible_daily_rows": 118,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 2,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 8,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ONEUSDT",
+      "eligible_daily_rows": 1955,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 543,
+      "90d_3x_hits": 277,
+      "180d_2x_hits": 822,
+      "180d_3x_hits": 523
+    },
+    {
+      "symbol": "ONGUSDT",
+      "eligible_daily_rows": 1266,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 338,
+      "90d_3x_hits": 136,
+      "180d_2x_hits": 495,
+      "180d_3x_hits": 136
+    },
+    {
+      "symbol": "ONTUSDT",
+      "eligible_daily_rows": 2286,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 339,
+      "90d_3x_hits": 74,
+      "180d_2x_hits": 651,
+      "180d_3x_hits": 157
+    },
+    {
+      "symbol": "OOKIUSDT",
+      "eligible_daily_rows": 661,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 97,
+      "90d_3x_hits": 40,
+      "180d_2x_hits": 172,
+      "180d_3x_hits": 75
+    },
+    {
+      "symbol": "OPUSDT",
+      "eligible_daily_rows": 1163,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 92,
+      "90d_3x_hits": 37,
+      "180d_2x_hits": 211,
+      "180d_3x_hits": 90
+    },
+    {
+      "symbol": "ORCAUSDT",
+      "eligible_daily_rows": 195,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 35,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 73,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ORDIUSDT",
+      "eligible_daily_rows": 639,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 89,
+      "90d_3x_hits": 62,
+      "180d_2x_hits": 179,
+      "180d_3x_hits": 63
+    },
+    {
+      "symbol": "ORNUSDT",
+      "eligible_daily_rows": 942,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 138,
+      "90d_3x_hits": 84,
+      "180d_2x_hits": 151,
+      "180d_3x_hits": 107
+    },
+    {
+      "symbol": "OSMOUSDT",
+      "eligible_daily_rows": 578,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 102,
+      "90d_3x_hits": 61,
+      "180d_2x_hits": 137,
+      "180d_3x_hits": 88
+    },
+    {
+      "symbol": "OXTUSDT",
+      "eligible_daily_rows": 1228,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 220,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 419,
+      "180d_3x_hits": 17
+    },
+    {
+      "symbol": "PARTIUSDT",
+      "eligible_daily_rows": 135,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 3,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 3,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PAXGUSDT",
+      "eligible_daily_rows": 1773,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PDAUSDT",
+      "eligible_daily_rows": 181,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 3,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 3,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PENDLEUSDT",
+      "eligible_daily_rows": 766,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 76,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 140,
+      "180d_3x_hits": 8
+    },
+    {
+      "symbol": "PENGUUSDT",
+      "eligible_daily_rows": 233,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PEOPLEUSDT",
+      "eligible_daily_rows": 1235,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 288,
+      "90d_3x_hits": 172,
+      "180d_2x_hits": 364,
+      "180d_3x_hits": 285
+    },
+    {
+      "symbol": "PEPEUSDT",
+      "eligible_daily_rows": 825,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 270,
+      "90d_3x_hits": 126,
+      "180d_2x_hits": 343,
+      "180d_3x_hits": 151
+    },
+    {
+      "symbol": "PERLUSDT",
+      "eligible_daily_rows": 920,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 244,
+      "90d_3x_hits": 108,
+      "180d_2x_hits": 380,
+      "180d_3x_hits": 138
+    },
+    {
+      "symbol": "PERPUSDT",
+      "eligible_daily_rows": 1283,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 236,
+      "90d_3x_hits": 98,
+      "180d_2x_hits": 407,
+      "180d_3x_hits": 132
+    },
+    {
+      "symbol": "PHAUSDT",
+      "eligible_daily_rows": 1256,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 234,
+      "90d_3x_hits": 181,
+      "180d_2x_hits": 451,
+      "180d_3x_hits": 364
+    },
+    {
+      "symbol": "PHBUSDT",
+      "eligible_daily_rows": 896,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 247,
+      "90d_3x_hits": 87,
+      "180d_2x_hits": 372,
+      "180d_3x_hits": 198
+    },
+    {
+      "symbol": "PIVXUSDT",
+      "eligible_daily_rows": 184,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 31,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 56,
+      "180d_3x_hits": 7
+    },
+    {
+      "symbol": "PIXELUSDT",
+      "eligible_daily_rows": 477,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 59,
+      "90d_3x_hits": 3,
+      "180d_2x_hits": 59,
+      "180d_3x_hits": 3
+    },
+    {
+      "symbol": "PLAUSDT",
+      "eligible_daily_rows": 330,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 16,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 16,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PNTUSDT",
+      "eligible_daily_rows": 877,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 175,
+      "90d_3x_hits": 40,
+      "180d_2x_hits": 224,
+      "180d_3x_hits": 77
+    },
+    {
+      "symbol": "PNUTUSDT",
+      "eligible_daily_rows": 269,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 24,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 24,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "POLSUSDT",
+      "eligible_daily_rows": 485,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 22,
+      "90d_3x_hits": 3,
+      "180d_2x_hits": 22,
+      "180d_3x_hits": 3
+    },
+    {
+      "symbol": "POLUSDT",
+      "eligible_daily_rows": 328,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "POLYUSDT",
+      "eligible_daily_rows": 138,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 69,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 83,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "POLYXUSDT",
+      "eligible_daily_rows": 850,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 123,
+      "90d_3x_hits": 89,
+      "180d_2x_hits": 249,
+      "180d_3x_hits": 199
+    },
+    {
+      "symbol": "PONDUSDT",
+      "eligible_daily_rows": 1031,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 138,
+      "90d_3x_hits": 14,
+      "180d_2x_hits": 232,
+      "180d_3x_hits": 81
+    },
+    {
+      "symbol": "PORTALUSDT",
+      "eligible_daily_rows": 449,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 48,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 92,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PORTOUSDT",
+      "eligible_daily_rows": 758,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 34,
+      "90d_3x_hits": 14,
+      "180d_2x_hits": 34,
+      "180d_3x_hits": 14
+    },
+    {
+      "symbol": "POWRUSDT",
+      "eligible_daily_rows": 744,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 178,
+      "90d_3x_hits": 120,
+      "180d_2x_hits": 249,
+      "180d_3x_hits": 142
+    },
+    {
+      "symbol": "PROMUSDT",
+      "eligible_daily_rows": 701,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 103,
+      "90d_3x_hits": 12,
+      "180d_2x_hits": 193,
+      "180d_3x_hits": 30
+    },
+    {
+      "symbol": "PROSUSDT",
+      "eligible_daily_rows": 489,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 172,
+      "90d_3x_hits": 23,
+      "180d_2x_hits": 251,
+      "180d_3x_hits": 74
+    },
+    {
+      "symbol": "PROVEUSDT",
+      "eligible_daily_rows": 2,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PSGUSDT",
+      "eligible_daily_rows": 1163,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 32,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 43,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "PUNDIXUSDT",
+      "eligible_daily_rows": 1008,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 91,
+      "90d_3x_hits": 10,
+      "180d_2x_hits": 132,
+      "180d_3x_hits": 10
+    },
+    {
+      "symbol": "PYRUSDT",
+      "eligible_daily_rows": 1256,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 114,
+      "90d_3x_hits": 19,
+      "180d_2x_hits": 186,
+      "180d_3x_hits": 45
+    },
+    {
+      "symbol": "PYTHUSDT",
+      "eligible_daily_rows": 547,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 69,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 80,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "QIUSDT",
+      "eligible_daily_rows": 766,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 109,
+      "90d_3x_hits": 27,
+      "180d_2x_hits": 186,
+      "180d_3x_hits": 52
+    },
+    {
+      "symbol": "QKCUSDT",
+      "eligible_daily_rows": 362,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 13,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 30,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "QNTUSDT",
+      "eligible_daily_rows": 1469,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 177,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 325,
+      "180d_3x_hits": 67
+    },
+    {
+      "symbol": "QTUMUSDT",
+      "eligible_daily_rows": 2284,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 488,
+      "90d_3x_hits": 193,
+      "180d_2x_hits": 786,
+      "180d_3x_hits": 349
+    },
+    {
+      "symbol": "QUICKUSDT",
+      "eligible_daily_rows": 722,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 53,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 112,
+      "180d_3x_hits": 1
+    },
+    {
+      "symbol": "RADUSDT",
+      "eligible_daily_rows": 1311,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 166,
+      "90d_3x_hits": 90,
+      "180d_2x_hits": 378,
+      "180d_3x_hits": 173
+    },
+    {
+      "symbol": "RAMPUSDT",
+      "eligible_daily_rows": 227,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 26,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 26,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "RAREUSDT",
+      "eligible_daily_rows": 1101,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 175,
+      "90d_3x_hits": 36,
+      "180d_2x_hits": 249,
+      "180d_3x_hits": 54
+    },
+    {
+      "symbol": "RAYUSDT",
+      "eligible_daily_rows": 1379,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 355,
+      "90d_3x_hits": 173,
+      "180d_2x_hits": 572,
+      "180d_3x_hits": 355
+    },
+    {
+      "symbol": "RDNTUSDT",
+      "eligible_daily_rows": 675,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 35,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 36,
+      "180d_3x_hits": 1
+    },
+    {
+      "symbol": "REDUSDT",
+      "eligible_daily_rows": 50,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "REEFUSDT",
+      "eligible_daily_rows": 1098,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 137,
+      "90d_3x_hits": 52,
+      "180d_2x_hits": 258,
+      "180d_3x_hits": 132
+    },
+    {
+      "symbol": "REIUSDT",
+      "eligible_daily_rows": 723,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 69,
+      "90d_3x_hits": 60,
+      "180d_2x_hits": 158,
+      "180d_3x_hits": 129
+    },
+    {
+      "symbol": "RENDERUSDT",
+      "eligible_daily_rows": 377,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 15,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 15,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "RENUSDT",
+      "eligible_daily_rows": 1461,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 394,
+      "90d_3x_hits": 191,
+      "180d_2x_hits": 567,
+      "180d_3x_hits": 287
+    },
+    {
+      "symbol": "REPUSDT",
+      "eligible_daily_rows": 454,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 51,
+      "90d_3x_hits": 5,
+      "180d_2x_hits": 51,
+      "180d_3x_hits": 5
+    },
+    {
+      "symbol": "REQUSDT",
+      "eligible_daily_rows": 661,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 69,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 154,
+      "180d_3x_hits": 27
+    },
+    {
+      "symbol": "RESOLVUSDT",
+      "eligible_daily_rows": 57,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 26,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 26,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "REZUSDT",
+      "eligible_daily_rows": 432,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 54,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 60,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "RIFUSDT",
+      "eligible_daily_rows": 971,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 209,
+      "90d_3x_hits": 54,
+      "180d_2x_hits": 345,
+      "180d_3x_hits": 162
+    },
+    {
+      "symbol": "RLCUSDT",
+      "eligible_daily_rows": 1771,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 467,
+      "90d_3x_hits": 140,
+      "180d_2x_hits": 647,
+      "180d_3x_hits": 338
+    },
+    {
+      "symbol": "RNDRUSDT",
+      "eligible_daily_rows": 730,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 381,
+      "90d_3x_hits": 153,
+      "180d_2x_hits": 486,
+      "180d_3x_hits": 351
+    },
+    {
+      "symbol": "RONINUSDT",
+      "eligible_daily_rows": 501,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 1,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 1,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ROSEUSDT",
+      "eligible_daily_rows": 1720,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 372,
+      "90d_3x_hits": 103,
+      "180d_2x_hits": 501,
+      "180d_3x_hits": 202
+    },
+    {
+      "symbol": "RPLUSDT",
+      "eligible_daily_rows": 697,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 42,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 59,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "RSRUSDT",
+      "eligible_daily_rows": 1785,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 313,
+      "90d_3x_hits": 176,
+      "180d_2x_hits": 483,
+      "180d_3x_hits": 368
+    },
+    {
+      "symbol": "RUNEUSDT",
+      "eligible_daily_rows": 1798,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 384,
+      "90d_3x_hits": 130,
+      "180d_2x_hits": 489,
+      "180d_3x_hits": 236
+    },
+    {
+      "symbol": "RVNUSDT",
+      "eligible_daily_rows": 1878,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 467,
+      "90d_3x_hits": 181,
+      "180d_2x_hits": 655,
+      "180d_3x_hits": 261
+    },
+    {
+      "symbol": "SAGAUSDT",
+      "eligible_daily_rows": 468,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 37,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 43,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SAHARAUSDT",
+      "eligible_daily_rows": 42,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 19,
+      "90d_3x_hits": 7,
+      "180d_2x_hits": 19,
+      "180d_3x_hits": 7
+    },
+    {
+      "symbol": "SANDUSDT",
+      "eligible_daily_rows": 1819,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 330,
+      "90d_3x_hits": 228,
+      "180d_2x_hits": 500,
+      "180d_3x_hits": 350
+    },
+    {
+      "symbol": "SANTOSUSDT",
+      "eligible_daily_rows": 1246,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 219,
+      "90d_3x_hits": 116,
+      "180d_2x_hits": 303,
+      "180d_3x_hits": 186
+    },
+    {
+      "symbol": "SCRTUSDT",
+      "eligible_daily_rows": 686,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 85,
+      "90d_3x_hits": 26,
+      "180d_2x_hits": 149,
+      "180d_3x_hits": 34
+    },
+    {
+      "symbol": "SCRUSDT",
+      "eligible_daily_rows": 197,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SCUSDT",
+      "eligible_daily_rows": 1234,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 222,
+      "90d_3x_hits": 82,
+      "180d_2x_hits": 291,
+      "180d_3x_hits": 137
+    },
+    {
+      "symbol": "SEIUSDT",
+      "eligible_daily_rows": 723,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 75,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 143,
+      "180d_3x_hits": 3
+    },
+    {
+      "symbol": "SFPUSDT",
+      "eligible_daily_rows": 1248,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 106,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 198,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "SHELLUSDT",
+      "eligible_daily_rows": 108,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SHIBUSDT",
+      "eligible_daily_rows": 1550,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 149,
+      "90d_3x_hits": 87,
+      "180d_2x_hits": 265,
+      "180d_3x_hits": 179
+    },
+    {
+      "symbol": "SIGNUSDT",
+      "eligible_daily_rows": 44,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 6,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 6,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SKLUSDT",
+      "eligible_daily_rows": 1510,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 320,
+      "90d_3x_hits": 31,
+      "180d_2x_hits": 495,
+      "180d_3x_hits": 99
+    },
+    {
+      "symbol": "SLFUSDT",
+      "eligible_daily_rows": 145,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 21,
+      "90d_3x_hits": 7,
+      "180d_2x_hits": 21,
+      "180d_3x_hits": 7
+    },
+    {
+      "symbol": "SLPUSDT",
+      "eligible_daily_rows": 1277,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 229,
+      "90d_3x_hits": 34,
+      "180d_2x_hits": 396,
+      "180d_3x_hits": 85
+    },
+    {
+      "symbol": "SNTUSDT",
+      "eligible_daily_rows": 407,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 144,
+      "90d_3x_hits": 74,
+      "180d_2x_hits": 198,
+      "180d_3x_hits": 144
+    },
+    {
+      "symbol": "SNXUSDT",
+      "eligible_daily_rows": 1853,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 308,
+      "90d_3x_hits": 72,
+      "180d_2x_hits": 526,
+      "180d_3x_hits": 159
+    },
+    {
+      "symbol": "SOLUSDT",
+      "eligible_daily_rows": 1822,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 354,
+      "90d_3x_hits": 170,
+      "180d_2x_hits": 538,
+      "180d_3x_hits": 350
+    },
+    {
+      "symbol": "SOLVUSDT",
+      "eligible_daily_rows": 173,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 43,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 43,
+      "180d_3x_hits": 4
+    },
+    {
+      "symbol": "SOPHUSDT",
+      "eligible_daily_rows": 14,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SPELLUSDT",
+      "eligible_daily_rows": 1123,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 229,
+      "90d_3x_hits": 79,
+      "180d_2x_hits": 358,
+      "180d_3x_hits": 248
+    },
+    {
+      "symbol": "SPKUSDT",
+      "eligible_daily_rows": 51,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 51,
+      "90d_3x_hits": 31,
+      "180d_2x_hits": 51,
+      "180d_3x_hits": 31
+    },
+    {
+      "symbol": "SRMUSDT",
+      "eligible_daily_rows": 601,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 100,
+      "90d_3x_hits": 59,
+      "180d_2x_hits": 115,
+      "180d_3x_hits": 67
+    },
+    {
+      "symbol": "SSVUSDT",
+      "eligible_daily_rows": 862,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 124,
+      "90d_3x_hits": 2,
+      "180d_2x_hits": 149,
+      "180d_3x_hits": 39
+    },
+    {
+      "symbol": "STEEMUSDT",
+      "eligible_daily_rows": 611,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 2,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 39,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "STGUSDT",
+      "eligible_daily_rows": 966,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 47,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 139,
+      "180d_3x_hits": 54
+    },
+    {
+      "symbol": "STMXUSDT",
+      "eligible_daily_rows": 1355,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 346,
+      "90d_3x_hits": 114,
+      "180d_2x_hits": 483,
+      "180d_3x_hits": 114
+    },
+    {
+      "symbol": "STORJUSDT",
+      "eligible_daily_rows": 1649,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 343,
+      "90d_3x_hits": 74,
+      "180d_2x_hits": 441,
+      "180d_3x_hits": 210
+    },
+    {
+      "symbol": "STORMUSDT",
+      "eligible_daily_rows": 3,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "STOUSDT",
+      "eligible_daily_rows": 51,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 50,
+      "90d_3x_hits": 50,
+      "180d_2x_hits": 50,
+      "180d_3x_hits": 50
+    },
+    {
+      "symbol": "STPTUSDT",
+      "eligible_daily_rows": 1190,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 313,
+      "90d_3x_hits": 168,
+      "180d_2x_hits": 443,
+      "180d_3x_hits": 319
+    },
+    {
+      "symbol": "STRAXUSDT",
+      "eligible_daily_rows": 1047,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 95,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 127,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "STRKUSDT",
+      "eligible_daily_rows": 534,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 84,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 155,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "STXUSDT",
+      "eligible_daily_rows": 1935,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 478,
+      "90d_3x_hits": 251,
+      "180d_2x_hits": 715,
+      "180d_3x_hits": 420
+    },
+    {
+      "symbol": "SUIUSDT",
+      "eligible_daily_rows": 827,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 162,
+      "90d_3x_hits": 65,
+      "180d_2x_hits": 228,
+      "180d_3x_hits": 147
+    },
+    {
+      "symbol": "SUNUSDT",
+      "eligible_daily_rows": 1098,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 185,
+      "90d_3x_hits": 42,
+      "180d_2x_hits": 354,
+      "180d_3x_hits": 87
+    },
+    {
+      "symbol": "SUPERUSDT",
+      "eligible_daily_rows": 1375,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 244,
+      "90d_3x_hits": 49,
+      "180d_2x_hits": 358,
+      "180d_3x_hits": 169
+    },
+    {
+      "symbol": "SUSDT",
+      "eligible_daily_rows": 203,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SUSHIUSDT",
+      "eligible_daily_rows": 1741,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 225,
+      "90d_3x_hits": 77,
+      "180d_2x_hits": 403,
+      "180d_3x_hits": 224
+    },
+    {
+      "symbol": "SXPUSDT",
+      "eligible_daily_rows": 1702,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 199,
+      "90d_3x_hits": 69,
+      "180d_2x_hits": 355,
+      "180d_3x_hits": 129
+    },
+    {
+      "symbol": "SXTUSDT",
+      "eligible_daily_rows": 53,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SYNUSDT",
+      "eligible_daily_rows": 784,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 264,
+      "90d_3x_hits": 44,
+      "180d_2x_hits": 340,
+      "180d_3x_hits": 129
+    },
+    {
+      "symbol": "SYRUPUSDT",
+      "eligible_daily_rows": 93,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "SYSUSDT",
+      "eligible_daily_rows": 828,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 134,
+      "90d_3x_hits": 34,
+      "180d_2x_hits": 152,
+      "180d_3x_hits": 65
+    },
+    {
+      "symbol": "TAOUSDT",
+      "eligible_daily_rows": 483,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 57,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 57,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TCTUSDT",
+      "eligible_daily_rows": 595,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 230,
+      "90d_3x_hits": 72,
+      "180d_2x_hits": 289,
+      "180d_3x_hits": 108
+    },
+    {
+      "symbol": "TFUELUSDT",
+      "eligible_daily_rows": 1564,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 258,
+      "90d_3x_hits": 164,
+      "180d_2x_hits": 372,
+      "180d_3x_hits": 298
+    },
+    {
+      "symbol": "THETAUSDT",
+      "eligible_daily_rows": 2134,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 497,
+      "90d_3x_hits": 282,
+      "180d_2x_hits": 687,
+      "180d_3x_hits": 476
+    },
+    {
+      "symbol": "THEUSDT",
+      "eligible_daily_rows": 240,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 104,
+      "90d_3x_hits": 13,
+      "180d_2x_hits": 163,
+      "180d_3x_hits": 55
+    },
+    {
+      "symbol": "TIAUSDT",
+      "eligible_daily_rows": 646,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 17,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 22,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TKOUSDT",
+      "eligible_daily_rows": 888,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 145,
+      "90d_3x_hits": 11,
+      "180d_2x_hits": 223,
+      "180d_3x_hits": 40
+    },
+    {
+      "symbol": "TLMUSDT",
+      "eligible_daily_rows": 1419,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 151,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 317,
+      "180d_3x_hits": 28
+    },
+    {
+      "symbol": "TNSRUSDT",
+      "eligible_daily_rows": 429,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 38,
+      "90d_3x_hits": 26,
+      "180d_2x_hits": 128,
+      "180d_3x_hits": 57
+    },
+    {
+      "symbol": "TOMOUSDT",
+      "eligible_daily_rows": 1092,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 316,
+      "90d_3x_hits": 137,
+      "180d_2x_hits": 381,
+      "180d_3x_hits": 221
+    },
+    {
+      "symbol": "TONUSDT",
+      "eligible_daily_rows": 364,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 54,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 60,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TORNUSDT",
+      "eligible_daily_rows": 326,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 17,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 17,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TOWNSUSDT",
+      "eligible_daily_rows": 2,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TRBUSDT",
+      "eligible_daily_rows": 1716,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 420,
+      "90d_3x_hits": 227,
+      "180d_2x_hits": 582,
+      "180d_3x_hits": 290
+    },
+    {
+      "symbol": "TRIBEUSDT",
+      "eligible_daily_rows": 119,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 25,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 41,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TROYUSDT",
+      "eligible_daily_rows": 1198,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 238,
+      "90d_3x_hits": 161,
+      "180d_2x_hits": 352,
+      "180d_3x_hits": 235
+    },
+    {
+      "symbol": "TRUMPUSDT",
+      "eligible_daily_rows": 200,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TRUUSDT",
+      "eligible_daily_rows": 1368,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 214,
+      "90d_3x_hits": 104,
+      "180d_2x_hits": 355,
+      "180d_3x_hits": 228
+    },
+    {
+      "symbol": "TRXUSDT",
+      "eligible_daily_rows": 2614,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 358,
+      "90d_3x_hits": 112,
+      "180d_2x_hits": 619,
+      "180d_3x_hits": 364
+    },
+    {
+      "symbol": "TSTUSDT",
+      "eligible_daily_rows": 122,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 2,
+      "90d_3x_hits": 2,
+      "180d_2x_hits": 72,
+      "180d_3x_hits": 3
+    },
+    {
+      "symbol": "TURBOUSDT",
+      "eligible_daily_rows": 304,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 8,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 8,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TUSDT",
+      "eligible_daily_rows": 928,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 97,
+      "90d_3x_hits": 10,
+      "180d_2x_hits": 223,
+      "180d_3x_hits": 34
+    },
+    {
+      "symbol": "TUTUSDT",
+      "eligible_daily_rows": 76,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "TVKUSDT",
+      "eligible_daily_rows": 461,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 108,
+      "90d_3x_hits": 20,
+      "180d_2x_hits": 126,
+      "180d_3x_hits": 20
+    },
+    {
+      "symbol": "TWTUSDT",
+      "eligible_daily_rows": 1561,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 279,
+      "90d_3x_hits": 24,
+      "180d_2x_hits": 463,
+      "180d_3x_hits": 94
+    },
+    {
+      "symbol": "UFTUSDT",
+      "eligible_daily_rows": 335,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 88,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 108,
+      "180d_3x_hits": 9
+    },
+    {
+      "symbol": "UMAUSDT",
+      "eligible_daily_rows": 1638,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 198,
+      "90d_3x_hits": 87,
+      "180d_2x_hits": 387,
+      "180d_3x_hits": 159
+    },
+    {
+      "symbol": "UNFIUSDT",
+      "eligible_daily_rows": 1210,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 363,
+      "90d_3x_hits": 222,
+      "180d_2x_hits": 600,
+      "180d_3x_hits": 337
+    },
+    {
+      "symbol": "UNIUSDT",
+      "eligible_daily_rows": 1785,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 239,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 423,
+      "180d_3x_hits": 118
+    },
+    {
+      "symbol": "USUALUSDT",
+      "eligible_daily_rows": 238,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "UTKUSDT",
+      "eligible_daily_rows": 1014,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 111,
+      "90d_3x_hits": 69,
+      "180d_2x_hits": 164,
+      "180d_3x_hits": 120
+    },
+    {
+      "symbol": "VANAUSDT",
+      "eligible_daily_rows": 171,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "VANRYUSDT",
+      "eligible_daily_rows": 545,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 54,
+      "90d_3x_hits": 1,
+      "180d_2x_hits": 81,
+      "180d_3x_hits": 1
+    },
+    {
+      "symbol": "VELODROMEUSDT",
+      "eligible_daily_rows": 83,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "VETUSDT",
+      "eligible_daily_rows": 2506,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 511,
+      "90d_3x_hits": 319,
+      "180d_2x_hits": 849,
+      "180d_3x_hits": 575
+    },
+    {
+      "symbol": "VGXUSDT",
+      "eligible_daily_rows": 770,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 125,
+      "90d_3x_hits": 31,
+      "180d_2x_hits": 134,
+      "180d_3x_hits": 31
+    },
+    {
+      "symbol": "VIBUSDT",
+      "eligible_daily_rows": 505,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 132,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 252,
+      "180d_3x_hits": 11
+    },
+    {
+      "symbol": "VICUSDT",
+      "eligible_daily_rows": 357,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 36,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 65,
+      "180d_3x_hits": 5
+    },
+    {
+      "symbol": "VIDTUSDT",
+      "eligible_daily_rows": 689,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 224,
+      "90d_3x_hits": 62,
+      "180d_2x_hits": 266,
+      "180d_3x_hits": 93
+    },
+    {
+      "symbol": "VIRTUALUSDT",
+      "eligible_daily_rows": 118,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "VITEUSDT",
+      "eligible_daily_rows": 992,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 192,
+      "90d_3x_hits": 57,
+      "180d_2x_hits": 262,
+      "180d_3x_hits": 112
+    },
+    {
+      "symbol": "VOXELUSDT",
+      "eligible_daily_rows": 1078,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 227,
+      "90d_3x_hits": 17,
+      "180d_2x_hits": 335,
+      "180d_3x_hits": 31
+    },
+    {
+      "symbol": "VTHOUSDT",
+      "eligible_daily_rows": 1120,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 305,
+      "90d_3x_hits": 129,
+      "180d_2x_hits": 330,
+      "180d_3x_hits": 184
+    },
+    {
+      "symbol": "WANUSDT",
+      "eligible_daily_rows": 820,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 149,
+      "90d_3x_hits": 54,
+      "180d_2x_hits": 177,
+      "180d_3x_hits": 66
+    },
+    {
+      "symbol": "WAVESUSDT",
+      "eligible_daily_rows": 1621,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 600,
+      "90d_3x_hits": 266,
+      "180d_2x_hits": 902,
+      "180d_3x_hits": 539
+    },
+    {
+      "symbol": "WAXPUSDT",
+      "eligible_daily_rows": 863,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 74,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 139,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "WBETHUSDT",
+      "eligible_daily_rows": 749,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 34,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 87,
+      "180d_3x_hits": 15
+    },
+    {
+      "symbol": "WBTCUSDT",
+      "eligible_daily_rows": 831,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 3,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "WCTUSDT",
+      "eligible_daily_rows": 106,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "WIFUSDT",
+      "eligible_daily_rows": 520,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 92,
+      "90d_3x_hits": 27,
+      "180d_2x_hits": 96,
+      "180d_3x_hits": 27
+    },
+    {
+      "symbol": "WINGUSDT",
+      "eligible_daily_rows": 1259,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 166,
+      "90d_3x_hits": 66,
+      "180d_2x_hits": 345,
+      "180d_3x_hits": 152
+    },
+    {
+      "symbol": "WINUSDT",
+      "eligible_daily_rows": 1414,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 306,
+      "90d_3x_hits": 107,
+      "180d_2x_hits": 495,
+      "180d_3x_hits": 187
+    },
+    {
+      "symbol": "WLDUSDT",
+      "eligible_daily_rows": 745,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 175,
+      "90d_3x_hits": 4,
+      "180d_2x_hits": 253,
+      "180d_3x_hits": 15
+    },
+    {
+      "symbol": "WNXMUSDT",
+      "eligible_daily_rows": 452,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 51,
+      "90d_3x_hits": 6,
+      "180d_2x_hits": 56,
+      "180d_3x_hits": 9
+    },
+    {
+      "symbol": "WOOUSDT",
+      "eligible_daily_rows": 1086,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 211,
+      "90d_3x_hits": 15,
+      "180d_2x_hits": 373,
+      "180d_3x_hits": 85
+    },
+    {
+      "symbol": "WRXUSDT",
+      "eligible_daily_rows": 1075,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 140,
+      "90d_3x_hits": 73,
+      "180d_2x_hits": 280,
+      "180d_3x_hits": 124
+    },
+    {
+      "symbol": "WTCUSDT",
+      "eligible_daily_rows": 740,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 172,
+      "90d_3x_hits": 37,
+      "180d_2x_hits": 196,
+      "180d_3x_hits": 80
+    },
+    {
+      "symbol": "WUSDT",
+      "eligible_daily_rows": 491,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 14,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 40,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "XAIUSDT",
+      "eligible_daily_rows": 555,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 80,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 80,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "XECUSDT",
+      "eligible_daily_rows": 1096,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 93,
+      "90d_3x_hits": 79,
+      "180d_2x_hits": 195,
+      "180d_3x_hits": 169
+    },
+    {
+      "symbol": "XEMUSDT",
+      "eligible_daily_rows": 782,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 6,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 13,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "XLMUSDT",
+      "eligible_daily_rows": 2616,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 422,
+      "90d_3x_hits": 192,
+      "180d_2x_hits": 736,
+      "180d_3x_hits": 401
+    },
+    {
+      "symbol": "XMRUSDT",
+      "eligible_daily_rows": 1565,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 149,
+      "90d_3x_hits": 16,
+      "180d_2x_hits": 401,
+      "180d_3x_hits": 149
+    },
+    {
+      "symbol": "XNOUSDT",
+      "eligible_daily_rows": 426,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 12,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 58,
+      "180d_3x_hits": 14
+    },
+    {
+      "symbol": "XRPUSDT",
+      "eligible_daily_rows": 2649,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 368,
+      "90d_3x_hits": 251,
+      "180d_2x_hits": 668,
+      "180d_3x_hits": 456
+    },
+    {
+      "symbol": "XTZUSDT",
+      "eligible_daily_rows": 2111,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 351,
+      "90d_3x_hits": 53,
+      "180d_2x_hits": 598,
+      "180d_3x_hits": 166
+    },
+    {
+      "symbol": "XUSDUSDT",
+      "eligible_daily_rows": 141,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "XVGUSDT",
+      "eligible_daily_rows": 1156,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 260,
+      "90d_3x_hits": 147,
+      "180d_2x_hits": 445,
+      "180d_3x_hits": 327
+    },
+    {
+      "symbol": "XVSUSDT",
+      "eligible_daily_rows": 1366,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 162,
+      "90d_3x_hits": 18,
+      "180d_2x_hits": 245,
+      "180d_3x_hits": 102
+    },
+    {
+      "symbol": "XZCUSDT",
+      "eligible_daily_rows": 9,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 0,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 0,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "YFIIUSDT",
+      "eligible_daily_rows": 777,
+      "ends_before_dataset_end": 1,
+      "90d_2x_hits": 215,
+      "90d_3x_hits": 166,
+      "180d_2x_hits": 283,
+      "180d_3x_hits": 219
+    },
+    {
+      "symbol": "YFIUSDT",
+      "eligible_daily_rows": 1734,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 254,
+      "90d_3x_hits": 59,
+      "180d_2x_hits": 432,
+      "180d_3x_hits": 65
+    },
+    {
+      "symbol": "YGGUSDT",
+      "eligible_daily_rows": 1363,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 303,
+      "90d_3x_hits": 129,
+      "180d_2x_hits": 463,
+      "180d_3x_hits": 323
+    },
+    {
+      "symbol": "ZECUSDT",
+      "eligible_daily_rows": 2331,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 612,
+      "90d_3x_hits": 177,
+      "180d_2x_hits": 997,
+      "180d_3x_hits": 479
+    },
+    {
+      "symbol": "ZENUSDT",
+      "eligible_daily_rows": 1754,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 349,
+      "90d_3x_hits": 155,
+      "180d_2x_hits": 561,
+      "180d_3x_hits": 284
+    },
+    {
+      "symbol": "ZILUSDT",
+      "eligible_daily_rows": 2097,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 456,
+      "90d_3x_hits": 238,
+      "180d_2x_hits": 789,
+      "180d_3x_hits": 366
+    },
+    {
+      "symbol": "ZKUSDT",
+      "eligible_daily_rows": 416,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 22,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 24,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ZROUSDT",
+      "eligible_daily_rows": 413,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 21,
+      "90d_3x_hits": 0,
+      "180d_2x_hits": 21,
+      "180d_3x_hits": 0
+    },
+    {
+      "symbol": "ZRXUSDT",
+      "eligible_daily_rows": 1994,
+      "ends_before_dataset_end": 0,
+      "90d_2x_hits": 511,
+      "90d_3x_hits": 243,
+      "180d_2x_hits": 819,
+      "180d_3x_hits": 428
+    }
+  ],
+  "regime_anchors": [
+    {
+      "era": "challenge",
+      "regime": "BEAR",
+      "label": "180d_2x",
+      "n": 93,
+      "hits": 18
+    },
+    {
+      "era": "challenge",
+      "regime": "BEAR",
+      "label": "180d_3x",
+      "n": 93,
+      "hits": 8
+    },
+    {
+      "era": "challenge",
+      "regime": "BEAR",
+      "label": "90d_2x",
+      "n": 93,
+      "hits": 13
+    },
+    {
+      "era": "challenge",
+      "regime": "BEAR",
+      "label": "90d_3x",
+      "n": 93,
+      "hits": 4
+    },
+    {
+      "era": "challenge",
+      "regime": "BULL",
+      "label": "180d_2x",
+      "n": 321,
+      "hits": 62
+    },
+    {
+      "era": "challenge",
+      "regime": "BULL",
+      "label": "180d_3x",
+      "n": 321,
+      "hits": 17
+    },
+    {
+      "era": "challenge",
+      "regime": "BULL",
+      "label": "90d_2x",
+      "n": 321,
+      "hits": 50
+    },
+    {
+      "era": "challenge",
+      "regime": "BULL",
+      "label": "90d_3x",
+      "n": 321,
+      "hits": 12
+    },
+    {
+      "era": "challenge",
+      "regime": "TRANSITION",
+      "label": "180d_2x",
+      "n": 558,
+      "hits": 24
+    },
+    {
+      "era": "challenge",
+      "regime": "TRANSITION",
+      "label": "180d_3x",
+      "n": 558,
+      "hits": 10
+    },
+    {
+      "era": "challenge",
+      "regime": "TRANSITION",
+      "label": "90d_2x",
+      "n": 558,
+      "hits": 18
+    },
+    {
+      "era": "challenge",
+      "regime": "TRANSITION",
+      "label": "90d_3x",
+      "n": 558,
+      "hits": 8
+    },
+    {
+      "era": "development",
+      "regime": "BEAR",
+      "label": "180d_2x",
+      "n": 300,
+      "hits": 103
+    },
+    {
+      "era": "development",
+      "regime": "BEAR",
+      "label": "180d_3x",
+      "n": 300,
+      "hits": 43
+    },
+    {
+      "era": "development",
+      "regime": "BEAR",
+      "label": "90d_2x",
+      "n": 300,
+      "hits": 76
+    },
+    {
+      "era": "development",
+      "regime": "BEAR",
+      "label": "90d_3x",
+      "n": 300,
+      "hits": 23
+    },
+    {
+      "era": "development",
+      "regime": "BULL",
+      "label": "180d_2x",
+      "n": 277,
+      "hits": 151
+    },
+    {
+      "era": "development",
+      "regime": "BULL",
+      "label": "180d_3x",
+      "n": 277,
+      "hits": 114
+    },
+    {
+      "era": "development",
+      "regime": "BULL",
+      "label": "90d_2x",
+      "n": 277,
+      "hits": 124
+    },
+    {
+      "era": "development",
+      "regime": "BULL",
+      "label": "90d_3x",
+      "n": 277,
+      "hits": 90
+    },
+    {
+      "era": "development",
+      "regime": "TRANSITION",
+      "label": "180d_2x",
+      "n": 242,
+      "hits": 76
+    },
+    {
+      "era": "development",
+      "regime": "TRANSITION",
+      "label": "180d_3x",
+      "n": 242,
+      "hits": 33
+    },
+    {
+      "era": "development",
+      "regime": "TRANSITION",
+      "label": "90d_2x",
+      "n": 242,
+      "hits": 57
+    },
+    {
+      "era": "development",
+      "regime": "TRANSITION",
+      "label": "90d_3x",
+      "n": 242,
+      "hits": 16
+    },
+    {
+      "era": "validation",
+      "regime": "BEAR",
+      "label": "180d_2x",
+      "n": 193,
+      "hits": 122
+    },
+    {
+      "era": "validation",
+      "regime": "BEAR",
+      "label": "180d_3x",
+      "n": 193,
+      "hits": 38
+    },
+    {
+      "era": "validation",
+      "regime": "BEAR",
+      "label": "90d_2x",
+      "n": 193,
+      "hits": 104
+    },
+    {
+      "era": "validation",
+      "regime": "BEAR",
+      "label": "90d_3x",
+      "n": 193,
+      "hits": 26
+    },
+    {
+      "era": "validation",
+      "regime": "BULL",
+      "label": "180d_2x",
+      "n": 573,
+      "hits": 201
+    },
+    {
+      "era": "validation",
+      "regime": "BULL",
+      "label": "180d_3x",
+      "n": 573,
+      "hits": 73
+    },
+    {
+      "era": "validation",
+      "regime": "BULL",
+      "label": "90d_2x",
+      "n": 573,
+      "hits": 124
+    },
+    {
+      "era": "validation",
+      "regime": "BULL",
+      "label": "90d_3x",
+      "n": 573,
+      "hits": 39
+    },
+    {
+      "era": "validation",
+      "regime": "TRANSITION",
+      "label": "180d_2x",
+      "n": 327,
+      "hits": 133
+    },
+    {
+      "era": "validation",
+      "regime": "TRANSITION",
+      "label": "180d_3x",
+      "n": 327,
+      "hits": 50
+    },
+    {
+      "era": "validation",
+      "regime": "TRANSITION",
+      "label": "90d_2x",
+      "n": 327,
+      "hits": 55
+    },
+    {
+      "era": "validation",
+      "regime": "TRANSITION",
+      "label": "90d_3x",
+      "n": 327,
+      "hits": 17
+    }
+  ],
+  "daily_descriptive": [
+    {
+      "era": "all",
+      "label": "180d_2x",
+      "n": 473267,
+      "hits": 133747,
+      "delayed_hits": 133634,
+      "stop_preceded_delayed_hit": 66654,
+      "ended_paths": 22140
+    },
+    {
+      "era": "all",
+      "label": "180d_3x",
+      "n": 473267,
+      "hits": 57223,
+      "delayed_hits": 57152,
+      "stop_preceded_delayed_hit": 27269,
+      "ended_paths": 22140
+    },
+    {
+      "era": "all",
+      "label": "90d_2x",
+      "n": 473267,
+      "hits": 85684,
+      "delayed_hits": 85553,
+      "stop_preceded_delayed_hit": 33741,
+      "ended_paths": 10654
+    },
+    {
+      "era": "all",
+      "label": "90d_3x",
+      "n": 473267,
+      "hits": 29931,
+      "delayed_hits": 29848,
+      "stop_preceded_delayed_hit": 11555,
+      "ended_paths": 10654
+    },
+    {
+      "era": "challenge",
+      "label": "180d_2x",
+      "n": 120041,
+      "hits": 14120,
+      "delayed_hits": 14174,
+      "stop_preceded_delayed_hit": 8529,
+      "ended_paths": 6884
+    },
+    {
+      "era": "challenge",
+      "label": "180d_3x",
+      "n": 120041,
+      "hits": 4149,
+      "delayed_hits": 4169,
+      "stop_preceded_delayed_hit": 2374,
+      "ended_paths": 6884
+    },
+    {
+      "era": "challenge",
+      "label": "90d_2x",
+      "n": 120041,
+      "hits": 9138,
+      "delayed_hits": 9152,
+      "stop_preceded_delayed_hit": 4668,
+      "ended_paths": 4024
+    },
+    {
+      "era": "challenge",
+      "label": "90d_3x",
+      "n": 120041,
+      "hits": 2482,
+      "delayed_hits": 2486,
+      "stop_preceded_delayed_hit": 1259,
+      "ended_paths": 4024
+    },
+    {
+      "era": "development",
+      "label": "180d_2x",
+      "n": 158956,
+      "hits": 52999,
+      "delayed_hits": 53015,
+      "stop_preceded_delayed_hit": 29523,
+      "ended_paths": 4751
+    },
+    {
+      "era": "development",
+      "label": "180d_3x",
+      "n": 158956,
+      "hits": 27324,
+      "delayed_hits": 27304,
+      "stop_preceded_delayed_hit": 15042,
+      "ended_paths": 4751
+    },
+    {
+      "era": "development",
+      "label": "90d_2x",
+      "n": 158956,
+      "hits": 37284,
+      "delayed_hits": 37311,
+      "stop_preceded_delayed_hit": 16850,
+      "ended_paths": 2278
+    },
+    {
+      "era": "development",
+      "label": "90d_3x",
+      "n": 158956,
+      "hits": 16111,
+      "delayed_hits": 16081,
+      "stop_preceded_delayed_hit": 6969,
+      "ended_paths": 2278
+    },
+    {
+      "era": "validation",
+      "label": "180d_2x",
+      "n": 194270,
+      "hits": 66628,
+      "delayed_hits": 66445,
+      "stop_preceded_delayed_hit": 28602,
+      "ended_paths": 10505
+    },
+    {
+      "era": "validation",
+      "label": "180d_3x",
+      "n": 194270,
+      "hits": 25750,
+      "delayed_hits": 25679,
+      "stop_preceded_delayed_hit": 9853,
+      "ended_paths": 10505
+    },
+    {
+      "era": "validation",
+      "label": "90d_2x",
+      "n": 194270,
+      "hits": 39262,
+      "delayed_hits": 39090,
+      "stop_preceded_delayed_hit": 12223,
+      "ended_paths": 4352
+    },
+    {
+      "era": "validation",
+      "label": "90d_3x",
+      "n": 194270,
+      "hits": 11338,
+      "delayed_hits": 11281,
+      "stop_preceded_delayed_hit": 3327,
+      "ended_paths": 4352
+    }
+  ]
+}

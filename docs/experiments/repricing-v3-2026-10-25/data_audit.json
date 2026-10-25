@@ -1,0 +1,5374 @@
+{
+  "audited_at_utc": "2026-10-25T07:50:52.849573+00:00",
+  "archive": {
+    "snapshot_count": 57217,
+    "sha256": "84e6c12f0a62bb689d490e861a20ff0c867b6448729c04a2a1cb512330f1fba6",
+    "regenerated_candles": 844092,
+    "publisher_zip_checksums_verified": 28228
+  },
+  "collection": {
+    "markets": 756,
+    "daily_bars": 844092,
+    "source_count": 57217,
+    "source_manifest_sha256": "810d1b1265dbb9531df2b6b89718c1a106efafcdde858eb6a6924b078c0228bf",
+    "normalized_candles_sha256": "b139383a4eacb5cf9150354576eb9cf2f44937c9a3e019bacfa88f3e37d2b98f",
+    "shortened_daily_bars": 297,
+    "rejected_candles": 7,
+    "markets_with_gaps": 26,
+    "coverage": [
+      {
+        "symbol": "0GUSDT",
+        "bars": 374,
+        "first_ms": 1758499200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1000CATUSDT",
+        "bars": 653,
+        "first_ms": 1734393600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1000CHEEMSUSDT",
+        "bars": 599,
+        "first_ms": 1739059200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1000SATSUSDT",
+        "bars": 1024,
+        "first_ms": 1702339200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1INCHDOWNUSDT",
+        "bars": 232,
+        "first_ms": 1618444800000,
+        "last_ms": 1638403200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1INCHUPUSDT",
+        "bars": 232,
+        "first_ms": 1618444800000,
+        "last_ms": 1638403200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1INCHUSDT",
+        "bars": 2106,
+        "first_ms": 1608854400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "1MBABYDOGEUSDT",
+        "bars": 745,
+        "first_ms": 1726444800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "2ZUSDT",
+        "bars": 364,
+        "first_ms": 1759363200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "A2ZUSDT",
+        "bars": 246,
+        "first_ms": 1753833600000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AAOIBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AAPLBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AAVEDOWNUSDT",
+        "bars": 351,
+        "first_ms": 1606348800000,
+        "last_ms": 1636588800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AAVEUPUSDT",
+        "bars": 351,
+        "first_ms": 1606348800000,
+        "last_ms": 1636588800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AAVEUSDT",
+        "bars": 2177,
+        "first_ms": 1602720000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ACAUSDT",
+        "bars": 1481,
+        "first_ms": 1643068800000,
+        "last_ms": 1770940800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ACEUSDT",
+        "bars": 1018,
+        "first_ms": 1702857600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ACHUSDT",
+        "bars": 1725,
+        "first_ms": 1641772800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ACMUSDT",
+        "bars": 2045,
+        "first_ms": 1614124800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ACTUSDT",
+        "bars": 689,
+        "first_ms": 1731283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ACXUSDT",
+        "bars": 620,
+        "first_ms": 1733443200000,
+        "last_ms": 1786924800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ADADOWNUSDT",
+        "bars": 1127,
+        "first_ms": 1594857600000,
+        "last_ms": 1692144000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ADAUPUSDT",
+        "bars": 1127,
+        "first_ms": 1594857600000,
+        "last_ms": 1692144000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ADAUSDT",
+        "bars": 3089,
+        "first_ms": 1523923200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ADBEBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ADXUSDT",
+        "bars": 1798,
+        "first_ms": 1635465600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AERGOUSDT",
+        "bars": 694,
+        "first_ms": 1683244800000,
+        "last_ms": 1743120000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AEROUSDT",
+        "bars": 76,
+        "first_ms": 1784246400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AEURUSDT",
+        "bars": 969,
+        "first_ms": 1701648000000,
+        "last_ms": 1785456000000,
+        "missing_days": 2
+      },
+      {
+        "symbol": "AEVOUSDT",
+        "bars": 932,
+        "first_ms": 1710288000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AGIXUSDT",
+        "bars": 501,
+        "first_ms": 1676592000000,
+        "last_ms": 1719792000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AGLDUSDT",
+        "bars": 1822,
+        "first_ms": 1633392000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AGPUBUSDT",
+        "bars": 8,
+        "first_ms": 1790121600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AIGENSYNUSDT",
+        "bars": 140,
+        "first_ms": 1778716800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AIONUSDT",
+        "bars": 1105,
+        "first_ms": 1582070400000,
+        "last_ms": 1677456000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AIUSDT",
+        "bars": 1001,
+        "first_ms": 1704326400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AIXBTUSDT",
+        "bars": 629,
+        "first_ms": 1736467200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AKROUSDT",
+        "bars": 1515,
+        "first_ms": 1604275200000,
+        "last_ms": 1735084800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALABBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALCXUSDT",
+        "bars": 1684,
+        "first_ms": 1638230400000,
+        "last_ms": 1783641600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALGOUSDT",
+        "bars": 2658,
+        "first_ms": 1561161600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALICEUSDT",
+        "bars": 2026,
+        "first_ms": 1615766400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALLOUSDT",
+        "bars": 324,
+        "first_ms": 1762819200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALPACAUSDT",
+        "bars": 1361,
+        "first_ms": 1628640000000,
+        "last_ms": 1746144000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALPHAUSDT",
+        "bars": 1729,
+        "first_ms": 1602288000000,
+        "last_ms": 1751587200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALPINEUSDT",
+        "bars": 1683,
+        "first_ms": 1645401600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ALTUSDT",
+        "bars": 980,
+        "first_ms": 1706140800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AMATBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AMBUSDT",
+        "bars": 725,
+        "first_ms": 1677801600000,
+        "last_ms": 1740355200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AMCBUSDT",
+        "bars": 8,
+        "first_ms": 1790121600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AMDBUSDT",
+        "bars": 100,
+        "first_ms": 1782172800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AMPUSDT",
+        "bars": 1773,
+        "first_ms": 1637625600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AMZNBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ANCUSDT",
+        "bars": 337,
+        "first_ms": 1643068800000,
+        "last_ms": 1672099200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ANIMEUSDT",
+        "bars": 616,
+        "first_ms": 1737590400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ANKRUSDT",
+        "bars": 2627,
+        "first_ms": 1563840000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ANTUSDT",
+        "bars": 1287,
+        "first_ms": 1597276800000,
+        "last_ms": 1708387200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ANYUSDT",
+        "bars": 117,
+        "first_ms": 1638576000000,
+        "last_ms": 1648598400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "APEUSDT",
+        "bars": 1659,
+        "first_ms": 1647475200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "API3USDT",
+        "bars": 1714,
+        "first_ms": 1642723200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "APTUSDT",
+        "bars": 1443,
+        "first_ms": 1666137600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARBUSDT",
+        "bars": 1288,
+        "first_ms": 1679529600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARDRUSDT",
+        "bars": 2248,
+        "first_ms": 1589500800000,
+        "last_ms": 1783641600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARKMUSDT",
+        "bars": 1171,
+        "first_ms": 1689638400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARKUSDT",
+        "bars": 1105,
+        "first_ms": 1695340800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARMBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARPAUSDT",
+        "bars": 2521,
+        "first_ms": 1572998400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ARUSDT",
+        "bars": 1966,
+        "first_ms": 1620950400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ASMLBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ASRUSDT",
+        "bars": 2101,
+        "first_ms": 1609286400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ASTERUSDT",
+        "bars": 360,
+        "first_ms": 1759708800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ASTRUSDT",
+        "bars": 1676,
+        "first_ms": 1646006400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ASTSBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ASTUSDT",
+        "bars": 680,
+        "first_ms": 1684454400000,
+        "last_ms": 1743120000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ATAUSDT",
+        "bars": 1816,
+        "first_ms": 1623024000000,
+        "last_ms": 1779840000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ATMUSDT",
+        "bars": 2101,
+        "first_ms": 1609286400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ATOMUSDT",
+        "bars": 2712,
+        "first_ms": 1556496000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ATUSDT",
+        "bars": 308,
+        "first_ms": 1764201600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AUCTIONUSDT",
+        "bars": 1798,
+        "first_ms": 1635465600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AUDIOUSDT",
+        "bars": 2169,
+        "first_ms": 1603411200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AUDUSDT",
+        "bars": 1028,
+        "first_ms": 1596758400000,
+        "last_ms": 1685577600000,
+        "missing_days": 1
+      },
+      {
+        "symbol": "AUSDT",
+        "bars": 491,
+        "first_ms": 1748390400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AUTOUSDT",
+        "bars": 747,
+        "first_ms": 1617321600000,
+        "last_ms": 1681776000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AVAUSDT",
+        "bars": 2137,
+        "first_ms": 1606176000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "bars": 2200,
+        "first_ms": 1600732800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AVGOBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AVNTUSDT",
+        "bars": 381,
+        "first_ms": 1757894400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AWEUSDT",
+        "bars": 498,
+        "first_ms": 1747785600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AXLUSDT",
+        "bars": 944,
+        "first_ms": 1709251200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AXSUSDT",
+        "bars": 2157,
+        "first_ms": 1604448000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "AXTIBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BABABUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BABYUSDT",
+        "bars": 539,
+        "first_ms": 1744243200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BADGERUSDT",
+        "bars": 1507,
+        "first_ms": 1614643200000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BAKEUSDT",
+        "bars": 1602,
+        "first_ms": 1619740800000,
+        "last_ms": 1758067200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BALUSDT",
+        "bars": 1710,
+        "first_ms": 1597104000000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BANANAS31USDT",
+        "bars": 553,
+        "first_ms": 1743033600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BANANAUSDT",
+        "bars": 803,
+        "first_ms": 1721433600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BANDUSDT",
+        "bars": 2570,
+        "first_ms": 1568764800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BANKUSDT",
+        "bars": 322,
+        "first_ms": 1762992000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BARDUSDT",
+        "bars": 378,
+        "first_ms": 1758153600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BARUSDT",
+        "bars": 1989,
+        "first_ms": 1618963200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BATUSDT",
+        "bars": 2768,
+        "first_ms": 1551657600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BBUSDT",
+        "bars": 871,
+        "first_ms": 1715558400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BCCUSDT",
+        "bars": 320,
+        "first_ms": 1514764800000,
+        "last_ms": 1542672000000,
+        "missing_days": 4
+      },
+      {
+        "symbol": "BCHABCUSDT",
+        "bars": 378,
+        "first_ms": 1542326400000,
+        "last_ms": 1574899200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BCHDOWNUSDT",
+        "bars": 279,
+        "first_ms": 1603843200000,
+        "last_ms": 1641254400000,
+        "missing_days": 155
+      },
+      {
+        "symbol": "BCHSVUSDT",
+        "bars": 158,
+        "first_ms": 1542326400000,
+        "last_ms": 1555891200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BCHUPUSDT",
+        "bars": 279,
+        "first_ms": 1603843200000,
+        "last_ms": 1641254400000,
+        "missing_days": 155
+      },
+      {
+        "symbol": "BCHUSDT",
+        "bars": 2499,
+        "first_ms": 1574899200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BEAMUSDT",
+        "bars": 1224,
+        "first_ms": 1569024000000,
+        "last_ms": 1674691200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BEAMXUSDT",
+        "bars": 1052,
+        "first_ms": 1699920000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BEARUSDT",
+        "bars": 75,
+        "first_ms": 1579219200000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BEBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BELUSDT",
+        "bars": 2207,
+        "first_ms": 1600128000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BERAUSDT",
+        "bars": 602,
+        "first_ms": 1738800000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BETAUSDT",
+        "bars": 1287,
+        "first_ms": 1633651200000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BETHUSDT",
+        "bars": 223,
+        "first_ms": 1677801600000,
+        "last_ms": 1696982400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BFUSDUSDT",
+        "bars": 414,
+        "first_ms": 1755043200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BICOUSDT",
+        "bars": 1757,
+        "first_ms": 1639008000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BIFIUSDT",
+        "bars": 1484,
+        "first_ms": 1648771200000,
+        "last_ms": 1776902400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BIGTIMEUSDT",
+        "bars": 538,
+        "first_ms": 1744329600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BIOUSDT",
+        "bars": 636,
+        "first_ms": 1735862400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BKRWUSDT",
+        "bars": 33,
+        "first_ms": 1593993600000,
+        "last_ms": 1596758400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BLURUSDT",
+        "bars": 1042,
+        "first_ms": 1700784000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BLZUSDT",
+        "bars": 1598,
+        "first_ms": 1597104000000,
+        "last_ms": 1735084800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BMNRBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BMTUSDT",
+        "bars": 562,
+        "first_ms": 1742256000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNBBEARUSDT",
+        "bars": 21,
+        "first_ms": 1583884800000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNBBULLUSDT",
+        "bars": 21,
+        "first_ms": 1583884800000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNBDOWNUSDT",
+        "bars": 1302,
+        "first_ms": 1596672000000,
+        "last_ms": 1709078400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNBUPUSDT",
+        "bars": 1302,
+        "first_ms": 1596672000000,
+        "last_ms": 1709078400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNBUSDT",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNCBUSDT",
+        "bars": 17,
+        "first_ms": 1789344000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNSOLUSDT",
+        "bars": 714,
+        "first_ms": 1729123200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNTUSDT",
+        "bars": 2429,
+        "first_ms": 1580947200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BNXUSDT",
+        "bars": 1226,
+        "first_ms": 1635984000000,
+        "last_ms": 1742256000000,
+        "missing_days": 5
+      },
+      {
+        "symbol": "BOMEUSDT",
+        "bars": 929,
+        "first_ms": 1710547200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BONDUSDT",
+        "bars": 1114,
+        "first_ms": 1625443200000,
+        "last_ms": 1721606400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BONKUSDT",
+        "bars": 1021,
+        "first_ms": 1702598400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BREVUSDT",
+        "bars": 268,
+        "first_ms": 1767657600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BROCCOLI714USDT",
+        "bars": 553,
+        "first_ms": 1743033600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BSWUSDT",
+        "bars": 1202,
+        "first_ms": 1647820800000,
+        "last_ms": 1751587200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTCDOWNUSDT",
+        "bars": 1386,
+        "first_ms": 1589414400000,
+        "last_ms": 1709078400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTCSTUSDT",
+        "bars": 682,
+        "first_ms": 1610496000000,
+        "last_ms": 1669593600000,
+        "missing_days": 3
+      },
+      {
+        "symbol": "BTCUPUSDT",
+        "bars": 1386,
+        "first_ms": 1589414400000,
+        "last_ms": 1709078400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTCUSDT",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTGUSDT",
+        "bars": 557,
+        "first_ms": 1618531200000,
+        "last_ms": 1666569600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTSUSDT",
+        "bars": 1401,
+        "first_ms": 1580947200000,
+        "last_ms": 1701907200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTTCUSDT",
+        "bars": 1710,
+        "first_ms": 1643068800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BTTUSDT",
+        "bars": 1078,
+        "first_ms": 1548979200000,
+        "last_ms": 1642377600000,
+        "missing_days": 4
+      },
+      {
+        "symbol": "BULLUSDT",
+        "bars": 75,
+        "first_ms": 1579219200000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BURGERUSDT",
+        "bars": 1429,
+        "first_ms": 1619740800000,
+        "last_ms": 1743120000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BUSDUSDT",
+        "bars": 1548,
+        "first_ms": 1568937600000,
+        "last_ms": 1702598400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "BZRXUSDT",
+        "bars": 477,
+        "first_ms": 1598832000000,
+        "last_ms": 1639958400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "C98USDT",
+        "bars": 1896,
+        "first_ms": 1626998400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CAKEUSDT",
+        "bars": 2050,
+        "first_ms": 1613692800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CATIUSDT",
+        "bars": 741,
+        "first_ms": 1726790400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CBRSBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CELOUSDT",
+        "bars": 2095,
+        "first_ms": 1609804800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CELRUSDT",
+        "bars": 2747,
+        "first_ms": 1553472000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CETUSUSDT",
+        "bars": 694,
+        "first_ms": 1730851200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CFGUSDT",
+        "bars": 199,
+        "first_ms": 1773619200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CFXUSDT",
+        "bars": 2012,
+        "first_ms": 1616976000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CGPTUSDT",
+        "bars": 629,
+        "first_ms": 1736467200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CHESSUSDT",
+        "bars": 1576,
+        "first_ms": 1634860800000,
+        "last_ms": 1770940800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CHIPUSDT",
+        "bars": 163,
+        "first_ms": 1776729600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CHRUSDT",
+        "bars": 2338,
+        "first_ms": 1588809600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CHZUSDT",
+        "bars": 2582,
+        "first_ms": 1567728000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CITYUSDT",
+        "bars": 1786,
+        "first_ms": 1636502400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CKBUSDT",
+        "bars": 2074,
+        "first_ms": 1611619200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CLVUSDT",
+        "bars": 1307,
+        "first_ms": 1627516800000,
+        "last_ms": 1740355200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COCOSUSDT",
+        "bars": 1375,
+        "first_ms": 1566345600000,
+        "last_ms": 1685318400000,
+        "missing_days": 3
+      },
+      {
+        "symbol": "COHRBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COINBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COMBOUSDT",
+        "bars": 666,
+        "first_ms": 1685664000000,
+        "last_ms": 1743120000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COMPUSDT",
+        "bars": 2289,
+        "first_ms": 1593043200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COOKIEUSDT",
+        "bars": 629,
+        "first_ms": 1736467200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COSUSDT",
+        "bars": 2513,
+        "first_ms": 1564790400000,
+        "last_ms": 1781827200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COTIUSDT",
+        "bars": 2409,
+        "first_ms": 1582675200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "COWUSDT",
+        "bars": 694,
+        "first_ms": 1730851200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CRCLBUSDT",
+        "bars": 112,
+        "first_ms": 1781136000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CRDOBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CREAMUSDT",
+        "bars": 573,
+        "first_ms": 1695340800000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CRMBUSDT",
+        "bars": 22,
+        "first_ms": 1788912000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CRVUSDT",
+        "bars": 2238,
+        "first_ms": 1597449600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CRWDBUSDT",
+        "bars": 29,
+        "first_ms": 1788307200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CRWVBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CTKUSDT",
+        "bars": 2165,
+        "first_ms": 1603756800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CTSIUSDT",
+        "bars": 2352,
+        "first_ms": 1587600000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CTXCUSDT",
+        "bars": 1973,
+        "first_ms": 1574380800000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CUSDT",
+        "bars": 440,
+        "first_ms": 1752796800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CVCUSDT",
+        "bars": 2439,
+        "first_ms": 1566864000000,
+        "last_ms": 1790726400000,
+        "missing_days": 153
+      },
+      {
+        "symbol": "CVPUSDT",
+        "bars": 1058,
+        "first_ms": 1633305600000,
+        "last_ms": 1724630400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CVXUSDT",
+        "bars": 1743,
+        "first_ms": 1640217600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CYBERUSDT",
+        "bars": 1143,
+        "first_ms": 1692057600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "CYPHBUSDT",
+        "bars": 8,
+        "first_ms": 1790121600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DAIUSDT",
+        "bars": 21,
+        "first_ms": 1595462400000,
+        "last_ms": 1597190400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DARUSDT",
+        "bars": 1160,
+        "first_ms": 1635984000000,
+        "last_ms": 1736121600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DASHUSDT",
+        "bars": 2744,
+        "first_ms": 1553731200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DATAUSDT",
+        "bars": 2139,
+        "first_ms": 1586217600000,
+        "last_ms": 1770940800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DCRUSDT",
+        "bars": 2254,
+        "first_ms": 1596067200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DEGOUSDT",
+        "bars": 1876,
+        "first_ms": 1615334400000,
+        "last_ms": 1777334400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DELLBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DENTUSDT",
+        "bars": 2437,
+        "first_ms": 1566864000000,
+        "last_ms": 1777334400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DEXEUSDT",
+        "bars": 1896,
+        "first_ms": 1626998400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DFUSDT",
+        "bars": 1604,
+        "first_ms": 1632441600000,
+        "last_ms": 1770940800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DGBUSDT",
+        "bars": 2264,
+        "first_ms": 1595203200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DIAUSDT",
+        "bars": 2218,
+        "first_ms": 1599177600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DJTBUSDT",
+        "bars": 36,
+        "first_ms": 1787702400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DNTUSDT",
+        "bars": 714,
+        "first_ms": 1604966400000,
+        "last_ms": 1666569600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOCKUSDT",
+        "bars": 1792,
+        "first_ms": 1566864000000,
+        "last_ms": 1721606400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DODOUSDT",
+        "bars": 2050,
+        "first_ms": 1613692800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "bars": 2645,
+        "first_ms": 1562284800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOGSUSDT",
+        "bars": 766,
+        "first_ms": 1724630400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOLOUSDT",
+        "bars": 400,
+        "first_ms": 1756252800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOTDOWNUSDT",
+        "bars": 810,
+        "first_ms": 1599782400000,
+        "last_ms": 1669680000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOTUPUSDT",
+        "bars": 810,
+        "first_ms": 1599782400000,
+        "last_ms": 1669680000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DOTUSDT",
+        "bars": 2235,
+        "first_ms": 1597708800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DRAMBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DREPUSDT",
+        "bars": 1537,
+        "first_ms": 1579132800000,
+        "last_ms": 1712102400000,
+        "missing_days": 3
+      },
+      {
+        "symbol": "DUSDT",
+        "bars": 527,
+        "first_ms": 1736380800000,
+        "last_ms": 1781827200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DUSKUSDT",
+        "bars": 2628,
+        "first_ms": 1563753600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DYDXUSDT",
+        "bars": 1848,
+        "first_ms": 1631145600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "DYMUSDT",
+        "bars": 968,
+        "first_ms": 1707177600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EDENUSDT",
+        "bars": 366,
+        "first_ms": 1759190400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EDUUSDT",
+        "bars": 1252,
+        "first_ms": 1682640000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EGLDUSDT",
+        "bars": 2219,
+        "first_ms": 1599091200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EIGENUSDT",
+        "bars": 730,
+        "first_ms": 1727740800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ELFUSDT",
+        "bars": 1317,
+        "first_ms": 1631059200000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ENAUSDT",
+        "bars": 912,
+        "first_ms": 1712016000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ENJUSDT",
+        "bars": 2723,
+        "first_ms": 1555545600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ENSOUSDT",
+        "bars": 352,
+        "first_ms": 1760400000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ENSUSDT",
+        "bars": 1786,
+        "first_ms": 1636502400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EOSBEARUSDT",
+        "bars": 49,
+        "first_ms": 1581465600000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EOSBULLUSDT",
+        "bars": 49,
+        "first_ms": 1581465600000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EOSDOWNUSDT",
+        "bars": 470,
+        "first_ms": 1599696000000,
+        "last_ms": 1640217600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EOSUPUSDT",
+        "bars": 470,
+        "first_ms": 1599696000000,
+        "last_ms": 1640217600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EOSUSDT",
+        "bars": 2556,
+        "first_ms": 1527465600000,
+        "last_ms": 1748217600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EPICUSDT",
+        "bars": 567,
+        "first_ms": 1741824000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EPSUSDT",
+        "bars": 403,
+        "first_ms": 1617321600000,
+        "last_ms": 1652054400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EPXUSDT",
+        "bars": 827,
+        "first_ms": 1653264000000,
+        "last_ms": 1724630400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ERAUSDT",
+        "bars": 441,
+        "first_ms": 1752710400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ERDUSDT",
+        "bars": 425,
+        "first_ms": 1562198400000,
+        "last_ms": 1598832000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ERNUSDT",
+        "bars": 1358,
+        "first_ms": 1624320000000,
+        "last_ms": 1741564800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ESPUSDT",
+        "bars": 231,
+        "first_ms": 1770854400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ETCUSDT",
+        "bars": 3033,
+        "first_ms": 1528761600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ETHBEARUSDT",
+        "bars": 59,
+        "first_ms": 1579219200000,
+        "last_ms": 1585612800000,
+        "missing_days": 16
+      },
+      {
+        "symbol": "ETHBULLUSDT",
+        "bars": 59,
+        "first_ms": 1579219200000,
+        "last_ms": 1585612800000,
+        "missing_days": 16
+      },
+      {
+        "symbol": "ETHDOWNUSDT",
+        "bars": 1326,
+        "first_ms": 1594598400000,
+        "last_ms": 1709078400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ETHFIUSDT",
+        "bars": 927,
+        "first_ms": 1710720000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ETHUPUSDT",
+        "bars": 1326,
+        "first_ms": 1594598400000,
+        "last_ms": 1709078400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ETHUSDT",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EULUSDT",
+        "bars": 353,
+        "first_ms": 1760313600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EURIUSDT",
+        "bars": 764,
+        "first_ms": 1724803200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EURUSDT",
+        "bars": 2463,
+        "first_ms": 1578009600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "EWYBUSDT",
+        "bars": 100,
+        "first_ms": 1782172800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FARMUSDT",
+        "bars": 1751,
+        "first_ms": 1628640000000,
+        "last_ms": 1779840000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FDUSDUSDT",
+        "bars": 1163,
+        "first_ms": 1690329600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FETUSDT",
+        "bars": 2772,
+        "first_ms": 1551312000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FFUSDT",
+        "bars": 367,
+        "first_ms": 1759104000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FIDAUSDT",
+        "bars": 1827,
+        "first_ms": 1632960000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FILDOWNUSDT",
+        "bars": 442,
+        "first_ms": 1603152000000,
+        "last_ms": 1641254400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FILUPUSDT",
+        "bars": 442,
+        "first_ms": 1603152000000,
+        "last_ms": 1641254400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FILUSDT",
+        "bars": 2177,
+        "first_ms": 1602720000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FIOUSDT",
+        "bars": 2058,
+        "first_ms": 1599177600000,
+        "last_ms": 1776902400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FIROUSDT",
+        "bars": 1539,
+        "first_ms": 1611878400000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FISUSDT",
+        "bars": 1751,
+        "first_ms": 1614729600000,
+        "last_ms": 1765929600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FLMUSDT",
+        "bars": 1872,
+        "first_ms": 1601251200000,
+        "last_ms": 1762905600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FLNCBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FLOKIUSDT",
+        "bars": 1245,
+        "first_ms": 1683244800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FLOWUSDT",
+        "bars": 1889,
+        "first_ms": 1627603200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FLUXUSDT",
+        "bars": 1756,
+        "first_ms": 1639094400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FOGOUSDT",
+        "bars": 259,
+        "first_ms": 1768435200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FORMUSDT",
+        "bars": 561,
+        "first_ms": 1742342400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FORTHUSDT",
+        "bars": 1805,
+        "first_ms": 1619136000000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FORUSDT",
+        "bars": 1103,
+        "first_ms": 1629417600000,
+        "last_ms": 1724630400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FRAXUSDT",
+        "bars": 259,
+        "first_ms": 1768435200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FRONTUSDT",
+        "bars": 1059,
+        "first_ms": 1633305600000,
+        "last_ms": 1724716800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FTMUSDT",
+        "bars": 2044,
+        "first_ms": 1560211200000,
+        "last_ms": 1736726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FTTUSDT",
+        "bars": 2167,
+        "first_ms": 1576800000000,
+        "last_ms": 1790726400000,
+        "missing_days": 310
+      },
+      {
+        "symbol": "FUNUSDT",
+        "bars": 2432,
+        "first_ms": 1566864000000,
+        "last_ms": 1776902400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FUSDT",
+        "bars": 341,
+        "first_ms": 1761350400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FWDIBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "FXSUSDT",
+        "bars": 1496,
+        "first_ms": 1639094400000,
+        "last_ms": 1768262400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GALAUSDT",
+        "bars": 1844,
+        "first_ms": 1631491200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GALUSDT",
+        "bars": 803,
+        "first_ms": 1651708800000,
+        "last_ms": 1721001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GASUSDT",
+        "bars": 1294,
+        "first_ms": 1679011200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GBPUSDT",
+        "bars": 1258,
+        "first_ms": 1595203200000,
+        "last_ms": 1703808000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GENIUSUSDT",
+        "bars": 132,
+        "first_ms": 1779408000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GFTUSDT",
+        "bars": 439,
+        "first_ms": 1695340800000,
+        "last_ms": 1733184000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GHSTUSDT",
+        "bars": 1639,
+        "first_ms": 1629417600000,
+        "last_ms": 1770940800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GIGGLEUSDT",
+        "bars": 341,
+        "first_ms": 1761350400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GLMRUSDT",
+        "bars": 1724,
+        "first_ms": 1641859200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GLMUSDT",
+        "bars": 1294,
+        "first_ms": 1679011200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GLWBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GMEBUSDT",
+        "bars": 50,
+        "first_ms": 1786492800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GMTUSDT",
+        "bars": 1667,
+        "first_ms": 1646784000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GMXUSDT",
+        "bars": 1457,
+        "first_ms": 1664928000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GNOUSDT",
+        "bars": 1858,
+        "first_ms": 1630281600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GNSUSDT",
+        "bars": 1322,
+        "first_ms": 1676592000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GOOGLBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GPROBUSDT",
+        "bars": 15,
+        "first_ms": 1789516800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GPSUSDT",
+        "bars": 576,
+        "first_ms": 1741046400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GRAMUSDT",
+        "bars": 91,
+        "first_ms": 1782950400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GRTUSDT",
+        "bars": 2114,
+        "first_ms": 1608163200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GSBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GTCUSDT",
+        "bars": 1939,
+        "first_ms": 1623283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GTOUSDT",
+        "bars": 1247,
+        "first_ms": 1561939200000,
+        "last_ms": 1669593600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GUNUSDT",
+        "bars": 549,
+        "first_ms": 1743379200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GUSDT",
+        "bars": 804,
+        "first_ms": 1721347200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "GXSUSDT",
+        "bars": 713,
+        "first_ms": 1589328000000,
+        "last_ms": 1650844800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HAEDALUSDT",
+        "bars": 498,
+        "first_ms": 1747785600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HARDUSDT",
+        "bars": 1623,
+        "first_ms": 1604620800000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HBARUSDT",
+        "bars": 2559,
+        "first_ms": 1569715200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HCUSDT",
+        "bars": 413,
+        "first_ms": 1569369600000,
+        "last_ms": 1604966400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HEIUSDT",
+        "bars": 595,
+        "first_ms": 1739404800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HEMIUSDT",
+        "bars": 373,
+        "first_ms": 1758585600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HFTUSDT",
+        "bars": 1380,
+        "first_ms": 1667779200000,
+        "last_ms": 1786924800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HIFIUSDT",
+        "bars": 980,
+        "first_ms": 1673481600000,
+        "last_ms": 1758067200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HIGHUSDT",
+        "bars": 1646,
+        "first_ms": 1639699200000,
+        "last_ms": 1781827200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HIMSBUSDT",
+        "bars": 22,
+        "first_ms": 1788912000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HIVEUSDT",
+        "bars": 2348,
+        "first_ms": 1587945600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HMSTRUSDT",
+        "bars": 735,
+        "first_ms": 1727308800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HNTUSDT",
+        "bars": 751,
+        "first_ms": 1600905600000,
+        "last_ms": 1665705600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HOLOUSDT",
+        "bars": 385,
+        "first_ms": 1757548800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HOMEUSDT",
+        "bars": 476,
+        "first_ms": 1749686400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HOODBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HOOKUSDT",
+        "bars": 1218,
+        "first_ms": 1669852800000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HOTUSDT",
+        "bars": 2782,
+        "first_ms": 1550448000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HPEBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HUMAUSDT",
+        "bars": 493,
+        "first_ms": 1748217600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HYPERUSDT",
+        "bars": 527,
+        "first_ms": 1745280000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "HYPEUSDT",
+        "bars": 7,
+        "first_ms": 1790208000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IBMBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ICPUSDT",
+        "bars": 1969,
+        "first_ms": 1620691200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ICXUSDT",
+        "bars": 3005,
+        "first_ms": 1528848000000,
+        "last_ms": 1788393600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IDEXUSDT",
+        "bars": 1666,
+        "first_ms": 1631145600000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IDUSDT",
+        "bars": 1289,
+        "first_ms": 1679443200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ILVUSDT",
+        "bars": 1835,
+        "first_ms": 1632268800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IMXUSDT",
+        "bars": 1725,
+        "first_ms": 1641772800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "INITUSDT",
+        "bars": 525,
+        "first_ms": 1745452800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "INJUSDT",
+        "bars": 2171,
+        "first_ms": 1603238400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "INTCBUSDT",
+        "bars": 100,
+        "first_ms": 1782172800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "INTWBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IOSTUSDT",
+        "bars": 2750,
+        "first_ms": 1553212800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IOTAUSDT",
+        "bars": 3045,
+        "first_ms": 1527724800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IOTXUSDT",
+        "bars": 2513,
+        "first_ms": 1573689600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IOUSDT",
+        "bars": 842,
+        "first_ms": 1718064000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IQUSDT",
+        "bars": 1105,
+        "first_ms": 1695340800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IRENBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "IRISUSDT",
+        "bars": 1583,
+        "first_ms": 1597104000000,
+        "last_ms": 1733788800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "JASMYUSDT",
+        "bars": 1774,
+        "first_ms": 1637539200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "JOEUSDT",
+        "bars": 1738,
+        "first_ms": 1640649600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "JSTUSDT",
+        "bars": 2242,
+        "first_ms": 1597104000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "JTOUSDT",
+        "bars": 1029,
+        "first_ms": 1701907200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "JUPUSDT",
+        "bars": 974,
+        "first_ms": 1706659200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "JUVUSDT",
+        "bars": 2110,
+        "first_ms": 1608508800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KAIAUSDT",
+        "bars": 700,
+        "first_ms": 1730332800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KAITOUSDT",
+        "bars": 588,
+        "first_ms": 1740009600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KATUSDT",
+        "bars": 197,
+        "first_ms": 1773792000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KAVAUSDT",
+        "bars": 2533,
+        "first_ms": 1571961600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KDAUSDT",
+        "bars": 1343,
+        "first_ms": 1646956800000,
+        "last_ms": 1762905600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KEEPUSDT",
+        "bars": 245,
+        "first_ms": 1623888000000,
+        "last_ms": 1644969600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KERNELUSDT",
+        "bars": 535,
+        "first_ms": 1744588800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KEYUSDT",
+        "bars": 1906,
+        "first_ms": 1566864000000,
+        "last_ms": 1733788800000,
+        "missing_days": 27
+      },
+      {
+        "symbol": "KGSTUSDT",
+        "bars": 281,
+        "first_ms": 1766534400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KITEUSDT",
+        "bars": 332,
+        "first_ms": 1762128000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KLAYUSDT",
+        "bars": 1224,
+        "first_ms": 1624492800000,
+        "last_ms": 1730160000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KMDUSDT",
+        "bars": 1789,
+        "first_ms": 1597104000000,
+        "last_ms": 1751587200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KMNOUSDT",
+        "bars": 513,
+        "first_ms": 1746489600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KNCUSDT",
+        "bars": 2302,
+        "first_ms": 1591920000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KORUBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KP3RUSDT",
+        "bars": 1091,
+        "first_ms": 1636675200000,
+        "last_ms": 1730851200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "KSMUSDT",
+        "bars": 2218,
+        "first_ms": 1599177600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LAUSDT",
+        "bars": 449,
+        "first_ms": 1752019200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LAYERUSDT",
+        "bars": 597,
+        "first_ms": 1739232000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LAZIOUSDT",
+        "bars": 1806,
+        "first_ms": 1634774400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LDOUSDT",
+        "bars": 1606,
+        "first_ms": 1652054400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LENDUSDT",
+        "bars": 151,
+        "first_ms": 1589500800000,
+        "last_ms": 1602460800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LEVERUSDT",
+        "bars": 1088,
+        "first_ms": 1657670400000,
+        "last_ms": 1751587200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LINAUSDT",
+        "bars": 1472,
+        "first_ms": 1616025600000,
+        "last_ms": 1743120000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LINEAUSDT",
+        "bars": 386,
+        "first_ms": 1757462400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LINKDOWNUSDT",
+        "bars": 995,
+        "first_ms": 1594857600000,
+        "last_ms": 1680739200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LINKUPUSDT",
+        "bars": 995,
+        "first_ms": 1594857600000,
+        "last_ms": 1680739200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LINKUSDT",
+        "bars": 2815,
+        "first_ms": 1547596800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LISTAUSDT",
+        "bars": 833,
+        "first_ms": 1718841600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LITEBUSDT",
+        "bars": 93,
+        "first_ms": 1782777600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LITUSDT",
+        "bars": 1468,
+        "first_ms": 1612396800000,
+        "last_ms": 1739145600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LOKAUSDT",
+        "bars": 1286,
+        "first_ms": 1642636800000,
+        "last_ms": 1753660800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LOOMUSDT",
+        "bars": 522,
+        "first_ms": 1679616000000,
+        "last_ms": 1724630400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LPTUSDT",
+        "bars": 1952,
+        "first_ms": 1622160000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LQTYUSDT",
+        "bars": 1311,
+        "first_ms": 1677542400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LRCUSDT",
+        "bars": 2120,
+        "first_ms": 1591920000000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LSKUSDT",
+        "bars": 2429,
+        "first_ms": 1580947200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LTCDOWNUSDT",
+        "bars": 499,
+        "first_ms": 1600214400000,
+        "last_ms": 1643241600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LTCUPUSDT",
+        "bars": 499,
+        "first_ms": 1600214400000,
+        "last_ms": 1643241600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LTCUSDT",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LTOUSDT",
+        "bars": 1975,
+        "first_ms": 1581033600000,
+        "last_ms": 1751587200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LUMIAUSDT",
+        "bars": 713,
+        "first_ms": 1729209600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "LUNAUSDT",
+        "bars": 2215,
+        "first_ms": 1597968000000,
+        "last_ms": 1790726400000,
+        "missing_days": 17
+      },
+      {
+        "symbol": "LUNCUSDT",
+        "bars": 1483,
+        "first_ms": 1662681600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MAGICUSDT",
+        "bars": 1389,
+        "first_ms": 1670803200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MANAUSDT",
+        "bars": 2247,
+        "first_ms": 1596672000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MANTAUSDT",
+        "bars": 987,
+        "first_ms": 1705536000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MANTRAUSDT",
+        "bars": 211,
+        "first_ms": 1772582400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MARSCOINUSDT",
+        "bars": 27,
+        "first_ms": 1788480000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MASKUSDT",
+        "bars": 1955,
+        "first_ms": 1621900800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MATICUSDT",
+        "bars": 1965,
+        "first_ms": 1556236800000,
+        "last_ms": 1725926400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MAVUSDT",
+        "bars": 1191,
+        "first_ms": 1687910400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MBLUSDT",
+        "bars": 2414,
+        "first_ms": 1582243200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MBOXUSDT",
+        "bars": 1766,
+        "first_ms": 1629331200000,
+        "last_ms": 1781827200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MCOUSDT",
+        "bars": 340,
+        "first_ms": 1574121600000,
+        "last_ms": 1603411200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MCUSDT",
+        "bars": 706,
+        "first_ms": 1638403200000,
+        "last_ms": 1699315200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MDTUSDT",
+        "bars": 2149,
+        "first_ms": 1591315200000,
+        "last_ms": 1776902400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MDXUSDT",
+        "bars": 1156,
+        "first_ms": 1621814400000,
+        "last_ms": 1721606400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MEGAUSDT",
+        "bars": 154,
+        "first_ms": 1777507200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MEMEUSDT",
+        "bars": 1063,
+        "first_ms": 1698969600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "METABUSDT",
+        "bars": 93,
+        "first_ms": 1782777600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "METISUSDT",
+        "bars": 934,
+        "first_ms": 1710115200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "METUSDT",
+        "bars": 322,
+        "first_ms": 1762992000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MEUSDT",
+        "bars": 660,
+        "first_ms": 1733788800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MFTUSDT",
+        "bars": 1226,
+        "first_ms": 1566864000000,
+        "last_ms": 1672704000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MINAUSDT",
+        "bars": 1878,
+        "first_ms": 1628553600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MIRAUSDT",
+        "bars": 370,
+        "first_ms": 1758844800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MIRUSDT",
+        "bars": 618,
+        "first_ms": 1618790400000,
+        "last_ms": 1672099200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MITHUSDT",
+        "bars": 1344,
+        "first_ms": 1555632000000,
+        "last_ms": 1671667200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MITOUSDT",
+        "bars": 398,
+        "first_ms": 1756425600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MKRUSDT",
+        "bars": 1881,
+        "first_ms": 1595462400000,
+        "last_ms": 1757894400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MLNUSDT",
+        "bars": 1788,
+        "first_ms": 1625443200000,
+        "last_ms": 1779840000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MMTUSDT",
+        "bars": 331,
+        "first_ms": 1762214400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MOBUSDT",
+        "bars": 706,
+        "first_ms": 1651190400000,
+        "last_ms": 1712102400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MORPHOUSDT",
+        "bars": 363,
+        "first_ms": 1759449600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MOVEUSDT",
+        "bars": 661,
+        "first_ms": 1733702400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MOVRUSDT",
+        "bars": 1788,
+        "first_ms": 1636329600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MRNABUSDT",
+        "bars": 29,
+        "first_ms": 1788307200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MRVLBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MSFTBUSDT",
+        "bars": 93,
+        "first_ms": 1782777600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MSTRBUSDT",
+        "bars": 100,
+        "first_ms": 1782172800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MTLUSDT",
+        "bars": 2596,
+        "first_ms": 1566518400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MUBARAKUSDT",
+        "bars": 553,
+        "first_ms": 1743033600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MUBUSDT",
+        "bars": 112,
+        "first_ms": 1781136000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MULTIUSDT",
+        "bars": 686,
+        "first_ms": 1649203200000,
+        "last_ms": 1708387200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MUUBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "MVLLBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NANOUSDT",
+        "bars": 1028,
+        "first_ms": 1554249600000,
+        "last_ms": 1642982400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NBISBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NBSUSDT",
+        "bars": 764,
+        "first_ms": 1600646400000,
+        "last_ms": 1666569600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NBTUSDT",
+        "bars": 336,
+        "first_ms": 1646956800000,
+        "last_ms": 1677542400000,
+        "missing_days": 19
+      },
+      {
+        "symbol": "NEARUSDT",
+        "bars": 2178,
+        "first_ms": 1602633600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NEBLUSDT",
+        "bars": 187,
+        "first_ms": 1665705600000,
+        "last_ms": 1681776000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NEIROUSDT",
+        "bars": 745,
+        "first_ms": 1726444800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NEOUSDT",
+        "bars": 3195,
+        "first_ms": 1514764800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NEWTUSDT",
+        "bars": 464,
+        "first_ms": 1750723200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NEXOUSDT",
+        "bars": 1616,
+        "first_ms": 1651190400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NFLXBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NFPUSDT",
+        "bars": 927,
+        "first_ms": 1703635200000,
+        "last_ms": 1783641600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NIGHTUSDT",
+        "bars": 204,
+        "first_ms": 1773187200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NILUSDT",
+        "bars": 556,
+        "first_ms": 1742774400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NKNUSDT",
+        "bars": 2318,
+        "first_ms": 1570752000000,
+        "last_ms": 1770940800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NMRUSDT",
+        "bars": 2234,
+        "first_ms": 1597795200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NOKBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NOMUSDT",
+        "bars": 365,
+        "first_ms": 1759276800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NOTUSDT",
+        "bars": 868,
+        "first_ms": 1715817600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NPXSUSDT",
+        "bars": 602,
+        "first_ms": 1565654400000,
+        "last_ms": 1617580800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NTRNUSDT",
+        "bars": 905,
+        "first_ms": 1696896000000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NULSUSDT",
+        "bars": 2460,
+        "first_ms": 1532304000000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NUUSDT",
+        "bars": 258,
+        "first_ms": 1622764800000,
+        "last_ms": 1644969600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NVDABUSDT",
+        "bars": 112,
+        "first_ms": 1781136000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "NXPCUSDT",
+        "bars": 504,
+        "first_ms": 1747267200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OAXUSDT",
+        "bars": 628,
+        "first_ms": 1679616000000,
+        "last_ms": 1733788800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OCEANUSDT",
+        "bars": 1413,
+        "first_ms": 1597795200000,
+        "last_ms": 1719792000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OGNUSDT",
+        "bars": 2457,
+        "first_ms": 1578528000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OGUSDT",
+        "bars": 2101,
+        "first_ms": 1609286400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OMGUSDT",
+        "bars": 1903,
+        "first_ms": 1554249600000,
+        "last_ms": 1718582400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OMNIUSDT",
+        "bars": 531,
+        "first_ms": 1713312000000,
+        "last_ms": 1759104000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OMUSDT",
+        "bars": 1821,
+        "first_ms": 1615161600000,
+        "last_ms": 1772409600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ONDOUSDT",
+        "bars": 538,
+        "first_ms": 1744329600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ONEUSDT",
+        "bars": 2679,
+        "first_ms": 1559347200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ONGUSDT",
+        "bars": 2784,
+        "first_ms": 1550275200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ONTUSDT",
+        "bars": 3037,
+        "first_ms": 1528416000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OOKIUSDT",
+        "bars": 1049,
+        "first_ms": 1640304000000,
+        "last_ms": 1730851200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OPENUSDT",
+        "bars": 388,
+        "first_ms": 1757289600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OPGUSDT",
+        "bars": 132,
+        "first_ms": 1779408000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OPNUSDT",
+        "bars": 210,
+        "first_ms": 1772668800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OPUSDT",
+        "bars": 1583,
+        "first_ms": 1654041600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ORCAUSDT",
+        "bars": 664,
+        "first_ms": 1733443200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ORCLBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ORDIUSDT",
+        "bars": 1059,
+        "first_ms": 1699315200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ORNUSDT",
+        "bars": 1477,
+        "first_ms": 1601424000000,
+        "last_ms": 1728950400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OSMOUSDT",
+        "bars": 1434,
+        "first_ms": 1666915200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "OXTUSDT",
+        "bars": 2041,
+        "first_ms": 1600646400000,
+        "last_ms": 1776902400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PARTIUSDT",
+        "bars": 555,
+        "first_ms": 1742860800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PAXGUSDT",
+        "bars": 2225,
+        "first_ms": 1598572800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PAXUSDT",
+        "bars": 1069,
+        "first_ms": 1538611200000,
+        "last_ms": 1630886400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PDAUSDT",
+        "bars": 428,
+        "first_ms": 1709251200000,
+        "last_ms": 1746144000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PDDBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PENDLEUSDT",
+        "bars": 1186,
+        "first_ms": 1688342400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PENGUUSDT",
+        "bars": 653,
+        "first_ms": 1734393600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PEOPLEUSDT",
+        "bars": 1743,
+        "first_ms": 1640217600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PEPEUSDT",
+        "bars": 1245,
+        "first_ms": 1683244800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PERLUSDT",
+        "bars": 1565,
+        "first_ms": 1566777600000,
+        "last_ms": 1701907200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PERPUSDT",
+        "bars": 1700,
+        "first_ms": 1616112000000,
+        "last_ms": 1762905600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PHAUSDT",
+        "bars": 1924,
+        "first_ms": 1624579200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PHBUSDT",
+        "bars": 1287,
+        "first_ms": 1668729600000,
+        "last_ms": 1779840000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PIVXUSDT",
+        "bars": 1006,
+        "first_ms": 1700092800000,
+        "last_ms": 1786924800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PIXELUSDT",
+        "bars": 955,
+        "first_ms": 1708300800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PLAUSDT",
+        "bars": 826,
+        "first_ms": 1637625600000,
+        "last_ms": 1708905600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PLTRBUSDT",
+        "bars": 93,
+        "first_ms": 1782777600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PLUMEUSDT",
+        "bars": 409,
+        "first_ms": 1755475200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PNTUSDT",
+        "bars": 1382,
+        "first_ms": 1592784000000,
+        "last_ms": 1712102400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PNUTUSDT",
+        "bars": 689,
+        "first_ms": 1731283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "POLSUSDT",
+        "bars": 1161,
+        "first_ms": 1621382400000,
+        "last_ms": 1721606400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "POLUSDT",
+        "bars": 748,
+        "first_ms": 1726185600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "POLYUSDT",
+        "bars": 397,
+        "first_ms": 1631145600000,
+        "last_ms": 1665360000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "POLYXUSDT",
+        "bars": 1445,
+        "first_ms": 1665964800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PONDUSDT",
+        "bars": 1950,
+        "first_ms": 1615248000000,
+        "last_ms": 1783641600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PORTALUSDT",
+        "bars": 945,
+        "first_ms": 1709164800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PORTOUSDT",
+        "bars": 1780,
+        "first_ms": 1637020800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "POWRUSDT",
+        "bars": 1779,
+        "first_ms": 1637107200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PROMUSDT",
+        "bars": 1294,
+        "first_ms": 1679011200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PROSUSDT",
+        "bars": 811,
+        "first_ms": 1674777600000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PROVEUSDT",
+        "bars": 422,
+        "first_ms": 1754352000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PSGUSDT",
+        "bars": 2110,
+        "first_ms": 1608508800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PUMPUSDT",
+        "bars": 385,
+        "first_ms": 1757548800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PUNDIXUSDT",
+        "bars": 2001,
+        "first_ms": 1617926400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PYPLBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PYRUSDT",
+        "bars": 1726,
+        "first_ms": 1637884800000,
+        "last_ms": 1786924800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "PYTHUSDT",
+        "bars": 972,
+        "first_ms": 1706832000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QCOMBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QIUSDT",
+        "bars": 1781,
+        "first_ms": 1636934400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QKCUSDT",
+        "bars": 1294,
+        "first_ms": 1679011200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QNTBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QNTUSDT",
+        "bars": 1890,
+        "first_ms": 1627516800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QQQBUSDT",
+        "bars": 93,
+        "first_ms": 1782777600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QTUMUSDT",
+        "bars": 3118,
+        "first_ms": 1521417600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "QUICKUSDT",
+        "bars": 1872,
+        "first_ms": 1628812800000,
+        "last_ms": 1790726400000,
+        "missing_days": 3
+      },
+      {
+        "symbol": "RADUSDT",
+        "bars": 1820,
+        "first_ms": 1633564800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RAMPUSDT",
+        "bars": 470,
+        "first_ms": 1616371200000,
+        "last_ms": 1656892800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RAREUSDT",
+        "bars": 1816,
+        "first_ms": 1633910400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RAYUSDT",
+        "bars": 1878,
+        "first_ms": 1628553600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RDDTBUSDT",
+        "bars": 15,
+        "first_ms": 1789516800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RDNTUSDT",
+        "bars": 1099,
+        "first_ms": 1680134400000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REDUSDT",
+        "bars": 580,
+        "first_ms": 1740700800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REEFUSDT",
+        "bars": 1337,
+        "first_ms": 1609200000000,
+        "last_ms": 1724630400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REIUSDT",
+        "bars": 1324,
+        "first_ms": 1651622400000,
+        "last_ms": 1765929600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RENDERUSDT",
+        "bars": 797,
+        "first_ms": 1721952000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RENUSDT",
+        "bars": 1904,
+        "first_ms": 1569369600000,
+        "last_ms": 1733788800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REPUSDT",
+        "bars": 924,
+        "first_ms": 1591920000000,
+        "last_ms": 1671667200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REQUSDT",
+        "bars": 1868,
+        "first_ms": 1629417600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RESOLVUSDT",
+        "bars": 477,
+        "first_ms": 1749600000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REUSDT",
+        "bars": 105,
+        "first_ms": 1781740800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "REZUSDT",
+        "bars": 884,
+        "first_ms": 1714435200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RGTUSDT",
+        "bars": 130,
+        "first_ms": 1636070400000,
+        "last_ms": 1647216000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RIFUSDT",
+        "bars": 2093,
+        "first_ms": 1609977600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RKLBBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RLCUSDT",
+        "bars": 2513,
+        "first_ms": 1573689600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RLUSDUSDT",
+        "bars": 252,
+        "first_ms": 1769040000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RNDRUSDT",
+        "bars": 969,
+        "first_ms": 1637971200000,
+        "last_ms": 1721606400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ROBOUSDT",
+        "bars": 211,
+        "first_ms": 1772582400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RONINUSDT",
+        "bars": 969,
+        "first_ms": 1707091200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ROSEUSDT",
+        "bars": 2142,
+        "first_ms": 1605744000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RPLUSDT",
+        "bars": 1352,
+        "first_ms": 1674000000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RSRUSDT",
+        "bars": 2226,
+        "first_ms": 1598486400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RUNEUSDT",
+        "bars": 2218,
+        "first_ms": 1599177600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "RVNUSDT",
+        "bars": 2563,
+        "first_ms": 1569369600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SAGAUSDT",
+        "bars": 905,
+        "first_ms": 1712620800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SAHARAUSDT",
+        "bars": 462,
+        "first_ms": 1750896000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SANDUSDT",
+        "bars": 2239,
+        "first_ms": 1597363200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SANTOSUSDT",
+        "bars": 1765,
+        "first_ms": 1638316800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SAPIENUSDT",
+        "bars": 329,
+        "first_ms": 1762387200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SCRTUSDT",
+        "bars": 1687,
+        "first_ms": 1642723200000,
+        "last_ms": 1788393600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SCRUSDT",
+        "bars": 720,
+        "first_ms": 1728604800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SCUSDT",
+        "bars": 2278,
+        "first_ms": 1593993600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SEIUSDT",
+        "bars": 1143,
+        "first_ms": 1692057600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SENTUSDT",
+        "bars": 252,
+        "first_ms": 1769040000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SFPUSDT",
+        "bars": 2061,
+        "first_ms": 1612742400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SHAZBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SHELLUSDT",
+        "bars": 581,
+        "first_ms": 1740614400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SHIBUSDT",
+        "bars": 1970,
+        "first_ms": 1620604800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SIGNUSDT",
+        "bars": 521,
+        "first_ms": 1745798400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SKHYBUSDT",
+        "bars": 80,
+        "first_ms": 1783900800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SKLUSDT",
+        "bars": 2130,
+        "first_ms": 1606780800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SKYUSDT",
+        "bars": 379,
+        "first_ms": 1758067200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SLFUSDT",
+        "bars": 384,
+        "first_ms": 1724976000000,
+        "last_ms": 1758067200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SLPUSDT",
+        "bars": 1980,
+        "first_ms": 1619740800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SMCIBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SMHBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SNDKBUSDT",
+        "bars": 112,
+        "first_ms": 1781136000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SNTUSDT",
+        "bars": 699,
+        "first_ms": 1684454400000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SNXUSDT",
+        "bars": 2275,
+        "first_ms": 1594252800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SNXXBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SOLUSDT",
+        "bars": 2242,
+        "first_ms": 1597104000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SOLVUSDT",
+        "bars": 622,
+        "first_ms": 1737072000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SOMIUSDT",
+        "bars": 394,
+        "first_ms": 1756771200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SOPHUSDT",
+        "bars": 491,
+        "first_ms": 1748390400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SOXLBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SOXSBUSDT",
+        "bars": 64,
+        "first_ms": 1785283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SPCXBUSDT",
+        "bars": 111,
+        "first_ms": 1781222400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SPELLUSDT",
+        "bars": 1742,
+        "first_ms": 1640304000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SPKUSDT",
+        "bars": 471,
+        "first_ms": 1750118400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SPYBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SQQQBUSDT",
+        "bars": 29,
+        "first_ms": 1788307200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SRMUSDT",
+        "bars": 840,
+        "first_ms": 1597104000000,
+        "last_ms": 1669593600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SSVUSDT",
+        "bars": 1315,
+        "first_ms": 1677196800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STEEMUSDT",
+        "bars": 1623,
+        "first_ms": 1650585600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STGUSDT",
+        "bars": 1504,
+        "first_ms": 1660867200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STMXUSDT",
+        "bars": 1720,
+        "first_ms": 1591833600000,
+        "last_ms": 1740355200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STORJUSDT",
+        "bars": 2227,
+        "first_ms": 1596067200000,
+        "last_ms": 1788393600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STORMUSDT",
+        "bars": 287,
+        "first_ms": 1566864000000,
+        "last_ms": 1591574400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STOUSDT",
+        "bars": 517,
+        "first_ms": 1746144000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STPTUSDT",
+        "bars": 1882,
+        "first_ms": 1585094400000,
+        "last_ms": 1747612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STRATUSDT",
+        "bars": 268,
+        "first_ms": 1582070400000,
+        "last_ms": 1605139200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STRAXUSDT",
+        "bars": 2136,
+        "first_ms": 1605657600000,
+        "last_ms": 1790726400000,
+        "missing_days": 7
+      },
+      {
+        "symbol": "STRKUSDT",
+        "bars": 954,
+        "first_ms": 1708387200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STXBUSDT",
+        "bars": 29,
+        "first_ms": 1788307200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "STXUSDT",
+        "bars": 2533,
+        "first_ms": 1571961600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUIUSDT",
+        "bars": 1247,
+        "first_ms": 1683072000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUNUSDT",
+        "bars": 2198,
+        "first_ms": 1600646400000,
+        "last_ms": 1790726400000,
+        "missing_days": 3
+      },
+      {
+        "symbol": "SUPERUSDT",
+        "bars": 2016,
+        "first_ms": 1616630400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUSDT",
+        "bars": 623,
+        "first_ms": 1736985600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUSDUSDT",
+        "bars": 494,
+        "first_ms": 1607040000000,
+        "last_ms": 1649635200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUSHIDOWNUSDT",
+        "bars": 370,
+        "first_ms": 1607558400000,
+        "last_ms": 1639440000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUSHIUPUSDT",
+        "bars": 370,
+        "first_ms": 1607558400000,
+        "last_ms": 1639440000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SUSHIUSDT",
+        "bars": 2221,
+        "first_ms": 1598918400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SXPDOWNUSDT",
+        "bars": 407,
+        "first_ms": 1602720000000,
+        "last_ms": 1637798400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SXPUPUSDT",
+        "bars": 407,
+        "first_ms": 1602720000000,
+        "last_ms": 1637798400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SXPUSDT",
+        "bars": 2082,
+        "first_ms": 1595203200000,
+        "last_ms": 1775001600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SXTUSDT",
+        "bars": 511,
+        "first_ms": 1746662400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SYNUSDT",
+        "bars": 1317,
+        "first_ms": 1677024000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SYRUPUSDT",
+        "bars": 513,
+        "first_ms": 1746489600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "SYSUSDT",
+        "bars": 1707,
+        "first_ms": 1632441600000,
+        "last_ms": 1779840000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TAOUSDT",
+        "bars": 903,
+        "first_ms": 1712793600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TCTUSDT",
+        "bars": 1008,
+        "first_ms": 1579564800000,
+        "last_ms": 1666569600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TFUELUSDT",
+        "bars": 2687,
+        "first_ms": 1558656000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "THETAUSDT",
+        "bars": 2731,
+        "first_ms": 1554854400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "THEUSDT",
+        "bars": 673,
+        "first_ms": 1732665600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TIAUSDT",
+        "bars": 1066,
+        "first_ms": 1698710400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TKOUSDT",
+        "bars": 2003,
+        "first_ms": 1617753600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TLMUSDT",
+        "bars": 1997,
+        "first_ms": 1618272000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TNSRUSDT",
+        "bars": 906,
+        "first_ms": 1712534400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TOMOUSDT",
+        "bars": 1550,
+        "first_ms": 1566604800000,
+        "last_ms": 1700438400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TONUSDT",
+        "bars": 692,
+        "first_ms": 1723075200000,
+        "last_ms": 1782777600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TORNUSDT",
+        "bars": 565,
+        "first_ms": 1623369600000,
+        "last_ms": 1672099200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TOWNSUSDT",
+        "bars": 422,
+        "first_ms": 1754352000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TQQQBUSDT",
+        "bars": 71,
+        "first_ms": 1784678400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRBUSDT",
+        "bars": 2224,
+        "first_ms": 1598659200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TREEUSDT",
+        "bars": 429,
+        "first_ms": 1753747200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRIBEUSDT",
+        "bars": 462,
+        "first_ms": 1629763200000,
+        "last_ms": 1669593600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TROYUSDT",
+        "bars": 1960,
+        "first_ms": 1575504000000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRUMPUSDT",
+        "bars": 620,
+        "first_ms": 1737244800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRUUSDT",
+        "bars": 1926,
+        "first_ms": 1611014400000,
+        "last_ms": 1777334400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRXDOWNUSDT",
+        "bars": 811,
+        "first_ms": 1599696000000,
+        "last_ms": 1669680000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRXUPUSDT",
+        "bars": 811,
+        "first_ms": 1599696000000,
+        "last_ms": 1669680000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TRXUSDT",
+        "bars": 3034,
+        "first_ms": 1528675200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TSLABUSDT",
+        "bars": 112,
+        "first_ms": 1781136000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TSMBUSDT",
+        "bars": 78,
+        "first_ms": 1784073600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TSTUSDT",
+        "bars": 599,
+        "first_ms": 1739059200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TURBOUSDT",
+        "bars": 745,
+        "first_ms": 1726444800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TURTLEUSDT",
+        "bars": 344,
+        "first_ms": 1761091200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TUSDT",
+        "bars": 1679,
+        "first_ms": 1645747200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TUSDUSDT",
+        "bars": 2880,
+        "first_ms": 1527724800000,
+        "last_ms": 1790726400000,
+        "missing_days": 165
+      },
+      {
+        "symbol": "TUTUSDT",
+        "bars": 553,
+        "first_ms": 1743033600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TVKUSDT",
+        "bars": 844,
+        "first_ms": 1628208000000,
+        "last_ms": 1701043200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "TWTUSDT",
+        "bars": 2073,
+        "first_ms": 1611705600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UFTUSDT",
+        "bars": 762,
+        "first_ms": 1679011200000,
+        "last_ms": 1744761600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UMAUSDT",
+        "bars": 2213,
+        "first_ms": 1599609600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UNFIUSDT",
+        "bars": 1449,
+        "first_ms": 1605744000000,
+        "last_ms": 1730851200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UNIDOWNUSDT",
+        "bars": 450,
+        "first_ms": 1601424000000,
+        "last_ms": 1640217600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UNIUPUSDT",
+        "bars": 450,
+        "first_ms": 1601424000000,
+        "last_ms": 1640217600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UNIUSDT",
+        "bars": 2205,
+        "first_ms": 1600300800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USARBUSDT",
+        "bars": 57,
+        "first_ms": 1785888000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USD1USDT",
+        "bars": 497,
+        "first_ms": 1747872000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USDCUSDT",
+        "bars": 2682,
+        "first_ms": 1544832000000,
+        "last_ms": 1790726400000,
+        "missing_days": 165
+      },
+      {
+        "symbol": "USDEUSDT",
+        "bars": 387,
+        "first_ms": 1757376000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USDPUSDT",
+        "bars": 1676,
+        "first_ms": 1631232000000,
+        "last_ms": 1790208000000,
+        "missing_days": 165
+      },
+      {
+        "symbol": "USDSBUSDT",
+        "bars": 96,
+        "first_ms": 1561334400000,
+        "last_ms": 1569542400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USDSUSDT",
+        "bars": 672,
+        "first_ms": 1550102400000,
+        "last_ms": 1790726400000,
+        "missing_days": 2114
+      },
+      {
+        "symbol": "USTCUSDT",
+        "bars": 1301,
+        "first_ms": 1678406400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USTUSDT",
+        "bars": 141,
+        "first_ms": 1640304000000,
+        "last_ms": 1652400000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "USUALUSDT",
+        "bars": 681,
+        "first_ms": 1731974400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UTKUSDT",
+        "bars": 2021,
+        "first_ms": 1601596800000,
+        "last_ms": 1776124800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "UUSDT",
+        "bars": 261,
+        "first_ms": 1768262400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VANAUSDT",
+        "bars": 654,
+        "first_ms": 1734307200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VANRYUSDT",
+        "bars": 991,
+        "first_ms": 1701388800000,
+        "last_ms": 1786924800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VELODROMEUSDT",
+        "bars": 657,
+        "first_ms": 1734048000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VENUSDT",
+        "bars": 33,
+        "first_ms": 1529625600000,
+        "last_ms": 1539907200000,
+        "missing_days": 87
+      },
+      {
+        "symbol": "VETUSDT",
+        "bars": 2990,
+        "first_ms": 1532476800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VGXUSDT",
+        "bars": 1009,
+        "first_ms": 1637539200000,
+        "last_ms": 1724630400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VIBUSDT",
+        "bars": 799,
+        "first_ms": 1677196800000,
+        "last_ms": 1746144000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VICUSDT",
+        "bars": 998,
+        "first_ms": 1700784000000,
+        "last_ms": 1786924800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VIDTUSDT",
+        "bars": 1308,
+        "first_ms": 1631145600000,
+        "last_ms": 1744761600000,
+        "missing_days": 8
+      },
+      {
+        "symbol": "VIRTUALUSDT",
+        "bars": 538,
+        "first_ms": 1744329600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VITEUSDT",
+        "bars": 1901,
+        "first_ms": 1576195200000,
+        "last_ms": 1740355200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VOXELUSDT",
+        "bars": 1465,
+        "first_ms": 1639440000000,
+        "last_ms": 1765929600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "VTHOUSDT",
+        "bars": 2267,
+        "first_ms": 1594944000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WALUSDT",
+        "bars": 356,
+        "first_ms": 1760054400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WANUSDT",
+        "bars": 2432,
+        "first_ms": 1566864000000,
+        "last_ms": 1776902400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WAVESUSDT",
+        "bars": 1978,
+        "first_ms": 1547769600000,
+        "last_ms": 1718582400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WAXPUSDT",
+        "bars": 1865,
+        "first_ms": 1629676800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WBETHUSDT",
+        "bars": 1170,
+        "first_ms": 1689724800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WBTCUSDT",
+        "bars": 1252,
+        "first_ms": 1682640000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WCTUSDT",
+        "bars": 534,
+        "first_ms": 1744675200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WDCBUSDT",
+        "bars": 86,
+        "first_ms": 1783382400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WENBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WIFUSDT",
+        "bars": 940,
+        "first_ms": 1709596800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WINGUSDT",
+        "bars": 1690,
+        "first_ms": 1600214400000,
+        "last_ms": 1746144000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WINUSDT",
+        "bars": 2618,
+        "first_ms": 1564617600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WLDUSDT",
+        "bars": 1165,
+        "first_ms": 1690156800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WLFIUSDT",
+        "bars": 395,
+        "first_ms": 1756684800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WNXMUSDT",
+        "bars": 1390,
+        "first_ms": 1598572800000,
+        "last_ms": 1718582400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WOOUSDT",
+        "bars": 1696,
+        "first_ms": 1644278400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WRXUSDT",
+        "bars": 1786,
+        "first_ms": 1580860800000,
+        "last_ms": 1735084800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WTCUSDT",
+        "bars": 1340,
+        "first_ms": 1586217600000,
+        "last_ms": 1701907200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "WUSDT",
+        "bars": 911,
+        "first_ms": 1712102400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XAIUSDT",
+        "bars": 996,
+        "first_ms": 1704758400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XAUTUSDT",
+        "bars": 189,
+        "first_ms": 1774483200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XECUSDT",
+        "bars": 1854,
+        "first_ms": 1630627200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XEMUSDT",
+        "bars": 1302,
+        "first_ms": 1606176000000,
+        "last_ms": 1718582400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XLMDOWNUSDT",
+        "bars": 369,
+        "first_ms": 1607644800000,
+        "last_ms": 1639440000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XLMUPUSDT",
+        "bars": 369,
+        "first_ms": 1607644800000,
+        "last_ms": 1639440000000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XLMUSDT",
+        "bars": 3045,
+        "first_ms": 1527724800000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XMRUSDT",
+        "bars": 1804,
+        "first_ms": 1552608000000,
+        "last_ms": 1708387200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XNOUSDT",
+        "bars": 1707,
+        "first_ms": 1643328000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XPLUSDT",
+        "bars": 371,
+        "first_ms": 1758758400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XRPBEARUSDT",
+        "bars": 49,
+        "first_ms": 1581465600000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XRPBULLUSDT",
+        "bars": 49,
+        "first_ms": 1581465600000,
+        "last_ms": 1585612800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XRPDOWNUSDT",
+        "bars": 974,
+        "first_ms": 1599782400000,
+        "last_ms": 1683849600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XRPUPUSDT",
+        "bars": 974,
+        "first_ms": 1599782400000,
+        "last_ms": 1683849600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XRPUSDT",
+        "bars": 3072,
+        "first_ms": 1525392000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XTZDOWNUSDT",
+        "bars": 539,
+        "first_ms": 1596758400000,
+        "last_ms": 1643241600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XTZUPUSDT",
+        "bars": 539,
+        "first_ms": 1596758400000,
+        "last_ms": 1643241600000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XTZUSDT",
+        "bars": 2564,
+        "first_ms": 1569283200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XUSDUSDT",
+        "bars": 561,
+        "first_ms": 1742342400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XVGUSDT",
+        "bars": 1943,
+        "first_ms": 1622937600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XVSUSDT",
+        "bars": 2186,
+        "first_ms": 1601942400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "XZCUSDT",
+        "bars": 294,
+        "first_ms": 1586217600000,
+        "last_ms": 1611532800000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "YBUSDT",
+        "bars": 351,
+        "first_ms": 1760486400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "YFIDOWNUSDT",
+        "bars": 408,
+        "first_ms": 1603238400000,
+        "last_ms": 1638403200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "YFIIUSDT",
+        "bars": 1086,
+        "first_ms": 1598918400000,
+        "last_ms": 1692662400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "YFIUPUSDT",
+        "bars": 408,
+        "first_ms": 1603238400000,
+        "last_ms": 1638403200000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "YFIUSDT",
+        "bars": 2243,
+        "first_ms": 1597017600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "YGGUSDT",
+        "bars": 1833,
+        "first_ms": 1632441600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZAMAUSDT",
+        "bars": 241,
+        "first_ms": 1769990400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZBTUSDT",
+        "bars": 349,
+        "first_ms": 1760659200000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZECUSDT",
+        "bars": 2751,
+        "first_ms": 1553126400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZENUSDT",
+        "bars": 2278,
+        "first_ms": 1593993600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZILUSDT",
+        "bars": 2781,
+        "first_ms": 1550534400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZKCUSDT",
+        "bars": 381,
+        "first_ms": 1757894400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZKPUSDT",
+        "bars": 267,
+        "first_ms": 1767744000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZKUSDT",
+        "bars": 836,
+        "first_ms": 1718582400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZMBUSDT",
+        "bars": 1,
+        "first_ms": 1790726400000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZROUSDT",
+        "bars": 833,
+        "first_ms": 1718841600000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "ZRXUSDT",
+        "bars": 2772,
+        "first_ms": 1551312000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "币安人生USDT",
+        "bars": 267,
+        "first_ms": 1767744000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      },
+      {
+        "symbol": "牛来USDT",
+        "bars": 22,
+        "first_ms": 1788912000000,
+        "last_ms": 1790726400000,
+        "missing_days": 0
+      }
+    ]
+  },
+  "year_coverage": [
+    {
+      "year": "2018",
+      "bars": 5166,
+      "markets": 24
+    },
+    {
+      "year": "2019",
+      "bars": 19451,
+      "markets": 90
+    },
+    {
+      "year": "2020",
+      "bars": 51809,
+      "markets": 245
+    },
+    {
+      "year": "2021",
+      "bars": 101579,
+      "markets": 353
+    },
+    {
+      "year": "2022",
+      "bars": 124163,
+      "markets": 374
+    },
+    {
+      "year": "2023",
+      "bars": 129123,
+      "markets": 394
+    },
+    {
+      "year": "2024",
+      "bars": 139293,
+      "markets": 433
+    },
+    {
+      "year": "2025",
+      "bars": 150002,
+      "markets": 489
+    },
+    {
+      "year": "2026",
+      "bars": 123506,
+      "markets": 554
+    }
+  ],
+  "zero_volume_rows": 4,
+  "invalid_normalized_rows": 0,
+  "histories_ending_before_dataset_end": 253,
+  "extreme_consecutive_close_ratio_rows": 46,
+  "extreme_ratio_definition": "Current close / previous consecutive daily close >=5 or <=0.2. Flags only; crashes, rallies and identity events require review, not automatic exclusion.",
+  "pr2_normalized_sha256": "b139383a4eacb5cf9150354576eb9cf2f44937c9a3e019bacfa88f3e37d2b98f",
+  "matches_pr2_normalized_candles": true,
+  "limits": [
+    "Archive availability is not a certified historical listing register.",
+    "Last observed candle does not prove delisting; missing markets require explicit handling.",
+    "Checksums verify captured bytes, not historical publication time or complete token identity.",
+    "Cross-venue major-pair checks do not validate every asset or USDT/USD parity.",
+    "Zero-volume and shortened bars are retained, not price-repaired."
+  ]
+}
