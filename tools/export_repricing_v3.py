@@ -198,6 +198,12 @@ def main():
                 case_relative28=case['relative28'],control_relative28=c['relative28'] if c else None,
                 case_tr_ratio=case['tr_ratio'],control_tr_ratio=c['tr_ratio'] if c else None))
     csv_write(out/'matched_pairs.csv',pair_rows)
+    # Git publishes LF text. Normalize reviewed exports before hashing so the
+    # published byte hashes verify on Linux as well as the Windows exporter.
+    # Private artifact hashes remain exact original bytes, without conversion.
+    for path in out.iterdir():
+        if path.is_file():
+            path.write_bytes(path.read_bytes().replace(b'\r\n',b'\n'))
     dump(out/'SHA256.json',{p.name:file_sha(p) for p in sorted(out.iterdir()) if p.is_file() and p.name!='SHA256.json'})
     print(json.dumps(dict(published_files=len(list(out.iterdir())),decisions=analysis['decisions'])))
 
