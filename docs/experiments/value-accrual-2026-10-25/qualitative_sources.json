@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://blog.ethereum.org/2021/07/15/london-mainnet-announcement",
+    "source_sha256": "9e2b6df59005ff78c3d7bda35c12a1dbeced1ce4b2421da81927941b543cc096",
+    "first_seen_at": "2026-10-25T10:09:40.555269+00:00",
+    "claimed_public_at": null,
+    "current_version_updated_at": null,
+    "classification": "QUALITATIVE_ONLY",
+    "reason": "No immutable historical preimage/publication proof for this fetched page version. A displayed creation date, including equal created/updated dates, is insufficient."
+  },
+  {
+    "url": "https://eips.ethereum.org/EIPS/eip-1559",
+    "source_sha256": "453b293845f8faac282a468be0c01594f0a785dde3af34947ee676c085e011b7",
+    "first_seen_at": "2026-10-25T10:09:40.793225+00:00",
+    "claimed_public_at": null,
+    "current_version_updated_at": null,
+    "classification": "QUALITATIVE_ONLY",
+    "reason": "No immutable historical preimage/publication proof for this fetched page version. A displayed creation date, including equal created/updated dates, is insufficient."
+  },
+  {
+    "url": "https://blog.uniswap.org/unification",
+    "source_sha256": "31f72d655b457e48c32ba5a7f1d8334fc78c6d319ad45e065ea2cdf8a9e0d943",
+    "first_seen_at": "2026-10-25T10:09:40.882206+00:00",
+    "claimed_public_at": null,
+    "current_version_updated_at": null,
+    "classification": "QUALITATIVE_ONLY",
+    "reason": "No immutable historical preimage/publication proof for this fetched page version. A displayed creation date, including equal created/updated dates, is insufficient."
+  },
+  {
+    "url": "https://governance.aave.com/t/arfc-aavenomics-implementation-part-one/21248.json",
+    "source_sha256": "13dc98a88ec8702932e5fb6cdf38b5506cdc0a701edba8cf19540f8888425c14",
+    "first_seen_at": "2026-10-25T10:09:42.372661+00:00",
+    "claimed_public_at": "2025-03-04T12:07:05.238Z",
+    "current_version_updated_at": "2025-03-14T11:09:29.517Z",
+    "classification": "QUALITATIVE_ONLY",
+    "reason": "No immutable historical preimage/publication proof for this fetched page version. A displayed creation date, including equal created/updated dates, is insufficient."
+  },
+  {
+    "url": "https://governance.aave.com/t/aave-dao-funding-insights/24192.json",
+    "source_sha256": "e9202bfbfab2450d0d865f39d9ffdae36ceeadc05044570651a2ee6845c5b99e",
+    "first_seen_at": "2026-10-25T10:09:43.984209+00:00",
+    "claimed_public_at": "2026-02-28T17:03:46.188Z",
+    "current_version_updated_at": "2026-03-24T17:03:13.724Z",
+    "classification": "QUALITATIVE_ONLY",
+    "reason": "No immutable historical preimage/publication proof for this fetched page version. A displayed creation date, including equal created/updated dates, is insufficient."
+  },
+  {
+    "url": "https://governance.aave.com/t/arfc-pause-aave-buybacks/24686.json",
+    "source_sha256": "19d7eaeb24a4a98d597e59c21c18e46f9b1a7fc565c186c9d94da2900405eea4",
+    "first_seen_at": "2026-10-25T10:09:45.352428+00:00",
+    "claimed_public_at": "2026-04-22T18:51:13.688Z",
+    "current_version_updated_at": "2026-04-22T18:51:13.688Z",
+    "classification": "QUALITATIVE_ONLY",
+    "reason": "No immutable historical preimage/publication proof for this fetched page version. A displayed creation date, including equal created/updated dates, is insufficient."
+  }
+]

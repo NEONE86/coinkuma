@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "network_calls": 0,
+  "originals_modified": false,
+  "exact_byte_comparisons": {
+    "summary.json": true,
+    "statistics.json": true,
+    "scheduled_events.json": true,
+    "collector_schedule.json": true,
+    "matched_pairs_private.json": true,
+    "execution_context_private.json": true,
+    "source_cohorts_private.json": true,
+    "event_panel.json": true
+  },
+  "excluded_nondeterministic_files": [
+    "run_manifest.json",
+    "artifact_hashes.json"
+  ],
+  "explanation": "Run time differs; all panel, clock, cohort, matching, endpoint and summary bytes match. Same-author isolated process, not external audit."
+}

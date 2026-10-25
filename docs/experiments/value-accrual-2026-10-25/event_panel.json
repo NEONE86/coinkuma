@@ -1,0 +1,2202 @@
+[
+  {
+    "event_id": "UNI-bravo-102",
+    "symbol": "UNIUSDT",
+    "proposal_id": 102,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Protocol Fee Expansion: Arc",
+    "source_text_sha256": "f8c7911fc4ae7685f44b36a2325ac48454feccfd399cbf5fd0925f4d5aaee37b",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-09-25T16:06:59.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "FEE_ROUTING_EXPANSION",
+    "direction": "ENABLE",
+    "execution_scope": "CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "Arc fee expansion proposal; retained even though future execution and 180-day labels lie outside study cutoff.",
+    "publication_proof": {
+      "block_number": 26055552,
+      "block_hash": "0x01953af5c5d9d53e4c9a83b17923d040cdbfc6c7393da64a98a682c68139f995",
+      "transaction_hash": "0x51fac05c65aa5a8be704316a82b55f82b1cbe475b56756b9198f9e3cf22d3d29",
+      "log_index": 70,
+      "published_at": "2026-09-25T16:06:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/26055552",
+          "sha256": "6e0cccd258fc2e1d32920acbf767e2adfcb9755d0075c42349b6997e05c91b44",
+          "first_seen_at": "2026-10-25T10:15:31.849700+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x51fac05c65aa5a8be704316a82b55f82b1cbe475b56756b9198f9e3cf22d3d29",
+          "sha256": "5ae1bf8c4b2aa38b0b8d22ace48b77c83a18d7b59d632c2cd9a554d183c32603",
+          "first_seen_at": "2026-10-25T10:15:32.594919+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x51fac05c65aa5a8be704316a82b55f82b1cbe475b56756b9198f9e3cf22d3d29",
+          "sha256": "536ef791d71f60de626d016a0a1185279440b04298ca54aac6cdea88a1837298",
+          "first_seen_at": "2026-10-25T10:15:33.059287+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=26055552",
+          "sha256": "04359a0b36516eaa439e84ad2422a7711065c1e2a349df730652ac1349961039",
+          "first_seen_at": "2026-10-25T10:15:33.441583+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:33.441583+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:15:33.441583+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-10-05T13:11:23.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-10-03T11:59:35.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 26126381,
+      "block_hash": "0xa46da81d128e6ed3e7394afa3344fef0e0089ced3158ad6faaf9fe7e3ad60f6a",
+      "transaction_hash": "0xc3b82a4721717315ce420f5c5f422934e4f662f170da7bb70cc5aad337a34dc4",
+      "log_index": 700,
+      "published_at": "2026-10-05T13:11:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/26126381",
+          "sha256": "0c90b1d976c4039a005e7800adf01218b8c7529623cd958c160577cf67ff2a9c",
+          "first_seen_at": "2026-10-25T10:15:34.398856+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xc3b82a4721717315ce420f5c5f422934e4f662f170da7bb70cc5aad337a34dc4",
+          "sha256": "769b0f6b3519cac18bca999b381b878414a73e7cc71b4775120430466730c69c",
+          "first_seen_at": "2026-10-25T10:15:35.082351+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xc3b82a4721717315ce420f5c5f422934e4f662f170da7bb70cc5aad337a34dc4",
+          "sha256": "6e0dbbf37befee0d9bca477ef17f234830b2b9c0a3d15187214b50163e907877",
+          "first_seen_at": "2026-10-25T10:15:35.523240+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=26126381",
+          "sha256": "906ee8f3866baf3349c93ef491bd4a7863b5d1954436045706fae4129a68e89c",
+          "first_seen_at": "2026-10-25T10:15:36.942028+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:36.942028+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 26111669,
+      "block_hash": "0x6dbbd4e9d176f993912026f6cda3d6b25780542b2d3f411f83336c7d2ff2d6f1",
+      "transaction_hash": "0x4e9810f4a81a5019d9353877ee3387851b74b2436109d2b82cfdf09c0263932b",
+      "log_index": 764,
+      "published_at": "2026-10-03T11:59:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/26111669",
+          "sha256": "941ca620c449b0748c28d42f7e4274ce747e5dd0a5a866169d43631019f3207d",
+          "first_seen_at": "2026-10-25T10:15:37.855085+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x4e9810f4a81a5019d9353877ee3387851b74b2436109d2b82cfdf09c0263932b",
+          "sha256": "d08dc3963edaac2b50fb2322f0e589b647c036e13adbe609ec99038902660006",
+          "first_seen_at": "2026-10-25T10:15:38.538930+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x4e9810f4a81a5019d9353877ee3387851b74b2436109d2b82cfdf09c0263932b",
+          "sha256": "81e14f55a966c5ecf121b2093ad22acb475f0ea641ca1499640b6b4dc5b4613d",
+          "first_seen_at": "2026-10-25T10:15:38.968760+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=26111669",
+          "sha256": "11fdb325e91ba4ae68f4ac8ecc26f3ced0fcf44b043ab457a57ee83267c47ee3",
+          "first_seen_at": "2026-10-25T10:15:39.585500+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:39.585500+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-100",
+    "symbol": "UNIUSDT",
+    "proposal_id": 100,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Activate v4 Protocol Fees (Part 1/2) ",
+    "source_text_sha256": "19210dd949fd936dc981c5f328881368952218b86b38b721286011afe0161a37",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-07-17T20:34:35.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "V4_PROTOCOL_FEE_ACTIVATION",
+    "direction": "ENABLE",
+    "execution_scope": "CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "v4 fee activation rollout; no assumption that L1 governance timestamp equals all target-chain economic execution.",
+    "publication_proof": {
+      "block_number": 25554834,
+      "block_hash": "0xf6b1e4b120d54101fa28007a468461a93c1b60fb33f20b20e1ad747b448005a3",
+      "transaction_hash": "0xa8ea4b2d438c82462ada1e24ed265d617963c667d4dcca3a67f94e1073cc5a3d",
+      "log_index": 633,
+      "published_at": "2026-07-17T20:34:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25554834",
+          "sha256": "d01ccb81ad69fed24e66dec0c4529318a339f80ce70b0b85da89cf1d47466d7c",
+          "first_seen_at": "2026-10-25T10:15:40.573888+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xa8ea4b2d438c82462ada1e24ed265d617963c667d4dcca3a67f94e1073cc5a3d",
+          "sha256": "e86347527db237e0bb54bbb690b19345643791e6eef5448ce23898ece7dd5bbe",
+          "first_seen_at": "2026-10-25T10:15:41.462496+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xa8ea4b2d438c82462ada1e24ed265d617963c667d4dcca3a67f94e1073cc5a3d",
+          "sha256": "378a853c74290d353be107f7797f66ebeca0b1df3c1121ceb80150509c2af5f0",
+          "first_seen_at": "2026-10-25T10:15:41.923462+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25554834",
+          "sha256": "de5ed1f8128ad0bf76b25a8c391c828d5d5ca12ea291a5ed962deda6f4f247a3",
+          "first_seen_at": "2026-10-25T10:15:43.383927+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:43.383927+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:15:43.383927+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-07-27T07:31:11.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-07-25T07:30:23.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 25622665,
+      "block_hash": "0xbd4fe8a4cb8f2e128d71e031d3aa3e92df14f30e09aba410fab81417f90751ac",
+      "transaction_hash": "0x451b7fd02b38fbd8cf8ed52cbaf6c87c12322fe078f08e5f3b26b059266e4604",
+      "log_index": 715,
+      "published_at": "2026-07-27T07:31:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25622665",
+          "sha256": "7572b0b184ae3bd53b586857f242f23bb6fce8fe883d8b4eede23f8db1d2830a",
+          "first_seen_at": "2026-10-25T10:15:44.124988+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x451b7fd02b38fbd8cf8ed52cbaf6c87c12322fe078f08e5f3b26b059266e4604",
+          "sha256": "00394c5be0ba21aab52b70df4dc3d8b7dd2aa11054df1d8a809da8da9c272ce7",
+          "first_seen_at": "2026-10-25T10:15:44.778778+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x451b7fd02b38fbd8cf8ed52cbaf6c87c12322fe078f08e5f3b26b059266e4604",
+          "sha256": "dcf312d3ba8648d6bfa1fbc743ab6ce072b8e248c872661b6e7146c326eeb511",
+          "first_seen_at": "2026-10-25T10:15:45.198250+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25622665",
+          "sha256": "d63e40dda425b6fb0932571e6ddeb3fc631632f074c52a6a5e586177bea108b7",
+          "first_seen_at": "2026-10-25T10:15:45.649931+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:45.649931+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 25608297,
+      "block_hash": "0x050fdfd7b208f3514b39fae2afaf073224fb75b335403efa0b42636aa41f718f",
+      "transaction_hash": "0xe6499cc2e740c9548ac28cafea1e235fc6c9f305e444c2b412124fa066748d90",
+      "log_index": 482,
+      "published_at": "2026-07-25T07:30:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25608297",
+          "sha256": "2593b63a0f061c8ecbfd1b776005ad8a33d2ed96f7843f7df0f38b9599ac73fe",
+          "first_seen_at": "2026-10-25T10:15:46.544731+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xe6499cc2e740c9548ac28cafea1e235fc6c9f305e444c2b412124fa066748d90",
+          "sha256": "dafe69c1164d876d12a4318bc1fca9a638e9706e80a3c395aa775d2f7ded8764",
+          "first_seen_at": "2026-10-25T10:15:47.202822+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xe6499cc2e740c9548ac28cafea1e235fc6c9f305e444c2b412124fa066748d90",
+          "sha256": "1134942e508679535d11a442acadd01ae204aec398cdaad010be105a3ada45b3",
+          "first_seen_at": "2026-10-25T10:15:47.650329+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25608297",
+          "sha256": "41368aa469f39bfd704a2888705ec62a7ed2d144cbec7dc15196bf9cec5cbc7c",
+          "first_seen_at": "2026-10-25T10:15:48.362821+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:48.362821+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-99",
+    "symbol": "UNIUSDT",
+    "proposal_id": 99,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Protocol Fee Expansion: Robinhood Chain",
+    "source_text_sha256": "d9ef16c6601441951b72cdd65f6a599d115628f835d144439659e8ae99d42568",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-07-17T20:20:47.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "FEE_ROUTING_EXPANSION",
+    "direction": "ENABLE",
+    "execution_scope": "CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "Robinhood Chain fee routing expansion; destination execution not reconstructed.",
+    "publication_proof": {
+      "block_number": 25554766,
+      "block_hash": "0x2e8fb8eaea4a80a21fb0c6a4b50044aefd1ef7ecacefb3671e3635e07ed14267",
+      "transaction_hash": "0x3a7421abc334d82f7da81512c182ac9c75d80007554b3c99cf3cc12b0758e176",
+      "log_index": 166,
+      "published_at": "2026-07-17T20:20:47.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25554766",
+          "sha256": "7e88312abd940610b6866a09391daeb708ed7ee8f33e793d6dd6b2347525fd61",
+          "first_seen_at": "2026-10-25T10:15:49.203550+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x3a7421abc334d82f7da81512c182ac9c75d80007554b3c99cf3cc12b0758e176",
+          "sha256": "6acd8b28a881045d83bf2983e03697924930ba7a217a1bf51f188efb56bf51d4",
+          "first_seen_at": "2026-10-25T10:15:49.901961+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x3a7421abc334d82f7da81512c182ac9c75d80007554b3c99cf3cc12b0758e176",
+          "sha256": "d1e8f901e8e5414c9e6b8380debd25ef0224dbc938676b77276b923cd946ef70",
+          "first_seen_at": "2026-10-25T10:15:50.342772+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25554766",
+          "sha256": "3ca839dfc422e5b3b499e66178ffc26f51214302d1f15746866ff8b545522e19",
+          "first_seen_at": "2026-10-25T10:15:51.009023+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:51.009023+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:15:51.009023+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-07-27T07:16:59.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-07-25T07:16:23.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 25622594,
+      "block_hash": "0x97a7e60b5c8fb8fc2e120ee60fd789688bd92ef9bc7f1cadd1a92c9deaeda13d",
+      "transaction_hash": "0x5565fec47fd76540d00ddd1ca1aadd4b5f4b58cd8488fac31323b7baca107192",
+      "log_index": 1404,
+      "published_at": "2026-07-27T07:16:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25622594",
+          "sha256": "5683761a6279e5ad2eee1d18e31e137049b700d617bfd53f02a1d67ae904dd89",
+          "first_seen_at": "2026-10-25T10:15:51.905168+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x5565fec47fd76540d00ddd1ca1aadd4b5f4b58cd8488fac31323b7baca107192",
+          "sha256": "b377f467128104174259638cd0cb5c96643356a18777d07e8059f498e8a24cc1",
+          "first_seen_at": "2026-10-25T10:15:52.559429+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x5565fec47fd76540d00ddd1ca1aadd4b5f4b58cd8488fac31323b7baca107192",
+          "sha256": "1af3c790f2741e515ce99d6325ad632940c2785f3231dedaf0a6322c598cac14",
+          "first_seen_at": "2026-10-25T10:15:53.038610+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25622594",
+          "sha256": "aa076db103f4b675a5020ef0a7f8d9f14e458f4f147691cbaa085e144217db24",
+          "first_seen_at": "2026-10-25T10:15:53.374932+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:53.374932+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 25608228,
+      "block_hash": "0x2381d71fdc8c4db22055b8496bba3b9b33888b39be13d7b0580a004792e44609",
+      "transaction_hash": "0xdb3a9bdbd429b812de64e19076dbe2ef5bc769e3aafce94533904655a67480a2",
+      "log_index": 916,
+      "published_at": "2026-07-25T07:16:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25608228",
+          "sha256": "b558bb40eab2e92f40b883bb8f296fc1b3bc7e7cbbed777b77d46b5cc336e3af",
+          "first_seen_at": "2026-10-25T10:15:54.314674+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xdb3a9bdbd429b812de64e19076dbe2ef5bc769e3aafce94533904655a67480a2",
+          "sha256": "659c67dea2798aaa3b1f95c3b9d7c8cb8e7fceefccf38b2a2f1cbde9b8b3f697",
+          "first_seen_at": "2026-10-25T10:15:55.006692+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xdb3a9bdbd429b812de64e19076dbe2ef5bc769e3aafce94533904655a67480a2",
+          "sha256": "f096365831c2fdbebbcec45f096d2bb5483d056c8cacae295b15ce66a4c8d26e",
+          "first_seen_at": "2026-10-25T10:15:55.517524+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25608228",
+          "sha256": "3b1d44277aa3f96d68ef2e986193c16c58a96e138e32f40479445170b5d0b371",
+          "first_seen_at": "2026-10-25T10:15:55.970545+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:55.970545+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-98",
+    "symbol": "UNIUSDT",
+    "proposal_id": 98,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "[RFC] Update Crosschain Governance Parameters for Avalanche, MegaETH, Soneium, and X Layer",
+    "source_text_sha256": "7dbed2164454079388d8fe40b2373c7d862a29dc0da3512dcac4782be8b1bcae",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-07-04T16:36:35.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": false,
+    "mechanism": "BRIDGE_GOVERNANCE_PARAMETERS",
+    "direction": "INCIDENTAL",
+    "execution_scope": "CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "Crosschain security parameters; protocol fee adjustments are an example of messages, not a direct fee or supply change.",
+    "publication_proof": {
+      "block_number": 25460396,
+      "block_hash": "0xe7f73d1c0fbc9ea2940585dea8259de3086a23fa4c4082ffef30dd41a42374e3",
+      "transaction_hash": "0xfd42e291e876afbece4211863662826216e7c9256fced320eed67c091b8cc937",
+      "log_index": 0,
+      "published_at": "2026-07-04T16:36:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25460396",
+          "sha256": "abdf59d6cc6b2ab2632b1e947cec92e71f6bd3100350c7cd1a09743022d33692",
+          "first_seen_at": "2026-10-25T10:15:56.695429+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xfd42e291e876afbece4211863662826216e7c9256fced320eed67c091b8cc937",
+          "sha256": "948455a822e7a2ab66beeaed1becaf17546b65aa74bed7d404aa33a78a0a38f4",
+          "first_seen_at": "2026-10-25T10:15:57.717883+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xfd42e291e876afbece4211863662826216e7c9256fced320eed67c091b8cc937",
+          "sha256": "6f3171bf0496b2bc51efa46c2c4b90c5441d7e5a20b0082c43beb8044a83312e",
+          "first_seen_at": "2026-10-25T10:15:58.150508+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25460396",
+          "sha256": "15631924a2a2daa86c70ade45e9d8b27ef9094ef5b48a04b23e87a97195b0550",
+          "first_seen_at": "2026-10-25T10:15:58.853498+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:15:58.853498+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:15:58.853498+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-07-14T13:53:23.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-07-12T11:48:11.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 25531307,
+      "block_hash": "0x33fa62ba9d0407abd281969a64f1ad9aa1647022c8abd7aa82f8cec56e83687f",
+      "transaction_hash": "0xcaa802fd4726d657eedff1eb181c28cc8ce19a38983699f130a38f58b06a4ee9",
+      "log_index": 601,
+      "published_at": "2026-07-14T13:53:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25531307",
+          "sha256": "1989bbc85fde88895f36c5d834ac0b8a378dad8914ae46496ad19092b05c708d",
+          "first_seen_at": "2026-10-25T10:15:59.688088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xcaa802fd4726d657eedff1eb181c28cc8ce19a38983699f130a38f58b06a4ee9",
+          "sha256": "fea91cbcd151e8d0829cb8ebf9de0d3f084ea2fa972445110a392ed7524cb77a",
+          "first_seen_at": "2026-10-25T10:16:00.483567+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xcaa802fd4726d657eedff1eb181c28cc8ce19a38983699f130a38f58b06a4ee9",
+          "sha256": "e89dfdf705b5c206ca712a121a1424e7d259d28332b57ea2bf746ec4e33fa63e",
+          "first_seen_at": "2026-10-25T10:16:00.959447+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25531307",
+          "sha256": "40bbd83ef7f4c8533dc8db938cbc0319e80c0659e7f37b7700f491606366d424",
+          "first_seen_at": "2026-10-25T10:16:02.668864+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:02.668864+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 25516341,
+      "block_hash": "0x5b21ac22eea5d1dba4b48b8d2ebc45ce67e6af5eef400a912fb62088de27addd",
+      "transaction_hash": "0x9ecb66d21ee7e81f844a9037239c3753a87c85f56e5dc82eb351f79b1efb9323",
+      "log_index": 623,
+      "published_at": "2026-07-12T11:48:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25516341",
+          "sha256": "4fad7c46d6bc768a49e2f51ed51d50259b1915833c1e07fe501d0a726cc67821",
+          "first_seen_at": "2026-10-25T10:16:03.603164+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x9ecb66d21ee7e81f844a9037239c3753a87c85f56e5dc82eb351f79b1efb9323",
+          "sha256": "74e0e7b8bd23cc10bcdcf2ead685be85504bf07e4ad5b9e024670fc197eec94d",
+          "first_seen_at": "2026-10-25T10:16:04.477091+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x9ecb66d21ee7e81f844a9037239c3753a87c85f56e5dc82eb351f79b1efb9323",
+          "sha256": "cd713e5ae5beac557bbce90d8075e5bbe67c027ce7cb00f6c0fa3468a320fdc1",
+          "first_seen_at": "2026-10-25T10:16:04.922990+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25516341",
+          "sha256": "a2d75a8241e830042c8759401c0728d5e726afe5890bef9a2154884d8da5aea3",
+          "first_seen_at": "2026-10-25T10:16:05.463086+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:05.463086+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-96",
+    "symbol": "UNIUSDT",
+    "proposal_id": 96,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Protocol Fee Expansion: Vote 3",
+    "source_text_sha256": "8d3b9a6984005300a9f810f6acaee51ce5480b35d1ab73832e600374c3861c77",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-05-22T17:30:47.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "FEE_ROUTING_EXPANSION",
+    "direction": "ENABLE",
+    "execution_scope": "CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "Fee-routing changes for BNB Chain, Polygon and Celo; destination execution not reconstructed.",
+    "publication_proof": {
+      "block_number": 25152304,
+      "block_hash": "0x3118910797b2f36eb68d782c7062c3f38c21cc3fa671d6635413700077bc2af4",
+      "transaction_hash": "0xa68bfaf7d67691998d0da28777f6c537fee916637a9502f0a05677c7ac07f86d",
+      "log_index": 0,
+      "published_at": "2026-05-22T17:30:47.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25152304",
+          "sha256": "c91dcc958726909244e3b87ea56cc4ba4ea92ceeb09a8541799e2bb639cc340c",
+          "first_seen_at": "2026-10-25T10:16:06.649205+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xa68bfaf7d67691998d0da28777f6c537fee916637a9502f0a05677c7ac07f86d",
+          "sha256": "c45f268766e5523258cdcc0dec667075b2a68a4315c7fd2e6ebde57326edd020",
+          "first_seen_at": "2026-10-25T10:16:07.538369+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xa68bfaf7d67691998d0da28777f6c537fee916637a9502f0a05677c7ac07f86d",
+          "sha256": "2d185e6ed9f5f12812e562d725f9e9995d10d16d97c753756691905ceb953ba5",
+          "first_seen_at": "2026-10-25T10:16:07.938914+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25152304",
+          "sha256": "d7ba8687a74a889ca72f30d97a5422bec50dc1e393b000191b81adbc1725262a",
+          "first_seen_at": "2026-10-25T10:16:08.704463+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:08.704463+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:16:08.704463+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-06-01T04:21:59.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-05-30T04:21:23.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 25220101,
+      "block_hash": "0x4bd571320f67b8a643a8c043f9b949e55ff0f1d3cf030ba3a73db3aca1841e15",
+      "transaction_hash": "0xc8f64c7055f167ed9f68ca476d5bf472317a5bdf78536665fcefbcf4d3dbe003",
+      "log_index": 321,
+      "published_at": "2026-06-01T04:21:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25220101",
+          "sha256": "eadd33c405e7be0961ac2a711fe5c133d0bebbad8a6290120af34b2c3de9fe44",
+          "first_seen_at": "2026-10-25T10:16:09.738964+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xc8f64c7055f167ed9f68ca476d5bf472317a5bdf78536665fcefbcf4d3dbe003",
+          "sha256": "0645f418baae6b953e47ab2804a7008a9fbda23eb7306812c53a11d6ccf51018",
+          "first_seen_at": "2026-10-25T10:16:10.429128+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xc8f64c7055f167ed9f68ca476d5bf472317a5bdf78536665fcefbcf4d3dbe003",
+          "sha256": "469dcec1ca2c71f725df1c48e48456b1cf4659a285847b266c02da21fc38147c",
+          "first_seen_at": "2026-10-25T10:16:10.890967+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25220101",
+          "sha256": "a4a0a4b061a867673834069cfaf3542f47b8d38bfbf921530c78658a02de9021",
+          "first_seen_at": "2026-10-25T10:16:12.144201+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:12.144201+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 25205766,
+      "block_hash": "0xb2cdfa7612e38c28bfe1c43ddddd724adc9cf294c33799abfe9e7a90adb38473",
+      "transaction_hash": "0x740132f3ed9c4b393a16b914e25fe434af5b2b6b2585b87896357d52afaaff73",
+      "log_index": 795,
+      "published_at": "2026-05-30T04:21:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/25205766",
+          "sha256": "397df7eab3b15b8a625f5e309115edf9449d40182e9e3188d188d205053eed14",
+          "first_seen_at": "2026-10-25T10:16:13.105538+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x740132f3ed9c4b393a16b914e25fe434af5b2b6b2585b87896357d52afaaff73",
+          "sha256": "e66c25a7f35117c83ee6d5cf3db51684ab58f4b36bdb7709f8ca68e2eee7584e",
+          "first_seen_at": "2026-10-25T10:16:13.763032+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x740132f3ed9c4b393a16b914e25fe434af5b2b6b2585b87896357d52afaaff73",
+          "sha256": "89c8245fa6b2ed1248500d8cc7c9dfb7cb35bbd824db02cdb18b36ddc4382be4",
+          "first_seen_at": "2026-10-25T10:16:14.197295+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=25205766",
+          "sha256": "9dd53b1fefcc92825e7ccc0797d2bf3ebddb68615951ebd73b1065605b214c71",
+          "first_seen_at": "2026-10-25T10:16:15.661119+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:15.661119+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-95",
+    "symbol": "UNIUSDT",
+    "proposal_id": 95,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Protocol Fee Expansion: Vote 2",
+    "source_text_sha256": "172a45ee7f4d84c42fa2e1dc93801456748f34a6334ae3df3a680a784aaf6739",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-02-25T22:39:59.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "FEE_ROUTING_EXPANSION",
+    "direction": "ENABLE",
+    "execution_scope": "CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "Spec dispatches fee-routing changes to several chains. Target-chain effect timestamps remain unknown.",
+    "publication_proof": {
+      "block_number": 24536965,
+      "block_hash": "0xded4b69a7c311d219c6261589fe63d646049b906ca9ed9a3a63c6e79cae9f8bf",
+      "transaction_hash": "0xedc552a4c2dc1f6c12f566ed6f80b42c66ccde54ab89461be088fc25eaa64c04",
+      "log_index": 237,
+      "published_at": "2026-02-25T22:39:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24536965",
+          "sha256": "558eaf91abb3428edb5420e2d46c7718501c60f5b63765b0e84704b9e8ea8aea",
+          "first_seen_at": "2026-10-25T10:16:16.474318+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xedc552a4c2dc1f6c12f566ed6f80b42c66ccde54ab89461be088fc25eaa64c04",
+          "sha256": "e9610adc79999d8673920a210029631956af84eab150b8b762c2062a5b0e0299",
+          "first_seen_at": "2026-10-25T10:16:17.346553+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xedc552a4c2dc1f6c12f566ed6f80b42c66ccde54ab89461be088fc25eaa64c04",
+          "sha256": "80699eb698eaeca461c42ed7ab587a48aeec53ebc705d7ac34aaeaf6208a456b",
+          "first_seen_at": "2026-10-25T10:16:17.792267+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24536965",
+          "sha256": "c2fdb541391f224c72960500c56f1afbc47fb25a079fa21b4d89154a287bb254",
+          "first_seen_at": "2026-10-25T10:16:18.344424+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:18.344424+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:16:18.344424+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-03-07T14:36:23.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-03-05T14:10:11.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 24606209,
+      "block_hash": "0x4129bd56c3fe6adb8bf108d928ec8a5cbb10123092cee3342791904a6e68b9b6",
+      "transaction_hash": "0x006b60f2a6a74d9f22a1c59fbb70192fab325baa692a2026d192891f1ccd3640",
+      "log_index": 1497,
+      "published_at": "2026-03-07T14:36:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24606209",
+          "sha256": "d610d10e70c8f4e29d52d4a3b53a951efcca546947b1dbace7165fcd70b02ede",
+          "first_seen_at": "2026-10-25T10:16:19.245094+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x006b60f2a6a74d9f22a1c59fbb70192fab325baa692a2026d192891f1ccd3640",
+          "sha256": "b6e4ade2b25361bb5d364faf808122f9c819f9a33690277654ed4f0f74266b58",
+          "first_seen_at": "2026-10-25T10:16:19.908549+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x006b60f2a6a74d9f22a1c59fbb70192fab325baa692a2026d192891f1ccd3640",
+          "sha256": "26d49aa49b21d791b5548dbfbf71cd63091e46c01b1b0193bf5a17a9452c2b7a",
+          "first_seen_at": "2026-10-25T10:16:20.355994+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24606209",
+          "sha256": "be83cd342c15229348667f14ef5687adc039e83019b8202b9226faf222a91cd4",
+          "first_seen_at": "2026-10-25T10:16:21.582033+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:21.582033+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 24591778,
+      "block_hash": "0x95d03d912b915b2a66c6a8f888336264d5d9f5f3adb61e1d1df6d2e2b3b508ad",
+      "transaction_hash": "0xe436d76a375c0fb2f21fc70118aab8aeb19219cc1df582178ba8de3b34ac3ebc",
+      "log_index": 262,
+      "published_at": "2026-03-05T14:10:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24591778",
+          "sha256": "c4e609fdb50184abda625d632e835aa2619095aec67eb0efe7e82dfff376e794",
+          "first_seen_at": "2026-10-25T10:16:22.366827+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xe436d76a375c0fb2f21fc70118aab8aeb19219cc1df582178ba8de3b34ac3ebc",
+          "sha256": "8a194b1243c0f8a6c255aacee73b69b80ceface09f3a1b1ebb35a7b5352eb7b1",
+          "first_seen_at": "2026-10-25T10:16:23.084814+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xe436d76a375c0fb2f21fc70118aab8aeb19219cc1df582178ba8de3b34ac3ebc",
+          "sha256": "e1575706c29af1f8222810aeac2b3c5b5d010bf2c7a671217e56d708a9d89d67",
+          "first_seen_at": "2026-10-25T10:16:23.530737+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24591778",
+          "sha256": "a5245900b60d85835e85653c103b4c245c048f3d6f65e8b9fe7f531da1521e21",
+          "first_seen_at": "2026-10-25T10:16:24.873588+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:24.873588+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-94",
+    "symbol": "UNIUSDT",
+    "proposal_id": 94,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Protocol Fee Expansion: Vote 1",
+    "source_text_sha256": "3d1496f41ccc3902f6772ed8dc4888b22874de6ad5ab470eb16c5d2c7ac4c1ca",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2026-02-24T19:48:23.000000Z",
+    "executed_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "FEE_ROUTING_EXPANSION",
+    "direction": "ENABLE",
+    "execution_scope": "PARTIAL_MAINNET_AND_CROSSCHAIN_UNVERIFIED",
+    "classification_reason": "Spec changes mainnet adapters and dispatches fee-routing calls to other chains. L1 governance execution does not prove every destination executed.",
+    "publication_proof": {
+      "block_number": 24528953,
+      "block_hash": "0x132987559f119b562020ff8e34c125fbf9821cd73ae1b5dd7ec916b4b3324f12",
+      "transaction_hash": "0x69477820a944e1f333abec00cca18b6e8fef525f7d8cf05fe39f07fdb40ea73b",
+      "log_index": 490,
+      "published_at": "2026-02-24T19:48:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24528953",
+          "sha256": "294429699abff7bbdd9bf64a618dc53158d1138f86fef19ecdae25168cfcb625",
+          "first_seen_at": "2026-10-25T10:16:26.617654+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x69477820a944e1f333abec00cca18b6e8fef525f7d8cf05fe39f07fdb40ea73b",
+          "sha256": "418914dd30142a3eeb5abe2df7dddd6543e3df5661afe8c1b910d586ca0b968b",
+          "first_seen_at": "2026-10-25T10:16:27.293901+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x69477820a944e1f333abec00cca18b6e8fef525f7d8cf05fe39f07fdb40ea73b",
+          "sha256": "81c09cf88c8e7d74162e42b8d11188458ad6a1764160722de528cee6e28fceb2",
+          "first_seen_at": "2026-10-25T10:16:27.737706+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24528953",
+          "sha256": "50201f1184655f5bb15cd9c89cc95f5612ad37754663b3f556cf957ed1c7871e",
+          "first_seen_at": "2026-10-25T10:16:28.237655+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:28.237655+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:16:28.237655+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2026-03-06T07:19:59.000000Z",
+    "canceled_at": null,
+    "queued_at": "2026-03-04T06:51:35.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 24596885,
+      "block_hash": "0x79347467bfce1f0af9e6a0dcb92bd06aad357d3605be5e3960512e29f1ab8d1c",
+      "transaction_hash": "0xd6c4c93eaaac3b6cf144853655f91b326c5e3019b022baeec08eaf74c8af9833",
+      "log_index": 556,
+      "published_at": "2026-03-06T07:19:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24596885",
+          "sha256": "4e9b8dd99f32e4916efa8a89aaef3dc58b91348403db112cc3546988943410f0",
+          "first_seen_at": "2026-10-25T10:16:28.941450+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xd6c4c93eaaac3b6cf144853655f91b326c5e3019b022baeec08eaf74c8af9833",
+          "sha256": "5361ebc4b3f2e4ca23ac7e3641848655eb6b30efa86ff79a2c4c5cb829d220c2",
+          "first_seen_at": "2026-10-25T10:16:29.602372+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xd6c4c93eaaac3b6cf144853655f91b326c5e3019b022baeec08eaf74c8af9833",
+          "sha256": "58cb48581fc4c170cb432752baa5ea1b975ccbd2a2829ede9e86e80e0c62bc20",
+          "first_seen_at": "2026-10-25T10:16:30.036821+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24596885",
+          "sha256": "f1fb055c07483fe08da9a51e1b794c5229d29d8e27821b6a3e13bdc6d8473066",
+          "first_seen_at": "2026-10-25T10:16:30.792934+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:30.792934+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 24582415,
+      "block_hash": "0x158eb903505364eca7ec3a3cef0c3c5789ddb44b863865922ea37d011b7a69c6",
+      "transaction_hash": "0xf40c97353d0d31a1b2ad018d7a58b7baa740bbb6503c6ca542cca303d9c272c8",
+      "log_index": 81,
+      "published_at": "2026-03-04T06:51:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24582415",
+          "sha256": "f571b4d589536e7ae1b5abc0e3d6e7382318f9c266aeef4da7b964575c71a1f5",
+          "first_seen_at": "2026-10-25T10:16:31.920997+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xf40c97353d0d31a1b2ad018d7a58b7baa740bbb6503c6ca542cca303d9c272c8",
+          "sha256": "d4c9dd85ca273c6cbcc67823ba21c56530f9b6ba66e2cd303ba9b84164cd8d01",
+          "first_seen_at": "2026-10-25T10:16:32.589014+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xf40c97353d0d31a1b2ad018d7a58b7baa740bbb6503c6ca542cca303d9c272c8",
+          "sha256": "aeaa93558b595cac241b00dcb9f69dc7f224e5a8dc4928ce8ab3c7699f2b4e28",
+          "first_seen_at": "2026-10-25T10:16:33.021699+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24582415",
+          "sha256": "0caf8d4f04613470bbd13ec071dd9e68d62e44f5d22166a5ec419e782b61841c",
+          "first_seen_at": "2026-10-25T10:16:34.269205+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:34.269205+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-93",
+    "symbol": "UNIUSDT",
+    "proposal_id": 93,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "UNIfication",
+    "source_text_sha256": "a64bed77aa3735b42813b3a702ca247814e76f01ede1285d3e8c2a1b72d7ed28",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2025-12-18T07:43:59.000000Z",
+    "executed_at": "2025-12-27T20:33:11.000000Z",
+    "direct_value_accrual": true,
+    "mechanism": "FEE_ROUTING_AND_TREASURY_SINK_TRANSFER",
+    "direction": "ENABLE",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Spec calls transfer of 100m UNI to 0xdead and mainnet v2/v3 fee configuration; also authorizes 40m UNI vesting. Sink transfer is not a decrease in ERC20 totalSupply; realized net issuance/fees are unmeasured.",
+    "publication_proof": {
+      "block_number": 24038076,
+      "block_hash": "0xd677936aba7d64752641622345b26fe053c644bb0801ba5b39c17718b58765c4",
+      "transaction_hash": "0xc3d0830b94a3f1648d7aba91ea6dba47aab4e4466b28f05d9a2dd7278444096e",
+      "log_index": 21,
+      "published_at": "2025-12-18T07:43:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24038076",
+          "sha256": "ee4d0e9a08290871cc0c211f7aa46a8404c43dacc5361aa19cc0ac36cd37f500",
+          "first_seen_at": "2026-10-25T10:16:35.028338+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xc3d0830b94a3f1648d7aba91ea6dba47aab4e4466b28f05d9a2dd7278444096e",
+          "sha256": "255edc34adf92d788867778b2f2e6bf90e052b1056ccf3a02a456472f56a09c2",
+          "first_seen_at": "2026-10-25T10:16:35.976862+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xc3d0830b94a3f1648d7aba91ea6dba47aab4e4466b28f05d9a2dd7278444096e",
+          "sha256": "17136fcce5e9c2bf9caad312877d46486a92402600a368150e7c9492a37ab4e2",
+          "first_seen_at": "2026-10-25T10:16:36.399128+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24038076",
+          "sha256": "25aa02c30de4a07891ec6b40cb216762ef7c23613bfd3c7200b2240c281160d7",
+          "first_seen_at": "2026-10-25T10:16:37.301156+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:37.301156+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:16:37.301156+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2025-12-27T20:33:11.000000Z",
+    "canceled_at": null,
+    "queued_at": "2025-12-25T20:32:23.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 24106378,
+      "block_hash": "0xdffacec5530523a39bbb539d65518cdcb754b67369477767586f1ad66d596f14",
+      "transaction_hash": "0x091f0083242a777d55821c1189e568d6d033d9da501b75087dc736fa143d2c1e",
+      "log_index": 23,
+      "published_at": "2025-12-27T20:33:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24106378",
+          "sha256": "5deac0845f9feafa8fe4380e16c7ea02f6f7467da93e9c73c6090828a37bba88",
+          "first_seen_at": "2026-10-25T10:16:38.743974+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x091f0083242a777d55821c1189e568d6d033d9da501b75087dc736fa143d2c1e",
+          "sha256": "7eb6015a724810b3ea990f81babb3f07fa310b3eda07fc555f6a248135e5c179",
+          "first_seen_at": "2026-10-25T10:16:39.667748+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x091f0083242a777d55821c1189e568d6d033d9da501b75087dc736fa143d2c1e",
+          "sha256": "da7fc5de47bcb955498db3d846404503c1523eaf695818aa8c287b311f5f2f26",
+          "first_seen_at": "2026-10-25T10:16:40.108469+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24106378",
+          "sha256": "dc6b609bd6c62a1aaabfa7d5088258f9f20b058d7c53af63c493df8cee053d6c",
+          "first_seen_at": "2026-10-25T10:16:40.759484+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:40.759484+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 24092049,
+      "block_hash": "0x29a0aa71505b6f4efebad6cec527fb4b6d952f1f0babd324b895113c3c811bb5",
+      "transaction_hash": "0x3110da56ba91cc17fe20be37f18356f423cc8407084ed8b54213434f41e6f09f",
+      "log_index": 1159,
+      "published_at": "2025-12-25T20:32:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/24092049",
+          "sha256": "a86264cc8575976d6c28e1d2ee7217edda8e6b6b81d6f97a3647037df67edd26",
+          "first_seen_at": "2026-10-25T10:16:41.524382+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x3110da56ba91cc17fe20be37f18356f423cc8407084ed8b54213434f41e6f09f",
+          "sha256": "fd159a2dae3c827668073b6b14e9c86ef387791f8b4c7742d3b58d419f638469",
+          "first_seen_at": "2026-10-25T10:16:42.180921+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x3110da56ba91cc17fe20be37f18356f423cc8407084ed8b54213434f41e6f09f",
+          "sha256": "b41975513b6d071b3d2572924118f9e58440c5240f3398a109efff134e15f030",
+          "first_seen_at": "2026-10-25T10:16:42.624537+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=24092049",
+          "sha256": "d67a84c933c4462da3259a95f1f03e25833fa3259bf60affad46cb93e08f4c09",
+          "first_seen_at": "2026-10-25T10:16:43.177819+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:43.177819+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "economic_execution_evidence": {
+      "kind": "UNI_TRANSFER_TO_DEAD",
+      "amount_base_units": "100000000000000000000000000",
+      "amount_tokens": 100000000,
+      "receipt_url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x091f0083242a777d55821c1189e568d6d033d9da501b75087dc736fa143d2c1e",
+      "log_index": 11,
+      "total_supply_decrease_proven": false,
+      "ongoing_fee_revenue_quantified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-90",
+    "symbol": "UNIUSDT",
+    "proposal_id": 90,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Establish Uniswap Governance as \"DUNI,\" a Wyoming DUNA",
+    "source_text_sha256": "7ae34518e1d35e11e90f9acbb1889393f43ff4de1f6e619429ff12e14987cc90",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2025-08-31T15:32:11.000000Z",
+    "executed_at": "2025-09-10T02:51:23.000000Z",
+    "direct_value_accrual": false,
+    "mechanism": "LEGAL_ENTITY",
+    "direction": "INCIDENTAL",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "DUNA legal organization mentions future fee powers; it does not activate token fee accrual.",
+    "publication_proof": {
+      "block_number": 23262043,
+      "block_hash": "0x799b4e64a41705f17152c3be606113a8dc478a4624f14eb4537ba832e9261f20",
+      "transaction_hash": "0x2f14ae8e06efb260639fff98f5b5404b6c936323ef29950d1c0987c99e822c20",
+      "log_index": 435,
+      "published_at": "2025-08-31T15:32:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/23262043",
+          "sha256": "0b557315929feec492333f975363db80ab06ddd2cc988a3773b4dee85a8b169a",
+          "first_seen_at": "2026-10-25T10:16:44.546793+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x2f14ae8e06efb260639fff98f5b5404b6c936323ef29950d1c0987c99e822c20",
+          "sha256": "c74c62a1f1c9933c8d35a2805b14ed3423db73101bbc0e36c41b54144fd87d36",
+          "first_seen_at": "2026-10-25T10:16:45.387657+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x2f14ae8e06efb260639fff98f5b5404b6c936323ef29950d1c0987c99e822c20",
+          "sha256": "20faa7fd675fdd65b96a17b5f0e440798308b9aaedcd7e2038a12df62d767c6b",
+          "first_seen_at": "2026-10-25T10:16:45.852693+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=23262043",
+          "sha256": "20d2e8183098ddc88697819b21c018b7fd5da4db320bdd6b9d621c9ccbf7137a",
+          "first_seen_at": "2026-10-25T10:16:47.380730+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:47.380730+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:16:47.380730+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2025-09-10T02:51:23.000000Z",
+    "canceled_at": null,
+    "queued_at": "2025-09-08T02:51:11.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 23329832,
+      "block_hash": "0x52dd539cfb9436d0ecd9f3fd967233cb28bb30236e7fd8d44012cc5da28570cc",
+      "transaction_hash": "0xc6b21a755dd29ff761057f05d27eb65be30af0b8b0d72f46a04cd69881c8cf2c",
+      "log_index": 10,
+      "published_at": "2025-09-10T02:51:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/23329832",
+          "sha256": "d342dac0e586839055ee9c52a8fb279ad3942d28714501c777466b67bc1d0922",
+          "first_seen_at": "2026-10-25T10:16:48.178002+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xc6b21a755dd29ff761057f05d27eb65be30af0b8b0d72f46a04cd69881c8cf2c",
+          "sha256": "17b6c8a91859ee0f2289ba8e0dff14eef06844cfb00d655a7ffbfdc668d9d788",
+          "first_seen_at": "2026-10-25T10:16:48.950128+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xc6b21a755dd29ff761057f05d27eb65be30af0b8b0d72f46a04cd69881c8cf2c",
+          "sha256": "34f6b5029196d9368ae7c5266064c46d334ff1ab32add8c7341170233f0aa612",
+          "first_seen_at": "2026-10-25T10:16:49.403520+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=23329832",
+          "sha256": "0aad3b50576fc13fdc6d6af94563044197bf62811d1db69284816f427746165b",
+          "first_seen_at": "2026-10-25T10:16:50.710026+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:50.710026+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 23315505,
+      "block_hash": "0x63fba2337f0b9ec4a937fe07427276afe36693b1d0abf1cf05009c1178e247d7",
+      "transaction_hash": "0x704e5600489908982d9fc24ba1e4036b75733573f48e1b8760c55200bcf26820",
+      "log_index": 19,
+      "published_at": "2025-09-08T02:51:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/23315505",
+          "sha256": "3724635d05e5024bc38563898a47cafd709d3a1dcc4f3b9b8d50cbaeaedf2f94",
+          "first_seen_at": "2026-10-25T10:16:51.474927+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x704e5600489908982d9fc24ba1e4036b75733573f48e1b8760c55200bcf26820",
+          "sha256": "c6385785eb899ba861ef4d9724390dd1a8569ff9bb73909de3bff6e2bc094a46",
+          "first_seen_at": "2026-10-25T10:16:52.127138+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x704e5600489908982d9fc24ba1e4036b75733573f48e1b8760c55200bcf26820",
+          "sha256": "e7669eca0732ce39086b510657a428456becb54930b3488cfdf03e94ff4d0379",
+          "first_seen_at": "2026-10-25T10:16:52.724025+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=23315505",
+          "sha256": "41622dacc059e4ea70553ba9985eac1a779e6b339892bd27b3bd6237e57cf472",
+          "first_seen_at": "2026-10-25T10:16:53.712734+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:53.712734+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-63",
+    "symbol": "UNIUSDT",
+    "proposal_id": 63,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "DeFi Education Fund",
+    "source_text_sha256": "a5077200f47fe5ecf40cfffe16b336b3c91d46d1e55d2e781969ca6cde708536",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2024-05-21T14:11:35.000000Z",
+    "executed_at": "2024-05-31T16:05:23.000000Z",
+    "direct_value_accrual": false,
+    "mechanism": "EDUCATION_FUNDING",
+    "direction": "INCIDENTAL",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Burn refers to an organization's operating runway, not UNI destruction.",
+    "publication_proof": {
+      "block_number": 19918795,
+      "block_hash": "0xf91928d01a570fdeee9c4cfebc45e80e9025310064167e3d853b9b45eb2b769b",
+      "transaction_hash": "0x578ef4a4d1e544e0238e361fcd17adf9fe948c69884f41c0801a5dc960c8131c",
+      "log_index": 269,
+      "published_at": "2024-05-21T14:11:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19918795",
+          "sha256": "b51d6364282dc52a5414249781a4625557c46f97b5664ed7fa105b90546d8887",
+          "first_seen_at": "2026-10-25T10:16:54.470131+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x578ef4a4d1e544e0238e361fcd17adf9fe948c69884f41c0801a5dc960c8131c",
+          "sha256": "f184db97f67ec33a00ef6bef7ebdcd75713715524e3cb26b2b4dec094e3971eb",
+          "first_seen_at": "2026-10-25T10:16:55.385856+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x578ef4a4d1e544e0238e361fcd17adf9fe948c69884f41c0801a5dc960c8131c",
+          "sha256": "be0a407c8adc4f75550518e2a7d7cfa2b1b1ad2169f5bc3bceaf7112ed7c2836",
+          "first_seen_at": "2026-10-25T10:16:55.814610+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19918795",
+          "sha256": "3bb9f72e2ea9e7d6a816a393aa495942e376c7c174aec84aa042c9ca5b14b64a",
+          "first_seen_at": "2026-10-25T10:16:57.064946+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:16:57.064946+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:16:57.064946+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2024-05-31T16:05:23.000000Z",
+    "canceled_at": null,
+    "queued_at": "2024-05-29T03:39:11.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 19990890,
+      "block_hash": "0x4df1d21f4f11bd9492267d4af99c24b9a8c02af7f913d098b34685dbe7899807",
+      "transaction_hash": "0x4d5c546045a5948e200be8acc27a547bbaec977c33bc7681787663c70ba45972",
+      "log_index": 437,
+      "published_at": "2024-05-31T16:05:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19990890",
+          "sha256": "b5ceba3714ed1055a74ca11270f6a1ff46ebab51e3b866f843498a7b3465fc49",
+          "first_seen_at": "2026-10-25T10:16:57.843734+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x4d5c546045a5948e200be8acc27a547bbaec977c33bc7681787663c70ba45972",
+          "sha256": "74c4f92db2d239aa0f663d14962d7851f3d89f0ddc96d85f78bc58bc4c9d7e35",
+          "first_seen_at": "2026-10-25T10:16:59.161638+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x4d5c546045a5948e200be8acc27a547bbaec977c33bc7681787663c70ba45972",
+          "sha256": "5177c5de1a4ec0fd0b9c62682947cdd0fb58eafd9176f5676056f71323e77c41",
+          "first_seen_at": "2026-10-25T10:16:59.615741+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19990890",
+          "sha256": "af3772528fca3326eb1d57f4211751ff07265633dcf4dab25b15236c54bafcd0",
+          "first_seen_at": "2026-10-25T10:17:00.134429+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:00.134429+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 19972890,
+      "block_hash": "0xe09fd055ce747da74dd674b9dfc07edfcad86c01fc8614025105f15bed287ff1",
+      "transaction_hash": "0x16ad6d0da9cd4d3e48be993bf99d66b16f5d88721f0af6c6698f9cb1da9e401b",
+      "log_index": 303,
+      "published_at": "2024-05-29T03:39:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19972890",
+          "sha256": "8c882b04b1b1659415f03c25570b94cbaf68f5dd9287b695ee225c5344b2ff84",
+          "first_seen_at": "2026-10-25T10:17:00.836556+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x16ad6d0da9cd4d3e48be993bf99d66b16f5d88721f0af6c6698f9cb1da9e401b",
+          "sha256": "9e1a7e4648603c2786e38c0adf69238744c7e99b75d0a0c28b26fed49f2ffb80",
+          "first_seen_at": "2026-10-25T10:17:01.529411+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x16ad6d0da9cd4d3e48be993bf99d66b16f5d88721f0af6c6698f9cb1da9e401b",
+          "sha256": "2984689c9c8913df2f5b4a8f9663606d0cb640b4df0b6c90cfb6487d89da250a",
+          "first_seen_at": "2026-10-25T10:17:02.010955+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19972890",
+          "sha256": "e5d0be46b3a80e0004c7c35d140149f7e4d4c1b39f5de3eaf3deac7d957517a1",
+          "first_seen_at": "2026-10-25T10:17:02.900045+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:02.900045+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-59",
+    "symbol": "UNIUSDT",
+    "proposal_id": 59,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Uniswap Revitalization and Growth Proposal",
+    "source_text_sha256": "d659c068a5ef3f494012832a832097017bcd440c63c840d55a2219e2efadf9d2",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2024-02-17T00:58:59.000000Z",
+    "executed_at": "2024-02-26T17:48:35.000000Z",
+    "direct_value_accrual": false,
+    "mechanism": "GROWTH_INCENTIVES",
+    "direction": "INCIDENTAL",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Ecosystem onboarding incentives; assumes fee switch may someday be turned on.",
+    "publication_proof": {
+      "block_number": 19244175,
+      "block_hash": "0x6bc4d2aea980bbcc543927a976490612fc2a135ad31f14a11477616347affee5",
+      "transaction_hash": "0x2110e0222379b8fd644b7c537736d78b1d3f576e5819a0e427c26dd8d0b8409b",
+      "log_index": 200,
+      "published_at": "2024-02-17T00:58:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19244175",
+          "sha256": "fc9a7ac9c9e7e1854041441ac89bb0746b781f7ac1366e885e2f43aa5c289054",
+          "first_seen_at": "2026-10-25T10:17:03.539098+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x2110e0222379b8fd644b7c537736d78b1d3f576e5819a0e427c26dd8d0b8409b",
+          "sha256": "b874811132603171633c2eb97927b238ea62d6681b0d72ee9d7fe08f86980b4c",
+          "first_seen_at": "2026-10-25T10:17:04.498489+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x2110e0222379b8fd644b7c537736d78b1d3f576e5819a0e427c26dd8d0b8409b",
+          "sha256": "c6fb8d3dee6ca9f4d9678874b8e0b025208c943280cefb446d5f2c91cc3fb69b",
+          "first_seen_at": "2026-10-25T10:17:04.968261+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19244175",
+          "sha256": "149a2a9b0d19f59c17b366d5b341a506f00efacac956fb08de02b0f98004489f",
+          "first_seen_at": "2026-10-25T10:17:05.910123+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:05.910123+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:17:05.910123+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2024-02-26T17:48:35.000000Z",
+    "canceled_at": null,
+    "queued_at": "2024-02-24T16:14:35.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 19313324,
+      "block_hash": "0xc6a014b3997e8f32c42477949bc6f1ebc2a3ef95ccc07496d9814bd3b5c0b075",
+      "transaction_hash": "0xc644347d44404a6d2e0610712ddc110dd495a83e4f3f51138cfe46ca6d62dd36",
+      "log_index": 182,
+      "published_at": "2024-02-26T17:48:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19313324",
+          "sha256": "6e3f53dc694e0cba464c25f49bfa882826f60025c60d1f89f0f81ff95e8808fe",
+          "first_seen_at": "2026-10-25T10:17:06.603066+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xc644347d44404a6d2e0610712ddc110dd495a83e4f3f51138cfe46ca6d62dd36",
+          "sha256": "169bbba8dcba6fab2c96d80593196b7849b30425cec48e35fd69467345b233bf",
+          "first_seen_at": "2026-10-25T10:17:07.421782+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xc644347d44404a6d2e0610712ddc110dd495a83e4f3f51138cfe46ca6d62dd36",
+          "sha256": "08a41691ae5b4de4a58a900c7d3f079dded460c2ce33c067b9f053a4255b5ba5",
+          "first_seen_at": "2026-10-25T10:17:07.885681+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19313324",
+          "sha256": "9d6fc8f85517d0c6733fe58af5fd8a74ae0f52ce79d01702bb05cb9286e63b8a",
+          "first_seen_at": "2026-10-25T10:17:08.580311+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:08.580311+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 19298569,
+      "block_hash": "0x0d3eea13b92f0743cea97a4cafc69e0f03ed8004a5ac384b16fb321ecb909b84",
+      "transaction_hash": "0x85402e133ab904a92d00bb66b9f7dfc54a1fa68cd5ac3fffffa3d60363a0710a",
+      "log_index": 386,
+      "published_at": "2024-02-24T16:14:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19298569",
+          "sha256": "0d9b8b275aeee3e3462e117b2e7fdc810727da797f2bfa3a8c9a5ddd639b6d80",
+          "first_seen_at": "2026-10-25T10:17:09.350954+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x85402e133ab904a92d00bb66b9f7dfc54a1fa68cd5ac3fffffa3d60363a0710a",
+          "sha256": "1a492dbee5fd7338dc962aa8103b32d5a05ad911431074197bd0fc40b2801ecd",
+          "first_seen_at": "2026-10-25T10:17:10.053867+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x85402e133ab904a92d00bb66b9f7dfc54a1fa68cd5ac3fffffa3d60363a0710a",
+          "sha256": "da828a2b8900de459c577ffe97a691b8d71be73a5c3390b2b0bdefba4875488d",
+          "first_seen_at": "2026-10-25T10:17:10.504302+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19298569",
+          "sha256": "91f2b598d5643347c6fdd0dcf4420a32a118368d71d5297a888fb15d971bb177",
+          "first_seen_at": "2026-10-25T10:17:11.426031+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:11.426031+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-55",
+    "symbol": "UNIUSDT",
+    "proposal_id": 55,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Lower Onchain Proposal Threshold",
+    "source_text_sha256": "5af603a069498035b81b610577de2d76fa5918d433239438a9f7cab8d546b682",
+    "source_envelope_sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+    "first_seen_at": "2026-10-25T10:06:45.437088+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2024-01-19T23:33:35.000000Z",
+    "executed_at": "2024-01-29T19:20:11.000000Z",
+    "direct_value_accrual": false,
+    "mechanism": "PROPOSAL_THRESHOLD",
+    "direction": "INCIDENTAL",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Proposal threshold reduction; future fee switch is speculative context.",
+    "publication_proof": {
+      "block_number": 19044217,
+      "block_hash": "0x7ec3bba730e9bb2d6e0e69dd1e058ffc5fbeb5dd63990020ea2dce56cb356d6e",
+      "transaction_hash": "0xad1cd8e2fc478acf829789bf14b3b9143623fba940c51b1bc7924987826ef297",
+      "log_index": 236,
+      "published_at": "2024-01-19T23:33:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0",
+          "sha256": "b7d63dba892ed3d7763c2fb9ab4461a7457057a4e2a49aa434f1a103cf8a50a7",
+          "first_seen_at": "2026-10-25T10:06:45.437088+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19044217",
+          "sha256": "77f04b4b2120ea881f05f07e45136f55d7c2c46654a0ba116834b02ff3bf4793",
+          "first_seen_at": "2026-10-25T10:17:12.156004+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xad1cd8e2fc478acf829789bf14b3b9143623fba940c51b1bc7924987826ef297",
+          "sha256": "df576110bbfb931c3d660812aa64865e98a81d31abcda13db3e94c18a5f778bd",
+          "first_seen_at": "2026-10-25T10:17:13.175673+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xad1cd8e2fc478acf829789bf14b3b9143623fba940c51b1bc7924987826ef297",
+          "sha256": "f31844db746fdec0d6abf4850c6ce24d9c87043969719a1496d9c391b6200fd8",
+          "first_seen_at": "2026-10-25T10:17:13.660422+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19044217",
+          "sha256": "d207cbee8e14ee0c06e832cc56c795a490c51850fcc72d977b6971f87a62a989",
+          "first_seen_at": "2026-10-25T10:17:14.626637+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:14.626637+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:17:14.626637+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2024-01-29T19:20:11.000000Z",
+    "canceled_at": null,
+    "queued_at": "2024-01-27T13:12:23.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 19114228,
+      "block_hash": "0x26e3d4414ed3567956c206934ee868d65baf5b33245131c648e9d55382d128e4",
+      "transaction_hash": "0x62d12a3dbd80bf7d6e5ade63d12997c99c964be6647b8a5f232b9e6ab4e8d5bd",
+      "log_index": 253,
+      "published_at": "2024-01-29T19:20:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19114228",
+          "sha256": "2c6f8f26b92cda6cf30992e5b1aadc4cd65d360e6de12e68b9074bfcbe3b05b8",
+          "first_seen_at": "2026-10-25T10:17:15.412131+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x62d12a3dbd80bf7d6e5ade63d12997c99c964be6647b8a5f232b9e6ab4e8d5bd",
+          "sha256": "9c83797988ce3f66e3a9a0959df70b1f7fc8a41d659eb8e0cf2597f2092cd031",
+          "first_seen_at": "2026-10-25T10:17:16.086254+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x62d12a3dbd80bf7d6e5ade63d12997c99c964be6647b8a5f232b9e6ab4e8d5bd",
+          "sha256": "c80a2b2441e518ffe8a453d5e5a629c45b5136b28e18841f28529c6739e1697c",
+          "first_seen_at": "2026-10-25T10:17:16.500783+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19114228",
+          "sha256": "e8930f1e4130bcb4d719051bf2072586cbeda92f12dd1abba98ad15cb35ead14",
+          "first_seen_at": "2026-10-25T10:17:16.943667+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:16.943667+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 19098134,
+      "block_hash": "0x42ae4fa35224f2e6391b576de23db60a188803b78f6ae82ae7d316cc4e104210",
+      "transaction_hash": "0x15bd94b08aaa1cccf74867eee45b4434dc0d2b1f7ca14f47fc7222cd5947f191",
+      "log_index": 161,
+      "published_at": "2024-01-27T13:12:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/19098134",
+          "sha256": "1b7559d2afdb444e0c7a46e8333b3549b980a809bdb0f9b220ebaf4979b94300",
+          "first_seen_at": "2026-10-25T10:17:17.745792+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x15bd94b08aaa1cccf74867eee45b4434dc0d2b1f7ca14f47fc7222cd5947f191",
+          "sha256": "2f2a088f46c81e3d5842e2b5335cf58b7040cc64d7ae1d3d9b44b0dacb694461",
+          "first_seen_at": "2026-10-25T10:17:18.411322+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x15bd94b08aaa1cccf74867eee45b4434dc0d2b1f7ca14f47fc7222cd5947f191",
+          "sha256": "3f7f5f9d07a2f86e26a28046a9040f8765f65a97de720bd8aad5ff3e05a829c7",
+          "first_seen_at": "2026-10-25T10:17:18.853342+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=19098134",
+          "sha256": "bd8923bc4adfbd6b0a122562d30786fc7ac2d6989d3b45bba06979ca9e5a1050",
+          "first_seen_at": "2026-10-25T10:17:19.319750+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:19.319750+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-51",
+    "symbol": "UNIUSDT",
+    "proposal_id": 51,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Complete initial funding of the Uniswap Foundation",
+    "source_text_sha256": "6fd970be554fa6ba3d49fee5703ce13ed9d1d86b9cdb14bcb9c7840ece4706b6",
+    "source_envelope_sha256": "388de32f8dd2b83cea258be682f184afd4d7a9d9b6f4713903ff1b445edfc833",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?index=137&block_number=18723395&topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0&items_count=50",
+    "first_seen_at": "2026-10-25T10:07:00.503363+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2023-10-10T22:00:23.000000Z",
+    "executed_at": "2023-10-20T11:32:11.000000Z",
+    "direct_value_accrual": false,
+    "mechanism": "FOUNDATION_FUNDING",
+    "direction": "INCIDENTAL",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Foundation funding; protocol fee switch education is incidental.",
+    "publication_proof": {
+      "block_number": 18322894,
+      "block_hash": "0x45e60db9f9cdb0f749170dc757bffdcf91c9119cf224adb4c0d9ddc97954b7f0",
+      "transaction_hash": "0x57199ed642a5fc5e192e5df95ab47510258ef50b95c7fbc4c67b10adb0be5c3a",
+      "log_index": 296,
+      "published_at": "2023-10-10T22:00:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?index=137&block_number=18723395&topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0&items_count=50",
+          "sha256": "388de32f8dd2b83cea258be682f184afd4d7a9d9b6f4713903ff1b445edfc833",
+          "first_seen_at": "2026-10-25T10:07:00.503363+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/18322894",
+          "sha256": "118ba37bb9e0b6f5870c7ed0d124f84a091538d00e5228d507a7d2de0a798392",
+          "first_seen_at": "2026-10-25T10:17:20.019333+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x57199ed642a5fc5e192e5df95ab47510258ef50b95c7fbc4c67b10adb0be5c3a",
+          "sha256": "be78ff3e52f73604001d7d7dc6885d23e1130df9205eb48e9f23069d84813d59",
+          "first_seen_at": "2026-10-25T10:17:21.018312+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x57199ed642a5fc5e192e5df95ab47510258ef50b95c7fbc4c67b10adb0be5c3a",
+          "sha256": "6878bef7d786590af9f2888c2f5db3905d02c2060adba004f593f2adf8f981e5",
+          "first_seen_at": "2026-10-25T10:17:21.553648+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=18322894",
+          "sha256": "a73420d24296b96f70c30a51c1077a190105320dfba6de9c55ce8eb6f45089ef",
+          "first_seen_at": "2026-10-25T10:17:22.969648+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:22.969648+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:17:22.969648+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2023-10-20T11:32:11.000000Z",
+    "canceled_at": null,
+    "queued_at": "2023-10-18T09:29:59.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 18391257,
+      "block_hash": "0x165e14b78af546979cce53a6238038da90c4693616a7c8315cc3954fc4ef7a83",
+      "transaction_hash": "0xd8304a661d34282ed988507f5b9353605062e92a5f621becf3a5284076b66b0e",
+      "log_index": 105,
+      "published_at": "2023-10-20T11:32:11.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f",
+          "sha256": "57c72f6fd0194a4873e7be4bd4c5e4ae23d76890cf30c068dea111ec81346f46",
+          "first_seen_at": "2026-10-25T10:02:59.646721+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/18391257",
+          "sha256": "fefb67a3e6e8dbbaf4249636ad81b8f51d2be29816a797edb8e6f034617276c3",
+          "first_seen_at": "2026-10-25T10:17:23.824991+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xd8304a661d34282ed988507f5b9353605062e92a5f621becf3a5284076b66b0e",
+          "sha256": "6dd38a2e15c845323ca6a6abc9d0f4a5a3da2eb168c2dec140325e44046084ee",
+          "first_seen_at": "2026-10-25T10:17:24.678727+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xd8304a661d34282ed988507f5b9353605062e92a5f621becf3a5284076b66b0e",
+          "sha256": "c563c750f7f67f609da1dfa346c3709b604c6dd91e67d145ba5143981787c4ef",
+          "first_seen_at": "2026-10-25T10:17:25.073185+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=18391257",
+          "sha256": "4ec4e45d67bafbc6b92aa33713f5b7bf017d0610bc4cc59530be9be75048bfca",
+          "first_seen_at": "2026-10-25T10:17:25.590341+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:25.590341+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 18376356,
+      "block_hash": "0x77241d6181ec34d9411c023084e555ece640468981c3122cc3798a7cda18bf0b",
+      "transaction_hash": "0x8bb59ff3877f5e2b65f8e2f151c75a4667df295a17d88be19d5f2646028558dc",
+      "log_index": 145,
+      "published_at": "2023-10-18T09:29:59.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892",
+          "sha256": "d7af48a11fbbb9e82a6fecd05063203609d9ce24ff6221b72dae9ddb74ddbcb1",
+          "first_seen_at": "2026-10-25T10:07:10.497982+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/18376356",
+          "sha256": "39541960c2c948193ba867f32d497fb783abbb16f340e49c5a305f46d455d7ad",
+          "first_seen_at": "2026-10-25T10:17:26.314050+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x8bb59ff3877f5e2b65f8e2f151c75a4667df295a17d88be19d5f2646028558dc",
+          "sha256": "fdb4ccfc3e09464f94902116682ef61ed5c1ef2a51d1924242015f9b8e5fe663",
+          "first_seen_at": "2026-10-25T10:17:27.241780+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x8bb59ff3877f5e2b65f8e2f151c75a4667df295a17d88be19d5f2646028558dc",
+          "sha256": "418a49aa37103873a4e53f6893cf9644cf83a5a52875709b823416ed62938362",
+          "first_seen_at": "2026-10-25T10:17:27.694801+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=18376356",
+          "sha256": "86dc73394e10e685eea789aaa0746e50d0166b568e9d48ecda19d45fe8260e2a",
+          "first_seen_at": "2026-10-25T10:17:28.215821+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:28.215821+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "UNI-bravo-24",
+    "symbol": "UNIUSDT",
+    "proposal_id": 24,
+    "governor": "0x408ED6354d4973f66138C91495F2f2FCbd8724C3",
+    "chain_id": 1,
+    "title": "Create the Uniswap Foundation",
+    "source_text_sha256": "fbb8b0bd78140a681bd90be3f182b8ba078dc4bd7a34823870592b9acd1090b0",
+    "source_envelope_sha256": "388de32f8dd2b83cea258be682f184afd4d7a9d9b6f4713903ff1b445edfc833",
+    "source_url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?index=137&block_number=18723395&topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0&items_count=50",
+    "first_seen_at": "2026-10-25T10:07:00.503363+00:00",
+    "historical_collector_first_seen_at": null,
+    "source_time_proven": true,
+    "published_at": "2022-08-15T16:11:16.000000Z",
+    "executed_at": "2022-08-26T04:19:53.000000Z",
+    "direct_value_accrual": false,
+    "mechanism": "FOUNDATION_FUNDING",
+    "direction": "INCIDENTAL",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Foundation funding; fee switch appears in a roadmap discussion, with no fee activation in this proposal.",
+    "publication_proof": {
+      "block_number": 15346993,
+      "block_hash": "0xe117016924a8cc8691dd87964f6ab894575951488389fdbc16bfcad76c31a0ed",
+      "transaction_hash": "0x9915654df9bee34644e0d587999420e0db823bedfa5523fd2b3ad22e97bb082b",
+      "log_index": 194,
+      "published_at": "2022-08-15T16:11:16.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?index=137&block_number=18723395&topic=0x7d84a6263ae0d98d3329bd7b46bb4e8d6f98cd35a7adb45c274c8b7fd5ebd5e0&items_count=50",
+          "sha256": "388de32f8dd2b83cea258be682f184afd4d7a9d9b6f4713903ff1b445edfc833",
+          "first_seen_at": "2026-10-25T10:07:00.503363+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/15346993",
+          "sha256": "012ec6792ddc9c4b899ce68be2e09733fd56ad591a97babe861a87a1ed8eabb5",
+          "first_seen_at": "2026-10-25T10:17:28.974255+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x9915654df9bee34644e0d587999420e0db823bedfa5523fd2b3ad22e97bb082b",
+          "sha256": "23de112a556d06c1671bde842bcc40ef4735e941c20da6a6878781f5f5ac129f",
+          "first_seen_at": "2026-10-25T10:17:30.103565+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x9915654df9bee34644e0d587999420e0db823bedfa5523fd2b3ad22e97bb082b",
+          "sha256": "e84a14b1e40145c57411c9d64f68c2143f6c9683e6a3c8afa947cf8306297034",
+          "first_seen_at": "2026-10-25T10:17:30.640577+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=15346993",
+          "sha256": "c02e3b60f4b5e72b5dd3c880d8a410e1fd0d9cd258ed08edec5a24b78c70fcee",
+          "first_seen_at": "2026-10-25T10:17:32.037939+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:32.037939+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:17:32.037939+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2022-08-26T04:19:53.000000Z",
+    "canceled_at": null,
+    "queued_at": "2022-08-24T03:34:18.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 15413228,
+      "block_hash": "0x873bba86d8e88337d504cbad418d91adec7a82d05e4d695bb58565e49db93e4b",
+      "transaction_hash": "0x9188543cd776b65a5f34a6c0d10d5166dfc225b7a5c5fa44bc9b1df812947d42",
+      "log_index": 287,
+      "published_at": "2022-08-26T04:19:53.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?index=219&block_number=18035233&topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f&items_count=50",
+          "sha256": "ab90260030c8974287c612a52c4a1d3e613f5f28488738642e4419cfeb6d46a4",
+          "first_seen_at": "2026-10-25T10:07:08.694816+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/15413228",
+          "sha256": "166fee831321b35c657605229e9b07da01f7445ae286fb958e261e470d58fe4e",
+          "first_seen_at": "2026-10-25T10:17:32.704791+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x9188543cd776b65a5f34a6c0d10d5166dfc225b7a5c5fa44bc9b1df812947d42",
+          "sha256": "48816a304d591c29382bdd8ac3376a61fbfe220bef29c03d919073ba3a267c6f",
+          "first_seen_at": "2026-10-25T10:17:33.452488+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x9188543cd776b65a5f34a6c0d10d5166dfc225b7a5c5fa44bc9b1df812947d42",
+          "sha256": "38da5726d16b1557fe6f1b48671e105df8f14898525591f2c0498bb151933bbe",
+          "first_seen_at": "2026-10-25T10:17:33.908699+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=15413228",
+          "sha256": "1f74b8c6f6d7ba9f00675aac98c4704436efb4e1eb2ba8deb3cf0317f84a0985",
+          "first_seen_at": "2026-10-25T10:17:34.897347+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:34.897347+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 15400579,
+      "block_hash": "0x4ea734f72eb50e529eaf9b6c1d39925ff5fb892ea0c374bb61e683cbb46b052f",
+      "transaction_hash": "0x8445f25a59db26c53401aa684b3b278dbe605314cfea0b888dfc51be1c7442e8",
+      "log_index": 106,
+      "published_at": "2022-08-24T03:34:18.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x408ED6354d4973f66138C91495F2f2FCbd8724C3/logs?index=424&block_number=18020427&topic=0x9a2e42fd6722813d69113e7d0079d3d940171428df7373df9c7f7617cfda2892&items_count=50",
+          "sha256": "919f8013322d277aebe101af62706494c3c72c08534c1100e0523b1799edd0c8",
+          "first_seen_at": "2026-10-25T10:07:12.341822+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/15400579",
+          "sha256": "cc813f1e03a59a1332e12a4e50ac19759f8dce858ac51a4645d4bdb35b403264",
+          "first_seen_at": "2026-10-25T10:17:35.628372+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x8445f25a59db26c53401aa684b3b278dbe605314cfea0b888dfc51be1c7442e8",
+          "sha256": "49b601cba50a1446677799b5c52c3d9ab193cbc9069a36e7a8ee40190f80ec81",
+          "first_seen_at": "2026-10-25T10:17:36.305351+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x8445f25a59db26c53401aa684b3b278dbe605314cfea0b888dfc51be1c7442e8",
+          "sha256": "af9ca70a4c44bbd9889cfaf3349f5e27ce602ae62266c7de521fccb21c973103",
+          "first_seen_at": "2026-10-25T10:17:36.754841+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=15400579",
+          "sha256": "538e44e2e8c653f6f3ccfe6e76674f3edc484b88788458a966484610682b9029",
+          "first_seen_at": "2026-10-25T10:17:37.843412+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:37.843412+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  },
+  {
+    "event_id": "AAVE-v3-286",
+    "symbol": "AAVEUSDT",
+    "proposal_id": 286,
+    "governor": "0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7",
+    "chain_id": 1,
+    "title": "AAVE Buybacks allocation",
+    "source_url": "https://gateway.pinata.cloud/ipfs/QmWdcnb3Z3rE711cYNpfNmZUDuxfHgq6yGVnbBecxu8Prj",
+    "source_text_sha256": "947386fa2a89fa187c358d706ebc289eb1147457eedd6b3439e66e5b24bff7e6",
+    "source_envelope_sha256": "44240b0878b3d0cc11e56b1317a5ec587d8e6b183aea322dd2c6762dbe1aca85",
+    "ipfs_cid": "QmWdcnb3Z3rE711cYNpfNmZUDuxfHgq6yGVnbBecxu8Prj",
+    "ipfs_verified": true,
+    "first_seen_at": "2026-10-25T10:15:11.034188+00:00",
+    "historical_collector_first_seen_at": null,
+    "direct_value_accrual": true,
+    "mechanism": "BUY_AND_DISTRIBUTE_ALLOWANCE",
+    "direction": "ENABLE",
+    "classification_reason": "Original CID text authorizes 4m aEthUSDT allowance to AFC for market purchases and reserve distribution; not burn, not completed purchases.",
+    "source_time_proven": true,
+    "published_at": "2025-04-04T17:09:35.000000Z",
+    "executed_at": "2025-04-09T17:59:59.000000Z",
+    "execution_scope": "ETHEREUM_MAINNET_ALLOWANCE",
+    "realized_buyback_at": null,
+    "realized_buyback_amount": null,
+    "publication_proof": {
+      "block_number": 22196955,
+      "block_hash": "0xff8ab9bc5832acbe2739f644eee9b31fa78da034229fb7c98c56084319544072",
+      "transaction_hash": "0x29e5f525f3453b32d94f5596518fc1c7832b78894fa688d75de9a273e41b9aa1",
+      "log_index": 468,
+      "published_at": "2025-04-04T17:09:35.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7/logs?index=326&block_number=22196973&topic=0xcc914becfa276bbc067049bf8db2d34ebbdc1bafa851e4d4936aaed376c08dbe&items_count=50",
+          "sha256": "44240b0878b3d0cc11e56b1317a5ec587d8e6b183aea322dd2c6762dbe1aca85",
+          "first_seen_at": "2026-10-25T10:07:24.172367+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/22196955",
+          "sha256": "b5abf660f3e1e0f49849b08665b3d7d58720651737da1fa025c46c37189c1301",
+          "first_seen_at": "2026-10-25T10:17:38.525838+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0x29e5f525f3453b32d94f5596518fc1c7832b78894fa688d75de9a273e41b9aa1",
+          "sha256": "22c85ac984ac01f8dbf1e8d44bf9c1d9fda4755690b8ae9dfc40ae20d355c33d",
+          "first_seen_at": "2026-10-25T10:17:39.386168+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x29e5f525f3453b32d94f5596518fc1c7832b78894fa688d75de9a273e41b9aa1",
+          "sha256": "6a827d63e7876f6890ad4502afab0e480c0fe882e45a1e84dfa5db2ce3a77ee6",
+          "first_seen_at": "2026-10-25T10:17:39.841197+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=22196955",
+          "sha256": "16f9238ecb0edd328d928b20e3096e74599dee2e40c3cf733a6491f4a6b1797e",
+          "first_seen_at": "2026-10-25T10:17:40.703557+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:40.703557+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "evidence_complete_at": "2026-10-25T10:17:40.703557+00:00",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "governance_executed_at": "2025-04-08T17:59:23.000000Z",
+    "canceled_at": null,
+    "queued_at": "2025-04-08T17:58:47.000000Z",
+    "governance_executed_at_proof": {
+      "block_number": 22225829,
+      "block_hash": "0x494f7f0a77beb448fb8ea056edd6088f63874fba851df8814123db7977a456f7",
+      "transaction_hash": "0xad4aa903ed50d4e45e49f61b232498c2740a26ef00708edb8f92ecea73b8e456",
+      "log_index": 44,
+      "published_at": "2025-04-08T17:59:23.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7/logs?index=189&block_number=22776557&topic=0x712ae1383f79ac853f8d882153778e0260ef8f03b504e2866e0593e04d2b291f&items_count=50",
+          "sha256": "0de7266d5578dfa7ea1f36fd451e674fe33550c23c66c720bef30f99ebb389b9",
+          "first_seen_at": "2026-10-25T10:07:39.784724+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/22225829",
+          "sha256": "fd191e7e75aa871c6977241741f6b5fb63717c6d89d9b7f58694f50e299a4b07",
+          "first_seen_at": "2026-10-25T10:17:41.428610+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xad4aa903ed50d4e45e49f61b232498c2740a26ef00708edb8f92ecea73b8e456",
+          "sha256": "e2e634b12f9536b2ddb17f8c1a73e518772e7bcf887559652b73789788d522e2",
+          "first_seen_at": "2026-10-25T10:17:42.127151+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xad4aa903ed50d4e45e49f61b232498c2740a26ef00708edb8f92ecea73b8e456",
+          "sha256": "a5adf49b67f67d88ad6f6ca1ad19721f14361dc87e731ba0b5c859b2d95f9cfe",
+          "first_seen_at": "2026-10-25T10:17:42.559900+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=22225829",
+          "sha256": "908648897139edd08c77c5e6407b69abd4a0c758b1f8e2775552adb08a637d5f",
+          "first_seen_at": "2026-10-25T10:17:43.572190+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:43.572190+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "queued_at_proof": {
+      "block_number": 22225826,
+      "block_hash": "0x36ed285ff665c3897d80510b865bdcf4977f220c2a38135dd3738e237808d1e5",
+      "transaction_hash": "0xfc745c161784c3561e4d58651c129e89c0582bf9df390c52d3a13b4ce0ddfbe0",
+      "log_index": 264,
+      "published_at": "2025-04-08T17:58:47.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/addresses/0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7/logs?index=163&block_number=22776556&topic=0xe39e7fc9f2013b8ab01110f66610f9fb8675d3126e69b3752f0084afc72be19a&items_count=50",
+          "sha256": "388982e23c5d4b446b786153b6bcd4502816c9bbfc3bbf1ce3b713f5655d1880",
+          "first_seen_at": "2026-10-25T10:07:56.598477+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/22225826",
+          "sha256": "821877c39b5eff59c474335809760b1ddb679cc7932685be9fed94a498218fbb",
+          "first_seen_at": "2026-10-25T10:17:44.249903+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/transactions/0xfc745c161784c3561e4d58651c129e89c0582bf9df390c52d3a13b4ce0ddfbe0",
+          "sha256": "8df85d99d2a2f5e8229e6431b6b827488adfffa8f42f6bd14194e937be5a8ac3",
+          "first_seen_at": "2026-10-25T10:17:44.998940+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xfc745c161784c3561e4d58651c129e89c0582bf9df390c52d3a13b4ce0ddfbe0",
+          "sha256": "4a7a0c67ee7a6e3433c83bed19ccb072342960b99f3c912be97665b69b46b601",
+          "first_seen_at": "2026-10-25T10:17:45.429735+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=22225826",
+          "sha256": "7ba7644c03812dcfa766eb6fb9ebfb7184b1c6d73510a4dc8757596f914739c7",
+          "first_seen_at": "2026-10-25T10:17:46.118242+00:00"
+        }
+      ],
+      "evidence_complete_at": "2026-10-25T10:17:46.118242+00:00",
+      "cross_provider_exact_receipt_match": true,
+      "consensus_or_merkle_proof_verified": false
+    },
+    "payloads": [
+      {
+        "id": 267,
+        "sent_proof": {
+          "block_number": 22225829,
+          "block_hash": "0x494f7f0a77beb448fb8ea056edd6088f63874fba851df8814123db7977a456f7",
+          "transaction_hash": "0xad4aa903ed50d4e45e49f61b232498c2740a26ef00708edb8f92ecea73b8e456",
+          "log_index": 43,
+          "published_at": "2025-04-08T17:59:23.000000Z",
+          "sources": [
+            {
+              "url": "https://eth.blockscout.com/api/v2/addresses/0x9AEE0B04504CeF83A65AC3f0e838D0593BCb2BC7/logs?index=154&block_number=22453973&topic=0x9c687134d572ff69f3e23f40470562650574c5c7cab9f535268763b2d00da65b&items_count=50",
+              "sha256": "fab807e61e8f72920709c3dc49855cf98fa0d112a65cc7179e4e4987ce2df285",
+              "first_seen_at": "2026-10-25T10:08:30.257148+00:00"
+            },
+            {
+              "url": "https://eth.blockscout.com/api/v2/blocks/22225829",
+              "sha256": "fd191e7e75aa871c6977241741f6b5fb63717c6d89d9b7f58694f50e299a4b07",
+              "first_seen_at": "2026-10-25T10:17:41.428610+00:00"
+            },
+            {
+              "url": "https://eth.blockscout.com/api/v2/transactions/0xad4aa903ed50d4e45e49f61b232498c2740a26ef00708edb8f92ecea73b8e456",
+              "sha256": "e2e634b12f9536b2ddb17f8c1a73e518772e7bcf887559652b73789788d522e2",
+              "first_seen_at": "2026-10-25T10:17:42.127151+00:00"
+            },
+            {
+              "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0xad4aa903ed50d4e45e49f61b232498c2740a26ef00708edb8f92ecea73b8e456",
+              "sha256": "a5adf49b67f67d88ad6f6ca1ad19721f14361dc87e731ba0b5c859b2d95f9cfe",
+              "first_seen_at": "2026-10-25T10:17:42.559900+00:00"
+            },
+            {
+              "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=22225829",
+              "sha256": "908648897139edd08c77c5e6407b69abd4a0c758b1f8e2775552adb08a637d5f",
+              "first_seen_at": "2026-10-25T10:17:43.572190+00:00"
+            }
+          ],
+          "evidence_complete_at": "2026-10-25T10:17:43.572190+00:00",
+          "cross_provider_exact_receipt_match": true,
+          "consensus_or_merkle_proof_verified": false
+        },
+        "execution_proof": {
+          "block_number": 22233000,
+          "block_hash": "0x3c34d2d6ca597b4bc101a86d3973c18cf35d9bf6f718e97a5e76c4f43d0072e9",
+          "transaction_hash": "0x4156210212c864ca6682bd804092689ab46174cf0129fd23771c5a4599a55f55",
+          "log_index": 435,
+          "published_at": "2025-04-09T17:59:59.000000Z",
+          "sources": [
+            {
+              "url": "https://eth.blockscout.com/api/v2/addresses/0xdAbad81aF85554E9ae636395611C58F7eC1aAEc5/logs?index=146&block_number=22802246&topic=0xda6084bb0aa902a7f6da10ba185d4aa129414651c90772417eff02a52112af2a&items_count=50",
+              "sha256": "523c4e9e883b34b1bec099dc7fba579ff194ab09754f2162f1839aa2426fdb30",
+              "first_seen_at": "2026-10-25T10:09:27.372579+00:00"
+            },
+            {
+              "url": "https://eth.blockscout.com/api/v2/blocks/22233000",
+              "sha256": "6cf5e99bb00d2ba9e23030ebb36a07be1fbf3a796dbbbcb0c64b9589c369cbaf",
+              "first_seen_at": "2026-10-25T10:17:46.792418+00:00"
+            },
+            {
+              "url": "https://eth.blockscout.com/api/v2/transactions/0x4156210212c864ca6682bd804092689ab46174cf0129fd23771c5a4599a55f55",
+              "sha256": "eacbb07e0bdf776eaca11e2571d9a97609d8edd418a028f5eba224abcb335765",
+              "first_seen_at": "2026-10-25T10:17:47.450862+00:00"
+            },
+            {
+              "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x4156210212c864ca6682bd804092689ab46174cf0129fd23771c5a4599a55f55",
+              "sha256": "1a713453dac22303491151735a2b8d2e2e67c9faeb05dc626fb04e3a65465b8d",
+              "first_seen_at": "2026-10-25T10:17:47.999614+00:00"
+            },
+            {
+              "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=22233000",
+              "sha256": "4045e211f91add0b3d502a0c15fd318ed1e7c06a9b2f4d8304c307cc1424bcc8",
+              "first_seen_at": "2026-10-25T10:17:49.138475+00:00"
+            }
+          ],
+          "evidence_complete_at": "2026-10-25T10:17:49.138475+00:00",
+          "cross_provider_exact_receipt_match": true,
+          "consensus_or_merkle_proof_verified": false
+        },
+        "executed_at": "2025-04-09T17:59:59.000000Z"
+      }
+    ],
+    "economic_execution_evidence": {
+      "kind": "AETHUSDT_ALLOWANCE",
+      "amount_base_units": "4000000000000",
+      "receipt_url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=proxy&action=eth_getTransactionReceipt&txhash=0x4156210212c864ca6682bd804092689ab46174cf0129fd23771c5a4599a55f55",
+      "log_index": 433,
+      "completed_buyback_proven": false
+    }
+  },
+  {
+    "event_id": "ETH-london-12965000",
+    "symbol": "ETHUSDT",
+    "chain_id": 1,
+    "title": "London base-fee burn activation",
+    "source_url": "https://eth.blockscout.com/api/v2/blocks/12965000",
+    "source_text_sha256": "f63b4a3736f5172f2b70fc28556912cc828dd6f1aff6125418344ed422d306b4",
+    "source_envelope_sha256": "f63b4a3736f5172f2b70fc28556912cc828dd6f1aff6125418344ed422d306b4",
+    "published_at": "2021-08-05T12:33:42.000000Z",
+    "executed_at": "2021-08-05T12:33:42.000000Z",
+    "first_seen_at": "2026-10-25T10:09:38.806620+00:00",
+    "evidence_complete_at": "2026-10-25T10:09:38.806620+00:00",
+    "historical_collector_first_seen_at": null,
+    "direct_value_accrual": true,
+    "source_time_proven": true,
+    "mechanism": "BASE_FEE_BURN_ACTIVATION",
+    "direction": "ENABLE",
+    "execution_scope": "ETHEREUM_MAINNET",
+    "classification_reason": "Execution-stage base-fee burn observation only; no proven earlier announcement vintage or claim of net deflation.",
+    "timing_status": "CHAIN_RECONSTRUCTED",
+    "publication_proof": {
+      "block_number": 12965000,
+      "block_hash": "0x9b83c12c69edb74f6c8dd5d052765c1adf940e320bd1291696e6fa07829eee71",
+      "published_at": "2021-08-05T12:33:42.000000Z",
+      "sources": [
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/12965000",
+          "sha256": "f63b4a3736f5172f2b70fc28556912cc828dd6f1aff6125418344ed422d306b4",
+          "first_seen_at": "2026-10-25T10:09:38.806620+00:00"
+        },
+        {
+          "url": "https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=block&action=getblockreward&blockno=12965000",
+          "sha256": "193ccc16ef2c72fb164eaa6e2658ba5ddaf3b90bf5be880f12a561c002844653",
+          "first_seen_at": "2026-10-25T10:08:46.506419+00:00"
+        },
+        {
+          "url": "https://eth.blockscout.com/api/v2/blocks/12964999",
+          "sha256": "126e9412298dc10c228a04c61d574eee1e7495a8fc2259a4eb60f80ef08cdb0c",
+          "first_seen_at": "2026-10-25T10:09:38.057313+00:00"
+        }
+      ],
+      "cross_provider_block_timestamp_match": true,
+      "consensus_or_merkle_proof_verified": false
+    }
+  }
+]

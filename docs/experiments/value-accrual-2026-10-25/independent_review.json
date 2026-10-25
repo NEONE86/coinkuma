@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "review_type": "same_author_separate_process_not_external_audit",
+  "raw_successful_receipts": 328,
+  "raw_unique_content_hashes": 328,
+  "chain_proofs_rechecked": 48,
+  "candidate_events": 16,
+  "original_chain_text_and_ipfs_hashes_verified": true,
+  "independently_matched_events": 3,
+  "unique_source_price_paths_recomputed": 16,
+  "all_473267_atlas_rows_scanned": true,
+  "source_archive_markets": 756,
+  "source_archive_bars": 844092,
+  "prior_tracked_files_unchanged": true,
+  "live_eligibility": false,
+  "limitations": [
+    "Explorer agreement, not local consensus/Merkle proof.",
+    "Selected sparse cohort and retrospectively retrieved sources.",
+    "No new strategy or account ledger; inherited PR7 accounts and rejections preserved."
+  ]
+}

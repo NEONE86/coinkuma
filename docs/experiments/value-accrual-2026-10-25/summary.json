@@ -1,0 +1,34 @@
+{
+  "decision": "NEEDS_MORE_EVIDENCE",
+  "validated_edge": false,
+  "live_eligible": false,
+  "inherited_atlas_rows_verified": 473267,
+  "panel_events": 16,
+  "direct_events": 9,
+  "primary_events": 3,
+  "strict_collector_matured_events": 0,
+  "exclusion_counts": {
+    "JOINED": 3,
+    "QUALITATIVE_OR_INCIDENTAL": 7,
+    "DUPLICATE_EPISODE": 5,
+    "IMMATURE_180D": 1
+  },
+  "collector_exclusion_counts": {
+    "OUTSIDE_STUDY_PERIOD": 9,
+    "QUALITATIVE_OR_INCIDENTAL": 7
+  },
+  "independent_tokens": 3,
+  "halfyear_clusters": 3,
+  "control_reused_symbol_date_rows": 0,
+  "reason": "Selected three-token feasibility sample; no historical collector receipts; validation/challenge sample and cluster minima unmet; no new trading rule or profitability evidence.",
+  "bounded_riskset": {
+    "exact_event_dates": 3,
+    "eligible_symbol_dates": 666,
+    "successes": 196,
+    "failures": 470,
+    "base_success_fraction": 0.29429429429429427,
+    "false_positive_event_signals": 2,
+    "bounded_date_signal_fpr": 0.00425531914893617,
+    "warning": "Signal means a selected primary event in this bounded panel, not absence/presence of all token events; these are selected event dates, not a market-wide FPR. Rows and tokens are dependent."
+  }
+}

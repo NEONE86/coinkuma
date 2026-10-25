@@ -1,0 +1,122 @@
+[
+  {
+    "event_id": "UNI-bravo-93",
+    "signal_day": "2025-12-27",
+    "usable": true,
+    "independent_observation": false,
+    "delayed": {
+      "90d_2x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.5434119723960841,
+        "stop_before_or_same_bar": true
+      },
+      "90d_3x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.5434119723960841,
+        "stop_before_or_same_bar": true
+      },
+      "90d_end_return": -0.45690900337024554,
+      "90d_max_return": 0.035146846413095956,
+      "90d_status": "OBSERVED_THROUGH_HORIZON",
+      "180d_2x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.6283100625902744,
+        "stop_before_or_same_bar": true
+      },
+      "180d_3x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.6283100625902744,
+        "stop_before_or_same_bar": true
+      },
+      "180d_end_return": -0.5243139142994704,
+      "180d_max_return": 0.035146846413095956,
+      "180d_status": "OBSERVED_THROUGH_HORIZON"
+    },
+    "entry_gap": 0.044243338360985485,
+    "broker_gap_acceptable": false
+  },
+  {
+    "event_id": "AAVE-v3-286",
+    "signal_day": "2025-04-09",
+    "usable": true,
+    "independent_observation": false,
+    "delayed": {
+      "90d_2x": {
+        "hit": true,
+        "days": 40,
+        "mae": -0.016143701682582945,
+        "stop_before_or_same_bar": false
+      },
+      "90d_3x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.016143701682582945,
+        "stop_before_or_same_bar": false
+      },
+      "90d_end_return": 1.2864938608458392,
+      "90d_max_return": 1.466348340154616,
+      "90d_status": "OBSERVED_THROUGH_HORIZON",
+      "180d_2x": {
+        "hit": true,
+        "days": 40,
+        "mae": -0.016143701682582945,
+        "stop_before_or_same_bar": false
+      },
+      "180d_3x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.016143701682582945,
+        "stop_before_or_same_bar": false
+      },
+      "180d_end_return": 1.0928452326815221,
+      "180d_max_return": 1.925496437774746,
+      "180d_status": "OBSERVED_THROUGH_HORIZON"
+    },
+    "entry_gap": -0.0783094655955292,
+    "broker_gap_acceptable": true
+  },
+  {
+    "event_id": "ETH-london-12965000",
+    "signal_day": "2021-08-05",
+    "usable": true,
+    "independent_observation": false,
+    "delayed": {
+      "90d_2x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.08284166914516145,
+        "stop_before_or_same_bar": false
+      },
+      "90d_3x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.08284166914516145,
+        "stop_before_or_same_bar": false
+      },
+      "90d_end_return": 0.5674415709276026,
+      "90d_max_return": 0.6136280321212917,
+      "90d_status": "OBSERVED_THROUGH_HORIZON",
+      "180d_2x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.253339051163048,
+        "stop_before_or_same_bar": true
+      },
+      "180d_3x": {
+        "hit": false,
+        "days": null,
+        "mae": -0.253339051163048,
+        "stop_before_or_same_bar": true
+      },
+      "180d_end_return": -0.07292653741604815,
+      "180d_max_return": 0.6835319587486253,
+      "180d_status": "OBSERVED_THROUGH_HORIZON"
+    },
+    "entry_gap": 0.02283347305791672,
+    "broker_gap_acceptable": true
+  }
+]
