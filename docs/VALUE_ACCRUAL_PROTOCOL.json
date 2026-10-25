@@ -1,0 +1,33 @@
+{
+  "id": "ONE-value-accrual-events-20261025-v1",
+  "parent_pr": 7,
+  "parent_head": "35bfbbc2a71aa47579974d15e9d1c62e3ba7db55",
+  "purpose": "Timestamp and source integrity panel plus descriptive leading-evidence event study; no new trading strategy, optimizer or account-performance claim.",
+  "prior_exposure": "All PR7 results and its ETH/AAVE/UNI qualitative examples are already known. This deliberately selected three-protocol feasibility cohort is not an unbiased whole-market census or untouched OOS.",
+  "period": ["2019-01-01T00:00:00Z", "2026-10-01T00:00:00Z"],
+  "cohort": {
+    "ETH": "London activation block 12965000, adjacent block, EIP1559 and activation announcement; no daily burn amounts presented as independent events.",
+    "UNI": "Enumerate ProposalCreated, ProposalQueued, ProposalExecuted, ProposalCanceled for all three official mainnet Alpha/Bravo governors. Retain a complete proposal inventory. Candidate if original onchain description matches case-insensitive protocol fee|fee switch|burn.{0,40}uni|uni.{0,40}burn (dot matches newline). Classify direct value accrual vs incidental mentions before joining prices. Retain defeated/canceled/unexecuted proposals. Do not require future execution to select a proposal.",
+    "AAVE": "Enumerate GovernanceV3 creation/execution/queue/cancel events and Ethereum PayloadsController events. Inspect the official aave-proposals-v3 recursive tree for paths containing buyback|aavenomic|financecommittee (case-insensitive). Preserve path inventory and missing sources. Resolve matching proposal original IPFS bytes and linked mainnet payloads when possible. Snapshot-only/forum-only or unverified CID material remains qualitative. This path-based coverage is incomplete and cannot estimate universe-wide event prevalence."
+  },
+  "evidence": "Save exact HTTP entity bytes outside Git, SHA256, requested/received UTC, URL, status and selected headers, content-addressed cache with append-only request receipts. SHA256 proves consistency, not origin. Chain block/log/transaction identities are checked against block and transaction responses; independent explorer cross-check when accessible. No claim of consensus verification or archive-node proof.",
+  "clocks": {
+    "published_at": "Earliest proven publication of the exact modeled bytes: onchain ProposalCreated inclusion for in-log text or verified IPFS commitment; activation inclusion for ETH. Not an assertion of first-ever public announcement. Earlier mutable webpage displayed dates are separate claimed times.",
+    "first_seen_at": "Actual UTC receipt time of this collector for this exact source version; never backdated to publication or execution. Historical collector first_seen is unknown unless a contemporaneous receipt is supplied.",
+    "executed_at": "Verified successful execution block for the exact governance action/payload. Aave Governance ProposalExecuted can merely dispatch payloads; require PayloadExecuted for economic configuration. Budget authorization is not a completed buyback. For unknown/unexecuted actions use null, never impute from votes or announcements.",
+    "available_after_reconstructed": "Chain publication timestamp plus fixed 3600 seconds; conservative modeling lag, not measured network observation or guarantee of finality. No revised mutable content allowed.",
+    "available_after_collector": "max(publication plus 3600 seconds, actual first_seen); strict prospective mode. With newly collected historical material this normally yields no matured historical examples. Report this separately."
+  },
+  "episodes": "Primary: first direct-value-accrual proposal/activation per token and inherited era, then suppress following181 calendar days irrespective of later execution/outcome. Execution is a separate descriptive clock, not another independent observation; don't use executed_at in the announcement selector. Negative policy changes kept and tagged, not silently dropped.",
+  "atlas": "Read the immutable PR7 atlas and its manifest; exact symbol/date join. D is UTC day containing available_after_reconstructed, wait until D closes; earliest hypothetical entry D+2 open. Preserve every exclusion: outside period, immature, boundary purge, ineligible history/liquidity, duplicate episode. Never rewrite prior atlas, matched controls, results or broker.",
+  "outcomes": "Frozen inherited 90/180-day 2x/3x research-close and D+2-open labels, passage time, MAE, stop-before/samebar, entry gap and ended status. Primary descriptive endpoint delayed180d2x. Require D+181 strictly before global AND era end. Ended markets retained by inherited labels. No realized-strategy return inferred from target touches.",
+  "controls": "For each primary event, up to3 other symbols on exact same D, same liquidity_bin and age_bin, nearest abs(log liquidity ratio)+abs(log history ratio), symbol tie-break. Exclude same token and overlapping modeled event exposure already public on D. Select without looking at labels; retain successful controls. Additional failure-only matched controls are explicitly descriptive and cannot produce base rates. Report match coverage, reuse and event count, not independent daily counts.",
+  "statistics": "Report per-era counts, success fractions, Wilson95% intervals (including 0/n, labeled binomial reference only), matched mean endpoint differences and whole-event bootstrap2000 seed20261025 where >=2 events. Report token and calendar-halfyear cluster counts; with <10 token clusters suppress inferential bootstrap claims and declare insufficiency. FPR requires non-event failures in the bounded same-date risk sets; don't call selected case-control frequency a market-wide FPR. Report failures among signals as FDR separately. No multiple-threshold search.",
+  "decision": "NEEDS_MORE_EVIDENCE unless >=30 nonoverlapping events in each of validation and challenge, >=10 token clusters, credible timestamp provenance, positive delayed-endpoint advantage with lower95% cluster interval>0 in both eras. Measured nonpositive association may be described as failure of the descriptive hypothesis, never retrospective live eligibility. No real-trading eligibility can be granted by this study.",
+  "validation": "Synthetic clock/tamper/CID/ABI/duplicate/maturity/control tests, independent source-hash and raw-ABI reconstruction, exact atlas joins, outcome-blind matching, independent linkage reproduction, parent-tree preservation. Same-author independent process is not an external audit.",
+  "parameter_trials": 0,
+  "leverage": false,
+  "paid_data": false,
+  "live_orders": false,
+  "merge": false
+}
