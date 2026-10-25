@@ -1,0 +1,274 @@
+{
+  "uni_governor_counts": {
+    "alpha0": {
+      "uni_created": 5,
+      "executed": 2,
+      "uni_queued": 2,
+      "canceled": 0
+    },
+    "alpha1": {
+      "uni_created": 4,
+      "executed": 2,
+      "uni_queued": 2,
+      "canceled": 1
+    },
+    "bravo": {
+      "uni_created": 102,
+      "executed": 74,
+      "uni_queued": 74,
+      "canceled": 24
+    }
+  },
+  "aave_log_counts": {
+    "aave_created": 537,
+    "executed": 507,
+    "aave_queued": 507,
+    "canceled": 26,
+    "payload_sent": 1321
+  },
+  "payload_log_counts": {
+    "payload_created": 478,
+    "payload_queued": 429,
+    "payload_executed": 428
+  },
+  "aave_paths": [
+    {
+      "commit": "1e7cdf1248941f3849b0145fcd2598fb48c72dfc",
+      "path": "diffs/AaveV3Ethereum_AAVEBuybacksAllocation_20250403_before_AaveV3Ethereum_AAVEBuybacksAllocation_20250403_after.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cf8eebbcc3486c30d8b7d13f3f7d0ef7c1ef0cd",
+      "size": 1219,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/2cf8eebbcc3486c30d8b7d13f3f7d0ef7c1ef0cd"
+    },
+    {
+      "commit": "8e1ec1d845c1b0375353bffdc74d7d65c33c9efb",
+      "path": "diffs/AaveV3Ethereum_AAVEBuybacksAllocation_20250403_before_AaveV3Ethereum_AAVEBuybacksAllocation_20250403_after.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cf8eebbcc3486c30d8b7d13f3f7d0ef7c1ef0cd",
+      "size": 1219,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/2cf8eebbcc3486c30d8b7d13f3f7d0ef7c1ef0cd"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "diffs/AaveV3Ethereum_AAVEBuybacksAllocation_20250403_before_AaveV3Ethereum_AAVEBuybacksAllocation_20250403_after.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cf8eebbcc3486c30d8b7d13f3f7d0ef7c1ef0cd",
+      "size": 1219,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/2cf8eebbcc3486c30d8b7d13f3f7d0ef7c1ef0cd"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "src/20250403_AaveV3Ethereum_AAVEBuybacksAllocation",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2830135c698493d9948e08ce80a1b4ace0047d7c",
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/trees/2830135c698493d9948e08ce80a1b4ace0047d7c"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "src/20250403_AaveV3Ethereum_AAVEBuybacksAllocation/AAVEBuybacksAllocation.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6a3dd28907484979bf191eb541ec7d23aae87f5c",
+      "size": 2914,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/6a3dd28907484979bf191eb541ec7d23aae87f5c"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "src/20250403_AaveV3Ethereum_AAVEBuybacksAllocation/AAVEBuybacksAllocation_20250403.s.sol",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bef6bccb5f9ffd7a5c92d7553629ce3c4dec725f",
+      "size": 2372,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/bef6bccb5f9ffd7a5c92d7553629ce3c4dec725f"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "src/20250403_AaveV3Ethereum_AAVEBuybacksAllocation/AaveV3Ethereum_AAVEBuybacksAllocation_20250403.sol",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d2f968a4ba23b46ab7c353fdc80ffdd407b87620",
+      "size": 1019,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/d2f968a4ba23b46ab7c353fdc80ffdd407b87620"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "src/20250403_AaveV3Ethereum_AAVEBuybacksAllocation/AaveV3Ethereum_AAVEBuybacksAllocation_20250403.t.sol",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d95c162808d09044bc4c1f53eb21a38a23d53a71",
+      "size": 3035,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/d95c162808d09044bc4c1f53eb21a38a23d53a71"
+    },
+    {
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "path": "src/20250403_AaveV3Ethereum_AAVEBuybacksAllocation/config.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "15ad087253a49035395b03986e7b9a101429cb55",
+      "size": 611,
+      "url": "https://api.github.com/repos/aave-dao/aave-proposals-v3/git/blobs/15ad087253a49035395b03986e7b9a101429cb55"
+    }
+  ],
+  "aave_trees": [
+    {
+      "until": "2023-12-31T23:59:59Z",
+      "commit": "8b9a467eb77787d086f1273c7f05def4257677fe",
+      "source_sha256": "96d13836ea7e251c7894ba019f241e77a7970e8f764832c01faae47ffe8a9a2b"
+    },
+    {
+      "until": "2024-12-31T23:59:59Z",
+      "commit": "d7674fd882d853761903961a9d1e2ef4f34b4b9c",
+      "source_sha256": "4ef1fc2cb083b1ec22fb6c5b7dd0618bf362c51d90a55f44c577414affe05f0e"
+    },
+    {
+      "until": "2025-12-31T23:59:59Z",
+      "commit": "1e7cdf1248941f3849b0145fcd2598fb48c72dfc",
+      "source_sha256": "5a5210b758fd58db5b922a91740864d91209de091fbef5e4e9d49d1bd1e9fa03"
+    },
+    {
+      "until": "2026-09-30T23:59:59Z",
+      "commit": "8e1ec1d845c1b0375353bffdc74d7d65c33c9efb",
+      "source_sha256": "0b612bbac5dbbd56a401d6510a05dc3d50be906a3e16c361ca0766aac20342e3"
+    },
+    {
+      "diff_origin": "diffs/AaveV3Ethereum_AAVEBuybacksAllocation_20250403_before_AaveV3Ethereum_AAVEBuybacksAllocation_20250403_after.md",
+      "commit": "5bf5796951820701d82d50530c71fcf1edd0d091",
+      "source_sha256": "f46efa76a131d140fc6588a1f8af0a8bc65a12018dc205344e009d5ae67b8589"
+    }
+  ],
+  "aave_candidate_documents": 2,
+  "ipfs_resolution": [
+    {
+      "proposal_id": 296,
+      "cid": "QmQdxKCw1ncwGCJbF8gTCWuNgNcz32mKu2qWNxDbtdkEmy",
+      "title": "Aave Liquidity Committee Funding Phase VI",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmQdxKCw1ncwGCJbF8gTCWuNgNcz32mKu2qWNxDbtdkEmy",
+      "source_sha256": "9b8785fd4aa8debba322b914d704dcad5686af2a37ad80692fd0c387afba19cb",
+      "first_seen_at": "2026-10-25T10:14:22.049172+00:00"
+    },
+    {
+      "proposal_id": 295,
+      "cid": "QmWgXwWPnf4aCuGA2S8Kuz3wCUVwTGZqubYQCb1k6aasTb",
+      "title": "Add rlUSD to Core Instance",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmWgXwWPnf4aCuGA2S8Kuz3wCUVwTGZqubYQCb1k6aasTb",
+      "source_sha256": "f7dffde1bf820cdb5e6b1c759bf0c2f9c25d84ea76ada349fd5491f7657a78fa",
+      "first_seen_at": "2026-10-25T10:14:26.213717+00:00"
+    },
+    {
+      "proposal_id": 294,
+      "cid": "QmXEtjc42MzV5ekr3atou6JBAnjTS5YbktUM5aAUNqDGiT",
+      "title": "Mantle a.DI path activation",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmXEtjc42MzV5ekr3atou6JBAnjTS5YbktUM5aAUNqDGiT",
+      "source_sha256": "695a7bc6e9d1a7f244f4eddd778a415325a61b693a1bbc69cde06387147037b4",
+      "first_seen_at": "2026-10-25T10:14:32.858533+00:00"
+    },
+    {
+      "proposal_id": 293,
+      "cid": "QmXUCvDhU8Zri5iv2CF368jksqx2EnSDLstvgUPZgutAbW",
+      "title": "April Funding update",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmXUCvDhU8Zri5iv2CF368jksqx2EnSDLstvgUPZgutAbW",
+      "source_sha256": "d7249a1032e961bea27422e2b15439ab5e570311da38325b3710d72ac8038c90",
+      "first_seen_at": "2026-10-25T10:14:37.912534+00:00"
+    },
+    {
+      "proposal_id": 292,
+      "cid": "QmbbFaYHd3KSS9K65TN96xCRMJXKyCAajcqxPgMkT7EdaU",
+      "title": "Caps Risk Oracle Activation on Base, Avalanche",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmbbFaYHd3KSS9K65TN96xCRMJXKyCAajcqxPgMkT7EdaU",
+      "source_sha256": "08de95b3dfb6d0d9df7334bfa10e1595f49bb2e4d4d7b572907610b359156c2f",
+      "first_seen_at": "2026-10-25T10:14:44.084929+00:00"
+    },
+    {
+      "proposal_id": 291,
+      "cid": "QmR8WUUNmDtZ6syGyYwXwyyEWLpzjzGwnpCogACsw4giKN",
+      "title": "Removal of legacy VotingPortals from Governance v3",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmR8WUUNmDtZ6syGyYwXwyyEWLpzjzGwnpCogACsw4giKN",
+      "source_sha256": "38395f3597e12958160d207de06d238a6a4503ddd799763ab25875fc619bbe1e",
+      "first_seen_at": "2026-10-25T10:14:48.008409+00:00"
+    },
+    {
+      "proposal_id": 290,
+      "cid": "QmVBPmoXojKMku4vRYH8ag2Pvg3aRZy77Win9PmTaiF24u",
+      "title": "Request for Bounty Payout - March 2025",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmVBPmoXojKMku4vRYH8ag2Pvg3aRZy77Win9PmTaiF24u",
+      "source_sha256": "3ae78a9463f1317d9f2380755b14fdb3425d397a125f0456049ba34b45d8e2a9",
+      "first_seen_at": "2026-10-25T10:12:19.388260+00:00"
+    },
+    {
+      "proposal_id": 289,
+      "cid": "QmXEdMGpguPRmX97yTejjimdqYfkJuFvJjEwE11dETNzKL",
+      "title": "Enhancements in Aave v3 Gnosis Chain Instance",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmXEdMGpguPRmX97yTejjimdqYfkJuFvJjEwE11dETNzKL",
+      "source_sha256": "1401de4a665a640b60845d577c7ca1b05882a6199888664236a68a2054310b72",
+      "first_seen_at": "2026-10-25T10:14:53.538943+00:00"
+    },
+    {
+      "proposal_id": 288,
+      "cid": "QmNgm9q8kHzrDdNBMb64ovpCydYdp5uU1vYUA7DD1Q15PM",
+      "title": "Risk Steward Parameter Updates Phase 3",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmNgm9q8kHzrDdNBMb64ovpCydYdp5uU1vYUA7DD1Q15PM",
+      "source_sha256": "14e9ec134312ee9099fda660a0476d5460ab22878169f38178c92ad4888b352d",
+      "first_seen_at": "2026-10-25T10:14:58.606772+00:00"
+    },
+    {
+      "proposal_id": 287,
+      "cid": "QmQS1mJvur92wmkGeoZ5w98T1FvbgacMdgynTsbNXw6MAH",
+      "title": "Orbit Program Renewal",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmQS1mJvur92wmkGeoZ5w98T1FvbgacMdgynTsbNXw6MAH",
+      "source_sha256": "7109e237df4cec6a8d0cfc4ef0bdf606440202c4719edaed83e2466f74077ef6",
+      "first_seen_at": "2026-10-25T10:15:04.087109+00:00"
+    },
+    {
+      "proposal_id": 286,
+      "cid": "QmWdcnb3Z3rE711cYNpfNmZUDuxfHgq6yGVnbBecxu8Prj",
+      "title": "AAVE Buybacks allocation",
+      "candidate": true,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmWdcnb3Z3rE711cYNpfNmZUDuxfHgq6yGVnbBecxu8Prj",
+      "source_sha256": "947386fa2a89fa187c358d706ebc289eb1147457eedd6b3439e66e5b24bff7e6",
+      "first_seen_at": "2026-10-25T10:15:11.034188+00:00"
+    },
+    {
+      "proposal_id": 285,
+      "cid": "QmXEdMGpguPRmX97yTejjimdqYfkJuFvJjEwE11dETNzKL",
+      "title": "Enhancements in Aave v3 Gnosis Chain Instance",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmXEdMGpguPRmX97yTejjimdqYfkJuFvJjEwE11dETNzKL",
+      "source_sha256": "1401de4a665a640b60845d577c7ca1b05882a6199888664236a68a2054310b72",
+      "first_seen_at": "2026-10-25T10:14:53.538943+00:00"
+    },
+    {
+      "proposal_id": 284,
+      "cid": "QmNgm9q8kHzrDdNBMb64ovpCydYdp5uU1vYUA7DD1Q15PM",
+      "title": "Risk Steward Parameter Updates Phase 3",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmNgm9q8kHzrDdNBMb64ovpCydYdp5uU1vYUA7DD1Q15PM",
+      "source_sha256": "14e9ec134312ee9099fda660a0476d5460ab22878169f38178c92ad4888b352d",
+      "first_seen_at": "2026-10-25T10:14:58.606772+00:00"
+    },
+    {
+      "proposal_id": 283,
+      "cid": "QmQS1mJvur92wmkGeoZ5w98T1FvbgacMdgynTsbNXw6MAH",
+      "title": "Orbit Program Renewal",
+      "candidate": false,
+      "source_url": "https://gateway.pinata.cloud/ipfs/QmQS1mJvur92wmkGeoZ5w98T1FvbgacMdgynTsbNXw6MAH",
+      "source_sha256": "7109e237df4cec6a8d0cfc4ef0bdf606440202c4719edaed83e2466f74077ef6",
+      "first_seen_at": "2026-10-25T10:15:04.087109+00:00"
+    }
+  ],
+  "proof_errors": [],
+  "scope": "selected_three_protocol_feasibility_cohort_not_all_market_events"
+}

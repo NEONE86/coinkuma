@@ -1,0 +1,31 @@
+{
+  "started_at": "2026-10-25T10:24:14.055292+00:00",
+  "freeze": {
+    "frozen_at": "2026-10-25T10:23:22.127838+00:00",
+    "parent": "35bfbbc2a71aa47579974d15e9d1c62e3ba7db55",
+    "remote_protocol_commit": "06d73b1a7e1e390ef54a75f596d4edb62cb6f3c9",
+    "code_sha256": {
+      "docs/VALUE_ACCRUAL_PROTOCOL.json": "df7c7656e01e69bcf52bee22dca5131dc856ee3eb9eea7ecfeb9dcb55d0c8cb8",
+      "docs/VALUE_ACCRUAL_CLASSIFICATIONS.json": "3ecd2a00fc17d68b3c7867b3d109e465134d48f2dfbf1099368f5ca837be785c",
+      "one_trading/value_evidence.py": "1ecd4e6354788243db0c5ab57bdaa1953b051825b890e4f5f899889b07fed828",
+      "one_trading/value_event_study.py": "9fe7b0b0bb010bb58d7ca6354fc5739435d49a4a424923fa63425a227eaaf468",
+      "scripts/collect_value_events.py": "a99d21a414e878d77a86ae56d5537706f1874fb95cb21d7df1e7e1131908652f",
+      "scripts/resolve_value_events.py": "d9182408e9d7bb4a1a7ba357137e9a38f86a5200a1c1180a0fc15d9239095928",
+      "scripts/run_value_event_study.py": "3a7d79e50feb8e472199e33771c97bf91702f3daaae2dbba42434960c48d9174",
+      "scripts/validate_value_events.py": "4a1a25eef629ed2b2c0f16aa6e9ffb1c76f886a8fb8809044ce71bded30b3cf1",
+      "tests/test_value_events.py": "20ed9e67984d7546b972602904a9b80d1187484d48e39ce40842b69398495348"
+    },
+    "event_panel_sha256": "669c2d9dca124f9ae90e48b7fbc943d004425319b5febdb5ce1bcd6538a1f7e2",
+    "atlas_sha256": "2fad9446a5b10955b16bf8106ea85e3fc57bd2c2da2a6fd9eb7c2eee04001bb7",
+    "new_event_price_outcomes_inspected": false,
+    "empirical_parameter_trials": 0,
+    "earlier_atlas_results_already_known": true
+  },
+  "atlas_sha256": "2fad9446a5b10955b16bf8106ea85e3fc57bd2c2da2a6fd9eb7c2eee04001bb7",
+  "parent": "35bfbbc2a71aa47579974d15e9d1c62e3ba7db55",
+  "head": "9b570cb0b099edfcd9aecc547bd165f1fc9a35c0",
+  "study": "descriptive_event_study",
+  "new_strategy": false,
+  "live_orders": false,
+  "leverage": false
+}
