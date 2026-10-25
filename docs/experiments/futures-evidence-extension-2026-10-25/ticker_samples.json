@@ -1,0 +1,80 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "day": "2022-01-01",
+    "rows": 200949,
+    "nonempty_oi_rows": 200924,
+    "observed_oi_value_changes": 2879,
+    "repeated_oi_value_rows": 198044,
+    "negative_timestamp_lag_rows": 0,
+    "local_out_of_order_rows": 0,
+    "first_local_us": 1640995200225839,
+    "last_local_us": 1641081599234180,
+    "fresh_OI_event_timestamps_recoverable_from_csv_alone": false
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2024-01-01",
+    "rows": 107023,
+    "nonempty_oi_rows": 107003,
+    "observed_oi_value_changes": 6833,
+    "repeated_oi_value_rows": 100169,
+    "negative_timestamp_lag_rows": 0,
+    "local_out_of_order_rows": 0,
+    "first_local_us": 1704067200028250,
+    "last_local_us": 1704153599023116,
+    "fresh_OI_event_timestamps_recoverable_from_csv_alone": false
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2026-09-01",
+    "rows": 112367,
+    "nonempty_oi_rows": 112342,
+    "observed_oi_value_changes": 14135,
+    "repeated_oi_value_rows": 98206,
+    "negative_timestamp_lag_rows": 0,
+    "local_out_of_order_rows": 0,
+    "first_local_us": 1788220800056156,
+    "last_local_us": 1788307199074051,
+    "fresh_OI_event_timestamps_recoverable_from_csv_alone": false
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2022-01-01",
+    "rows": 177265,
+    "nonempty_oi_rows": 177238,
+    "observed_oi_value_changes": 2879,
+    "repeated_oi_value_rows": 174358,
+    "negative_timestamp_lag_rows": 0,
+    "local_out_of_order_rows": 0,
+    "first_local_us": 1640995200055044,
+    "last_local_us": 1641081599560582,
+    "fresh_OI_event_timestamps_recoverable_from_csv_alone": false
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2024-01-01",
+    "rows": 106646,
+    "nonempty_oi_rows": 106613,
+    "observed_oi_value_changes": 6834,
+    "repeated_oi_value_rows": 99778,
+    "negative_timestamp_lag_rows": 0,
+    "local_out_of_order_rows": 0,
+    "first_local_us": 1704067200028625,
+    "last_local_us": 1704153599023288,
+    "fresh_OI_event_timestamps_recoverable_from_csv_alone": false
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2026-09-01",
+    "rows": 113598,
+    "nonempty_oi_rows": 113575,
+    "observed_oi_value_changes": 14138,
+    "repeated_oi_value_rows": 99436,
+    "negative_timestamp_lag_rows": 0,
+    "local_out_of_order_rows": 0,
+    "first_local_us": 1788220800086290,
+    "last_local_us": 1788307199550107,
+    "fresh_OI_event_timestamps_recoverable_from_csv_alone": false
+  }
+]

@@ -1,0 +1,230 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "day": "2022-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 0,
+    "missing_settlement_marks": 3,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "BTCUSDT",
+      "startTime": 1640995200000,
+      "endTime": 1641081599999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.411Z",
+    "finished_utc": "2026-10-25T06:45:23.704Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "22ee19079b620f5c6d820e7d7f8bafa7fde866d89bd664863b8bd527749c12cb"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2023-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 0,
+    "missing_settlement_marks": 3,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "BTCUSDT",
+      "startTime": 1672531200000,
+      "endTime": 1672617599999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:23.784Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "05e3df32f28d0d50f4c5a280adee9368b4a66fc68c6ddca1b3277087ac0d19f5"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2024-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "BTCUSDT",
+      "startTime": 1704067200000,
+      "endTime": 1704153599999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:23.802Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "3e0d30870672aa8f0f937881056e3cfd55913ae5c780cd50b33f2763aa0ba58e"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2025-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "BTCUSDT",
+      "startTime": 1735689600000,
+      "endTime": 1735775999999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:23.801Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "df725010d55458866eb5a47e9ee708c6796c9d7e77b14c38342cea11f381815e"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2026-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "BTCUSDT",
+      "startTime": 1767225600000,
+      "endTime": 1767311999999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:24.229Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "fcdc796484f395830d418588a34a26baed8849dbef0ff2b56173247e493ff51f"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "day": "2026-09-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "BTCUSDT",
+      "startTime": 1788220800000,
+      "endTime": 1788307199999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:23.783Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "913cd31b8f924a06717a2fac17f3df6132c24ccded209eb3e4ae7d83e1b247f2"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2022-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 0,
+    "missing_settlement_marks": 3,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "ETHUSDT",
+      "startTime": 1640995200000,
+      "endTime": 1641081599999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:24.845Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "9f5bd01450b05a8c5e48cdc99fa147e85c82ecf7ee7919fa543a4e6039a2b98d"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2023-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 0,
+    "missing_settlement_marks": 3,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "ETHUSDT",
+      "startTime": 1672531200000,
+      "endTime": 1672617599999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:24.164Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "5647d5978092d220eb14e11c7854d86815d0eb6204197e37b4808cc599e986f3"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2024-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "ETHUSDT",
+      "startTime": 1704067200000,
+      "endTime": 1704153599999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:23.794Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "5a71469b0b363886df904e784dddefc484dd943334b1fb7454713ce4ed715a4b"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2025-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "ETHUSDT",
+      "startTime": 1735689600000,
+      "endTime": 1735775999999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:24.026Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "88c95b99d2784a7baac529fe578563d7e05038a1b8a498b2f59bf81b216fee20"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2026-01-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "ETHUSDT",
+      "startTime": 1767225600000,
+      "endTime": 1767311999999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:24.164Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "830cf7797ea6ecdc554ac2d9047a141df1a6a544f4ea58e7028227930462b139"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "day": "2026-09-01",
+    "rows": 3,
+    "positive_settlement_marks": 3,
+    "missing_settlement_marks": 0,
+    "exact_archive_event_rate_matches": 3,
+    "api_url": "https://fapi.binance.com/fapi/v1/fundingRate",
+    "params": {
+      "symbol": "ETHUSDT",
+      "startTime": 1788220800000,
+      "endTime": 1788307199999,
+      "limit": 10
+    },
+    "started_utc": "2026-10-25T06:45:23.427Z",
+    "finished_utc": "2026-10-25T06:45:24.140Z",
+    "source_format": "NORMALIZED_MCP_NOT_ORIGINAL_HTTP",
+    "archive_zip_sha256": "d1916b9181cf3507ad5a6522ac6587cd84a424941f1a2132ab887f768b5dd4de"
+  }
+]

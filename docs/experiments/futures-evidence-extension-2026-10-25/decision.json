@@ -1,0 +1,32 @@
+{
+  "decision": "NEEDS_MORE_EVIDENCE",
+  "data_gate_passed": false,
+  "reasons": [
+    "BTCUSDT:OI_CONTINUOUS_HISTORICAL_RECEIPT_INCOMPLETE",
+    "BTCUSDT:EXACT_SETTLEMENT_MARK_COVERAGE_INCOMPLETE",
+    "ETHUSDT:OI_CONTINUOUS_HISTORICAL_RECEIPT_INCOMPLETE",
+    "ETHUSDT:EXACT_SETTLEMENT_MARK_COVERAGE_INCOMPLETE",
+    "EFFECTIVE_DATED_CONTRACT_TERMS_INCOMPLETE",
+    "STRUCTURE_HISTORICAL_AVAILABILITY_INCOMPLETE"
+  ],
+  "required_calendar_days_per_symbol": 1734,
+  "sampled_ticker_days": {
+    "BTCUSDT": [
+      "2022-01-01",
+      "2024-01-01",
+      "2026-09-01"
+    ],
+    "ETHUSDT": [
+      "2022-01-01",
+      "2024-01-01",
+      "2026-09-01"
+    ]
+  },
+  "sample_source_progress": true,
+  "continuous_qualified_signal_observations": 0,
+  "strategy_backtest_executed": false,
+  "performance_metrics": null,
+  "strategy_performance_independent_reproduction": false,
+  "orders": 0,
+  "leverage_applied": false
+}

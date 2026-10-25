@@ -1,0 +1,22 @@
+{
+  "tests_passed": 178,
+  "compileall_passed": true,
+  "cli_help_passed": true,
+  "cli_status": "NOT_STARTED",
+  "independent_scope": "Supplemental source-byte, parser and gate reproduction, not strategy returns",
+  "previous_PR5_files_unchanged": true,
+  "orders": 0,
+  "leverage": false,
+  "merge": false,
+  "plan_registered_local_commit": "eec21e3",
+  "before_additional_sample_collection": true,
+  "code_sha256_after_validation": {
+    "one_trading/futures_evidence.py": "924106dbb2397aa3d55bfa427ceafa97a19611ce5b2202a480056a19c8f60ae9",
+    "scripts/collect_futures_evidence.py": "eb85f78695951348527ed22dd4725277e7a9e8d82a92bffc383e1fabd245d485",
+    "scripts/run_futures_evidence.py": "b21ee071af34d63d959c9345fdf7624770dd561d7d2359fb55d2081e97a127ae",
+    "scripts/validate_futures_evidence.py": "1c1c503c9c7c157be8438f600dea96671f3f852edb4129a4d1129e66ba1d6e19",
+    "tests/test_futures_evidence.py": "939887c666c15b5cc92ad7c067ff33fc0a4944055476c1383f26f608ddd53265",
+    "tools/export_futures_evidence.py": "6f161e9f344c900bdf230f4b5ff456d2b4f650c8640a83c7eb74d9f66fd5eaf5",
+    "docs/FUTURES_EVIDENCE_EXTENSION_PLAN.json": "7d13f84c89f9899f867a60879dbe48908f9bbb3894bd7224081d03176943bac8"
+  }
+}
