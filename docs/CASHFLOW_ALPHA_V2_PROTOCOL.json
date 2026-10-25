@@ -1,0 +1,70 @@
+{
+  "id": "ONE-Cashflow-Alpha-v2-fixed-two-challengers",
+  "source_pr3_head": "e6a78766aeb4462fc4aeb01f80fcbf24ca7096cb",
+  "source_spec": "docs/CASHFLOW_ALPHA_NEXT_EXPERIMENT.json",
+  "source_spec_git_blob": "8706d7cee7e9b1eaeb81e0998cea8fb692599b7f",
+  "source_rules_override": false,
+  "evaluation_start": "2019-01-01",
+  "evaluation_end_exclusive": "2026-10-01",
+  "collection_start": "2018-01-01",
+  "costs": {
+    "base": {"fee_rate": 0.001, "slippage_rate": 0.001},
+    "stress": {"fee_rate": 0.002, "slippage_rate": 0.003}
+  },
+  "era_accounts": {
+    "development": ["2019-01-01", "2022-01-01"],
+    "validation": ["2022-01-01", "2025-01-01"],
+    "challenge": ["2025-01-01", "2026-10-01"]
+  },
+  "accounts": "Each strategy and cost: continuous, eight independent calendar-year accounts (2026 ends September), three independent era accounts. Never splice reset accounts. Continuous attribution also reported by era and year.",
+  "implementation_conventions": {
+    "returns": "r_N = close[D]/close[D-N]-1; relative strength is arithmetic return difference, not ratio",
+    "high": "Maximum daily HIGH including D in the stated trailing window",
+    "sma": "Arithmetic mean of completed daily CLOSE including each SMA date",
+    "atr": "Arithmetic mean of last14 true ranges, not Wilder smoothing; initial stop = signal close -2.5 ATR",
+    "below_history": "28 observations D-34 through D-7, excluding latest seven D-6 through D; each below its own causal SMA50",
+    "cross": "Previous close strictly below previous SMA50 and current close strictly above current SMA50, on at least one of D-6 through D",
+    "tr_contraction": "Mean TR D-9..D divided by mean TR D-39..D-10; zero denominator fails",
+    "holding_age": "At signal observation (D+1 00:00 UTC) minus actual entry open; inherited convention",
+    "context": "BTC gate uses D completed close; A week is completed Sunday. No extra inherited v1 weekly/monthly-return entry filter is added to either challenger.",
+    "no_adds": "New entries allow the broker BUY path; all held targets have allow_add=false. Inherited risk/weight trims, stops, partial exits and stale-plan protection retained.",
+    "delays": "D close observed D+1; entries, planned exits and tightened stops become eligible D+2 open. Existing stops and 3R partial profit operate every daily bar, stop first.",
+    "capacity": "Held valid positions first, then fixed-ranked new candidates; no replacement with tomorrow's information",
+    "idle_cash": "Zero interest, no borrowing or leverage; cash included in all returns and exposure denominators",
+    "missing_market": "First missing held daily candle: zero recovery at close, no hindsight terminal-price exit. Shortened and zero-volume source candles retained and audited.",
+    "history": "240 consecutive daily observations with known LUNA identity boundary reset. Historical archive availability, not present exchangeInfo, defines membership. Full official listing and migration history remains uncertified.",
+    "krw": "Scale USDT net returns to 20m KRW at constant FX, before tax. Show fixed-20m month return PnL, original-account compounding PnL and realized PnL separately; no withdrawals assumed. This is not measured FX-adjusted cash income."
+  },
+  "controls": {
+    "cost_case": "stress",
+    "seeds": [0, 199],
+    "count_per_strategy": 200,
+    "sampling": "At each original strategy signal date, K is the count of price-rule qualifiers in the whole historical top80 before holdings/capacity. Draw min(K,N) without replacement from that day's same top80 with BTC gate and 3%..18% initial-stop feasibility. Existing holdings may be drawn; no replacement, no adds. Rank drawn symbols with fresh deterministic random numbers. Same strategy-specific exit, trailing, delay, cost, halt and risk policies.",
+    "rng": "Python random.Random(f'{strategy}:{seed}:{signal_day_ms}'); sorted eligible symbols; sample then random ranking",
+    "statistic": "Arithmetic mean of full-calendar-month net returns of the continuous stress account, including idle months",
+    "percentile": "Number of 200 controls strictly below challenger statistic divided by 200; ties count against challenger; require >=0.975",
+    "diagnostic_p": "(1 + controls with statistic >= challenger)/(201), reported as Monte Carlo comparison only",
+    "retain": "Keep seed, performance, monthly path, independent ledger checks and artifact digest; individual ledgers outside Git. Do all controls even when other gates already fail."
+  },
+  "uncertainty": {
+    "method": "4000 circular moving-block resamples of full-month net returns, block length3 months, seed20261025; percentile 2.5% and97.5% endpoints",
+    "gate": "Lower endpoint of historical 95% interval for arithmetic mean monthly net return must exceed0",
+    "not_a_forecast": true
+  },
+  "decision": {
+    "gates": "Apply every edge_gates_before_forward_paper and capital_growth_relevance_gates value in the unchanged source spec to stress results",
+    "positive_calendar_fold_fraction": "Positive net-return independent calendar accounts divided by8, including partial2026; threshold0.60 requires at least5/8",
+    "challenge_count": "Closed campaigns in the independent 2025-01-01..2026-10-01 challenge account",
+    "mdd": "Continuous stress daily-close MDD plus independent-fold MDD reported. Gate checks continuous AND each reset account, with no permanent halt in any account. Intraday simultaneous-low bound separately reported; trigger is not a guaranteed cap.",
+    "PASS": "All gates pass and all required audits/controls completed; only eligible for a separate at-least90-day new forward-paper interval",
+    "REJECT": "Any measured profitability, stability, capital-growth or drawdown/halt gate fails; preserve failed parameters",
+    "NEEDS_MORE_EVIDENCE": "No measured failure but samples insufficient, or mandatory audit/data/control evidence incomplete; never PASS an unverified run",
+    "selection": "At most one. If both PASS, higher stress mean full-month net return; ties choose lower MDD magnitude then strategy name. Otherwise select none or the sole PASS."
+  },
+  "future_prefix_test": "Physically delete every bar on/after2023-01-01; compare all earlier equity, fills, writeoffs and plans for all four continuous accounts, with no terminal liquidation on truncated run",
+  "independent_reproduction": "Separate validator process reconstructs daily cash/inventory/campaigns, source market eligibility and candidate rules, then reruns all four continuous accounts from new panel objects. Same-author code validation is not an external investment audit.",
+  "live_orders": false,
+  "leverage": 1,
+  "historical_not_untouched_oos": true,
+  "parameter_search": false
+}

@@ -237,7 +237,7 @@ def period_metrics(equity,initial,period):
     return out
 
 
-def run(panel,config,start,end,missing='zero',liquidate_end=True):
+def run(panel,config,start,end,missing='zero',liquidate_end=True,*,planner=None,signal_schedule=None):
     """Run a fixed-policy chronological account, without fitting on the test period."""
     validate_config(config)
     if missing not in {'zero','fail'}:raise ValueError('invalid_missing_policy')
@@ -254,7 +254,8 @@ def run(panel,config,start,end,missing='zero',liquidate_end=True):
         # Presence of a daily row supplies an open proxy. Today's volume/close
         # never filters an opening order. Zero-volume opens remain an explicit
         # execution limitation, not a hindsight liquidity filter.
-        bars={s:x for s in panel.h if (x:=panel.bar(s,day)) is not None}
+        bars=(panel.market_day(day) if hasattr(panel,'market_day') else
+              {s:x for s in panel.h if (x:=panel.bar(s,day)) is not None})
         opens={s:x.open for s,x in bars.items()};closes={s:x.close for s,x in bars.items()}
         if day>=start:
             absent=set(book.positions)-set(bars)
@@ -298,8 +299,9 @@ def run(panel,config,start,end,missing='zero',liquidate_end=True):
                 'open_risk_fraction':book.open_risk(closes,config)/eq,'btc_equity':benchmark_qty*b.close,
                 'drawdown':eq/book.peak-1,'intraday_low_equity_bound':low_equity,'intraday_low_drawdown_bound':low_dd,
                 'halted':book.halted,'position_count':len(book.positions)})
-        if datetime.fromtimestamp(day/1000,timezone.utc).weekday()==6:
-            plan=make_swing_plan(panel,book,day,config,closes);plans.append(plan);pending.append(plan)
+        scheduled=(signal_schedule(day) if signal_schedule else datetime.fromtimestamp(day/1000,timezone.utc).weekday()==6)
+        if scheduled:
+            plan=(planner or make_swing_plan)(panel,book,day,config,closes);plans.append(plan);pending.append(plan)
         prior=closes
     if liquidate_end:
         fbegin=len(book.fills);book.liquidate(prior,test[-1].close_ms,config,'END_OF_TEST_LIQUIDATION');_annotate_fills(book,fbegin,campaign_ids)
