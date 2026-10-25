@@ -410,6 +410,16 @@ class FixTests(unittest.TestCase):
             leg["external_reference"] += "-different"
         with self.assertRaisesRegex(ValueError, "duplicate_economic_flow"):
             events.register_flow(t.store, second)
+        other = "0x" + "2" * 40
+        sid = t.fetch(SOURCE, dict(contract=other, value="100"))
+        asset = copy.deepcopy(t.asset)
+        asset.update(asset_id="eip155:1:" + other, contract_address=other, identity_evidence_ids=[sid])
+        asset["exchange_symbol_mapping"]["BINANCE"]["instrument"] = "OTHERUSDT"
+        events.register_asset(t.store, asset)
+        second["asset_id"] = asset["asset_id"]
+        for leg in second["legs"]:
+            leg["unit"] = asset["asset_id"]
+        events.register_flow(t.store, second)  # Same local label on another asset is not the same flow leg.
 
     def test_F13_observation_alias_and_reimport_do_not_inflate_clusters(self):
         t = self.t

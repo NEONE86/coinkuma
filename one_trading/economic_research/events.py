@@ -67,7 +67,8 @@ def register_flow(store, data):
     existing_refs = {leg["external_reference"] for flow in store.all("economic_flow")
                      if flow["economic_flow_id"] != data["economic_flow_id"] for leg in flow["legs"]}
     existing_legs = {leg["leg_id"] for flow in store.all("economic_flow")
-                     if flow["economic_flow_id"] != data["economic_flow_id"] for leg in flow["legs"]}
+                     if flow["economic_flow_id"] != data["economic_flow_id"] and flow["asset_id"] == data["asset_id"]
+                     for leg in flow["legs"]}
     for leg in data["legs"]:
         nonempty(leg, "leg_id", "kind", "external_reference", "epistemic_type", "evidence_ids")
         required(leg, "quantity", "unit", "origin")

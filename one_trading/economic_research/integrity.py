@@ -92,10 +92,11 @@ def inspect_semantics(store):
         def flow(f=f):
             ids = [leg["leg_id"] for leg in f["legs"]]
             refs = [leg["external_reference"] for leg in f["legs"]]
+            scoped_ids = {(f["asset_id"], key) for key in ids}
             require(len(set(ids)) == len(ids) and len(set(refs)) == len(refs)
-                    and not (set(refs) & seen_refs) and not (set(ids) & seen_legs), "duplicate_flow_leg")
+                    and not (set(refs) & seen_refs) and not (scoped_ids & seen_legs), "duplicate_flow_leg")
             seen_refs.update(refs)
-            seen_legs.update(ids)
+            seen_legs.update(scoped_ids)
         check("F12", f["economic_flow_id"], flow)
     prior_facts = []
     for e in store.all("economic_event_revision"):
