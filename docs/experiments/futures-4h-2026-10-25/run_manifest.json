@@ -1,0 +1,21 @@
+{
+  "frozen_code": {
+    "docs/FUTURES_4H_AUDIT_PLAN.json": "a88e3cd77290cea9894ba850d3b9367e15deb1afcecdfe397a887cd0c04b5b8c",
+    "docs/FUTURES_4H_PROTOCOL.json": "a8c0d9433abfd5fd3e962b09518d9039c9a24441d14c160db4de398563e5bbfb",
+    "one_trading/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_trading/historical_data.py": "309e2404d8efe0cc8db07ff38f6780e13bc080d5a10b72f6453eac913db6b211",
+    "one_trading/observer.py": "8d514c417b6479ee8340401cd96b29ad24d5cf6588d9cf5699f6439bae08103f",
+    "one_trading/futures_data_audit.py": "3f93d0d5193763d027516c4ad3bfee5473ad64edd86a92a94f68c6a4ed5a1175",
+    "one_trading/futures_4h_research.py": "43249d21421827d16188df0a874b0fcb293e1b76ab588daec2dfda3bb08ed72a",
+    "scripts/collect_futures_4h.py": "147fcd534f57ace3032a00eac2da78ae3df1cfa89a28129486ab7b6d83e2cc04",
+    "scripts/run_futures_4h.py": "5305daad7c471d134327775b8b25515e2a551849d48a1e52eba81105946bf403",
+    "scripts/validate_futures_4h.py": "7f7c8df38d7289a04179e902ab25e82959363e475c179e202d24c47666a5ea33",
+    "tools/probe_futures_sources.py": "92ac239f3dc2dd282eab46bac1bf436f74331bdb614687749895cc1cb779f9b9",
+    "tests/test_futures_research.py": "8ee71bf39f0312612912a12c3bcd94d1a11ebd6ab68b83f531931884f8d0e8c6"
+  },
+  "freeze_sha256_canonical_lf": "fb43abc80dc102c2a759474e36e79dcc18480e6aed36ffdd946f776b52304183",
+  "git_head": "fef1ad44e604a2efe7ba480e523517bd7755a54a",
+  "started_utc": "2026-10-25T06:04:25.530707+00:00",
+  "historical_performance_computed": false,
+  "archive_file_audits_sha256": "4133700e36340327d053e3a8baa3a20fb2472a042d9403e6856bb706147c00c3"
+}
