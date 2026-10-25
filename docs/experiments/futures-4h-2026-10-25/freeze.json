@@ -1,0 +1,116 @@
+{
+  "frozen_utc": "2026-10-25T06:04:19.692065+00:00",
+  "parent_pr4_head": "e49f3f06518eb3bf4ea59e82680f96c46acf2828",
+  "code_sha256": {
+    "docs/FUTURES_4H_AUDIT_PLAN.json": "a88e3cd77290cea9894ba850d3b9367e15deb1afcecdfe397a887cd0c04b5b8c",
+    "docs/FUTURES_4H_PROTOCOL.json": "a8c0d9433abfd5fd3e962b09518d9039c9a24441d14c160db4de398563e5bbfb",
+    "one_trading/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_trading/historical_data.py": "309e2404d8efe0cc8db07ff38f6780e13bc080d5a10b72f6453eac913db6b211",
+    "one_trading/observer.py": "8d514c417b6479ee8340401cd96b29ad24d5cf6588d9cf5699f6439bae08103f",
+    "one_trading/futures_data_audit.py": "3f93d0d5193763d027516c4ad3bfee5473ad64edd86a92a94f68c6a4ed5a1175",
+    "one_trading/futures_4h_research.py": "43249d21421827d16188df0a874b0fcb293e1b76ab588daec2dfda3bb08ed72a",
+    "scripts/collect_futures_4h.py": "147fcd534f57ace3032a00eac2da78ae3df1cfa89a28129486ab7b6d83e2cc04",
+    "scripts/run_futures_4h.py": "5305daad7c471d134327775b8b25515e2a551849d48a1e52eba81105946bf403",
+    "scripts/validate_futures_4h.py": "7f7c8df38d7289a04179e902ab25e82959363e475c179e202d24c47666a5ea33",
+    "tools/probe_futures_sources.py": "92ac239f3dc2dd282eab46bac1bf436f74331bdb614687749895cc1cb779f9b9",
+    "tests/test_futures_research.py": "8ee71bf39f0312612912a12c3bcd94d1a11ebd6ab68b83f531931884f8d0e8c6"
+  },
+  "protocol": {
+    "id": "ONE-futures-funding-OI-structure-4h-v1",
+    "parent_pr4_head": "e49f3f06518eb3bf4ea59e82680f96c46acf2828",
+    "trial_budget": 1,
+    "hypothesis": "A completed price/flow reversal after funding and OI crowding identifies a cost-adjusted reversal more efficiently than the same price-only control.",
+    "scope": [
+      "BTCUSDT",
+      "ETHUSDT"
+    ],
+    "market": "Actual Binance USD-M linear perpetual contracts, bounded two-major-contract research; no whole-exchange survivor-free claim",
+    "warmup": [
+      "2021-01-01",
+      "2022-01-01"
+    ],
+    "evaluation": [
+      "2022-01-01",
+      "2026-10-01"
+    ],
+    "eras": {
+      "development": [
+        "2022-01-01",
+        "2024-01-01"
+      ],
+      "validation": [
+        "2024-01-01",
+        "2025-01-01"
+      ],
+      "challenge": [
+        "2025-01-01",
+        "2026-10-01"
+      ]
+    },
+    "cadence": "Complete UTC four-hour OHLCV formed from exactly four consecutive original one-hour trade bars; observe at completed boundary plus10minutes; execute no earlier than next four-hour boundary. No retroactive close/open fills.",
+    "availability": "Every OI, funding and structure input requires independently evidenced historical available_ms; event_ms<=signal boundary and available_ms<=observation. CSV create_time, present collection time and object LastModified are never substituted for historical availability. Unknown evidence fails closed.",
+    "OI": "Latest OI at or before signal boundary and latest at or before boundary minus24h; each at most15minutes stale; both positive, timestamped and verified available. Current OI / prior OI -1 >=0.05.",
+    "funding": "Arithmetic mean of latest3 actually settled funding rates, all events strictly before signal boundary, latest not older than24h. Do not infer a predicted funding rate or assume an eight-hour charging interval.",
+    "long_all": [
+      "mean realized funding <=-0.0001",
+      "OI24h change >=0.05",
+      "completed close exceeds its open and previous close",
+      "completed taker-buy quote volume / total quote volume >=0.55",
+      "completed mark/index basis <=0"
+    ],
+    "short_all": [
+      "mean realized funding >=0.0001",
+      "OI24h change >=0.05",
+      "completed close below its open and previous close",
+      "completed taker-buy quote volume / total quote volume <=0.45",
+      "completed mark/index basis >=0"
+    ],
+    "ranking": "Absolute mean funding descending, symbol ascending; maximum one position per contract, no adds",
+    "initial_stop": "Signal close minus/plus2.5 arithmetic ATR14 of complete4h bars; distance between1% and8%; re-size using actual delayed simulated execution and all costs",
+    "exit": "Stop first at adverse trade open on gaps; half at3 original R; delayed4h trailing six-bar low/high minus/plus0.25 ATR14; exit after18four-hour bars or mean settled funding crosses0 against the crowding premise",
+    "risk": {
+      "per_position": 0.005,
+      "aggregate_current_mark_to_stop": 0.01,
+      "max_positions": 2,
+      "max_position_notional_fraction": 0.2,
+      "max_gross_notional_fraction": 0.4,
+      "daily_loss_halt": 0.03,
+      "permanent_drawdown_halt": 0.15,
+      "leverage_multiplier": 1,
+      "borrowing": false
+    },
+    "risk_enforcement": "A future engine must reduce drift above aggregate risk/gross caps at the next observable tradable one-hour quote, record intrahour gap uncertainty, and never claim a guaranteed loss ceiling. Cash collateral cannot be reused as borrowed purchasing power.",
+    "base_cost_per_side": {
+      "fee": 0.0005,
+      "slippage": 0.0005
+    },
+    "stress_cost_per_side": {
+      "fee": 0.001,
+      "slippage": 0.0015
+    },
+    "funding_cost": "Signed quantity times actual settlement mark times realized rate at every actual settlement timestamp; positive funding debits longs and credits shorts. Exact original timestamps including milliseconds are retained. Missing settlement marks are not silently replaced by hourly prices or zero expense.",
+    "futures_terms_gate": "Historical contract identity, listing/termination, price/quantity filters and maintenance-margin/settlement terms must be sufficient for the tested cash-collateral scope. Present exchangeInfo is not historical terms.",
+    "controls_if_data_gate_passes": "Same price/flow reversal control without funding/OI/basis filters plus200 same-time randomized-selection stress accounts, seeds0..199; identical collateral, costs, funding, exits and risk. No controls run on unqualified data.",
+    "minimum_gates_if_executed": {
+      "stress_pf_exclusive": 1.3,
+      "total_closed_campaigns": 200,
+      "challenge_closed_campaigns": 50,
+      "max_drawdown": 0.15,
+      "positive_calendar_fold_fraction": 0.6,
+      "positive_month_fraction": 0.55,
+      "mean_monthly_net_return": 0.01,
+      "bootstrap_lower95_mean_monthly_exclusive": 0,
+      "random_control_percentile": 0.975
+    },
+    "decision": "NEEDS_MORE_EVIDENCE if mandatory availability/terms/settlement evidence is missing; do not manufacture a flat zero-return curve. REJECT only for measured performance failures on qualified data. PASS requires all data, execution, independent reproduction, sample and profitability gates; then separate90-day no-order forward evidence remains necessary.",
+    "implementation_scope_this_pr": "Source audit, independent byte/row reproduction, strict as-of signal evaluator and cost arithmetic. Full futures account/execution engine and performance controls remain deferred when the mandatory data gate fails.",
+    "historical_periods_are_not_untouched_oos": true,
+    "no_after_result_parameter_changes": true,
+    "live_orders": false,
+    "PR_merge": false
+  },
+  "before_strategy_performance": true,
+  "data_availability_audit_precedes_rule_freeze": true,
+  "performance_known": false,
+  "source": "Official archives only, data qualification before any strategy PnL"
+}

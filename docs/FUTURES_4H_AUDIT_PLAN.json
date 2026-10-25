@@ -1,0 +1,18 @@
+{
+  "id": "ONE-futures-4h-source-audit-v1",
+  "parent_pr4": "e49f3f06518eb3bf4ea59e82680f96c46acf2828",
+  "branch": "research/futures-structure-4h-20261025",
+  "scope_before_performance": ["BTCUSDT", "ETHUSDT"],
+  "scope_reason": "First bounded experiment in two major USD-M perpetual contracts already established before 2022; no claim about all altcoin futures or a survivor-free exchange-wide universe.",
+  "candidate_collection_interval": ["2021-01-01", "2026-10-01"],
+  "candidate_evaluation_interval": ["2022-01-01", "2026-10-01"],
+  "streams": ["trade klines", "markPriceKlines", "indexPriceKlines", "realized fundingRate", "historical OI metrics"],
+  "timestamps_to_distinguish": ["market event/period time", "funding settlement time", "source object LastModified", "publication/availability time", "collection time"],
+  "pit_policy": "Neither CSV create_time nor archive LastModified alone certifies historical public availability. Retrospective data can support separately labelled lag-assumption diagnostics, not verified point-in-time profitability. No PASS without availability evidence.",
+  "no_source_repairs": true,
+  "no_current_OI_backfill": true,
+  "no_real_orders": true,
+  "leverage_multiplier": 1,
+  "rules_and_costs": "Freeze after availability audit and before any strategy-return calculation; do not optimize on diagnostic returns.",
+  "preserve_previous_results": true
+}
