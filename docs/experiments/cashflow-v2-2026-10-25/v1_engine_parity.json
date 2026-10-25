@@ -1,0 +1,26 @@
+{
+  "preserved_pr3_actual_results_match": true,
+  "metrics": {
+    "base": {
+      "total_return": 0.016266099585555693,
+      "cagr": 0.002084639999324178,
+      "max_drawdown": -0.11796122523834873,
+      "profit_factor": 1.0694034908520882,
+      "trade_count": 113,
+      "win_rate": 0.30973451327433627,
+      "average_daily_exposure": 0.026660976944990887,
+      "fees_paid": 98.94829466900504
+    },
+    "stress": {
+      "total_return": -0.004628367286834467,
+      "cagr": -0.0005985612211357738,
+      "max_drawdown": -0.12323639681040655,
+      "profit_factor": 0.9812292008299913,
+      "trade_count": 113,
+      "win_rate": 0.30973451327433627,
+      "average_daily_exposure": 0.02649470643054241,
+      "fees_paid": 191.529720742413
+    }
+  },
+  "interpretation": "Shared-engine regression only; no new strategy variant and no edits to old results."
+}

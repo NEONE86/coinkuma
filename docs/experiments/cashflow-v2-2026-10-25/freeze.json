@@ -1,0 +1,261 @@
+{
+  "frozen_utc": "2026-10-25T05:01:06.831615+00:00",
+  "parent_pr3": "e6a78766aeb4462fc4aeb01f80fcbf24ca7096cb",
+  "head_before_freeze_commit": "e6a78766aeb4462fc4aeb01f80fcbf24ca7096cb",
+  "source_spec": {
+    "id": "ONE-Cashflow-Alpha-next-two-challengers",
+    "status": "DESIGNED_NOT_RUN",
+    "v1_status": "REJECTED; do not modify or relabel its result",
+    "reason": {
+      "stress_profit_factor": 0.9812292008299913,
+      "stress_trade_count": 113,
+      "stress_win_rate": 0.30973451327433627,
+      "stress_payoff_ratio": 2.186739361849695,
+      "base_candidate_signal_count": 180,
+      "base_universe_symbol_week_count": 26940,
+      "base_candidate_fraction": 0.006681514476614699,
+      "base_average_exposure": 0.026660976944990887,
+      "interpretation": "Both weak cost-adjusted selection and insufficient opportunity density; simply increasing exposure or leverage is not justified. Rejection reasons overlap and are not causal ablation estimates."
+    },
+    "trial_budget": {
+      "challenger_count": 2,
+      "parameter_grid_search": false,
+      "changes_after_results": "new experiment version; keep failed results",
+      "same_time_randomized_selection_controls": 200,
+      "control_seeds": "0 through 199; historical eligible pool, identical execution/cost/risk policy; no future membership"
+    },
+    "common": {
+      "universe": "Historical top80 USDT spot by trailing30 mean quote volume, minimum1m USDT; 240 consecutive days; ended markets retained",
+      "market_gate": "BTC prior completed daily close above SMA200; weekly/monthly context uses only completed bars",
+      "per_position_risk": 0.005,
+      "aggregate_open_risk": 0.03,
+      "max_positions": 8,
+      "max_position_weight": 0.2,
+      "max_gross_weight": 0.95,
+      "daily_loss_trigger": 0.03,
+      "permanent_drawdown_trigger": 0.15,
+      "execution": "D signal close, D+1 observation, earliest D+2 open; inherited gap rejection and stop-first execution",
+      "base_cost_per_side": {
+        "fee": 0.001,
+        "slippage": 0.001
+      },
+      "stress_cost_per_side": {
+        "fee": 0.002,
+        "slippage": 0.003
+      },
+      "initial_stop": "signal close minus2.5 ATR14; reject if distance outside3%..18%; size again at actual simulated execution",
+      "missing_held": "full-loss writeoff when unobservable at close; no hindsight last-price liquidation",
+      "instrument": "unborrowed spot; funding0; no leverage test until edge gates pass",
+      "classification": "price proxies, not fundamental revaluation evidence"
+    },
+    "challenger_A": {
+      "name": "relative_strength_recovery",
+      "hypothesis": "A recovery of relative strength after a sustained below-trend period identifies early repricing more efficiently than a narrow absolute56day range.",
+      "observation_frequency": "weekly after completed Sunday",
+      "entry_all": [
+        "At least14 of the28 days immediately preceding the last7 completed days closed below their own causal SMA50",
+        "At least one close in last7 completed days crossed from below to above causal SMA50; latest close remains above SMA50",
+        "Latest close is10%..60% below trailing180day high",
+        "28day asset return minus BTC28day return is at least0.03",
+        "Asset7day return <=0.12 and28day return between0 and0.30",
+        "Mean true range of last10 days / mean true range of preceding30 days <=0.90",
+        "Latest completed weekly close is above preceding weekly close"
+      ],
+      "rank": "descending28day relative return; symbol ascending for ties",
+      "exit": "BTC market gate fails, or close below SMA50 after7days held, or84days held; weekly delayed plan",
+      "partial_profit": "half at3 initial R; inherited stop-first convention",
+      "trailing_stop": "weekly max(existing stop,20day low minus0.25 ATR14)",
+      "adds": false
+    },
+    "challenger_B": {
+      "name": "established_trend_controlled_pullback",
+      "hypothesis": "Buying a bounded pullback in a sustained trend produces more repeated opportunities without unconditional breakout chasing.",
+      "observation_frequency": "daily; regime inputs still completed weekly/monthly context",
+      "entry_all": [
+        "SMA50 > SMA200 and latest SMA50 > its value20completed days earlier",
+        "Latest close is8%..25% below trailing60day high",
+        "Latest close/SMA20 is between0.95 and1.03",
+        "Latest close exceeds previous close and latest daily open",
+        "Asset7day return <=0.08 and28day return between-0.15 and0.25",
+        "90day asset return minus BTC90day return is positive"
+      ],
+      "rank": "descending90day relative return; symbol ascending for ties",
+      "exit": "BTC market gate fails, or close below SMA50, or21days held; daily delayed plan",
+      "partial_profit": "half at3 initial R; inherited stop-first convention",
+      "trailing_stop": "daily delayed max(existing stop,10day low minus0.25 ATR14)",
+      "adds": false
+    },
+    "chronology": {
+      "warmup": "2018",
+      "development_diagnostics": "2019-01-01 through2021-12-31",
+      "locked_historical_validation": "2022-01-01 through2024-12-31",
+      "locked_historical_challenge": "2025-01-01 through2026-09-30",
+      "selection_rule": "Freeze both complete specs and code hashes before running. Evaluate both, retain both failures. Select at most one only if all gates pass; otherwise select none. No splicing winners across years.",
+      "warning": "These periods were already inspected for v1; historical validation is not untouched OOS. A genuinely new forward paper interval of at least90days starts only after code freeze, without orders."
+    },
+    "edge_gates_before_forward_paper": {
+      "stress_profit_factor_min_exclusive": 1.3,
+      "total_closed_campaigns_min": 200,
+      "challenge_closed_campaigns_min": 50,
+      "stress_mean_closed_campaign_pnl_min_exclusive": 0,
+      "positive_calendar_fold_fraction_min": 0.6,
+      "max_drawdown_magnitude_max": 0.15,
+      "permanent_halt_allowed": false,
+      "block_resampled_lower95pct_mean_monthly_net_return_min_exclusive": 0,
+      "random_selection_control_percentile_min": 0.975,
+      "chronology_accounting_missing_market_checks": "all pass",
+      "interpretation": "Two challengers:97.5th percentile control hurdle is a conservative multiplicity-aware screen, not a proof of future profitability. Monthly blocks handle only part of dependence."
+    },
+    "capital_growth_relevance_gates": {
+      "stress_mean_full_month_net_return_min": 0.01,
+      "positive_full_month_fraction_min": 0.55,
+      "interpretation": "Economic research hurdle only:1% monthly on20m is200k, still far below5m. Even passing requires a capital-growth phase; it does not authorize withdrawals or leverage."
+    },
+    "discarded": [
+      "Multiplying v1 exposure or applying2x/3x leverage while stress expectancy is negative",
+      "Removing several v1 filters and selecting whichever historical variant looks best",
+      "Claiming a low-priced or compressed chart proves fundamental undervaluation",
+      "Treating historical monthly median0 as a dependable cashflow stream"
+    ],
+    "fundamental_followup_if_both_fail": {
+      "minimum_timestamped_events": 200,
+      "required_fields": [
+        "event/publication/collection/effective timestamps",
+        "asset identity",
+        "usage or revenue change",
+        "token value capture",
+        "supply/unlock change",
+        "source URL and raw snapshot"
+      ],
+      "scope": "A separate point-in-time catalyst dataset, not backfilled present-day fundamentals"
+    }
+  },
+  "conventions": {
+    "id": "ONE-Cashflow-Alpha-v2-fixed-two-challengers",
+    "source_pr3_head": "e6a78766aeb4462fc4aeb01f80fcbf24ca7096cb",
+    "source_spec": "docs/CASHFLOW_ALPHA_NEXT_EXPERIMENT.json",
+    "source_spec_git_blob": "8706d7cee7e9b1eaeb81e0998cea8fb692599b7f",
+    "source_rules_override": false,
+    "evaluation_start": "2019-01-01",
+    "evaluation_end_exclusive": "2026-10-01",
+    "collection_start": "2018-01-01",
+    "costs": {
+      "base": {
+        "fee_rate": 0.001,
+        "slippage_rate": 0.001
+      },
+      "stress": {
+        "fee_rate": 0.002,
+        "slippage_rate": 0.003
+      }
+    },
+    "era_accounts": {
+      "development": [
+        "2019-01-01",
+        "2022-01-01"
+      ],
+      "validation": [
+        "2022-01-01",
+        "2025-01-01"
+      ],
+      "challenge": [
+        "2025-01-01",
+        "2026-10-01"
+      ]
+    },
+    "accounts": "Each strategy and cost: continuous, eight independent calendar-year accounts (2026 ends September), three independent era accounts. Never splice reset accounts. Continuous attribution also reported by era and year.",
+    "implementation_conventions": {
+      "returns": "r_N = close[D]/close[D-N]-1; relative strength is arithmetic return difference, not ratio",
+      "high": "Maximum daily HIGH including D in the stated trailing window",
+      "sma": "Arithmetic mean of completed daily CLOSE including each SMA date",
+      "atr": "Arithmetic mean of last14 true ranges, not Wilder smoothing; initial stop = signal close -2.5 ATR",
+      "below_history": "28 observations D-34 through D-7, excluding latest seven D-6 through D; each below its own causal SMA50",
+      "cross": "Previous close strictly below previous SMA50 and current close strictly above current SMA50, on at least one of D-6 through D",
+      "tr_contraction": "Mean TR D-9..D divided by mean TR D-39..D-10; zero denominator fails",
+      "holding_age": "At signal observation (D+1 00:00 UTC) minus actual entry open; inherited convention",
+      "context": "BTC gate uses D completed close; A week is completed Sunday. No extra inherited v1 weekly/monthly-return entry filter is added to either challenger.",
+      "no_adds": "New entries allow the broker BUY path; all held targets have allow_add=false. Inherited risk/weight trims, stops, partial exits and stale-plan protection retained.",
+      "delays": "D close observed D+1; entries, planned exits and tightened stops become eligible D+2 open. Existing stops and 3R partial profit operate every daily bar, stop first.",
+      "capacity": "Held valid positions first, then fixed-ranked new candidates; no replacement with tomorrow's information",
+      "idle_cash": "Zero interest, no borrowing or leverage; cash included in all returns and exposure denominators",
+      "missing_market": "First missing held daily candle: zero recovery at close, no hindsight terminal-price exit. Shortened and zero-volume source candles retained and audited.",
+      "history": "240 consecutive daily observations with known LUNA identity boundary reset. Historical archive availability, not present exchangeInfo, defines membership. Full official listing and migration history remains uncertified.",
+      "krw": "Scale USDT net returns to 20m KRW at constant FX, before tax. Show fixed-20m month return PnL, original-account compounding PnL and realized PnL separately; no withdrawals assumed. This is not measured FX-adjusted cash income."
+    },
+    "controls": {
+      "cost_case": "stress",
+      "seeds": [
+        0,
+        199
+      ],
+      "count_per_strategy": 200,
+      "sampling": "At each original strategy signal date, K is the count of price-rule qualifiers in the whole historical top80 before holdings/capacity. Draw min(K,N) without replacement from that day's same top80 with BTC gate and 3%..18% initial-stop feasibility. Existing holdings may be drawn; no replacement, no adds. Rank drawn symbols with fresh deterministic random numbers. Same strategy-specific exit, trailing, delay, cost, halt and risk policies.",
+      "rng": "Python random.Random(f'{strategy}:{seed}:{signal_day_ms}'); sorted eligible symbols; sample then random ranking",
+      "statistic": "Arithmetic mean of full-calendar-month net returns of the continuous stress account, including idle months",
+      "percentile": "Number of 200 controls strictly below challenger statistic divided by 200; ties count against challenger; require >=0.975",
+      "diagnostic_p": "(1 + controls with statistic >= challenger)/(201), reported as Monte Carlo comparison only",
+      "retain": "Keep seed, performance, monthly path, independent ledger checks and artifact digest; individual ledgers outside Git. Do all controls even when other gates already fail."
+    },
+    "uncertainty": {
+      "method": "4000 circular moving-block resamples of full-month net returns, block length3 months, seed20261025; percentile 2.5% and97.5% endpoints",
+      "gate": "Lower endpoint of historical 95% interval for arithmetic mean monthly net return must exceed0",
+      "not_a_forecast": true
+    },
+    "decision": {
+      "gates": "Apply every edge_gates_before_forward_paper and capital_growth_relevance_gates value in the unchanged source spec to stress results",
+      "positive_calendar_fold_fraction": "Positive net-return independent calendar accounts divided by8, including partial2026; threshold0.60 requires at least5/8",
+      "challenge_count": "Closed campaigns in the independent 2025-01-01..2026-10-01 challenge account",
+      "mdd": "Continuous stress daily-close MDD plus independent-fold MDD reported. Gate checks continuous AND each reset account, with no permanent halt in any account. Intraday simultaneous-low bound separately reported; trigger is not a guaranteed cap.",
+      "PASS": "All gates pass and all required audits/controls completed; only eligible for a separate at-least90-day new forward-paper interval",
+      "REJECT": "Any measured profitability, stability, capital-growth or drawdown/halt gate fails; preserve failed parameters",
+      "NEEDS_MORE_EVIDENCE": "No measured failure but samples insufficient, or mandatory audit/data/control evidence incomplete; never PASS an unverified run",
+      "selection": "At most one. If both PASS, higher stress mean full-month net return; ties choose lower MDD magnitude then strategy name. Otherwise select none or the sole PASS."
+    },
+    "future_prefix_test": "Physically delete every bar on/after2023-01-01; compare all earlier equity, fills, writeoffs and plans for all four continuous accounts, with no terminal liquidation on truncated run",
+    "independent_reproduction": "Separate validator process reconstructs daily cash/inventory/campaigns, source market eligibility and candidate rules, then reruns all four continuous accounts from new panel objects. Same-author code validation is not an external investment audit.",
+    "live_orders": false,
+    "leverage": 1,
+    "historical_not_untouched_oos": true,
+    "parameter_search": false
+  },
+  "code_sha256": {
+    "config.json": "34de9a853bc7184610cad6844c6d0c74d95487e84e5c32f91c3d9c5503f91cd4",
+    "docs/CASHFLOW_ALPHA_NEXT_EXPERIMENT.json": "0e95de9e9452ffa3fc55a216b99fca3cb0fbe81c246dedef9da5c328b0dda9e7",
+    "docs/CASHFLOW_ALPHA_V2_PROTOCOL.json": "50c5c4fecc33930e20af48a905015aa70c77f4fa76fd33c3e4aed9262820d9ff",
+    "one_trading/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "one_trading/cashflow_alpha.py": "1e005520b7b628316ab57f4b457467a73adeb7d13e81882e9b8d114df609d4c5",
+    "one_trading/cashflow_alpha_v2.py": "cf7236f88e659b09337a7e8414ecbb129d38923b1c616ce152d4919d1b368693",
+    "one_trading/governance.py": "bbbcebb8285a5eab28dd307d8418fe3d2c8467949d76e92b3510c2cfe950a2eb",
+    "one_trading/historical_data.py": "8f0e3a24a74fb893b87a799b03d85dd1557c61550400d5a6e846454a5da094ef",
+    "one_trading/learning.py": "b1c3236fef66f10c091731a1b5d9a6ad890f19f9d5deac9f4f964b6abd508b3a",
+    "one_trading/observer.py": "275d2d6858595f43e617c5a96c5831637f3232096f4e4cbf5507c5d30ce1872a",
+    "one_trading/portfolio.py": "1a5c0f4d9f6e2809b9c0d104ffcedd4c84b72df904959220bdc3a699498d87e5",
+    "one_trading/reference_data.py": "64bd7022b844fa0b02ffb1895a1d98e73db2646414b6305d68fefb5018e6480b",
+    "one_trading/replay.py": "ea87d90bc11183b66412c81c479c7bc9641668d68a7f500faafa0630aca08a9e",
+    "one_trading/research.py": "5a76a978e88b05ae4c381c20a1968a8af0943e565f57188bf459c49603e79e8f",
+    "one_trading/runtime.py": "7d6b6f90b5f41796e183006f15c535cd9d78797880723101bcc7954216604bd2",
+    "one_trading/walkforward.py": "1c491f4580c3598c6c26812c38776d943c4cb27c47622690fb4c89e2f8ca3afd",
+    "scripts/analyze_cashflow_target.py": "3a3fcd5aa95d1bb8f0b1085fb4f545e61690ea61407ba3bbaeb9beb060d0ce23",
+    "scripts/cashflow_data_audit.py": "5a28f04f32676ca19da41b2e0080450e0c227fe254c5faf4d429b315ed691d29",
+    "scripts/collect_cashflow_v2.py": "8a4564211b245cfea7ffc0c40d038cc6966ad28fc464d12281992fc096465e17",
+    "scripts/export_cashflow_evidence.py": "8a02f4f89e5917deeb30a5a37fc67c9161b1723818bdc6f69fc5f069fe2f9136",
+    "scripts/export_historical_evidence.py": "49e18dc5ebaa8c5579a33abf255dcaa34d1f5d4700419f0e8581008f82566104",
+    "scripts/run_cashflow_alpha.py": "f2fb682b7d8fd971375c2f1d12d409c3a4f0242edcbdedf16441e1d9373904e3",
+    "scripts/run_cashflow_v2.py": "ed9436f3e82f85894b7e901ff80866664b8b3c1998bee0bbff034b3157929375",
+    "scripts/validate_cashflow_alpha.py": "c8ba30124593b8197242b8b8bce46243888541225e8119b35829fd26d1553946",
+    "scripts/validate_cashflow_v2.py": "727631eb4739bf0a196e556d87e13daf6c0dd46dbb197ca34c373bb70e29812a",
+    "tests/test_cashflow_alpha.py": "e92ad039039219d740c8293dedfeff8d2e6558cd6057918cb37bf0fadd8fe9d7",
+    "tests/test_cashflow_audit.py": "82597b8d8a8ac9fe923db222ac3a66f99d5c1fb5a4ffa90c5f8df148c1053784",
+    "tests/test_cashflow_target.py": "c7526b018d4c2e411de934c179f401c32ce5ecf5e8229b0fff5b0bb0056e3886",
+    "tests/test_cashflow_v2.py": "5d1b4d0f41dde5e554ec8817f97de0cc6c49f2377858f47ee57c982942129af3",
+    "tests/test_cashflow_v2_audit.py": "c968ce4e17009408ca7612b0c9f57490493e9ab2f1f4982277e2049765657d87",
+    "tests/test_governance.py": "54eed23009beb2523c683490d135b7b73e9563cd318a0cc0c91d9cfb3f582da7",
+    "tests/test_historical.py": "dd46ebb9c6e56fd52e787c7470d2e9489bccf54e9288ae45013d01e6a97dc5a3",
+    "tests/test_learning_execution.py": "8f9e59504b796145f53b7b814dd4322df4fa432c691257fed7c55575661fc8b3",
+    "tests/test_observer.py": "ba88d834df81a08cb6212938c6a3d9849795569a794939b97783a213c9fa2197",
+    "tests/test_pending_position_context.py": "121f5474a805121a38dd3e7ab8fe92aa2f1086cabaa99840dbcd4c272903ccee",
+    "tests/test_research.py": "aaff45c4689d46fea6810d6ef67f07db4f18610540e91d15f3a4684252349a5b",
+    "tests/test_runtime_execution.py": "de54b90870dd8bb608e6091b96b251a3c7a196e9eec42c883f461dffae1406c5"
+  },
+  "results_inspected": false
+}
