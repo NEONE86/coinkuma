@@ -1,0 +1,34 @@
+{
+  "independent_reproduction_passed": true,
+  "scope": "SOURCE_BYTES_ROWS_AND_DATA_GATE_ONLY_NOT_STRATEGY_RETURNS",
+  "files_verified": 4416,
+  "index_pages_verified": 17,
+  "counts": {
+    "header_rows": 4332,
+    "raw_rows": 1466397,
+    "duplicate_rows": 40152,
+    "conflicting_timestamps": 0,
+    "conflicting_duplicate_rows": 0,
+    "out_of_order_transitions": 11238,
+    "usable_unique_rows": 1426245,
+    "expected_grid_rows": 1415088,
+    "missing_or_ambiguous_grid_rows": 1437,
+    "funding_subhour_timestamps": 5880,
+    "shortened_bars": 0
+  },
+  "source_manifest_sha256": "59732404f79b5d248e3561aec135816185935edb6b65c1781172947153196666",
+  "normalized_manifest_sha256": "786572abbb04e4c76b5df1043ca6b6a82834f4619bfb375e901c1b77b4bb8bf5",
+  "complete_4h_trade_observations": {
+    "BTCUSDT": 10404,
+    "ETHUSDT": 10404
+  },
+  "pre2025_grid_counts_after_future_deletion": {
+    "BTCUSDT": 6576,
+    "ETHUSDT": 6576
+  },
+  "historical_OI_availability_verified": 0,
+  "publication_columns_found": [],
+  "performance_backtest_not_executed": true,
+  "main_gate_reproduced": "NEEDS_MORE_EVIDENCE",
+  "external_investment_audit": false
+}

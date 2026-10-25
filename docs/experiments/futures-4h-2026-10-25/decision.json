@@ -1,0 +1,27 @@
+{
+  "decision": "NEEDS_MORE_EVIDENCE",
+  "data_gate_passed": false,
+  "reasons": [
+    "OI_HISTORICAL_AVAILABILITY_UNVERIFIED",
+    "HISTORICAL_FUTURES_TERMS_UNVERIFIED",
+    "FUNDING_SETTLEMENT_MARKS_UNVERIFIED"
+  ],
+  "strategy_backtest_executed": false,
+  "performance_metrics": {
+    "total_return": null,
+    "cagr": null,
+    "max_drawdown": null,
+    "profit_factor": null,
+    "win_rate": null,
+    "trade_count": null,
+    "average_holding_days": null,
+    "average_exposure": null,
+    "monthly_returns": null,
+    "worst_losing_streak": null,
+    "monthly_krw_pnl": null,
+    "target_hit_frequency": null
+  },
+  "simulated_or_live_orders": 0,
+  "leverage_applied": false,
+  "implementation": "Signal primitives only; no futures account engine or performance simulation approved by this data gate"
+}

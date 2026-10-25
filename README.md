@@ -114,3 +114,13 @@ preserve their past after future data deletion. See the
 [independent calculation review](docs/experiments/cashflow-v2-2026-10-25/INDEPENDENT_REVIEW.md)
 and [reproduction workflow](docs/CASHFLOW_ALPHA_V2.md). Earlier rejection results
 remain unchanged. This is research evidence, not live-trading approval.
+
+## 바이낸스 선물 4시간봉 연구
+
+PR #4 HEAD에서 시작한 펀딩비·OI·시장구조 연구는 **NEEDS_MORE_EVIDENCE**다.
+공식 ZIP 4,416개와 원시 기록 1,466,397행의 감사를 별도 파서로 재현했지만,
+과거 OI 가용시각·정산 마크·계약 조건을 입증하지 못해 전략 수익 백테스트를
+보류했다. 수익성 검증을 완료한 결과가 아니다. [연구·재현 절차](docs/FUTURES_4H_RESEARCH.md),
+[실데이터 감사 결과](docs/experiments/futures-4h-2026-10-25/RESULTS.md),
+[독립 데이터 검토](docs/experiments/futures-4h-2026-10-25/INDEPENDENT_REVIEW.md)를 참조한다.
+기존 기각 결과는 보존했으며 실주문·레버리지·PR 병합은 실행하지 않았다.

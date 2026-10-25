@@ -1,0 +1,104 @@
+[
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2Fklines%2FBTCUSDT%2F1h%2F&max-keys=1000",
+    "sha256": "083d618d2b49fd379e5b0425483fc3ee9dbb036fbd023e4b17eb664c64844039",
+    "fetched_ms": 1792907415867,
+    "bytes": 46575
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2FmarkPriceKlines%2FBTCUSDT%2F1h%2F&max-keys=1000",
+    "sha256": "6d4228cadfa832bc6d2bf1359ed3bc35f4e3e7af8fbb877da058332132b3b1d8",
+    "fetched_ms": 1792907416064,
+    "bytes": 48042
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2FindexPriceKlines%2FBTCUSDT%2F1h%2F&max-keys=1000",
+    "sha256": "83d28f4600e27b36de791879f53bbe434d0fde12d458fc46b39b6e7a4cc7fe0b",
+    "fetched_ms": 1792907416234,
+    "bytes": 48205
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2FfundingRate%2FBTCUSDT%2F&max-keys=1000",
+    "sha256": "0fef837c9747ef5a887f5361431c5ee25d1aa9859ca101de26774ab1d18e77d4",
+    "fetched_ms": 1792907416399,
+    "bytes": 48199
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2F&max-keys=1000",
+    "sha256": "b7c2a4fb4c6b53c177a2c2ebd0874b859cb56afdaf6b8f27e69a98dd3b65e2c2",
+    "fetched_ms": 1792907417173,
+    "bytes": 348521
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2FBTCUSDT-metrics-2022-01-13.zip.CHECKSUM",
+    "sha256": "f7ccf273ea4263ef74f0c4f654a88b24969d110e3c80293fbecb5f413c82676c",
+    "fetched_ms": 1792907417916,
+    "bytes": 268593
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2FBTCUSDT-metrics-2023-05-28.zip.CHECKSUM",
+    "sha256": "ac562230686be500746dc85a5d9651674310715232b38a6c733b0c97091cb402",
+    "fetched_ms": 1792907418632,
+    "bytes": 307582
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2FBTCUSDT-metrics-2024-10-09.zip.CHECKSUM",
+    "sha256": "9fea1e20e5d78139b7d91c36ebf3e9d29ce28efc1e80af200e029782aaa97b37",
+    "fetched_ms": 1792907419336,
+    "bytes": 356359
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FBTCUSDT%2FBTCUSDT-metrics-2026-02-21.zip.CHECKSUM",
+    "sha256": "9ad8a7725c3e731b181ce63b03badb4aa77ddff06ad78de5f663a4a74dfafbe3",
+    "fetched_ms": 1792907419758,
+    "bytes": 174088
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2Fklines%2FETHUSDT%2F1h%2F&max-keys=1000",
+    "sha256": "5f8e93d429f8b0b024221d6207bf09b4bc1bd5a1a8ddda429347c346e3a6cd43",
+    "fetched_ms": 1792907419997,
+    "bytes": 46575
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2FmarkPriceKlines%2FETHUSDT%2F1h%2F&max-keys=1000",
+    "sha256": "4eef3db0a5745f2c843379bdcc5e70aa458abafab3a8c1b1855938836337c91c",
+    "fetched_ms": 1792907420160,
+    "bytes": 48042
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2FindexPriceKlines%2FETHUSDT%2F1h%2F&max-keys=1000",
+    "sha256": "ea78b7261e56d8a2068a55e81585b62623b97f9e3c2ced71343ea177365060d2",
+    "fetched_ms": 1792907420327,
+    "bytes": 48205
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fmonthly%2FfundingRate%2FETHUSDT%2F&max-keys=1000",
+    "sha256": "31a373e86b612a53853eae3166b14b1aedde75503ecbb5750f671bd4ba0db203",
+    "fetched_ms": 1792907420488,
+    "bytes": 48202
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2F&max-keys=1000",
+    "sha256": "91a8ab3751fac52f704dec3c400260a9ec6d03aeb63109fa726bb7727c2af4b6",
+    "fetched_ms": 1792907421362,
+    "bytes": 268677
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2FETHUSDT-metrics-2023-04-14.zip.CHECKSUM",
+    "sha256": "0ef8ccc177a3131d2f088d99f60ca5ee4d38a89fabd21d1addd3c66ef964d377",
+    "fetched_ms": 1792907422236,
+    "bytes": 299838
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2FETHUSDT-metrics-2024-08-26.zip.CHECKSUM",
+    "sha256": "8c6243a9b7df2dd9d88a3893c03d76052d955c893a62225a15f93d0e00314aca",
+    "fetched_ms": 1792907422933,
+    "bytes": 356351
+  },
+  {
+    "url": "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2F&max-keys=1000&marker=data%2Ffutures%2Fum%2Fdaily%2Fmetrics%2FETHUSDT%2FETHUSDT-metrics-2026-01-08.zip.CHECKSUM",
+    "sha256": "cae3c6038057670ce8a02a4f3c507074f72ed07c2948d0da73c7a8a51f6e3436",
+    "fetched_ms": 1792907423379,
+    "bytes": 205416
+  }
+]

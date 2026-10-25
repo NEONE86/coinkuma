@@ -1,0 +1,16 @@
+{
+  "tests_passed": 172,
+  "compileall_passed": true,
+  "cli_help_passed": true,
+  "cli_status": "NOT_STARTED",
+  "independent_scope": "All4416sourceZIPs and normalized audit rows, not strategy performance",
+  "independent_reproduction_passed": true,
+  "original_experiment_files_preserved": true,
+  "no_actual_or_simulated_orders": true,
+  "no_leverage_applied": true,
+  "strategy_performance_backtest": false,
+  "full_futures_account_engine_implemented": false,
+  "frozen_code_files": 12,
+  "external_third_party_investment_audit": false,
+  "hash_scheme": "Public artifact SHA256 hashes canonical CRLF-to-LF bytes, retaining CSV BOM. Raw ZIP/CHECKSUM roots use original bytes."
+}

@@ -1,0 +1,41 @@
+{
+  "recorded_utc": "2026-10-25 06:02:26 UTC",
+  "interpretation": "Normalized Binance MCP results, not original HTTP response bytes",
+  "precise_original_capture_latency_not_claimed": true,
+  "private_normalized_response_sha256": "afca6daa9f455d8f57bbe81bb51a77d90c95bfd6a4675d954c0806ca8dfe86ff",
+  "probes": {
+    "historical_OI_2022": {
+      "isError": true,
+      "error": "McpServerError: Invalid params: Error calling tool 'get_futures_usds_open_interest_statistics': HTTP error 400: Bad Request - {'msg': \"parameter 'startTime' is invalid.\", 'code': -1130}",
+      "rows": 0,
+      "fields": [],
+      "empty_mark_price_rows": null
+    },
+    "recent_OI": {
+      "isError": false,
+      "error": null,
+      "rows": 3,
+      "fields": [
+        "symbol",
+        "sumOpenInterest",
+        "sumOpenInterestValue",
+        "CMCCirculatingSupply",
+        "timestamp"
+      ],
+      "empty_mark_price_rows": null
+    },
+    "historical_funding_2022": {
+      "isError": false,
+      "error": null,
+      "rows": 3,
+      "fields": [
+        "symbol",
+        "fundingTime",
+        "fundingRate",
+        "markPrice",
+        "rateType"
+      ],
+      "empty_mark_price_rows": 3
+    }
+  }
+}
