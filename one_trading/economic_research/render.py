@@ -16,8 +16,8 @@ def markdown(report):
     counts = report["scoring"]["counts"]
     lines = ["# ONE Trading — Repricing Research v4", "",
              f"판단 보고 기준 UTC: {report['as_of']}", "",
-             "현재 판단은 아래 저장된 증거와 주관적 가정을 연결한 전향 연구 기록이다. 투자 수익성은 미검증이며 모든 행동은 PROPOSED이다.", "",
-             "| 자산 | 연구 선택 | 현재 행동 | 예상 180일 순수익 | 최악 시나리오 | 요구수익 진입가격 |",
+             "현재 판단은 아래 저장된 증거와 주관적 가정을 연결한 연구 기록이다. 투자 수익성은 미검증이며 행동 상태는 각 카드에 표시한다.", "",
+             "| 자산 | 연구 선택 | 현재 행동 | 고정 시한까지 예상 순수익 | 최악 시나리오 | 요구수익 진입가격 |",
              "|---|---|---|---:|---:|---:|"]
     for card in report["cards"]:
         d, t = card["decision"], card["thesis"]
@@ -38,7 +38,7 @@ def markdown(report):
                   "시장 기대와의 차이: " + t["market_expectation_gap"], "",
                   "판정을 바꾸는 조건: " + d["change_conditions"], "",
                   "다음 조사 질문: " + t["next_high_value_question"], "",
-                  f"등록 UTC: {d['decision_at']}; 입력 마감: {packet['as_of']}; 가격 상태: {d['price_status']}; 행동 상태: {d['action_execution_status']}."]
+                  f"등록 UTC: {d['decision_at']}; 입력 마감: {packet['as_of']}; 평가 시한: {d['horizon']}; 가격 상태: {d['price_status']}; 행동 상태: {d['action_execution_status']}."]
         price = card.get("price_snapshot")
         if price:
             lines += ["", f"관측 가격: {number(price['value'])} {price['quote_currency']} / {price['venue']} {price['instrument']} {price['price_kind']}; 거래소 시각 {price['source_time']}; 실제 수신 {price['observed_at']}."]
@@ -56,11 +56,13 @@ def markdown(report):
             estimate = pct(dist["p"]) if dist["type"] == "BINARY" else "; ".join(number(p["value"]) + " @ " + pct(p["p"]) for p in dist["points"])
             lines.append(f"| {f['target_type']} | {f['deadline']} | {f['target_definition']} | {estimate} | {f['status']} |")
         lines += ["", "확률은 JUDGMENT이며 미상 기본 발생률은 null이다. 사건·경제효과 확률을 독립으로 곱하지 않았다. 정확한 측정창·허용 출처·해결 규칙은 JSON 보고서의 resolution_rule에 동결되어 있다.", "",
-                  "### 같은 시한의 가격 시나리오", "", "| 시나리오 | 결합 확률 | 기말 가격 | 기말 경제적 공급 가정 | 경제 가정 |", "|---|---:|---:|---:|---|"]
-        for scenario in d["scenario_tree"]["scenarios"]:
-            if "terminal_price" in scenario:
-                lines.append(f"| {scenario['id']} | {pct(scenario['p'])} | {number(scenario['terminal_price'])} | {number(scenario['terminal_token_supply'], 0)} | {scenario['economic_assumptions']} |")
-        lines += ["", f"비용: 매수 {pct(d['cost_assumptions']['buy_fraction'])}, 매도 {pct(d['cost_assumptions']['sell_fraction'])}. 단위 현금분배 0은 평가 가정이다. 손익분기 진입가격 {number(v['break_even_entry'])}; 요구수익 {pct(v['required_return'])}의 진입가격 {number(v['entry_for_required_return'])}.", "",
+                  "### 같은 시한의 가격 시나리오", "", "| 시나리오 | 결합 확률 | 기말 가격 | 기말 경제적 공급 가정 | 단위 현금분배 | 경제 가정 |", "|---|---:|---:|---:|---:|---|"]
+        inputs = {s["id"]: s for s in d["scenario_tree"]["scenarios"]}
+        for valued in v["scenarios"]:
+            scenario = inputs[valued["id"]]
+            lines.append(f"| {scenario['id']} | {pct(valued['joint_probability'])} | {number(scenario['terminal_price'])} | {number(scenario['terminal_token_supply'], 0)} | {number(scenario['cash_distribution'])} | {scenario['economic_assumptions']} |")
+        lines += ["", f"결합 확률 합계: {pct(sum(Decimal(s['joint_probability']) for s in v['scenarios']))}. 현금분배는 위 시나리오별 가정이다.", "",
+                  f"비용: 매수 {pct(d['cost_assumptions']['buy_fraction'])}, 매도 {pct(d['cost_assumptions']['sell_fraction'])}. 손익분기 진입가격 {number(v['break_even_entry'])}; 요구수익 {pct(v['required_return'])}의 진입가격 {number(v['entry_for_required_return'])}.", "",
                   "가격 민감도: " + "; ".join(number(r["entry_price"]) + " → " + pct(r["expected_return"]) for r in v["price_sensitivity"]), "",
                   "### 버전과 출처", "", f"Packet `{packet['packet_id']}`; manifest `{packet['manifest_hash']}`.", "",
                   f"원인 모형 `{t['causal_model_version']}`, 추정 `{d['estimation_version']}`, 정책 `{d['policy_version']}`.", ""]

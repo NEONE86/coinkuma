@@ -4,7 +4,7 @@ from __future__ import annotations
 from decimal import Decimal, localcontext
 import re
 
-from .evidence import evidence_links, source_bytes
+from .evidence import evidence_links, source_bytes, validate_observation
 from .store import (check_revision, decimal, digest, instant, nonempty, one_of,
                     required, utc)
 
@@ -66,12 +66,15 @@ def register_flow(store, data):
     seen = set()
     existing_refs = {leg["external_reference"] for flow in store.all("economic_flow")
                      if flow["economic_flow_id"] != data["economic_flow_id"] for leg in flow["legs"]}
+    existing_legs = {leg["leg_id"] for flow in store.all("economic_flow")
+                     if flow["economic_flow_id"] != data["economic_flow_id"] for leg in flow["legs"]}
     for leg in data["legs"]:
         nonempty(leg, "leg_id", "kind", "external_reference", "epistemic_type", "evidence_ids")
         required(leg, "quantity", "unit", "origin")
-        if leg["leg_id"] in seen or leg["external_reference"] in existing_refs:
+        if leg["leg_id"] in seen or leg["leg_id"] in existing_legs or leg["external_reference"] in existing_refs:
             raise ValueError("duplicate_economic_flow")
         seen.add(leg["leg_id"])
+        existing_refs.add(leg["external_reference"])
         one_of(leg["kind"], {"ISSUANCE", "BURN", "BUYBACK", "UNLOCK", "REDISTRIBUTION", "RELOCK", "BRIDGE"})
         one_of(leg["epistemic_type"], {"DIRECT_RECORD", "SOURCE_CLAIM", "ASSUMPTION", "DERIVED_VALUE"})
         evidence_links(store, leg["evidence_ids"])
@@ -171,11 +174,17 @@ def register_event(store, data):
         if data["status"] not in transitions[previous["status"]]:
             raise ValueError("invalid_event_state_transition")
     # Same source claims under a new event id do not become an independent event.
+    facts = {f for o in observations for f in validate_observation(store, o)["fact_ids"]}
     for prior in store.all("economic_event_revision"):
+        prior_facts = {f for oid in prior["observation_ids"]
+                       for f in validate_observation(store, store.get("observation", oid))["fact_ids"]}
         if (prior["event_id"] != data["event_id"] and prior["asset_id"] == data["asset_id"]
                 and prior["mechanism_id"] == data["mechanism_id"]
-                and set(prior["observation_ids"]) == set(data["observation_ids"])):
+                and prior_facts == facts):
             raise ValueError("duplicate_economic_event")
+        if (prior["event_id"] != data["event_id"] and prior_facts & facts
+                and prior["independent_cluster_id"] != data["independent_cluster_id"]):
+            raise ValueError("shared_facts_cannot_create_independent_cluster")
     old = store.get("economic_event_revision", data["revision_id"], optional=True)
     data["registered_at"] = old["registered_at"] if old else utc()
     data["available_at"] = data["registered_at"]

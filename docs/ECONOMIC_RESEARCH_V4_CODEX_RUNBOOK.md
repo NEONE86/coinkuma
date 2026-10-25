@@ -18,7 +18,9 @@ python one.py status --workspace workspace_public
 python -m one_trading.economic_research --help
 ```
 
-The v4 suite has 22 tests, including T01–T14. The synthetic mature-policy test
+The v4 suite has 22 original tests, including T01–T14, and 25 independent-review
+regressions in `test_economic_research_v4_fixes.py` (228 repository tests total).
+The synthetic mature-policy test
 `test_full_synthetic_mature_policy_pair_attribution_and_rejection_history` freezes
 the challenger before new inputs, records two separate decisions, resolves a
 future terminal price under a test-only controlled clock, reports a missed winner,
@@ -83,7 +85,7 @@ new information cutoff. A fresh source response cannot recreate an old receipt.
 `ingest --file` accepts a JSON array of `{"kind": ..., "data": ...}` objects in
 dependency order. Kinds: `asset_identity`, `observation`, `economic_flow`,
 `economic_event_revision`, `policy`, `policy_change`, `policy_change_review`,
-`attribution`, `valuation_and_decision`. Domain validators enforce referenced
+`attribution`, `valuation_and_decision`, `policy_cohort`. Domain validators enforce referenced
 records; the batch is transactional and a rejection survives outside the rollback.
 The supplied protocol lists baseline fields; additional implementation fields
 are demonstrated in the synthetic test fixture and private authored JSON.
@@ -104,6 +106,35 @@ still checked against the source allowlist. Supported operators are GE/GT/LE/LT/
 EQ for binary questions and NUMERIC for discrete numeric forecast distributions.
 The analyst's period attribution must be reviewed; hashes cannot prove it true.
 
+Observations require `value_type=DECIMAL|TEXT|BOOLEAN`. Numeric outcomes require
+DECIMAL and recursive validation of every final input. TEXT cannot resolve a
+numeric question. Source claims remain claims, including through multiple sums.
+No ASSUMPTION ancestor can resolve an outcome. Arithmetic inputs must have the
+same asset, unit and effective period; arbitrary period aggregation is unsupported.
+
+`question_id` owns the immutable subject, target, rule, unit, source, benchmark and
+deadline contract. Revisions must reference the preceding forecast, advance both
+cutoff and registration, and use a newly registered thesis/packet. The original
+economic window remains fixed even when part of it has elapsed. Both remaining
+horizon (deadline minus cutoff) and actual lead (deadline minus registration) are
+reported. Different horizons/leads are not pooled into one score. INITIAL selects
+the first registered probability, LATEST_AS_OF the latest registered by as_of;
+all revisions share the question's single resolution history.
+
+Set `resolution_rule.observation_mode` explicitly for new questions. WINDOW_FINAL
+(legacy default), END_STATE and TERMINAL_PRICE require the endpoint; a current
+positive observation does not prove the final state. EVER_IN_WINDOW and
+MONOTONIC_CUMULATIVE permit decisive partial positive GE/GT evidence. These modes
+are part of the frozen contract. A known result anywhere in recorded observations
+or a question's resolution history blocks prospective revision, even if omitted
+from the new packet. Unrecorded external knowledge is outside this check. For a
+legacy question whose temporal meaning was ambiguous, do not reinterpret its
+contract retrospectively: record a separate, explicitly defined question.
+
+For a price-only decision update using the existing thesis and forecasts, use
+`ingest` with kind `valuation_and_decision` and `supersedes_decision_id`. Do not
+submit a new thesis bundle that points at old thesis revisions.
+
 `resolve --file <resolution.json>` accepts `resolution_id`, `forecast_id`,
 `status`, `explanation`, `evidence_ids`, `observation_ids` and
 `supersedes_resolution_id`. The actual outcome is recomputed from the admissible
@@ -116,6 +147,23 @@ it does not fetch or invent outcomes. Corrections require a new ID and predecess
 The latter requires a frozen change and both policies' separate records on the
 same post-preregistration information vintage. Initial results remain pending;
 rerun after admissible terminal-price resolution for a new comparison snapshot.
+The first comparison enrolls a pair **before** its outcome or deadline. Endpoint
+contracts (including instrument/price specification, sources and benchmark) and
+one common question/outcome must match. Before any cohort outcome, freeze the
+complete enrolled event set using `ingest` with kind `policy_cohort` and data
+`{"cohort_id":"...","change_id":"...","pair_ids":["pair-..."]}`. No more pairs
+can be added to that cohort. Completion requires every frozen pair to resolve;
+PENDING/missing pairs remain in report coverage. Pair result records contain no
+mutable global forecast coverage, so unrelated imports do not break replay.
+Reports separately calculate full cohort coverage at the requested as_of. This
+remains a one-unit proposal markout diagnostic, never account performance or
+automatic policy promotion. `CAPITAL_REVIEW` still grants no authority.
+
+`audit` now adds a read-only F01–F13 semantic impact inventory to raw/storage/
+packet checks; any detected issue yields a failing CLI status. Legacy resolved
+records are revalidated before scoring or policy comparison. A bad label fails
+closed until an explicit valid superseding resolution is registered. Auditing
+does not rewrite old data or certify source truth.
 
 The [blank change template](ECONOMIC_RESEARCH_V4_POLICY_CHANGE_TEMPLATE.json) is
 intentionally incomplete and must **not** be registered as real research. It is

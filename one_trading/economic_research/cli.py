@@ -12,7 +12,7 @@ from . import VERSION
 from .evidence import VersionedEvidence, observe, price_from_ticker
 from .events import register_asset, register_event, register_flow
 from .review import (audit, compare_policies, mark_due_missing, register_attribution,
-                     register_change, register_policy, report, resolve_forecast, review_change)
+                     register_change, register_policy, report, resolve_forecast, review_change, freeze_policy_cohort)
 from .store import Store, atomic_bytes, digest, instant, nonempty, utc, write_json
 from .theses import make_packet, register_bundle, register_decision
 
@@ -26,6 +26,7 @@ def ingest(store, payload):
                 "economic_flow": register_flow, "economic_event_revision": register_event,
                 "policy": register_policy, "policy_change": register_change,
                 "policy_change_review": review_change, "attribution": register_attribution,
+                "policy_cohort": freeze_policy_cohort,
                 "valuation_and_decision": register_decision}
     result = []
     try:
@@ -125,6 +126,8 @@ def main(argv=None):
             result = report(store, args.as_of)
         elif args.command == "audit":
             result = audit(store)
+            if result["status"] != "PASS":
+                status = "FAILED"
         rendered = None
         if args.command == "report" and args.format == "markdown":
             from .render import markdown

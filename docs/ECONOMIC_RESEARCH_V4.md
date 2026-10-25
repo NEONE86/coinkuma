@@ -1,5 +1,10 @@
 # Economic Repricing Research v4
 
+**v4.1 correction:** the independent review of PR #9 at `429b480` reproduced
+F01–F13 despite the original 203 passing tests. The fixes and 25 new assertions
+are described in [the correction record](ECONOMIC_RESEARCH_V4_REVIEW_FIXES.md).
+Do not treat the original test result as approval of the pre-fix semantics.
+
 **Implemented one-shot research, not validated investment edge.** The first real
 manual-import run selected UNI for research (`PRIORITIZE / WATCH`), retained CAKE
 for observation (`MONITOR / NO_TRADE`), and excluded the unconfirmed continuing

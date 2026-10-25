@@ -7,6 +7,7 @@ from .evidence import evidence_links, source_bytes
 from .store import (check_revision, decimal, digest, identifier, instant, nonempty,
                     one_of, required, stamp, utc)
 from .valuation import probability, value_scenarios
+from .contracts import contract_hash, question_contract, known_outcome_evidence, forecast_timing
 
 MODES = {"CASE_STUDY_BACKFILL", "HISTORICAL_POINT_IN_TIME", "PROSPECTIVE"}
 
@@ -159,25 +160,48 @@ def register_forecast(store, data):
         raise ValueError("resolution_window_mismatch")
     if data["target_type"] == "PRICE":
         nonempty(rule, "price_spec", "benchmark_spec")
-        if dist["type"] == "NUMERIC" and dist["unit"] != rule["unit"]:
-            raise ValueError("forecast_distribution_unit_mismatch")
-    check_revision(store, "forecast", data, "forecast_id", "supersedes_forecast_id", ("question_id", "target_type", "deadline", "resolution_rule"))
+    if dist["type"] == "NUMERIC" and dist["unit"] != rule["unit"]:
+        raise ValueError("forecast_distribution_unit_mismatch")
+    mode = rule.get("observation_mode", "WINDOW_FINAL")
+    one_of(mode, {"WINDOW_FINAL", "END_STATE", "TERMINAL_PRICE", "EVER_IN_WINDOW", "MONOTONIC_CUMULATIVE"})
+    if mode in {"EVER_IN_WINDOW", "MONOTONIC_CUMULATIVE"} and (dist["type"] != "BINARY" or rule["operator"] not in {"GE", "GT"}):
+        raise ValueError("monotonic_question_requires_positive_threshold_rule")
+    if data["target_type"] == "PRICE" and mode in {"EVER_IN_WINDOW", "MONOTONIC_CUMULATIVE"}:
+        raise ValueError("terminal_price_cannot_close_early")
+    contract = question_contract(store, data)
+    check_revision(store, "forecast", data, "forecast_id", "supersedes_forecast_id", ("question_id",))
     for prior in store.all("forecast"):
-        if (prior["question_id"] != data["question_id"] and prior["target_type"] == data["target_type"]
-                and prior["resolution_rule"] == data["resolution_rule"]
-                and store.get("thesis_revision", prior["thesis_revision_id"])["subject_asset_ids"] == thesis["subject_asset_ids"]):
+        same_contract = question_contract(store, prior) == contract
+        if prior["question_id"] == data["question_id"] and not same_contract:
+            raise ValueError("question_contract_immutable")
+        if prior["question_id"] != data["question_id"] and same_contract:
             raise ValueError("duplicate_forecast_question_use_revision")
     old = store.get("forecast", data["forecast_id"], optional=True)
     data["registered_at"] = old["registered_at"] if old else utc()
     data["resolution_due_at"] = data["deadline"]
     data["mode"] = thesis["mode"]
+    parent = store.get("forecast", data["supersedes_forecast_id"]) if data["supersedes_forecast_id"] else None
+    if parent and (instant(data["knowledge_cutoff"]) <= instant(parent["knowledge_cutoff"])
+                   or instant(data["registered_at"]) <= instant(parent["registered_at"])):
+        raise ValueError("revision_clock_must_advance")
+    if instant(data["knowledge_cutoff"]) > instant(data["registered_at"]):
+        raise ValueError("cutoff_after_registration")
     if data["mode"] == "PROSPECTIVE":
         if instant(data["deadline"]) <= instant(data["registered_at"]) or data.get("outcome_already_observed"):
             raise ValueError("prospective_outcome_already_known_or_due")
-        if instant(rule["window_start"]) < instant(packet["as_of"]):
+        if parent and parent["mode"] != "PROSPECTIVE":
+            raise ValueError("cannot_promote_retrospective_question")
+        if not parent and instant(rule["window_start"]) < instant(packet["as_of"]):
             raise ValueError("prospective_window_before_cutoff")
+        if not old and known_outcome_evidence(store, data, data["registered_at"]):
+            raise ValueError("prospective_outcome_already_known_or_due")
     data["independent_cluster_ids"] = sorted({store.get("economic_event_revision", rid)["independent_cluster_id"]
                                               for rid in packet["event_revision_ids"]})
+    # Preserve legacy serialized records on idempotent replay; new rows carry the
+    # explicit contract, which is always independently recomputed when compared.
+    if not old or "question_contract_hash" in old:
+        data.update(question_contract_hash=digest(contract), question_contract=contract,
+                    timing=forecast_timing(data))
     return store.put("forecast", data["forecast_id"], data)
 
 
@@ -250,10 +274,20 @@ def register_bundle(store, payload):
     existing = store.get("registration", key, optional=True)
     if existing:
         # Check inputs again on replay, including raw tampering.
+        revision = payload["thesis"]["revision_id"]
+        if (payload["decision"]["thesis_revision_id"] != revision
+                or any(f["thesis_revision_id"] != revision for f in payload["forecasts"])
+                or store.get("valuation_and_decision", existing["decision_id"])["thesis_revision_id"] != revision
+                or any(store.get("forecast", fid)["thesis_revision_id"] != revision for fid in existing["forecast_ids"])):
+            raise ValueError("bundle_thesis_links")
         validate_packet(store, store.get("evidence_packet", payload["thesis"]["packet_id"]))
         return existing
     try:
         with store.transaction():
+            revision = payload["thesis"]["revision_id"]
+            if (payload["decision"]["thesis_revision_id"] != revision
+                    or any(f["thesis_revision_id"] != revision for f in payload["forecasts"])):
+                raise ValueError("bundle_thesis_links")
             thesis = register_thesis(store, payload["thesis"])
             forecasts = [register_forecast(store, f) for f in payload["forecasts"]]
             if {f["target_type"] for f in forecasts} != {"IMPLEMENTATION", "ECONOMICS", "PRICE"}:

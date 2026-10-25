@@ -160,27 +160,43 @@ def evidence_links(store, ids, cutoff=None):
             raise ValueError("future_evidence")
 
 
-def observe(store, data):
-    data = dict(data)
+def validate_observation(store, data, cutoff=None, stack=()):
+    """Recompute provenance from raw bytes and every input; never trust cached tags.
+
+    Numeric semantics are explicit. TEXT claims can paraphrase a source, but can
+    never be a numeric outcome. Period labels still require analyst/source review.
+    """
     nonempty(data, "observation_id", "asset_id", "metric", "unit", "locator")
-    required(data, "value", "period_start", "period_end", "derivation_version", "evidence_ids", "epistemic_type")
+    required(data, "value", "value_type", "period_start", "period_end", "derivation_version", "evidence_ids", "epistemic_type")
+    oid = data["observation_id"]
+    if oid in stack:
+        raise ValueError("derived_dependency_cycle")
+    one_of(data["value_type"], {"DECIMAL", "TEXT", "BOOLEAN"})
     store.get("asset_identity", data["asset_id"])
     one_of(data["epistemic_type"], {"DIRECT_RECORD", "SOURCE_CLAIM", "DERIVED_VALUE", "ASSUMPTION"})
-    evidence_links(store, data["evidence_ids"])
+    available = data.get("available_at", cutoff or utc())
+    if cutoff and instant(available) > instant(cutoff):
+        raise ValueError("future_observation")
+    evidence_links(store, data["evidence_ids"], available)
     # Locator is an exact UTF-8 excerpt or a JSON pointer, tied to one source.
     loc = data["locator"]
     nonempty(loc, "snapshot_id")
     if loc["snapshot_id"] not in data["evidence_ids"]:
         raise ValueError("locator_not_linked")
     raw = source_bytes(store, loc["snapshot_id"])
+    if ("quote" in loc) == ("json_pointer" in loc):
+        raise ValueError("one_locator_required")
     if "quote" in loc:
         if not loc["quote"] or loc["quote"].encode() not in raw:
             raise ValueError("locator_quote_missing")
         located_value = loc["quote"].replace(",", "").strip()
     elif "json_pointer" in loc:
-        value = json.loads(raw)
+        value = json.loads(raw, parse_float=str)
         try:
-            for part in loc["json_pointer"].strip("/").split("/"):
+            pointer = loc["json_pointer"]
+            if pointer and not pointer.startswith("/"):
+                raise ValueError("invalid_json_pointer")
+            for part in pointer[1:].split("/") if pointer else []:
                 part = part.replace("~1", "/").replace("~0", "~")
                 value = value[int(part)] if isinstance(value, list) else value[part]
         except (KeyError, IndexError, TypeError, ValueError) as exc:
@@ -192,15 +208,41 @@ def observe(store, data):
         raise ValueError("locator_required")
     if data["value"] is None and not data.get("missing_reason"):
         raise ValueError("missing_reason_required")
-    if data.get("value_type") == "DECIMAL" and data["value"] is not None:
+    if data["value_type"] == "DECIMAL" and data["value"] is not None:
         decimal(data["value"])
         if data["epistemic_type"] in {"DIRECT_RECORD", "SOURCE_CLAIM"} and decimal(located_value) != decimal(data["value"]):
             raise ValueError("numeric_observation_source_mismatch")
+    elif data["value"] is not None:
+        expected = str if data["value_type"] == "TEXT" else bool
+        if type(data["value"]) is not expected:
+            raise ValueError("observation_value_type_mismatch")
+        if data["epistemic_type"] == "DIRECT_RECORD" and data["value"] != located_value:
+            raise ValueError("direct_observation_source_mismatch")
+    leaf_types = {data["epistemic_type"]}
+    snapshot = store.get("source_snapshot", loc["snapshot_id"])
+    # Same raw fact under an alias/URL reimport does not become a new fact.
+    fact_ids = {digest([data["asset_id"], data["metric"], data["unit"],
+                       data["period_start"], data["period_end"], data["value"], snapshot["sha256"],
+                       {k: loc[k] for k in ("quote", "json_pointer") if k in loc}])}
+    # Additional citations cannot make an already available scalar look new.
+    source_available = [min((s["available_at"] for s in store.all("source_snapshot")
+                             if s["sha256"] == snapshot["sha256"]), key=instant)]
     if data["epistemic_type"] == "DERIVED_VALUE":
+        if data["value_type"] != "DECIMAL":
+            raise ValueError("derived_value_must_be_numeric")
         nonempty(data, "input_observation_ids", "calculation", "derivation_version")
+        if len(set(data["input_observation_ids"])) != len(data["input_observation_ids"]):
+            raise ValueError("duplicate_derived_input")
         inputs = [store.get("observation", oid) for oid in data["input_observation_ids"]]
-        if any(o["asset_id"] != data["asset_id"] or o["unit"] != data["unit"] for o in inputs):
+        if any(o["asset_id"] != data["asset_id"] or o["unit"] != data["unit"] or o.get("value_type") != "DECIMAL" for o in inputs):
             raise ValueError("derived_input_identity_or_unit")
+        if any((o["period_start"], o["period_end"]) != (data["period_start"], data["period_end"]) for o in inputs):
+            raise ValueError("derived_input_period_mismatch")
+        provenance = [validate_observation(store, o, available, (*stack, oid)) for o in inputs]
+        leaf_types = {t for p in provenance for t in p["leaf_epistemic_types"]}
+        fact_ids = {f for p in provenance for f in p["fact_ids"]}
+        if sum(len(p["fact_ids"]) for p in provenance) != len(fact_ids):
+            raise ValueError("duplicate_derived_fact")
         if not {sid for o in inputs for sid in o["evidence_ids"]}.issubset(data["evidence_ids"]):
             raise ValueError("derived_evidence_missing")
         one_of(data["calculation"], {"SUM", "SUBTRACT"})
@@ -216,14 +258,30 @@ def observe(store, data):
                 computed = decimal(inputs[0]["value"]) - decimal(inputs[1]["value"])
             if (computed is None) != (data["value"] is None) or (computed is not None and computed != decimal(data["value"])):
                 raise ValueError("derived_arithmetic_mismatch")
-        data["input_epistemic_types"] = sorted({o["epistemic_type"] for o in inputs})
+        source_available = [p["source_available_at"] for p in provenance]
     if data["period_start"] and data["period_end"] and instant(data["period_start"]) > instant(data["period_end"]):
         raise ValueError("invalid_period")
     if data["epistemic_type"] == "DIRECT_RECORD" and data["period_end"] and instant(data["period_end"]) > instant(utc()):
         raise ValueError("direct_measurement_cannot_end_in_future")
-    # Availability includes the parsing/analysis operation, not just HTTP receipt.
+    return dict(leaf_epistemic_types=sorted(leaf_types), fact_ids=sorted(fact_ids),
+                source_available_at=max(source_available, key=instant))
+
+
+def observe(store, data):
+    data = dict(data)
     old = store.get("observation", data["observation_id"], optional=True)
     data["available_at"] = old["available_at"] if old else utc()
+    provenance = validate_observation(store, data)
+    # Aliases retain the first parsing time; reparsing cannot launder old facts.
+    aliases = [o for o in store.all("observation") if o["observation_id"] != data["observation_id"]
+               and o["asset_id"] == data["asset_id"] and o["metric"] == data["metric"]
+               and o["unit"] == data["unit"] and o["value"] == data["value"]
+               and o["period_start"] == data["period_start"] and o["period_end"] == data["period_end"]
+               and validate_observation(store, o)["fact_ids"] == provenance["fact_ids"]]
+    if aliases and not old:
+        data["available_at"] = min([data["available_at"], *(o["available_at"] for o in aliases)], key=instant)
+    if data["epistemic_type"] == "DERIVED_VALUE":
+        data["input_epistemic_types"] = sorted({store.get("observation", oid)["epistemic_type"] for oid in data["input_observation_ids"]})
     return store.put("observation", data["observation_id"], data)
 
 

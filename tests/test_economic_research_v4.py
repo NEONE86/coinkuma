@@ -260,7 +260,12 @@ class V4Tests(unittest.TestCase):
         self.registered()
         self.advance(seconds=1)
         amendment = copy.deepcopy(self.payload["forecasts"][0])
+        packet = theses.make_packet(self.store, [self.aid])
+        updated_thesis = dict(self.payload["thesis"], revision_id="thesis-r2", supersedes_revision_id="thesis-r1",
+                              packet_id=packet["packet_id"], evidence_manifest_hash=packet["manifest_hash"])
+        theses.register_thesis(self.store, updated_thesis)
         amendment.update(forecast_id="implementation-v2", supersedes_forecast_id="IMPLEMENTATION")
+        amendment.update(thesis_revision_id="thesis-r2", knowledge_cutoff=packet["as_of"])
         amendment["probability_or_distribution"]["p"] = "0.4"
         theses.register_forecast(self.store, amendment)
         decision = dict(self.payload["decision"], decision_id="decision-r2", supersedes_decision_id="decision-r1", reason="Revised explanation")
