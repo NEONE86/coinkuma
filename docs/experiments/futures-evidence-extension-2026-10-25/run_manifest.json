@@ -1,0 +1,9 @@
+{
+  "parent_pr5_head": "152ae3635527378e02d9de138535e3538b4ae5ec",
+  "private_source_hashes": {
+    "connector_probes.json": "372b61c4cf6a27911987d5fd3228633531c026c8be8818a6301d4e5735ad5724",
+    "terms_web_extract.txt": "bb8f310eefedd77ce99bd06b77d7ab753ee21c0483d04a659805f63a47ffdae5"
+  },
+  "plan_sha256": "7d13f84c89f9899f867a60879dbe48908f9bbb3894bd7224081d03176943bac8",
+  "unchanged_protocol_sha256": "a8c0d9433abfd5fd3e962b09518d9039c9a24441d14c160db4de398563e5bbfb"
+}

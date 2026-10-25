@@ -1,0 +1,14 @@
+{
+  "independent_data_reproduction_passed": true,
+  "external_third_party_audit": false,
+  "scope": "SOURCE_BYTES_AND_SUPPLEMENTAL_EVIDENCE_ONLY_NOT_STRATEGY_PERFORMANCE",
+  "sources_verified": 26,
+  "ticker_rows": 817848,
+  "raw_OI_rows": 68,
+  "funding_event_rate_matches": 36,
+  "positive_settlement_marks": 24,
+  "missing_settlement_marks": 12,
+  "decision": "NEEDS_MORE_EVIDENCE",
+  "strategy_performance_reproduced": false,
+  "terms_extraction_independently_authenticated": false
+}

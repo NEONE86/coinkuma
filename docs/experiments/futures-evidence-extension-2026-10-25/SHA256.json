@@ -1,0 +1,11 @@
+{
+  "decision.json": "fd41c148b72768aa52d14f8d4c0e1f0614547794f2c67d2872817e2d82544f2e",
+  "funding_samples.json": "45f5ec05c2daacd990aa2e17bc223b1860e5bdaf7b6a9559d5bfaef4f2bc2641",
+  "independent.json": "88ee36634d8b7be6ddbe57093476a77ede773e0f41c79eee15772c5fca2e03ad",
+  "raw_oi_samples.json": "5e4c7bf536fef678ee70df643c77c7831ee9b5cfb5e2866eeebd18f851813bbd",
+  "RESULTS.md": "88c09ea9a2c015b86129fc35c890c7a9120c65ac74abcc8b9f88391c77013bea",
+  "run_manifest.json": "b154449f64008dc336ee672314b244d6648e2a418989b88dbe3574cde3276000",
+  "sources.json": "be8334f6760310a36f0426646d9dd8f8a2138d732c6ca6b01ce459a94f275752",
+  "ticker_samples.json": "7a4d4217f61c13f63a6c613941369a5abc824816df6e61ca1aa5e2022998a2b8",
+  "verification.json": "bd21119eaa0d757b0bbb134af1a51cf99e4eac3ad6ed4edbdee18da32f74a536"
+}
