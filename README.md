@@ -101,3 +101,16 @@ reject v1: +1.63% cumulative under base costs, -0.46% under stress costs,
 2026. [Independent validation](docs/CASHFLOW_ALPHA_INDEPENDENT_REVIEW.md) reconciles
 all 18 accounts and verifies real-data future-prefix invariance. Passing these
 software checks does not establish a profitable strategy.
+
+## Cashflow Alpha v2
+
+The two preregistered PR #3 challengers are both **REJECTED**. On the same verified
+2019–September 2026 history, stress net return / PF were -7.39% / 0.148 for
+relative-strength recovery and +4.01% / 1.146 for controlled trend pullbacks.
+Neither reached the 1.30 stress PF hurdle or the cashflow objective. All 48
+accounts reconcile; all four continuous accounts independently reproduce and
+preserve their past after future data deletion. See the
+[Korean result report](docs/experiments/cashflow-v2-2026-10-25/RESULTS.md),
+[independent calculation review](docs/experiments/cashflow-v2-2026-10-25/INDEPENDENT_REVIEW.md)
+and [reproduction workflow](docs/CASHFLOW_ALPHA_V2.md). Earlier rejection results
+remain unchanged. This is research evidence, not live-trading approval.

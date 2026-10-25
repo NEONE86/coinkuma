@@ -1,0 +1,70 @@
+{
+  "strategies": {
+    "relative_strength_recovery": {
+      "decision": "REJECT",
+      "gates": {
+        "stress_pf": false,
+        "total_sample": false,
+        "challenge_sample": false,
+        "expectancy": false,
+        "positive_calendar_folds": false,
+        "max_drawdown": true,
+        "no_permanent_halt": true,
+        "bootstrap_positive_lower": false,
+        "random_control": false,
+        "monthly_growth": false,
+        "positive_months": false,
+        "required_checks": true
+      },
+      "failed_gates": [
+        "stress_pf",
+        "total_sample",
+        "challenge_sample",
+        "expectancy",
+        "positive_calendar_folds",
+        "bootstrap_positive_lower",
+        "random_control",
+        "monthly_growth",
+        "positive_months"
+      ],
+      "stress_mean_monthly_return": -0.0008160858595200345,
+      "positive_calendar_fold_fraction": 0.125,
+      "control_percentile": 0.16,
+      "control_count": 200,
+      "control_one_sided_monte_carlo_p": 0.8407960199004975
+    },
+    "established_trend_controlled_pullback": {
+      "decision": "REJECT",
+      "gates": {
+        "stress_pf": false,
+        "total_sample": true,
+        "challenge_sample": true,
+        "expectancy": true,
+        "positive_calendar_folds": true,
+        "max_drawdown": true,
+        "no_permanent_halt": true,
+        "bootstrap_positive_lower": false,
+        "random_control": false,
+        "monthly_growth": false,
+        "positive_months": false,
+        "required_checks": true
+      },
+      "failed_gates": [
+        "stress_pf",
+        "bootstrap_positive_lower",
+        "random_control",
+        "monthly_growth",
+        "positive_months"
+      ],
+      "stress_mean_monthly_return": 0.0004635231226663004,
+      "positive_calendar_fold_fraction": 0.75,
+      "control_percentile": 0.825,
+      "control_count": 200,
+      "control_one_sided_monte_carlo_p": 0.1791044776119403
+    }
+  },
+  "selected": [],
+  "audited_accounts": 48,
+  "external_investment_audit": false,
+  "live_orders": false
+}

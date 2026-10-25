@@ -1,0 +1,29 @@
+{
+  "local_software_checks": {
+    "python": "3.13 on Windows, UTF-8 mode",
+    "unittest_tests_run": 154,
+    "unittest_failures": 0,
+    "unittest_errors": 0,
+    "compileall": true,
+    "cli_help": true,
+    "cli_status": "NOT_STARTED",
+    "whitespace_check": true,
+    "software_tests_are_market_performance_evidence": false
+  },
+  "experiment_checks": {
+    "frozen_code_files_unchanged": 37,
+    "main_accounts_audited": 48,
+    "stress_control_accounts_with_independent_final_ledger_checks": 400,
+    "continuous_full_reproductions_identical": 4,
+    "actual_future_prefix_deletion_reproductions_identical": 4,
+    "prefix_days_per_account": 1461,
+    "monthly_krw_rows_checked": 372,
+    "monthly_target_hits_both_thresholds_all_cases": 0,
+    "previous_spec_and_rejection_results_unchanged": true,
+    "preserved_v1_actual_base_and_stress_metrics_reproduced": true,
+    "external_third_party_investment_audit": false,
+    "live_orders": false
+  },
+  "publication_hashes": "SHA256.json uses CRLF-to-LF canonical text bytes, preserving any BOM; raw archive and private ledger hashes use exact original bytes.",
+  "github_ci": "Separate code-only CI; this file records local checks and does not claim remote CI status."
+}

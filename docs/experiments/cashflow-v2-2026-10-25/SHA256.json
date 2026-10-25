@@ -1,0 +1,23 @@
+{
+  "comparison.json": "0dc3b3a2b28218780a138402186a54b7d00a9d7dceb13f39aec8b80cbdcfed22",
+  "data_audit.json": "af431250ca9e9bae89fb134c42bc18c47c227119cc2184982a1966181c9a8625",
+  "decision.json": "252e7a6bf24271470d98de25dcbaa306ec64f2883a091daefe8ed3568a0a362c",
+  "era_continuous_attribution.csv": "28340fb5c7f7996dfde63e1997e4722d5a45ee6b5ee25863d8e7d79b62247a5c",
+  "freeze-portable.json": "3528dd9643ad136a36909430d40b88fe986679eae665a8225e24a608f17b5fcf",
+  "freeze.json": "86aa88556a7fe6091f1e3c07f9468b5ddc04db05bf747ae5a32a1cb20f21807b",
+  "independent_accounts.csv": "2544bd97bb64d7eb8ea446d08c4604e6748407ff5895b66f743fd829f30aa1dd",
+  "INDEPENDENT_REVIEW.md": "7a4acc9bfb0a8eb0c5de5d88a93ccf642cc59b9cde4749334b0e9fa06f2b71af",
+  "independent_validation.json": "80b5c0c8e8bc81639ee1b4d98dd68185c55b1623fdf394b1719ca652d0e1eaaf",
+  "market_coverage.csv": "ad53da368a2d1baf9a422a9e98abe4b8c77605d0132a286f9783c1d3c4ec7250",
+  "metrics.json": "cf818459a0eef99bfb8918931f77347f8930af629b89c744aae2ec4a1862ef28",
+  "monthly_krw.csv": "90bd3cc7e4e02ac197709c49ce6bddb7460b1cf78750320afba12b6148d20c6c",
+  "NEXT_RESEARCH.md": "3ac6085eaeeb66ea4f0ede5de9d6b02f24b477cea4f2bc538dbf66f4ae0e7727",
+  "private_artifact_hashes.json": "72315412476a367341429382dd4d74bc05ca0bbd1ecef1370721496774c694c1",
+  "random_controls.json": "a8f7b1f01372e5cb92a1bd89e1a780584b203ce6ef00b1e255534232d2ff98e2",
+  "RESULTS.md": "671fa6de29850b6592ab537d3e95617ed8a4fe21c1379ac4fab2991019dbd049",
+  "run_manifest.json": "9150d394bd7a4606e1f197524e75ee3e794051da3140f069c167c4bc6ba0dba6",
+  "v1_engine_parity.json": "41ad0389c0bc7f4805f71a920db77513b77d4517c92ae820534db16ca2c324f4",
+  "validation_artifact_hashes.json": "6e2ea45fba3f8260d8fe135737856da1a179529ac8952fc7268c26f342351c55",
+  "verification.json": "201ba3117684788c31988dd1280c2565b60ca8ef8d8e244700494a24fd285b31",
+  "yearly_continuous.csv": "3999ee1bb321deb5bc82e5c7b739c1e064dc99b6efcd05d235c01e4205a8022a"
+}
