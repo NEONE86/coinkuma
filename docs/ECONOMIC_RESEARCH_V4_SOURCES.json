@@ -1,0 +1,57 @@
+[
+  {
+    "url": "https://aave.com/docs/ecosystem/aave"
+  },
+  {
+    "url": "https://governance.aave.com/t/arfc-pause-aave-buybacks/24686.json"
+  },
+  {
+    "url": "https://governance.aave.com/t/aave-dao-funding-insights/24192.json"
+  },
+  {
+    "url": "https://governance.aave.com/t/restart-aave-buy-backs/24936.json"
+  },
+  {
+    "url": "https://governance.aave.com/c/finance/30.json"
+  },
+  {
+    "url": "https://developers.uniswap.org/docs/protocols/protocol-fee/overview"
+  },
+  {
+    "url": "https://blog.uniswap.org/aggregator-hooks-are-now-live"
+  },
+  {
+    "url": "https://gov.uniswap.org/t/temp-check-protocol-fee-expansion-arc/26287.json"
+  },
+  {
+    "url": "https://tokens.uniswap.org"
+  },
+  {
+    "url": "https://docs.pancakeswap.finance/protocol/cake-tokenomics"
+  },
+  {
+    "url": "https://blog.pancakeswap.finance/articles/september-cake-burn-report"
+  },
+  {
+    "url": "https://data-api.binance.vision/api/v3/exchangeInfo?symbols=%5B%22AAVEUSDT%22,%22UNIUSDT%22,%22CAKEUSDT%22%5D",
+    "source_kind": "VENUE_INSTRUMENTS"
+  },
+  {
+    "url": "https://data-api.binance.vision/api/v3/ticker/24hr?symbol=AAVEUSDT",
+    "source_kind": "SPOT_TICKER"
+  },
+  {
+    "url": "https://data-api.binance.vision/api/v3/ticker/24hr?symbol=UNIUSDT",
+    "source_kind": "SPOT_TICKER"
+  },
+  {
+    "url": "https://data-api.binance.vision/api/v3/ticker/24hr?symbol=CAKEUSDT",
+    "source_kind": "SPOT_TICKER"
+  },
+  {
+    "url": "https://governance.aave.com/t/direct-to-aip-may-june-2026-funding-update/25000.json"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/pancakeswap/token-list/main/lists/pancakeswap-default.json"
+  }
+]

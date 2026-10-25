@@ -1,0 +1,17 @@
+{
+  "change_id": "",
+  "parent_policy_id": "",
+  "challenger_policy_id": "",
+  "mechanism_id": "",
+  "evidence_ids": [],
+  "identified_error": "",
+  "proposed_change": [],
+  "expected_gain": "",
+  "expected_cost": "",
+  "applicability": "",
+  "primary_endpoint": "",
+  "prospective_start": "",
+  "review_rule": "",
+  "rollback_rule": "",
+  "status": "PROPOSED"
+}
