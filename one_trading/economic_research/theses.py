@@ -193,12 +193,8 @@ def register_forecast(store, data):
         raise ValueError("terminal_price_cannot_close_early")
     contract = question_contract(store, data)
     check_forecast_revision(store, data)
-    for prior in store.all("forecast"):
-        same_contract = question_contract(store, prior) == contract
-        if prior["question_id"] == data["question_id"] and not same_contract:
-            raise ValueError("question_contract_immutable")
-        if prior["question_id"] != data["question_id"] and same_contract:
-            raise ValueError("duplicate_forecast_question_use_revision")
+    from .recovery import check_new_question
+    check_new_question(store, data, contract)
     old = store.get("forecast", data["forecast_id"], optional=True)
     data["registered_at"] = old["registered_at"] if old else utc()
     data["resolution_due_at"] = data["deadline"]

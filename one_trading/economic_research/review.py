@@ -11,6 +11,7 @@ from .theses import validate_packet, validate_decision_targets
 from .contracts import (contract_hash, question_contract, measured_outcome,
                         known_outcome_evidence, forecast_timing)
 from .semantics import chain_key, predictor_id
+from .recovery import quarantines, recovery_report
 
 FAILURES = {"IMPLEMENTATION_WRONG", "ECONOMIC_MECHANISM_WRONG", "VALUE_CAPTURE_WRONG",
             "SUPPLY_WRONG", "EXPECTATIONS_ALREADY_PRICED", "CATALYST_OR_TIMING_WRONG",
@@ -79,6 +80,8 @@ def review_change(store, data):
 
 def latest_resolution(store, forecast_id, as_of):
     forecast = store.get("forecast", forecast_id)
+    if forecast["question_id"] in quarantines(store, as_of):
+        raise ValueError("quarantined_question_not_scoreable")
     siblings = {f["forecast_id"] for f in store.all("forecast")
                 if f["question_id"] == forecast["question_id"]
                 and instant(f["registered_at"]) <= instant(as_of)
@@ -154,6 +157,8 @@ def mark_due_missing(store, as_of=None):
         raise ValueError("future_resolution_clock")
     result = []
     for forecast in store.all("forecast"):
+        if forecast["question_id"] in quarantines(store, as_of):
+            continue
         last = latest_resolution(store, forecast["forecast_id"], as_of)
         if instant(forecast["deadline"]) <= instant(as_of) and (last is None or last["status"] == "PENDING"):
             result.append(resolve_forecast(store, dict(
@@ -187,12 +192,19 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
         raise ValueError("future_report_clock")
     one_of(revision_policy, {"INITIAL", "LATEST_AS_OF"})
     all_forecasts = [f for f in store.all("forecast") if instant(f["registered_at"]) <= instant(as_of) and f["mode"] == mode]
+    isolated = quarantines(store, as_of)
+    excluded = [dict(forecast_id=f["forecast_id"], question_id=f["question_id"],
+                     reason=isolated[f["question_id"]]["reason"])
+                for f in all_forecasts if f["question_id"] in isolated]
     chosen = {}
     for f in all_forecasts:
+        if f["question_id"] in isolated:
+            continue
         if revision_policy == "LATEST_AS_OF" or chain_key(f) not in chosen:
             chosen[chain_key(f)] = f
     counts = Counter(registered_forecasts=len(all_forecasts), selected_forecasts=len(chosen), due_forecasts=0,
                      resolved_forecasts=0, unresolved_forecasts=0, pending=0, data_missing=0, ambiguous=0)
+    counts["quarantined_forecasts"] = len(excluded)
     groups, clusters, labels = defaultdict(list), set(), []
     fact_clusters = {}
     with localcontext() as context:
@@ -270,6 +282,7 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
     counts["resolved_questions"] = len({r["question_id"] for r in labels})
     counts["resolved_independent_event_clusters"] = len({c for r in labels for c in r["independent_clusters"]})
     return dict(as_of=as_of, mode=mode, revision_policy=revision_policy, counts=dict(counts), scores=scores,
+                excluded_forecasts=excluded, legacy_review=recovery_report(store, as_of),
                 selection_rule="First registered revision per (question, policy)" if revision_policy == "INITIAL" else "Latest revision registered by as_of per (question, policy)",
                 policy_counts=[dict(policy_id=p, selected_forecasts=sum(predictor_id(f) == p for f in chosen.values()),
                                     resolved_forecasts=sum(r["policy_id"] == p for r in labels))
@@ -441,6 +454,9 @@ def report(store, as_of=None):
         forecasts = []
         for fid in decision["forecast_ids"]:
             f = store.get("forecast", fid)
+            if f["question_id"] in quarantines(store, as_of):
+                forecasts.append(dict(f, status="QUARANTINED", question_contract=None, timing=forecast_timing(f)))
+                continue
             resolution = latest_resolution(store, fid, as_of)
             forecasts.append(dict(f, status=effective_status(f, resolution, as_of),
                                   question_contract=question_contract(store, f), timing=forecast_timing(f)))

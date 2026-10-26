@@ -28,6 +28,13 @@ def markdown(report):
               f"전체 등록 {counts['registered_forecasts']}개, 평가 대상으로 선택 {counts['selected_forecasts']}개, 기한 도래 {counts['due_forecasts']}개, 해결 {counts['resolved_forecasts']}개, 미해결 {counts['unresolved_forecasts']}개, 독립 사건으로 묶은 군집 {counts['independent_event_clusters']}개.", "",
               "점수 분모는 실제 해결된 예측뿐이다. 군집 수는 통계적 독립성을 입증하지 않는다. 해결된 사례만의 점수에는 자료 누락 편향이 남는다."]
     lines += ["", f"공통 질문 {counts['selected_questions']}개, 해결된 공통 질문 {counts['resolved_questions']}개. 정책별 예측 평가는 같은 사건의 독립 표본 수를 늘리지 않는다."]
+    legacy = report["scoring"].get("legacy_review", {})
+    if legacy.get("quarantined_questions"):
+        lines += ["", f"격리된 구버전 질문 {legacy['quarantined_questions']}개 / 예측 {legacy['quarantined_forecasts']}개. 원본 감사 문제는 유지하며 점수와 학습에서 제외한다."]
+        for row in legacy["quarantines"]:
+            lines.append(f"- `{row['question_id']}`: {row['reason']} — {row['review_reason']}")
+        for link in legacy["recovery_links"]:
+            lines.append(f"- 복구 연결 `{link['old_question_id']}` → `{link['new_question_id']}`: {link['review_reason']}")
     if report["scoring"]["scores"]:
         lines += ["", "| 정책 | 대상 | 점수 | 단위 | 평가 수 | 오차 |", "|---|---|---|---|---:|---:|"]
         for s in report["scoring"]["scores"]:

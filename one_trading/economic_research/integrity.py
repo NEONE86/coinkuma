@@ -17,6 +17,8 @@ def inspect_semantics(store):
     checks = {"F%02d" % n: dict(checked_record_ids=[], issues=[]) for n in range(1, 14)}
     checks.update({"R2-%02d" % n: dict(checked_record_ids=[], issues=[]) for n in range(1, 5)})
 
+    checks.update({"R3-%02d" % n: dict(checked_record_ids=[], issues=[]) for n in (1, 2)})
+
     def check(code, key, operation):
         checks[code]["checked_record_ids"].append(key)
         try:
@@ -40,10 +42,12 @@ def inspect_semantics(store):
             else:
                 first_facts[identity] = o["available_at"]
         check("R2-01", o["observation_id"], semantic_fact)
+        check("R3-01", o["observation_id"], semantic_fact)
     questions = defaultdict(list)
     for f in store.all("forecast"):
         questions[f["question_id"]].append(f)
         check("R2-02", f["forecast_id"], lambda f=f: question_contract(store, f))
+        check("R3-02", f["forecast_id"], lambda f=f: question_contract(store, f))
         check("R2-04", f["forecast_id"], lambda f=f: question_contract(store, f))
         def timing(f=f):
             t = store.get("thesis_revision", f["thesis_revision_id"])
@@ -86,7 +90,7 @@ def inspect_semantics(store):
                 require(instant(result["source_available_at"]) > instant(f["registered_at"]), "outcome_source_predates_forecast")
             check("F02", r["resolution_id"], resolution)
             check("F06", r["resolution_id"], resolution)
-            for code in ("R2-01", "R2-02", "R2-04"):
+            for code in ("R2-01", "R2-02", "R2-04", "R3-01"):
                 check(code, r["resolution_id"], resolution)
     for r in store.all("registration"):
         def links(r=r):
@@ -131,15 +135,21 @@ def inspect_semantics(store):
                     require(not (facts & old_facts) or old["independent_cluster_id"] == e["independent_cluster_id"], "shared_fact_cluster")
         check("F13", e["revision_id"], event)
         check("R2-01", e["revision_id"], event)
+        check("R3-01", e["revision_id"], event)
         try:
             prior_facts.append((e, {fid for oid in e["observation_ids"]
                 for fid in validate_observation(store, store.get("observation", oid))["fact_ids"]}))
         except (ValueError, KeyError, TypeError):
             pass  # Already reported by both checks; invalid inputs stay in ledger.
+    from .recovery import recovery_report
+    legacy_review = {}
+    def inspect_recovery():
+        legacy_review.update(recovery_report(store))
+    check("R3-02", "legacy_review", inspect_recovery)
     for item in checks.values():
         item["status"] = "ISSUES" if item["issues"] else "PASS" if item["checked_record_ids"] else "NOT_EXERCISED_IN_LEDGER"
     return dict(status="ISSUES" if any(v["issues"] for v in checks.values()) else "PASS", checks=checks,
-                fact_identity_version=FACT_IDENTITY_VERSION,
+                fact_identity_version=FACT_IDENTITY_VERSION, legacy_review=legacy_review,
                 resolution_corrections=[dict(resolution_id=r["resolution_id"], supersedes_resolution_id=r["supersedes_resolution_id"])
                                         for r in store.all("resolution") if r["supersedes_resolution_id"]],
                 remediation="Original bytes are immutable. Invalid resolutions fail closed for scoring/training. Append a validated resolution with supersedes_resolution_id; ambiguous contracts need a new explicit question, never an inferred target.",

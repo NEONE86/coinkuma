@@ -1,7 +1,7 @@
 """Versioned semantic identities, independent of immutable serialized bodies."""
 from .store import decimal, digest, stamp
 
-FACT_IDENTITY_VERSION = "semantic-fact-v2"
+FACT_IDENTITY_VERSION = "semantic-fact-v3"
 LEGACY_PREDICTOR = "LEGACY_UNATTRIBUTED"
 
 
@@ -39,11 +39,9 @@ def observation_identity(data):
     return [data["asset_id"], data["metric"], data["unit"], period_identity(data), data["value_type"], value]
 
 
-def semantic_fact_id(data, snapshot):
-    loc = data["locator"]
+def semantic_fact_id(data, snapshot, raw_location):
     return FACT_IDENTITY_VERSION + ":" + digest([
-        observation_identity(data), snapshot["sha256"],
-        {k: loc[k] for k in ("quote", "json_pointer") if k in loc}])
+        observation_identity(data), snapshot["sha256"], raw_location])
 
 
 def predictor_id(forecast):

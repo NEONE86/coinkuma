@@ -14,7 +14,8 @@ from .events import register_asset, register_event, register_flow
 from .review import (audit, compare_policies, mark_due_missing, register_attribution,
                      register_change, register_policy, report, resolve_forecast, review_change, freeze_policy_cohort)
 from .store import Store, atomic_bytes, digest, instant, nonempty, utc, write_json
-from .theses import make_packet, register_bundle, register_decision
+from .theses import make_packet, register_bundle, register_decision, register_forecast
+from .recovery import quarantine_question, recover_question
 
 
 def read_json(path):
@@ -22,7 +23,8 @@ def read_json(path):
 
 
 def ingest(store, payload):
-    dispatch = {"asset_identity": register_asset, "observation": observe,
+    dispatch = {"question_quarantine": quarantine_question, "question_recovery": recover_question,
+                "forecast": register_forecast, "asset_identity": register_asset, "observation": observe,
                 "economic_flow": register_flow, "economic_event_revision": register_event,
                 "policy": register_policy, "policy_change": register_change,
                 "policy_change_review": review_change, "attribution": register_attribution,
