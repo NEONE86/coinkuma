@@ -20,6 +20,23 @@ and its trimmed alias have the same spans. Missing values and the display citati
 of a derived calculation are not numeric measurements; derived **inputs** still
 undergo the full numeric provenance gate. Missing/assumed facts cannot become labels.
 
+### Complete numeric tokens (R4-01)
+
+Numeric non-JSON quotes must cover a complete token. For example, `1e1` is the
+single value 10; its exponent `1` cannot be registered as another measurement.
+The parser accepts ASCII signs, integers, decimals, scientific notation and valid
+three-digit comma grouping. Malformed grouping, underscores, unsupported Unicode
+number spellings and non-UTF-8 numeric source text fail closed. It preserves exact
+UTF-8 byte positions, including when Korean text surrounds the number. TEXT quotes
+retain their existing literal substring behavior.
+
+This check also runs when auditing and scoring saved observations. Previously
+accepted partial-token observations remain immutable audit issues; they cannot
+supply a score or training label until a valid resolution explicitly supersedes
+the affected resolution. `tests/test_economic_research_v4_r4.py` covers both new
+input and preserved legacy contamination. This repair does not relabel or delete
+old records.
+
 `semantic-fact-v3` combines these raw positions, original byte digest, exact numeric
 identity and UTC measurement interval. It never changes a saved observation body.
 Derivations reject overlapping leaf fact sets. Events, stored-resolution audit,
