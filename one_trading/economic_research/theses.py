@@ -8,6 +8,29 @@ from .store import (check_revision, decimal, digest, identifier, instant, nonemp
                     one_of, required, stamp, utc)
 from .valuation import probability, value_scenarios
 from .contracts import contract_hash, question_contract, known_outcome_evidence, forecast_timing
+from .semantics import chain_key, predictor_id, LEGACY_PREDICTOR
+
+
+def check_forecast_revision(store, data):
+    chain = chain_key(data)
+    rows = store.all("forecast")
+    parent_id = data["supersedes_forecast_id"]
+    if parent_id:
+        parent = store.get("forecast", parent_id)
+        if parent_id == data["forecast_id"] or chain_key(parent) != chain:
+            raise ValueError("revision_identity_mismatch")
+        if any(f["supersedes_forecast_id"] == parent_id and f["forecast_id"] != data["forecast_id"] for f in rows):
+            raise ValueError("revision_branch_requires_new_identity")
+    elif any(chain_key(f) == chain and f["forecast_id"] != data["forecast_id"] for f in rows):
+        raise ValueError("revision_parent_required")
+
+
+def validate_decision_targets(store, data, forecasts):
+    for forecast in forecasts:
+        if forecast["target_type"] == "PRICE" and question_contract(store, forecast)["target_asset_id"] != data["target_asset_id"]:
+            raise ValueError("decision_price_forecast_target_mismatch")
+        if predictor_id(forecast) not in {LEGACY_PREDICTOR, data["policy_version"]}:
+            raise ValueError("decision_forecast_policy_mismatch")
 
 MODES = {"CASE_STUDY_BACKFILL", "HISTORICAL_POINT_IN_TIME", "PROSPECTIVE"}
 
@@ -169,7 +192,7 @@ def register_forecast(store, data):
     if data["target_type"] == "PRICE" and mode in {"EVER_IN_WINDOW", "MONOTONIC_CUMULATIVE"}:
         raise ValueError("terminal_price_cannot_close_early")
     contract = question_contract(store, data)
-    check_revision(store, "forecast", data, "forecast_id", "supersedes_forecast_id", ("question_id",))
+    check_forecast_revision(store, data)
     for prior in store.all("forecast"):
         same_contract = question_contract(store, prior) == contract
         if prior["question_id"] == data["question_id"] and not same_contract:
@@ -180,6 +203,10 @@ def register_forecast(store, data):
     data["registered_at"] = old["registered_at"] if old else utc()
     data["resolution_due_at"] = data["deadline"]
     data["mode"] = thesis["mode"]
+    if predictor_id(data) != LEGACY_PREDICTOR:
+        policy = store.get("policy", data["policy_id"])
+        if instant(policy["registered_at"]) > instant(data["knowledge_cutoff"]):
+            raise ValueError("policy_must_precede_forecast_cutoff")
     parent = store.get("forecast", data["supersedes_forecast_id"]) if data["supersedes_forecast_id"] else None
     if parent and (instant(data["knowledge_cutoff"]) <= instant(parent["knowledge_cutoff"])
                    or instant(data["registered_at"]) <= instant(parent["registered_at"])):
@@ -199,9 +226,13 @@ def register_forecast(store, data):
                                               for rid in packet["event_revision_ids"]})
     # Preserve legacy serialized records on idempotent replay; new rows carry the
     # explicit contract, which is always independently recomputed when compared.
-    if not old or "question_contract_hash" in old:
+    if not old:
         data.update(question_contract_hash=digest(contract), question_contract=contract,
                     timing=forecast_timing(data))
+    else:
+        for key in ("question_contract_hash", "question_contract", "timing"):
+            if key in old:
+                data[key] = old[key]  # Keep legacy bytes; validation recomputes semantics.
     return store.put("forecast", data["forecast_id"], data)
 
 
@@ -227,6 +258,7 @@ def register_decision(store, data):
     if len(set(data["forecast_ids"])) != len(data["forecast_ids"]):
         raise ValueError("duplicate_forecast_link")
     forecasts = [store.get("forecast", fid) for fid in data["forecast_ids"]]
+    validate_decision_targets(store, data, forecasts)
     if any(f["thesis_revision_id"] != data["thesis_revision_id"] for f in forecasts):
         raise ValueError("decision_forecast_mismatch")
     if not any(f["target_type"] == "PRICE" and instant(f["deadline"]) == instant(data["horizon"]) for f in forecasts):
@@ -281,6 +313,10 @@ def register_bundle(store, payload):
                 or any(store.get("forecast", fid)["thesis_revision_id"] != revision for fid in existing["forecast_ids"])):
             raise ValueError("bundle_thesis_links")
         validate_packet(store, store.get("evidence_packet", payload["thesis"]["packet_id"]))
+        forecasts = [store.get("forecast", fid) for fid in existing["forecast_ids"]]
+        for forecast in forecasts:
+            question_contract(store, forecast)
+        validate_decision_targets(store, store.get("valuation_and_decision", existing["decision_id"]), forecasts)
         return existing
     try:
         with store.transaction():

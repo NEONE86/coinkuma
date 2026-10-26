@@ -14,6 +14,8 @@ from urllib.parse import urlparse
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from one_trading.value_evidence import EvidenceStore, HOSTS, sha
+from .semantics import (FACT_IDENTITY_VERSION, numeric_identity, observation_identity,
+                        period_identity, semantic_fact_id)
 from .store import (atomic_bytes, canonical, decimal, digest, identifier, instant,
                     nonempty, one_of, required, stamp, utc, write_json)
 
@@ -209,7 +211,7 @@ def validate_observation(store, data, cutoff=None, stack=()):
     if data["value"] is None and not data.get("missing_reason"):
         raise ValueError("missing_reason_required")
     if data["value_type"] == "DECIMAL" and data["value"] is not None:
-        decimal(data["value"])
+        numeric_identity(data["value"])
         if data["epistemic_type"] in {"DIRECT_RECORD", "SOURCE_CLAIM"} and decimal(located_value) != decimal(data["value"]):
             raise ValueError("numeric_observation_source_mismatch")
     elif data["value"] is not None:
@@ -221,9 +223,7 @@ def validate_observation(store, data, cutoff=None, stack=()):
     leaf_types = {data["epistemic_type"]}
     snapshot = store.get("source_snapshot", loc["snapshot_id"])
     # Same raw fact under an alias/URL reimport does not become a new fact.
-    fact_ids = {digest([data["asset_id"], data["metric"], data["unit"],
-                       data["period_start"], data["period_end"], data["value"], snapshot["sha256"],
-                       {k: loc[k] for k in ("quote", "json_pointer") if k in loc}])}
+    fact_ids = {semantic_fact_id(data, snapshot)}
     # Additional citations cannot make an already available scalar look new.
     source_available = [min((s["available_at"] for s in store.all("source_snapshot")
                              if s["sha256"] == snapshot["sha256"]), key=instant)]
@@ -236,7 +236,7 @@ def validate_observation(store, data, cutoff=None, stack=()):
         inputs = [store.get("observation", oid) for oid in data["input_observation_ids"]]
         if any(o["asset_id"] != data["asset_id"] or o["unit"] != data["unit"] or o.get("value_type") != "DECIMAL" for o in inputs):
             raise ValueError("derived_input_identity_or_unit")
-        if any((o["period_start"], o["period_end"]) != (data["period_start"], data["period_end"]) for o in inputs):
+        if any(period_identity(o) != period_identity(data) for o in inputs):
             raise ValueError("derived_input_period_mismatch")
         provenance = [validate_observation(store, o, available, (*stack, oid)) for o in inputs]
         leaf_types = {t for p in provenance for t in p["leaf_epistemic_types"]}
@@ -263,7 +263,8 @@ def validate_observation(store, data, cutoff=None, stack=()):
         raise ValueError("invalid_period")
     if data["epistemic_type"] == "DIRECT_RECORD" and data["period_end"] and instant(data["period_end"]) > instant(utc()):
         raise ValueError("direct_measurement_cannot_end_in_future")
-    return dict(leaf_epistemic_types=sorted(leaf_types), fact_ids=sorted(fact_ids),
+    return dict(fact_identity_version=FACT_IDENTITY_VERSION,
+                leaf_epistemic_types=sorted(leaf_types), fact_ids=sorted(fact_ids),
                 source_available_at=max(source_available, key=instant))
 
 
@@ -274,9 +275,7 @@ def observe(store, data):
     provenance = validate_observation(store, data)
     # Aliases retain the first parsing time; reparsing cannot launder old facts.
     aliases = [o for o in store.all("observation") if o["observation_id"] != data["observation_id"]
-               and o["asset_id"] == data["asset_id"] and o["metric"] == data["metric"]
-               and o["unit"] == data["unit"] and o["value"] == data["value"]
-               and o["period_start"] == data["period_start"] and o["period_end"] == data["period_end"]
+               and observation_identity(o) == observation_identity(data)
                and validate_observation(store, o)["fact_ids"] == provenance["fact_ids"]]
     if aliases and not old:
         data["available_at"] = min([data["available_at"], *(o["available_at"] for o in aliases)], key=instant)

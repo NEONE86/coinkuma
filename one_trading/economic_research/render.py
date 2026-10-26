@@ -27,6 +27,11 @@ def markdown(report):
     lines += ["", "예상수익은 실측 수익이 아니다. 단위 토큰의 매수·기말매도 비용을 적용한 시나리오 산술이며 계좌 수익률·포지션 손익과 구분한다.", "",
               f"전체 등록 {counts['registered_forecasts']}개, 평가 대상으로 선택 {counts['selected_forecasts']}개, 기한 도래 {counts['due_forecasts']}개, 해결 {counts['resolved_forecasts']}개, 미해결 {counts['unresolved_forecasts']}개, 독립 사건으로 묶은 군집 {counts['independent_event_clusters']}개.", "",
               "점수 분모는 실제 해결된 예측뿐이다. 군집 수는 통계적 독립성을 입증하지 않는다. 해결된 사례만의 점수에는 자료 누락 편향이 남는다."]
+    lines += ["", f"공통 질문 {counts['selected_questions']}개, 해결된 공통 질문 {counts['resolved_questions']}개. 정책별 예측 평가는 같은 사건의 독립 표본 수를 늘리지 않는다."]
+    if report["scoring"]["scores"]:
+        lines += ["", "| 정책 | 대상 | 점수 | 단위 | 평가 수 | 오차 |", "|---|---|---|---|---:|---:|"]
+        for s in report["scoring"]["scores"]:
+            lines.append(f"| {s['policy_id']} | {s['target_type']} | {s['score_name']} | {s['unit']} | {s['score_denominator']} | {number(s['mean_loss'])} |")
     for comparison in report["candidate_comparisons"]:
         lines += ["", "## 후보 비교", "", *["- " + reason for reason in comparison["pairwise_reasons"]], "",
                   "다음 단 하나의 행동: " + comparison["next_single_action"]]

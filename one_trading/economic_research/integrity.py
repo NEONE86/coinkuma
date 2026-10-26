@@ -9,10 +9,13 @@ from .contracts import question_contract, contract_hash, measured_outcome, known
 from .evidence import validate_observation
 from .store import decimal, digest, instant
 from .valuation import value_scenarios
+from .semantics import (FACT_IDENTITY_VERSION, chain_key, observation_identity,
+                        predictor_id, LEGACY_PREDICTOR)
 
 
 def inspect_semantics(store):
     checks = {"F%02d" % n: dict(checked_record_ids=[], issues=[]) for n in range(1, 14)}
+    checks.update({"R2-%02d" % n: dict(checked_record_ids=[], issues=[]) for n in range(1, 5)})
 
     def check(code, key, operation):
         checks[code]["checked_record_ids"].append(key)
@@ -25,12 +28,23 @@ def inspect_semantics(store):
         if not condition:
             raise ValueError(reason)
 
+    first_facts = {}
     for o in store.all("observation"):
         code = "F02" if o["epistemic_type"] == "DERIVED_VALUE" else "F01"
         check(code, o["observation_id"], lambda o=o: validate_observation(store, o))
+        def semantic_fact(o=o):
+            p = validate_observation(store, o)
+            identity = digest([observation_identity(o), p["fact_ids"]])
+            if identity in first_facts:
+                require(instant(first_facts[identity]) == instant(o["available_at"]), "semantic_alias_first_fact_time_changed")
+            else:
+                first_facts[identity] = o["available_at"]
+        check("R2-01", o["observation_id"], semantic_fact)
     questions = defaultdict(list)
     for f in store.all("forecast"):
         questions[f["question_id"]].append(f)
+        check("R2-02", f["forecast_id"], lambda f=f: question_contract(store, f))
+        check("R2-04", f["forecast_id"], lambda f=f: question_contract(store, f))
         def timing(f=f):
             t = store.get("thesis_revision", f["thesis_revision_id"])
             p = store.get("evidence_packet", t["packet_id"])
@@ -49,14 +63,18 @@ def inspect_semantics(store):
     for qid, revisions in questions.items():
         def identity(revisions=revisions):
             require(len({contract_hash(store, f) for f in revisions}) == 1, "question_contract_changed")
-            require(sum(not f["supersedes_forecast_id"] for f in revisions) == 1, "question_root_count")
-            previous = None
+            previous = {}
             for f in revisions:
-                require(f["supersedes_forecast_id"] == previous, "question_lineage")
-                previous = f["forecast_id"]
+                chain = chain_key(f)
+                require(f["supersedes_forecast_id"] == previous.get(chain), "question_policy_lineage")
+                previous[chain] = f["forecast_id"]
+                if predictor_id(f) != LEGACY_PREDICTOR:
+                    policy = store.get("policy", f["policy_id"])
+                    require(instant(policy["registered_at"]) <= instant(f["knowledge_cutoff"]), "policy_after_cutoff")
                 if f["mode"] == "PROSPECTIVE":
                     require(not known_outcome_evidence(store, f, f["registered_at"]), "outcome_known_at_registration")
         check("F04", qid, identity)
+        check("R2-03", qid, identity)
     for r in store.all("resolution"):
         if r["status"] == "RESOLVED":
             def resolution(r=r):
@@ -68,6 +86,8 @@ def inspect_semantics(store):
                 require(instant(result["source_available_at"]) > instant(f["registered_at"]), "outcome_source_predates_forecast")
             check("F02", r["resolution_id"], resolution)
             check("F06", r["resolution_id"], resolution)
+            for code in ("R2-01", "R2-02", "R2-04"):
+                check(code, r["resolution_id"], resolution)
     for r in store.all("registration"):
         def links(r=r):
             ids = [store.get("forecast", fid)["thesis_revision_id"] for fid in r["forecast_ids"]]
@@ -76,6 +96,8 @@ def inspect_semantics(store):
             require(set(d["forecast_ids"]) == set(r["forecast_ids"]), "bundle_forecast_links")
         check("F09", r["registration_id"], links)
     for d in store.all("valuation_and_decision"):
+        from .theses import validate_decision_targets
+        check("R2-02", d["decision_id"], lambda d=d: validate_decision_targets(store, d, [store.get("forecast", fid) for fid in d["forecast_ids"]]))
         def value(d=d):
             p = store.get("price_snapshot", d["price_snapshot_id"]) if d["price_snapshot_id"] else None
             v = value_scenarios(p["value"] if p else d["assumed_entry_price"], d["scenario_tree"], d["cost_assumptions"],
@@ -107,9 +129,18 @@ def inspect_semantics(store):
                 if old["event_id"] != e["event_id"]:
                     require(not (facts == old_facts and old["mechanism_id"] == e["mechanism_id"]), "duplicate_economic_event")
                     require(not (facts & old_facts) or old["independent_cluster_id"] == e["independent_cluster_id"], "shared_fact_cluster")
-            prior_facts.append((e, facts))
         check("F13", e["revision_id"], event)
+        check("R2-01", e["revision_id"], event)
+        try:
+            prior_facts.append((e, {fid for oid in e["observation_ids"]
+                for fid in validate_observation(store, store.get("observation", oid))["fact_ids"]}))
+        except (ValueError, KeyError, TypeError):
+            pass  # Already reported by both checks; invalid inputs stay in ledger.
     for item in checks.values():
         item["status"] = "ISSUES" if item["issues"] else "PASS" if item["checked_record_ids"] else "NOT_EXERCISED_IN_LEDGER"
     return dict(status="ISSUES" if any(v["issues"] for v in checks.values()) else "PASS", checks=checks,
+                fact_identity_version=FACT_IDENTITY_VERSION,
+                resolution_corrections=[dict(resolution_id=r["resolution_id"], supersedes_resolution_id=r["supersedes_resolution_id"])
+                                        for r in store.all("resolution") if r["supersedes_resolution_id"]],
+                remediation="Original bytes are immutable. Invalid resolutions fail closed for scoring/training. Append a validated resolution with supersedes_resolution_id; ambiguous contracts need a new explicit question, never an inferred target.",
                 scope="Stored semantic contracts and numerical evidence; not truth, external knowledge, chain completeness, or investment edge")

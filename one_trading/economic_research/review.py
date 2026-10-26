@@ -4,12 +4,13 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from decimal import Decimal, localcontext
 
-from .evidence import evidence_links, source_bytes
+from .evidence import evidence_links, source_bytes, validate_observation
 from .store import (check_revision, decimal, digest, identifier, instant, nonempty,
                     one_of, required, utc)
-from .theses import validate_packet
+from .theses import validate_packet, validate_decision_targets
 from .contracts import (contract_hash, question_contract, measured_outcome,
                         known_outcome_evidence, forecast_timing)
+from .semantics import chain_key, predictor_id
 
 FAILURES = {"IMPLEMENTATION_WRONG", "ECONOMIC_MECHANISM_WRONG", "VALUE_CAPTURE_WRONG",
             "SUPPLY_WRONG", "EXPECTATIONS_ALREADY_PRICED", "CATALYST_OR_TIMING_WRONG",
@@ -188,11 +189,12 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
     all_forecasts = [f for f in store.all("forecast") if instant(f["registered_at"]) <= instant(as_of) and f["mode"] == mode]
     chosen = {}
     for f in all_forecasts:
-        if revision_policy == "LATEST_AS_OF" or f["question_id"] not in chosen:
-            chosen[f["question_id"]] = f
+        if revision_policy == "LATEST_AS_OF" or chain_key(f) not in chosen:
+            chosen[chain_key(f)] = f
     counts = Counter(registered_forecasts=len(all_forecasts), selected_forecasts=len(chosen), due_forecasts=0,
                      resolved_forecasts=0, unresolved_forecasts=0, pending=0, data_missing=0, ambiguous=0)
     groups, clusters, labels = defaultdict(list), set(), []
+    fact_clusters = {}
     with localcontext() as context:
         context.prec = 80
         for f in chosen.values():
@@ -202,9 +204,21 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
             status = effective_status(f, resolution, as_of)
             thesis = store.get("thesis_revision", f["thesis_revision_id"])
             packet = store.get("evidence_packet", thesis["packet_id"])
-            clusters.update(store.get("economic_event_revision", rid)["independent_cluster_id"] for rid in packet["event_revision_ids"])
+            # Legacy cluster labels do not establish independent evidence. Check
+            # selected packets again with the current semantic identity rules.
+            forecast_clusters = set()
+            for rid in packet["event_revision_ids"]:
+                event = store.get("economic_event_revision", rid)
+                cluster = event["independent_cluster_id"]
+                for oid in event["observation_ids"]:
+                    for fact in validate_observation(store, store.get("observation", oid))["fact_ids"]:
+                        if fact in fact_clusters and fact_clusters[fact] != cluster:
+                            raise ValueError("shared_facts_cannot_create_independent_cluster")
+                        fact_clusters[fact] = cluster
+                clusters.add(cluster)
+                forecast_clusters.add(cluster)
             if status == "RESOLVED" and due:
-                validate_resolved_record(store, f, resolution)
+                measured = validate_resolved_record(store, f, resolution)
                 counts["resolved_forecasts"] += 1
                 timing = forecast_timing(f)
                 horizon = timing["remaining_horizon_seconds"]
@@ -212,9 +226,9 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
                 dist = f["probability_or_distribution"]
                 # Numeric errors only pool identical measurement definitions and
                 # units. Exact horizon/lead avoids mixing refreshed forecasts.
-                definition = digest(dict(subjects=question_contract(store, f)["subject_asset_ids"],
-                                         rule=f["resolution_rule"])) if dist["type"] == "NUMERIC" else "BINARY"
-                key = (f["target_type"], horizon, lead, dist["type"], f["resolution_rule"]["unit"], definition)
+                definition = digest(dict(target=question_contract(store, f)["target_asset_id"],
+                                         rule=question_contract(store, f)["resolution_rule"])) if dist["type"] == "NUMERIC" else "BINARY"
+                key = (predictor_id(f), f["target_type"], horizon, lead, dist["type"], f["resolution_rule"]["unit"], definition)
                 dist = f["probability_or_distribution"]
                 outcome = decimal(resolution["outcome"])
                 baseline = None
@@ -227,20 +241,22 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
                     loss = abs(mean - outcome)
                 delay = (instant(resolution["resolution_at"]) - instant(f["deadline"])).total_seconds() / 86400
                 groups[key].append((loss, baseline, delay, dist, outcome))
-                labels.append(dict(forecast_id=f["forecast_id"], resolution_id=resolution["resolution_id"],
-                                   outcome=resolution["outcome"], independent_clusters=f["independent_cluster_ids"]))
+                labels.append(dict(forecast_id=f["forecast_id"], question_id=f["question_id"], policy_id=predictor_id(f),
+                                   resolution_id=resolution["resolution_id"], outcome=resolution["outcome"],
+                                   outcome_leaf_epistemic_types=measured["outcome_leaf_epistemic_types"],
+                                   independent_clusters=sorted(forecast_clusters)))
             else:
                 counts["unresolved_forecasts"] += 1
                 counts[status.lower()] += 1
         scores = []
-        for (target, horizon, lead, kind, unit, definition), rows in sorted(groups.items()):
+        for (policy, target, horizon, lead, kind, unit, definition), rows in sorted(groups.items()):
             baselines = [r[1] for r in rows if r[1] is not None]
             bins = defaultdict(list)
             for _, _, _, dist, outcome in rows:
                 if kind == "BINARY":
                     bucket = min(9, int(decimal(dist["p"]) * 10))
                     bins[bucket].append(outcome)
-            scores.append(dict(target_type=target, horizon_days=horizon / 86400,
+            scores.append(dict(policy_id=policy, target_type=target, horizon_days=horizon / 86400,
                                remaining_horizon_seconds=horizon, actual_lead_seconds=lead,
                                unit=unit if kind == "NUMERIC" else "DIMENSIONLESS", measurement_definition_hash=definition,
                                score_name="BRIER" if kind == "BINARY" else "MAE",
@@ -250,9 +266,15 @@ def score(store, as_of=None, revision_policy="INITIAL", mode="PROSPECTIVE"):
                                calibration_bins=[dict(lower=str(Decimal(b) / 10), upper=str(Decimal(b + 1) / 10), n=len(v),
                                                       observed_frequency=str(sum(v) / len(v))) for b, v in sorted(bins.items())]))
     counts["independent_event_clusters"] = len(clusters)
+    counts["selected_questions"] = len({f["question_id"] for f in chosen.values()})
+    counts["resolved_questions"] = len({r["question_id"] for r in labels})
+    counts["resolved_independent_event_clusters"] = len({c for r in labels for c in r["independent_clusters"]})
     return dict(as_of=as_of, mode=mode, revision_policy=revision_policy, counts=dict(counts), scores=scores,
-                selection_rule="First registered revision per question" if revision_policy == "INITIAL" else "Latest revision registered by as_of per immutable question",
-                selected_forecasts=[dict(forecast_id=f["forecast_id"], question_id=f["question_id"], **forecast_timing(f)) for f in chosen.values()],
+                selection_rule="First registered revision per (question, policy)" if revision_policy == "INITIAL" else "Latest revision registered by as_of per (question, policy)",
+                policy_counts=[dict(policy_id=p, selected_forecasts=sum(predictor_id(f) == p for f in chosen.values()),
+                                    resolved_forecasts=sum(r["policy_id"] == p for r in labels))
+                               for p in sorted({predictor_id(f) for f in chosen.values()})],
+                selected_forecasts=[dict(forecast_id=f["forecast_id"], question_id=f["question_id"], policy_id=predictor_id(f), **forecast_timing(f)) for f in chosen.values()],
                 resolved_only_training_labels=labels, coverage_denominator="SELECTED_FORECASTS_ALL_STATUSES",
                 resolved_fraction=str(Decimal(counts["resolved_forecasts"]) / len(chosen)) if chosen else None,
                 score_bias="Scores condition on resolved outcomes; missingness may bias them. Repeated questions and tokens are not independent trials.",
@@ -263,6 +285,7 @@ def comparison_endpoint(store, decisions):
     endpoints = []
     for decision in decisions:
         forecasts = [store.get("forecast", fid) for fid in decision["forecast_ids"]]
+        validate_decision_targets(store, decision, forecasts)
         prices = [f for f in forecasts if f["target_type"] == "PRICE"
                   and instant(f["deadline"]) == instant(decision["horizon"])]
         if len(prices) != 1:

@@ -7,19 +7,31 @@ from copy import deepcopy
 
 from .evidence import validate_observation
 from .store import decimal, digest, instant, one_of, stamp
+from .semantics import strict_bool
+
+
+def measurement_target(store, forecast):
+    subjects = store.get("thesis_revision", forecast["thesis_revision_id"])["subject_asset_ids"]
+    if "measurement_target" in forecast:
+        raise ValueError("composite_measurement_target_not_supported")
+    # Explicit compatibility rule, never infer from prose or a decision.
+    target = forecast.get("target_asset_id") if "target_asset_id" in forecast else (subjects[0] if len(subjects) == 1 else None)
+    if not isinstance(target, str) or not target or target not in subjects:
+        raise ValueError("unambiguous_target_asset_id_required")
+    return target
 
 
 def question_contract(store, forecast):
-    thesis = store.get("thesis_revision", forecast["thesis_revision_id"])
     rule = deepcopy(forecast["resolution_rule"])
     for key in ("window_start", "window_end"):
         rule[key] = stamp(rule[key])
     for key in ("allowed_source_urls", "allowed_source_path_prefixes"):
         rule[key] = sorted(set(rule.get(key, [])))
     rule.setdefault("observation_mode", "WINDOW_FINAL")
-    rule.setdefault("accept_source_claim", False)
-    rule.setdefault("ignore_query_for_source_match", False)
-    return dict(subject_asset_ids=sorted(thesis["subject_asset_ids"]),
+    for key in ("accept_source_claim", "ignore_query_for_source_match"):
+        rule[key] = strict_bool(rule, key)
+    strict_bool(forecast, "outcome_already_observed")
+    return dict(target_asset_id=measurement_target(store, forecast),
                 target_type=forecast["target_type"], deadline=stamp(forecast["deadline"]),
                 resolution_rule=rule)
 
@@ -39,9 +51,9 @@ def outcome_value(rule, value):
 
 
 def measured_outcome(store, forecast, observation, as_of, early=False):
-    rule = forecast["resolution_rule"]
     contract = question_contract(store, forecast)
-    if (observation["asset_id"] not in contract["subject_asset_ids"]
+    rule = contract["resolution_rule"]
+    if (observation["asset_id"] != contract["target_asset_id"]
             or observation["unit"] != rule["unit"] or observation["metric"] != rule["measurement"]):
         raise ValueError("resolution_measurement_identity_or_unit")
     provenance = validate_observation(store, observation, as_of)
