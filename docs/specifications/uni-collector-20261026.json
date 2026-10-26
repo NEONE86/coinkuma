@@ -1,0 +1,84 @@
+{
+  "spec_id": "UNI-ethereum-pancake-collector-20261026-v1",
+  "schema": "bounded-ethereum-fee-cycle-v1",
+  "frozen_at": "2026-10-26T13:58:00.698964+00:00",
+  "mode": "ACTUAL_HISTORICAL_COLLECTION",
+  "chain_id": 1,
+  "endpoint": "https://ethereum-rpc.publicnode.com",
+  "start_block": 26277185,
+  "end_block": 26277200,
+  "start_hash": "0x8aa7271525621973b738afe8a9187c3efb0d9e955cacabf054601a80829fda9d",
+  "end_hash": "0x298dac2685c1476bf26f2c9e4b79791f7ddf5b7b63f632b34f1433ff3b8505b6",
+  "start_utc": "2026-10-26T13:33:23+00:00",
+  "end_utc": "2026-10-26T13:36:23+00:00",
+  "finality": "Both boundaries at or below first finalized head; all16 parent links and end hash rechecked after capture. No outcome if changed.",
+  "coverage": "One block per page, eth_getBlockReceipts exact transaction hash/index set equals block.transactions, no duplicate logs or removed logs. Missing page, endpoint error, truncated response, mismatched chain/hash/status -> DATA_MISSING. No range changes.",
+  "addresses": {
+    "hook": "0x9338644744b78a28db36cbf535c7d4e4eb17a888",
+    "jar": "0xf38521f130fccf29db1961597bc5d2b60f995f85",
+    "firepit": "0x0d5cd355e2abeb8fb1552f56c965b867346d6721",
+    "uni": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+    "adapter": "0x89a5d5bf00a27d55c02951e49078a5c5771051db",
+    "pool_manager": "0x000000000004444c5dc75cb358380d2e3de08a90"
+  },
+  "uni_sink": "0x000000000000000000000000000000000000dead",
+  "uni_decimals": 18,
+  "identity_proofs": {
+    "hook": {
+      "address": "0x9338644744b78a28db36cbf535c7d4e4eb17a888",
+      "verified_contract_name": "PancakeSwapV3Aggregator",
+      "deployed_code_sha256": "64360364bef93ea2ef792b082aac05bfda4ddc2e182c66135919c9fb4232b9bc",
+      "source_file": "hook-verified.bin",
+      "code_file": "code-hook.bin"
+    },
+    "jar": {
+      "address": "0xf38521f130fccf29db1961597bc5d2b60f995f85",
+      "verified_contract_name": "TokenJar",
+      "deployed_code_sha256": "f1ddd262ed79bd4b86ef5b6781d08cc533ccd2d61dbe2579066602e436e7dfb3",
+      "source_file": "jar-verified.bin",
+      "code_file": "code-jar.bin"
+    },
+    "firepit": {
+      "address": "0x0d5cd355e2abeb8fb1552f56c965b867346d6721",
+      "verified_contract_name": "Firepit",
+      "deployed_code_sha256": "91c18e35aa393908f049fbc5f2ca5cd68c7967de00eb83fe0a02b63c4ff18acd",
+      "source_file": "firepit-verified.bin",
+      "code_file": "code-firepit.bin"
+    },
+    "uni": {
+      "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+      "verified_contract_name": "Uni",
+      "deployed_code_sha256": "77ea2b530607db6cb87c7cce18016aa12dd0762c4357355bceee2cb11721bebe",
+      "source_file": "uni-verified.bin",
+      "code_file": "code-uni.bin"
+    },
+    "adapter": {
+      "address": "0x89a5d5bf00a27d55c02951e49078a5c5771051db",
+      "verified_contract_name": "V4FeeAdapter",
+      "deployed_code_sha256": "b101a0e7ec9ea6d61c17e2cb87729c647ca9d473618e8fa04dd23c3f021f9bc1",
+      "source_file": "adapter-verified.bin",
+      "code_file": "code-adapter.bin"
+    }
+  },
+  "official_hook_source_commit": "2264ac8b023011fdca8fd3422ada172dc10184e0",
+  "hook_version": "PancakeSwapV3Aggregator v1.0",
+  "fee_topic": "0xdb249cf7a102711dda1beaba415bb011ee0e1402c7f67617236fed5739235d6c",
+  "swap_topic": "0x6150bb53cd76c5702d6074239fc7b6c2a5495d339eb122fdc06252f3efdbbc1b",
+  "transfer_topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+  "eligibility": "Successful status1 receipt; exact hook HookSwap plus ProtocolFeesCollected recipient TokenJar. ERC20: pair each fee one-to-one with PoolManager -> TokenJar Transfer of identical token/raw amount in that receipt. Native fees remain event claims without execution traces.",
+  "units": "Unsigned uint256 atomic units; decimals eth_call at frozen end block, values integer/string only. Report each token separately, no invented USD conversion.",
+  "uni_attribution": "Canonical UNI Transfer to Firepit.RESOURCE_RECIPIENT plus Firepit Released log proves shared-jar conversion only. Never allocate all shared-jar UNI to the selected hook. Approval/allowance/proposals do not count. Sink transfer is not totalSupply reduction.",
+  "direct_value": "Measured per-token gross direct transfer to jar; complete-zero only with full fixed-range receipts. Incomplete -> null plus observed lower bound.",
+  "causal_increment": {
+    "status": "AMBIGUOUS",
+    "value": null,
+    "comparison_route": null,
+    "matched_trade_conditions": null,
+    "incentive_cost": null,
+    "conversion_time": null,
+    "identification_assumptions": null,
+    "reason": "Replacement/counterfactual unknown; never substitute gross or zero for UNI-90d causal net increment."
+  },
+  "duplicate_key": "chain_id:block_hash:transaction_hash:log_index; observation id also binds spec and metric. Same capture replay creates no domain records.",
+  "legacy_predictions": "No forecast/decision/resolution mutations. All12 retain original policy attribution and timing. Progress observations are not training outcomes."
+}

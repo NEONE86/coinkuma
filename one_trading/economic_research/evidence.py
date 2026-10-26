@@ -24,6 +24,7 @@ REVIEWED_HOSTS = frozenset(HOSTS | {
     "aave.com", "docs.pancakeswap.finance", "blog.pancakeswap.finance",
     "pancakeswap.finance", "data-api.binance.vision",
     "tokens.uniswap.org", "raw.githubusercontent.com",
+    "ethereum-rpc.publicnode.com",
 })
 PRICE_PATHS = {"/api/v3/ticker/24hr", "/api/v3/exchangeInfo", "/api/v3/klines", "/api/v3/time"}
 
@@ -36,6 +37,8 @@ def validate_url(url):
         raise ValueError("source_not_allowlisted")
     if p.hostname == "data-api.binance.vision" and p.path not in PRICE_PATHS:
         raise ValueError("market_endpoint_not_allowlisted")
+    if p.hostname == "ethereum-rpc.publicnode.com" and (p.path not in ("", "/") or p.query):
+        raise ValueError("rpc_endpoint_not_allowlisted")
     return url
 
 

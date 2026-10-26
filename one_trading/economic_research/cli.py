@@ -77,12 +77,15 @@ def candidate_comparison(store, payload):
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
-    for name in ("init", "collect-once", "ingest", "packet", "register", "resolve", "compare", "report", "audit"):
+    for name in ("init", "collect-once", "collect-chain-once", "ingest", "packet", "register", "resolve", "compare", "report", "audit"):
         command = sub.add_parser(name)
         command.add_argument("--workspace", type=Path, required=True, help="Runtime directory outside every Git checkout")
         command.add_argument("--output", type=Path)
         if name in {"ingest", "register"}:
             command.add_argument("--file", type=Path, required=True)
+        elif name == "collect-chain-once":
+            command.add_argument("--spec", type=Path, required=True)
+            command.add_argument("--asset-id", required=True)
         elif name == "collect-once":
             command.add_argument("--sources", type=Path, required=True, help="JSON array of reviewed public URLs")
             command.add_argument("--offline", action="store_true")
@@ -112,6 +115,12 @@ def main(argv=None):
         elif args.command == "collect-once":
             result = collect(store, read_json(args.sources), args.offline)
             if result["status"] == "PARTIAL_COVERAGE":
+                status = "PARTIAL_COVERAGE"
+        elif args.command == "collect-chain-once":
+            from .chain_cycle import collect_cycle, link_cycle
+            cycle = collect_cycle(store, read_json(args.spec))
+            result = dict(cycle=cycle, link=link_cycle(store, cycle["cycle_id"], args.asset_id))
+            if cycle["measurement"]["status"] != "COMPLETE":
                 status = "PARTIAL_COVERAGE"
         elif args.command == "ingest":
             result = ingest(store, read_json(args.file))

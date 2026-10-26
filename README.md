@@ -119,3 +119,10 @@ preserve their past after future data deletion. See the
 [independent calculation review](docs/experiments/cashflow-v2-2026-10-25/INDEPENDENT_REVIEW.md)
 and [reproduction workflow](docs/CASHFLOW_ALPHA_V2.md). Earlier rejection results
 remain unchanged. This is research evidence, not live-trading approval.
+
+## Bounded economic-effect collection
+
+The [Ethereum hook collector](docs/BOUNDED_CHAIN_COLLECTOR.md) captures one frozen
+block range with raw RPC receipts, transaction/log reconciliation and offline
+replay. It keeps direct gross transfers, incomplete coverage and unidentified
+causal increment separate, and does not resolve pending forecasts.

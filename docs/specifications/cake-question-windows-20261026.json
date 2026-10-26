@@ -1,0 +1,43 @@
+{
+  "specification_id": "CAKE-weekly-explicit-spec-20261026-v1",
+  "status": "FROZEN_SPECIFICATION_ONLY_NOT_REGISTERED_FORECAST",
+  "frozen_at": "2026-10-26T13:58:00.698964+00:00",
+  "legacy_forecast_id": "CAKE-30d-r1",
+  "legacy_unchanged": true,
+  "new_question_id": "CAKE-30d-explicit-windows-v1",
+  "measurement_start": "2026-10-27T00:00:00+00:00",
+  "deadline": "2026-11-26T00:00:00+00:00",
+  "interval_semantics": "UTC [start,end), four disjoint7-day intervals; final2 days reported separately and excluded from four-week count",
+  "weeks": [
+    {
+      "start": "2026-10-27T00:00:00+00:00",
+      "end": "2026-11-03T00:00:00+00:00"
+    },
+    {
+      "start": "2026-11-03T00:00:00+00:00",
+      "end": "2026-11-10T00:00:00+00:00"
+    },
+    {
+      "start": "2026-11-10T00:00:00+00:00",
+      "end": "2026-11-17T00:00:00+00:00"
+    },
+    {
+      "start": "2026-11-17T00:00:00+00:00",
+      "end": "2026-11-24T00:00:00+00:00"
+    }
+  ],
+  "tail": {
+    "start": "2026-11-24T00:00:00+00:00",
+    "end": "2026-11-26T00:00:00+00:00",
+    "scored_in_weekly_count": false
+  },
+  "future_registration_requirements": [
+    "new policy_id and exact target_asset_id",
+    "model_id/prompt_version and raw manual request/response hashes, no automatic-model claim",
+    "input packet hash and cutoff<=registration<fixed measurement_start",
+    "target sentence names same explicit UTC start, not registration-relative wording",
+    "new forecast ID; never register an already observed endpoint"
+  ],
+  "probability": null,
+  "new_forecast_registered": false
+}
