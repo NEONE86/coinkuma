@@ -7,10 +7,10 @@ from decimal import Decimal, localcontext
 import re
 
 from .chain_capture import ChainCapture, ReplayCapture, CaptureError, ENDPOINT
-from .evidence import observe
+from .evidence import observe, validate_observation
 from .events import register_event
 from .store import digest, identifier, instant, utc
-from .theses import make_packet
+from .theses import make_packet, validate_packet
 
 TRANSFER = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 FEE = "0xdb249cf7a102711dda1beaba415bb011ee0e1402c7f67617236fed5739235d6c"
@@ -140,7 +140,7 @@ def extract_flows(spec, block, receipts):
     return found, swaps, shared, unresolved
 
 
-def measure(store, spec, capture):
+def measure_legacy(store, spec, capture):
     requests, errors, pages = {}, [], []
     def call(method, params):
         key = digest([method, params])
@@ -227,13 +227,40 @@ def measure(store, spec, capture):
                     reason="Counterfactual replacement, incentives and conversion are not identified; gross transfers are not net increment."))
 
 
+def measure(store, spec, capture):
+    from .chain_qualification import qualify
+    return qualify(store, spec, measure_legacy(store, spec, capture))
+
+
+def validated_measurement(store, cycle):
+    """Recheck raw inputs using the recorded measurement version; never rewrite it."""
+    from .chain_qualification import VERSION, qualify
+    old = cycle["measurement"]
+    spec = store.get("collection_spec", old["spec_id"])
+    # Canonical JSON sorts object keys in storage. Legacy preflight stopped at
+    # its first failed code request, so recover the actual attempted role order
+    # from receipts instead of interpreting sorted keys as execution order.
+    code_attempts = {}
+    for ref in old["requests"].values():
+        receipt = store.get("retrieval_receipt", ref["receipt_id"])
+        request = receipt["request_payload"]
+        if request["method"] == "eth_getCode":
+            code_attempts[request["params"][0]] = receipt["requested_at"]
+    spec = dict(spec, identity_proofs=dict(sorted(spec["identity_proofs"].items(),
+        key=lambda item: (code_attempts.get(item[1]["address"], "9999"), item[0]))))
+    replay = measure_legacy(store, spec, ReplayCapture(store, old["requests"]))
+    checked = qualify(store, spec, replay)
+    require(old.get("measurement_version") in (None, VERSION), "unknown_measurement_version")
+    require((checked if old.get("measurement_version") else replay) == old, "offline_replay_mismatch")
+    return checked
+
+
 def collect_cycle(store, spec, capture=None):
     freeze_spec(store, spec)
     key = identifier("chain-cycle", spec)
     old = store.get("collection_cycle", key, optional=True)
     if old:
-        replay = measure(store, spec, ReplayCapture(store, old["measurement"]["requests"]))
-        require(replay == old["measurement"], "offline_replay_mismatch")
+        validated_measurement(store, old)
         return old
     started = utc()
     result = measure(store, spec, capture or ChainCapture(store))
@@ -241,42 +268,153 @@ def collect_cycle(store, spec, capture=None):
     return store.put("collection_cycle", key, value)
 
 
-def link_cycle(store, cycle_id, asset_id):
-    """Link finite coverage into the normal observation/event/packet path.
+def validate_target(store, spec, asset_id):
+    asset = store.get("asset_identity", asset_id)
+    chain = asset["chain_id"]
+    require((type(chain) is int and chain == spec["chain_id"])
+            or chain == "eip155:" + str(spec["chain_id"]), "collection_asset_chain_mismatch")
+    require(address(asset["contract_address"]) == address(spec["addresses"]["uni"])
+            and asset["representation"] == "CANONICAL"
+            and type(asset["decimals"]) is int and asset["decimals"] == spec["uni_decimals"],
+            "collection_asset_identity_mismatch")
 
-    This progress record deliberately creates no forecast, resolution or label.
-    An RPC hex quantity is not sent through the decimal text-locator parser.
-    Integer-unit reconciliation is retained in the checked collection_cycle.
+
+def validate_link(store, link, cycle, asset_id, measured):
+    observation = store.get("observation", link["observation_id"])
+    event = store.get("economic_event_revision", link["event_revision_id"])
+    packet = store.get("evidence_packet", link["packet_id"])
+    require(link["cycle_id"] == cycle["cycle_id"] and observation["collection_cycle_id"] == cycle["cycle_id"],
+            "collection_link_cycle_mismatch")
+    require(observation["asset_id"] == event["asset_id"] == asset_id
+            and packet["subject_asset_ids"] == [asset_id], "collection_link_target_mismatch")
+    require(observation["observation_id"] in event["observation_ids"]
+            and observation["observation_id"] in packet["observation_ids"]
+            and event["revision_id"] in packet["event_revision_ids"]
+            and packet["manifest_hash"] == link["packet_hash"], "collection_link_reference_mismatch")
+    require(event["event_id"] not in event["related_event_ids"], "collection_event_self_reference")
+    require(event["status"] == measured["validation"]["event_status"], "collection_link_requires_review")
+    validate_observation(store, observation)
+    validate_packet(store, packet)
+    from .chain_qualification import fact_key
+    spec = store.get("collection_spec", cycle["measurement"]["spec_id"])
+    for fact in measured["flows"]:
+        if fact["qualification_status"] == "QUALIFIED":
+            stored = store.get("chain_fee_fact", fact_key(spec, fact))
+            require(all(stored.get(k) == v for k, v in fact.items() if k != "qualification_status"),
+                    "collection_link_fact_mismatch")
+    for review in store.all("collection_link_review"):
+        require(event["revision_id"] not in review["excluded_event_revision_ids"], "quarantined_collection_event")
+    return link
+
+
+def link_cycle(store, cycle_id, asset_id):
+    """Atomic domain link. Rejected identity inputs never cause domain writes.
+
+    Old completed or interrupted rows are checked before reuse. Invalid legacy
+    rows need an append-only review; this function never silently replaces them.
     """
-    cycle = store.get("collection_cycle", cycle_id);m = cycle["measurement"]
-    spec = store.get("collection_spec", m["spec_id"])
+    cycle = store.get("collection_cycle", cycle_id)
+    spec = store.get("collection_spec", cycle["measurement"]["spec_id"])
+    validate_target(store, spec, asset_id)  # including the existing-link fast path
+    m = validated_measurement(store, cycle)
     existing = store.get("collection_link", cycle_id, optional=True)
     if existing:
-        return existing
-    sources = sorted({r["snapshot_id"] for r in m["requests"].values() if r.get("snapshot_id")})
-    require(sources, "no_raw_source_to_link")
-    # Textual locator to an actual JSON-RPC response. Never label the narrative
-    # or missing causal amount as a directly measured numeric outcome.
-    oid = identifier("chain-observation", [cycle_id, asset_id])
-    observation = observe(store, dict(observation_id=oid, asset_id=asset_id,
-        metric="bounded_hook_fee_collection_progress", value="Collection " + m["status"] + "; reconciled fee logs=" + str(len(m["flows"])) + "; causal increment AMBIGUOUS",
-        value_type="TEXT", unit="COLLECTION_PROGRESS", period_start=spec["start_utc"], period_end=spec["end_utc"],
-        epistemic_type="SOURCE_CLAIM", evidence_ids=sources, locator=dict(snapshot_id=sources[0], json_pointer="/jsonrpc"),
-        derivation_version="bounded-ethereum-fee-cycle-v1", collection_cycle_id=cycle_id, missing_reason=None))
-    event_id = identifier("collection-event", spec)
-    related = [e for e in store.all("economic_event_revision") if e["asset_id"] == asset_id
-               and e["mechanism_id"] == "VALUE_CAPTURE_CHANGE"]
-    cluster = related[0]["independent_cluster_id"] if related else "UNI-aggregator-hook-collection"
-    for fact in m["flows"]:
-        fact_id = ":".join(map(str, (spec["chain_id"], fact["block_hash"], fact["transaction_hash"], fact["log_index"])))
-        if not store.get("chain_fee_fact", fact_id, optional=True):
-            store.put("chain_fee_fact", fact_id, dict(fact, fact_id=fact_id, first_cycle_id=cycle_id,
-                synthetic=False, available_at=cycle["completed_at"]))
-    event = register_event(store, dict(event_id=event_id, revision_id=event_id + "-r1", asset_id=asset_id,
-        mechanism_id="VALUE_CAPTURE_CHANGE", status="EXECUTED" if m["flows"] and m["identity_verified"] else "CONFIGURED",
-        effective_at=spec["end_utc"], published_at=None, decision_authority="Frozen read-only collector; no trading authority",
-        observation_ids=[observation["observation_id"]], related_event_ids=sorted({e["event_id"] for e in related}), economic_flow_ids=[],
-        independent_cluster_id=cluster, supersedes_revision_id=None))
-    packet = make_packet(store, [asset_id])
-    return store.put("collection_link", cycle_id, dict(cycle_id=cycle_id, observation_id=oid,
-        event_revision_id=event["revision_id"], packet_id=packet["packet_id"], packet_hash=packet["manifest_hash"], available_at=utc()))
+        return validate_link(store, existing, cycle, asset_id, m)
+    from .chain_qualification import fact_key, VERSION
+    with store.transaction():
+        sources = sorted({r["snapshot_id"] for r in m["requests"].values() if r.get("snapshot_id")})
+        require(sources, "no_raw_source_to_link")
+        oid = identifier("chain-observation", [cycle_id, asset_id])
+        old_observation = store.get("observation", oid, optional=True)
+        if old_observation:
+            require(old_observation["asset_id"] == asset_id and old_observation["collection_cycle_id"] == cycle_id
+                    and old_observation["evidence_ids"] == sources
+                    and old_observation["metric"] == "bounded_hook_fee_collection_progress"
+                    and old_observation["period_start"] == spec["start_utc"]
+                    and old_observation["period_end"] == spec["end_utc"], "interrupted_observation_mismatch")
+            require(not old_observation.get("qualification_version") or old_observation["qualification_version"] == VERSION,
+                    "interrupted_observation_version")
+            validate_observation(store, old_observation)
+            observation = old_observation
+        else:
+            observation = observe(store, dict(observation_id=oid, asset_id=asset_id,
+                metric="bounded_hook_fee_collection_progress",
+                value="Collection " + m["status"] + "; qualified fee lower bound=" + str(m["observed_qualified_fee_count"]) + "; causal increment AMBIGUOUS",
+                value_type="TEXT", unit="COLLECTION_PROGRESS", period_start=spec["start_utc"], period_end=spec["end_utc"],
+                epistemic_type="SOURCE_CLAIM", evidence_ids=sources, locator=dict(snapshot_id=sources[0], json_pointer="/jsonrpc"),
+                derivation_version=VERSION, qualification_version=VERSION, validation_hash=digest(m["validation"]),
+                collection_cycle_id=cycle_id, missing_reason=None))
+        event_id = identifier("collection-event", spec)
+        related = [e for e in store.all("economic_event_revision") if e["asset_id"] == asset_id
+                   and e["mechanism_id"] == "VALUE_CAPTURE_CHANGE" and e["event_id"] != event_id]
+        cluster = related[0]["independent_cluster_id"] if related else "UNI-aggregator-hook-collection"
+        for fact in m["flows"]:
+            if fact["qualification_status"] != "QUALIFIED":
+                continue
+            fid = fact_key(spec, fact)
+            old = store.get("chain_fee_fact", fid, optional=True)
+            if old:
+                require(all(old.get(k) == v for k, v in fact.items() if k != "qualification_status"),
+                        "existing_fee_fact_conflict")
+            else:
+                store.put("chain_fee_fact", fid, dict(fact, fact_id=fid, first_cycle_id=cycle_id,
+                    qualification_version=VERSION, synthetic=cycle["synthetic"], available_at=utc()))
+        event = store.get("economic_event_revision", event_id + "-r1", optional=True)
+        if event:
+            require(event["asset_id"] == asset_id and event["observation_ids"] == [oid]
+                    and event["mechanism_id"] == "VALUE_CAPTURE_CHANGE" and event["economic_flow_ids"] == []
+                    and event["status"] == m["validation"]["event_status"]
+                    and event_id not in event["related_event_ids"], "interrupted_event_requires_review")
+        else:
+            event = register_event(store, dict(event_id=event_id, revision_id=event_id + "-r1", asset_id=asset_id,
+                mechanism_id="VALUE_CAPTURE_CHANGE", status=m["validation"]["event_status"],
+                effective_at=spec["end_utc"], published_at=None, decision_authority="Frozen read-only collector; no trading authority",
+                observation_ids=[oid], related_event_ids=sorted({e["event_id"] for e in related}), economic_flow_ids=[],
+                independent_cluster_id=cluster, supersedes_revision_id=None))
+        previous_packets = [p for p in store.all("evidence_packet") if p["subject_asset_ids"] == [asset_id]
+                            and oid in p["observation_ids"] and event["revision_id"] in p["event_revision_ids"]]
+        packet = validate_packet(store, previous_packets[0]) if previous_packets else make_packet(store, [asset_id])
+        linked = dict(cycle_id=cycle_id, observation_id=oid, event_revision_id=event["revision_id"],
+                      packet_id=packet["packet_id"], packet_hash=packet["manifest_hash"], available_at=utc())
+        validate_link(store, linked, cycle, asset_id, m)
+        return store.put("collection_link", cycle_id, linked)
+
+
+def review_cycle(store, cycle_id):
+    """Versioned offline reassessment; receipt clocks and old domain rows stay intact."""
+    from .chain_qualification import VERSION
+    cycle = store.get("collection_cycle", cycle_id)
+    spec = store.get("collection_spec", cycle["measurement"]["spec_id"])
+    m = validated_measurement(store, cycle)
+    key = identifier("collection-review", [cycle_id, VERSION, digest(m)])
+    old = store.get("collection_link_review", key, optional=True)
+    if old:
+        return old
+    findings, excluded = [], []
+    link = store.get("collection_link", cycle_id, optional=True)
+    if link:
+        event = store.get("economic_event_revision", link["event_revision_id"])
+        try:
+            validate_target(store, spec, event["asset_id"])
+            validate_link(store, link, cycle, event["asset_id"], m)
+        except ValueError as exc:
+            findings.append(dict(record_kind="collection_link", record_id=cycle_id, reason=str(exc)))
+            excluded.append(event["revision_id"])
+    else:
+        # Older non-atomic writers can leave an orphan event without a link.
+        event = store.get("economic_event_revision", identifier("collection-event", spec) + "-r1", optional=True)
+        if event:
+            try:
+                validate_target(store, spec, event["asset_id"])
+                require(event["status"] == m["validation"]["event_status"], "orphan_event_requires_review")
+            except ValueError as exc:
+                findings.append(dict(record_kind="economic_event_revision", record_id=event["revision_id"], reason=str(exc)))
+                excluded.append(event["revision_id"])
+    rejected_facts = [f["fact_id"] for f in store.all("chain_fee_fact")
+                      if f["first_cycle_id"] == cycle_id and f["fact_id"] not in m["validation"]["qualified_fact_ids"]]
+    return store.put("collection_link_review", key, dict(review_id=key, cycle_id=cycle_id,
+        validation_version=VERSION, original_measurement_version=cycle["measurement"].get("measurement_version", "legacy-v1"),
+        cycle_hash=digest(cycle), validation=m["validation"], findings=findings,
+        excluded_event_revision_ids=excluded, excluded_fee_fact_ids=rejected_facts,
+        status="QUARANTINED_LINK" if excluded or rejected_facts else "VERIFIED_LINK",
+        reassessed_at=utc(), available_at=utc(), no_new_network_requests=True))

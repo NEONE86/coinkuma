@@ -77,8 +77,12 @@ def make_packet(store, asset_ids, as_of=None):
         raise ValueError("packet_subjects")
     assets = [store.get("asset_identity", aid) for aid in asset_ids]
     selected = {}
+    excluded = {rid for review in store.all("collection_link_review")
+                if instant(review["available_at"]) <= instant(as_of)
+                for rid in review["excluded_event_revision_ids"]}
     for event in store.all("economic_event_revision"):
-        if event["asset_id"] in asset_ids and instant(event["available_at"]) <= instant(as_of):
+        if (event["asset_id"] in asset_ids and instant(event["available_at"]) <= instant(as_of)
+                and event["revision_id"] not in excluded):
             selected[event["event_id"]] = event
     events = list(selected.values())
     if not events:

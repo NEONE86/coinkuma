@@ -69,3 +69,38 @@ all envelope fields, including sequence and actual recorded_at.
 
 New synthetic tests cover only collector/packaging boundaries. The inherited
 suite remains a software gate, not profitability or actual economic validation.
+
+## Qualification and recovery (COL-01 through COL-04)
+
+New measurements use `chain-qualification-v2`. Candidate logs remain in the
+cycle even when identity/route, finality, canonical membership or units fail.
+Each candidate records these checks. Only qualified facts enter the fact ledger
+and support EXECUTED. A valid positive transaction may supply an observed lower
+bound despite a different missing receipt page; the range count remains null
+and zero remains unproven. State checks refer to the frozen end block; this is
+not a per-transaction EVM replay. Shared UNI context is never hook revenue.
+
+Linking validates the registered chain, canonical UNI contract, representation
+and decimals before any domain write and before returning an existing link.
+Observation, fact, event, packet and link writes share one transaction. Retrying
+also verifies and reuses valid partial rows left by the older non-atomic writer,
+including a packet persisted before interruption. Related events exclude self.
+
+Old cycle bodies retain the legacy measurement algorithm and original clocks.
+To append an offline reassessment without replacing them:
+
+```sh
+python -m one_trading.economic_research.cli review-chain-cycle \
+  --workspace /outside/git/research-runtime --cycle-id EXISTING_CYCLE_ID \
+  --output cycle-review.json
+```
+
+The review identifies excluded legacy events and fee facts. New packets exclude
+events quarantined by reviews available at their cutoff; historical packets and
+forecasts stay intact. Invalid existing links are rejected instead of silently
+reused. A review is idempotent; CLI execution manifests record each invocation.
+The independent calculator first binds supplied JSON to the ledger, then
+reconstructs full fee, swap and shared-transfer fields from raw responses. Its
+raw comparison remains necessary even when a corrupted export's JSON and DB
+body agree. The regression suite tests both attacks on disposable synthetic
+exports without weakening production append-only triggers.
