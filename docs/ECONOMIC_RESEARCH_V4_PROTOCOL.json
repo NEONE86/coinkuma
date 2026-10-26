@@ -1,0 +1,610 @@
+{
+  "artifact_kind": "implementation_design_contract",
+  "version": "one-economic-research-v4.0-design",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "designed_on_kst": "2026-10-26",
+  "repository": "https://github.com/NEONE86/coinkuma",
+  "base": {
+    "pr": 8,
+    "sha": "78e927b7712a9333a59ff99c36c4e7e8e359d239",
+    "branch": "research/value-accrual-events-20261025",
+    "recheck_remote_before_implementation": true,
+    "preserve_prior_results": true
+  },
+  "objective": "Detect economic changes before sufficient repricing, make explicit current-price choices, and improve future judgment using timestamped outcomes.",
+  "scope": {
+    "pilot_assets": [
+      "AAVE",
+      "UNI",
+      "CAKE"
+    ],
+    "pilot_is_buy_recommendation": false,
+    "mechanisms": [
+      "VALUE_CAPTURE_CHANGE",
+      "NET_SUPPLY_CHANGE"
+    ],
+    "expansion_target_assets": {
+      "min": 10,
+      "max": 15
+    },
+    "expansion_condition": "complete vertical slice, verified identities, source availability and comparable economics; no future-return selection",
+    "reasoner_backend": "manual_import",
+    "initial_runtime": "one_shot",
+    "future_schedule_deployed": false,
+    "live_orders": false,
+    "account_connection": false,
+    "paid_service_purchase": false
+  },
+  "proposed_schedule": {
+    "status": "DESIGN_ONLY_NOT_SCHEDULED",
+    "source_poll_interval_minutes": 60,
+    "numeric_aggregation_interval_hours": 24,
+    "thesis_refresh_trigger": "material new evidence or decision-changing price movement",
+    "weekly_deep_reviews_max": 3
+  },
+  "evidence_modes": [
+    "CASE_STUDY_BACKFILL",
+    "HISTORICAL_POINT_IN_TIME",
+    "PROSPECTIVE"
+  ],
+  "epistemic_types": [
+    "DIRECT_RECORD",
+    "SOURCE_CLAIM",
+    "DERIVED_VALUE",
+    "ASSUMPTION"
+  ],
+  "event_statuses": [
+    "PROPOSED",
+    "AUTHORIZED",
+    "CONFIGURED",
+    "EXECUTED",
+    "PAUSED",
+    "RESUMED",
+    "CANCELLED",
+    "REVERSED"
+  ],
+  "forecast_targets": [
+    "IMPLEMENTATION",
+    "ECONOMICS",
+    "PRICE"
+  ],
+  "forecast_basis": [
+    "EMPIRICAL_REFERENCE",
+    "MODEL",
+    "JUDGMENT",
+    "MIXED"
+  ],
+  "resolution_statuses": [
+    "PENDING",
+    "RESOLVED",
+    "DATA_MISSING",
+    "AMBIGUOUS"
+  ],
+  "research_choices": [
+    "PRIORITIZE",
+    "MONITOR",
+    "ARCHIVE"
+  ],
+  "investment_actions": [
+    "NO_TRADE",
+    "WATCH",
+    "PAPER_ENTER",
+    "PAPER_HOLD",
+    "PAPER_ADD",
+    "PAPER_REDUCE",
+    "PAPER_EXIT"
+  ],
+  "promotion_states": [
+    "IMPLEMENTATION_VALID",
+    "RESEARCH_PRIORITY",
+    "PROSPECTIVE_PAPER",
+    "CAPITAL_REVIEW"
+  ],
+  "example_horizons_days": {
+    "IMPLEMENTATION": [
+      7,
+      30
+    ],
+    "ECONOMICS": [
+      30,
+      90
+    ],
+    "PRICE": [
+      90,
+      180
+    ]
+  },
+  "probability_rules": [
+    "subjective forecasts permitted with labeled basis and evidence",
+    "unknown base rates remain null",
+    "no model-token likelihood as event probability",
+    "same target horizon across payoff scenarios",
+    "sum joint scenario probabilities equals one",
+    "do not multiply correlated marginal forecasts as independent",
+    "conditional branches must identify parent and sum to one under parent"
+  ],
+  "temporal_invariants": [
+    "prospective inputs available_at <= registered_at",
+    "observed_at is actual receipt, never backdated to effective_at",
+    "registered_at precedes unresolved prospective deadline",
+    "future data cannot rewrite earlier as-of packets",
+    "maturity gates evaluation and learning, not current event collection or paper entry",
+    "forecast revisions preserve initial prediction",
+    "LLM historical knowledge contamination is separately disclosed",
+    "input.available_at <= packet.as_of == forecast.knowledge_cutoff <= registered_at",
+    "registered_at is assigned by the actual storage operation, not trusted from imported analysis",
+    "updated decision prices must have available_at <= new decision_at"
+  ],
+  "data_contracts": {
+    "asset_identity": [
+      "asset_id",
+      "chain_id",
+      "contract_address",
+      "decimals",
+      "valid_from",
+      "valid_to",
+      "exchange_symbol_mapping",
+      "migration_evidence_ids"
+    ],
+    "source_snapshot": [
+      "snapshot_id",
+      "source_url",
+      "source_kind",
+      "sha256",
+      "raw_path",
+      "first_observed_at",
+      "published_at",
+      "supersedes_snapshot_id"
+    ],
+    "retrieval_receipt": [
+      "receipt_id",
+      "requested_at",
+      "received_at",
+      "http_status",
+      "snapshot_id",
+      "error"
+    ],
+    "observation": [
+      "observation_id",
+      "asset_id",
+      "metric",
+      "value",
+      "unit",
+      "period_start",
+      "period_end",
+      "epistemic_type",
+      "evidence_ids",
+      "locator",
+      "derivation_version",
+      "available_at"
+    ],
+    "economic_event_revision": [
+      "event_id",
+      "revision_id",
+      "asset_id",
+      "mechanism_id",
+      "status",
+      "effective_at",
+      "published_at",
+      "observed_at",
+      "decision_authority",
+      "observation_ids",
+      "related_event_ids",
+      "economic_flow_ids"
+    ],
+    "thesis_revision": [
+      "thesis_id",
+      "revision_id",
+      "subject_asset_ids",
+      "event_ids",
+      "packet_id",
+      "registered_at",
+      "causal_model_version",
+      "evidence_manifest_hash",
+      "causal_chain",
+      "authority_and_incentives",
+      "primary_explanation",
+      "competing_explanations",
+      "market_expectation_gap",
+      "next_observations",
+      "falsifiers",
+      "next_high_value_question",
+      "model_id",
+      "prompt_hash",
+      "request_response_hashes",
+      "supersedes_revision_id"
+    ],
+    "forecast": [
+      "forecast_id",
+      "thesis_revision_id",
+      "target_type",
+      "target_definition",
+      "deadline",
+      "probability_or_distribution",
+      "estimate_basis",
+      "uncertainty_assumptions",
+      "reference_class_id",
+      "resolution_rule",
+      "registered_at",
+      "knowledge_cutoff",
+      "supersedes_forecast_id"
+    ],
+    "valuation_and_decision": [
+      "decision_id",
+      "target_asset_id",
+      "thesis_revision_id",
+      "forecast_ids",
+      "decision_at",
+      "price_snapshot_id",
+      "price_status",
+      "scenario_tree",
+      "cost_assumptions",
+      "horizon",
+      "benchmark_snapshot_id",
+      "sensitivity_results",
+      "research_choice",
+      "investment_action",
+      "reason",
+      "change_conditions",
+      "estimation_version",
+      "policy_version",
+      "action_execution_status",
+      "portfolio_snapshot_id",
+      "paper_fill_ids"
+    ],
+    "resolution": [
+      "resolution_id",
+      "forecast_id",
+      "status",
+      "outcome",
+      "resolution_at",
+      "evidence_ids",
+      "supersedes_resolution_id"
+    ],
+    "attribution": [
+      "attribution_id",
+      "decision_id",
+      "possible_failure_causes",
+      "supporting_and_conflicting_evidence",
+      "certainty",
+      "proposed_learning"
+    ],
+    "policy_change": [
+      "change_id",
+      "parent_policy_id",
+      "evidence_ids",
+      "identified_error",
+      "proposed_change",
+      "expected_gain",
+      "expected_cost",
+      "applicability",
+      "primary_endpoint",
+      "frozen_spec_hash",
+      "prospective_start",
+      "review_rule",
+      "rollback_rule",
+      "status"
+    ],
+    "policy_comparison": [
+      "comparison_id",
+      "policy_ids",
+      "shared_input_manifest",
+      "independent_decision_logs",
+      "outcome_coverage",
+      "results"
+    ],
+    "run_manifest": [
+      "run_id",
+      "code_commit",
+      "schema_version",
+      "causal_model_version",
+      "estimation_version",
+      "policy_version",
+      "asset_registry_hash",
+      "evidence_manifest_hash",
+      "model_id",
+      "prompt_hash",
+      "reasoner_backend",
+      "model_call_status",
+      "started_at",
+      "completed_at",
+      "data_cutoff",
+      "mode"
+    ],
+    "evidence_packet": [
+      "packet_id",
+      "as_of",
+      "subject_asset_ids",
+      "event_ids",
+      "observation_ids",
+      "source_snapshot_ids",
+      "price_snapshot_ids",
+      "manifest_hash"
+    ],
+    "price_snapshot": [
+      "price_snapshot_id",
+      "asset_id",
+      "venue",
+      "instrument",
+      "quote_currency",
+      "price_kind",
+      "value",
+      "source_time",
+      "observed_at",
+      "available_at",
+      "evidence_ids"
+    ]
+  },
+  "storage_rules": {
+    "append_only_entities": [
+      "source_snapshot",
+      "retrieval_receipt",
+      "observation",
+      "economic_event_revision",
+      "thesis_revision",
+      "forecast",
+      "valuation_and_decision",
+      "resolution",
+      "attribution",
+      "policy_change"
+    ],
+    "sqlite_and_content_addressed_raw": true,
+    "money_and_supply_use_decimal_or_integer_strings": true,
+    "raw_and_runtime_outside_git": true,
+    "all_rejected_and_unresolved_preserved": true,
+    "hash_integrity_not_truth": true,
+    "model_rerun_not_guaranteed_byte_identical": true
+  },
+  "accounting_invariants": [
+    "fees != protocol retained revenue != holder accrual",
+    "buyback != burn",
+    "unlock != issuance",
+    "treasury inventory burn != market purchase",
+    "same buyback-to-burn flow counted once economically",
+    "bridge representations not counted as new global supply",
+    "author target != executed amount",
+    "missing != zero",
+    "market volume != net capital inflow"
+  ],
+  "price_math": {
+    "unit": "single token buy-and-terminal-sell scenario, not a full portfolio backtest",
+    "scenario_return": "(V_j*(1-c_sell)+D_j)/(P0*(1+c_buy))-1",
+    "expected_return": "sum(p_j*scenario_return_j)",
+    "break_even_entry": "sum(p_j*(V_j*(1-c_sell)+D_j))/(1+c_buy)",
+    "entry_for_required_return": "sum(p_j*(V_j*(1-c_sell)+D_j))/((1+c_buy)*(1+r_required))",
+    "cash_distribution_assumption": "simplified cash amount; early distributions and additional reward token units require separate accounting",
+    "stale_or_missing_price": "no simulated current fill; conditional valuation only"
+  },
+  "synthetic_example": {
+    "tag": "SYNTHETIC_EXAMPLE_NOT_A_REAL_ASSET_FORECAST",
+    "asset": "EXAMPLE_TOKEN",
+    "horizon_days": 180,
+    "price": 100,
+    "costs": {
+      "buy_fraction": 0,
+      "sell_fraction": 0,
+      "status": "OMITTED_FOR_ILLUSTRATION"
+    },
+    "cash_distributions": 0,
+    "original": [
+      {
+        "state": "failure",
+        "p": 0.5,
+        "terminal_price": 50
+      },
+      {
+        "state": "partial",
+        "p": 0.35,
+        "terminal_price": 150
+      },
+      {
+        "state": "success",
+        "p": 0.15,
+        "terminal_price": 400
+      }
+    ],
+    "original_expected_terminal_price": 137.5,
+    "original_expected_return": 0.375,
+    "updated_price": 250,
+    "updated": [
+      {
+        "state": "failure",
+        "p": 0.2,
+        "terminal_price": 50
+      },
+      {
+        "state": "partial",
+        "p": 0.5,
+        "terminal_price": 150
+      },
+      {
+        "state": "success",
+        "p": 0.3,
+        "terminal_price": 400
+      }
+    ],
+    "updated_expected_terminal_price": 205,
+    "updated_expected_return": -0.18,
+    "lesson": "More favorable event probabilities do not imply an attractive entry after the price rises."
+  },
+  "learning": {
+    "versioned_layers": [
+      "causal_model_version",
+      "estimation_version",
+      "policy_version"
+    ],
+    "max_major_change_per_challenger": 1,
+    "max_parallel_challengers_per_mechanism": 1,
+    "attempts_and_failures_retained": true,
+    "comparison": "same new event stream and information vintages, separate decision/portfolio logs",
+    "selection_endpoint_preregistered": true,
+    "small_sample_allowed_for": [
+      "RESEARCH_PRIORITY",
+      "PROSPECTIVE_PAPER"
+    ],
+    "small_sample_not_auto_capital_approval": true,
+    "top_winner_removal_is_diagnostic_only": true,
+    "may_change_risk_limits": false,
+    "may_grant_live_order_authority": false
+  },
+  "failure_codes": [
+    "IMPLEMENTATION_WRONG",
+    "ECONOMIC_MECHANISM_WRONG",
+    "VALUE_CAPTURE_WRONG",
+    "SUPPLY_WRONG",
+    "EXPECTATIONS_ALREADY_PRICED",
+    "CATALYST_OR_TIMING_WRONG",
+    "ENTRY_PRICE_WRONG",
+    "EXIT_OR_HOLDING_WRONG",
+    "EXECUTION_COST_WRONG",
+    "MARKET_REGIME_DOMINANT",
+    "DATA_OR_IDENTITY_ERROR",
+    "UNRESOLVED"
+  ],
+  "proposed_module_root": "one_trading/economic_research",
+  "proposed_modules": [
+    "store.py",
+    "evidence.py",
+    "events.py",
+    "theses.py",
+    "valuation.py",
+    "review.py",
+    "cli.py",
+    "__main__.py"
+  ],
+  "proposed_cli": [
+    "init",
+    "collect-once",
+    "packet",
+    "register",
+    "resolve",
+    "compare",
+    "report",
+    "audit"
+  ],
+  "tests": [
+    {
+      "id": "T01",
+      "assertion": "mutable URL revisions preserve original evidence and prior decisions"
+    },
+    {
+      "id": "T02",
+      "assertion": "late announcement with earlier effective date cannot enter an earlier forecast"
+    },
+    {
+      "id": "T03",
+      "assertion": "future-prefix invariance of earlier packet and decision references"
+    },
+    {
+      "id": "T04",
+      "assertion": "idempotent capture, event creation, forecast registration and economic flows"
+    },
+    {
+      "id": "T05",
+      "assertion": "no buyback/burn, unlock/issue or bridged-supply double counting"
+    },
+    {
+      "id": "T06",
+      "assertion": "symbol collisions and migrations require asset identity evidence"
+    },
+    {
+      "id": "T07",
+      "assertion": "missing/unresolved not zero/false; retained in coverage counts, excluded from proper-score denominator"
+    },
+    {
+      "id": "T08",
+      "assertion": "forecast and resolution amendments preserve original versions"
+    },
+    {
+      "id": "T09",
+      "assertion": "probability, horizon, joint/conditional scenarios, currency units and costs valid"
+    },
+    {
+      "id": "T10",
+      "assertion": "higher current price with otherwise fixed payoff lowers entry expected return"
+    },
+    {
+      "id": "T11",
+      "assertion": "immature 180-day outcomes do not block prospective registration or create training labels"
+    },
+    {
+      "id": "T12",
+      "assertion": "frozen policies share vintage inputs with separate records; no risk-authority modification; proposed actions create no fills"
+    },
+    {
+      "id": "T13",
+      "assertion": "raw/manifest corruption and receipt recovery after interrupted write are detected"
+    },
+    {
+      "id": "T14",
+      "assertion": "evidence links/source controls validated and document instructions are untrusted"
+    }
+  ],
+  "initial_deliverables": [
+    "working one-cycle path from source receipt to forecast and report",
+    "target three current judgment cards without forced positive events or trades",
+    "selection and rejection reasons with change conditions",
+    "pending outcomes correctly labeled",
+    "resolution and policy revision pathway exercised with explicitly synthetic fixtures",
+    "reproduction commands and code change summary",
+    "actual source failures and unimplemented operational pieces"
+  ],
+  "no_initial_build": [
+    "all-market perfect historical reconstruction",
+    "LLM finetuning",
+    "complex reinforcement learning",
+    "large vector database",
+    "arbitrary weighted alpha score",
+    "forced monthly-target trading",
+    "unattended deployment",
+    "real orders or leverage"
+  ],
+  "sources": [
+    "https://github.com/NEONE86/coinkuma/pull/8",
+    "https://github.com/NEONE86/coinkuma/blob/78e927b7712a9333a59ff99c36c4e7e8e359d239/docs/VALUE_ACCRUAL.md",
+    "https://github.com/NEONE86/coinkuma/blob/78e927b7712a9333a59ff99c36c4e7e8e359d239/one_trading/value_evidence.py",
+    "https://github.com/NEONE86/coinkuma/blob/78e927b7712a9333a59ff99c36c4e7e8e359d239/one_trading/value_event_study.py",
+    "https://aave.com/docs/ecosystem/aave",
+    "https://developers.uniswap.org/docs/protocols/protocol-fee/overview",
+    "https://docs.pancakeswap.finance/protocol/cake-tokenomics",
+    "https://github.com/binance/binance-public-data"
+  ],
+  "action_execution_statuses": [
+    "PROPOSED",
+    "PAPER_APPLIED",
+    "NOT_APPLICABLE"
+  ],
+  "scoring_rules": {
+    "report_counts": [
+      "registered_forecasts",
+      "due_forecasts",
+      "resolved_forecasts",
+      "unresolved_forecasts",
+      "independent_event_clusters"
+    ],
+    "score_denominator": "resolved forecasts only, within the same question type, horizon and revision scoring policy",
+    "coverage_denominator": "all registered or all due, explicitly labeled",
+    "unresolved_not_zero_or_false": true,
+    "unresolved_not_zero_loss_in_score_denominator": true,
+    "resolved_subset_selection_bias_reported": true
+  },
+  "paper_action_rules": {
+    "initial_llm_action_status": "PROPOSED",
+    "proposal_creates_fill_or_pnl": false,
+    "held_actions_require_actual_paper_portfolio_snapshot": true,
+    "paper_applied_trade_requires_fills_and_reconciliation": true,
+    "paper_hold_may_have_no_fill": true,
+    "no_invented_real_account_holdings": true
+  },
+  "capture_adapter_requirements": {
+    "legacy_evidence_store_reused_with_version_adapter": true,
+    "additional_official_hosts_to_review": [
+      "aave.com",
+      "docs.pancakeswap.finance"
+    ],
+    "every_redirect_checked_before_request": true,
+    "refresh_current_sources": true,
+    "old_versions_retained": true,
+    "price_asset_matches_decision": true
+  }
+}
