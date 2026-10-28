@@ -126,3 +126,7 @@ The [Ethereum hook collector](docs/BOUNDED_CHAIN_COLLECTOR.md) captures one froz
 block range with raw RPC receipts, transaction/log reconciliation and offline
 replay. It keeps direct gross transfers, incomplete coverage and unidentified
 causal increment separate, and does not resolve pending forecasts.
+
+## Hourly dual-engine forward research
+
+The separate paper-only vertical slice is documented in [the runbook](docs/DUAL_ENGINE_FORWARD_RUNBOOK.md). It does not replace the daily runner or imply a proven investment edge.

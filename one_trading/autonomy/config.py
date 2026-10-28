@@ -1,0 +1,21 @@
+"""Frozen defaults; all capital is virtual. Shadow accounts are counterfactual."""
+DEFAULT={
+ "version":"dual-engine-v1","base_ref":"research/economic-repricing-v4-20261026",
+ "base_sha":"cc7ccc8e50de8518b6b178801ad38eada9b687fb",
+ "universe":["BTCUSDT","ETHUSDT","SOLUSDT"],"bar_interval":"1h","horizons_hours":[6,24,72],
+ "policies":["CF_BASE","CF_NUMERIC","CF_AI_MEMORY"],"champion":"CF_NUMERIC",
+ "total_capital_krw":20000000,"engine_capital_krw":{"CASHFLOW":12000000,"CAPITAL_GROWTH":8000000},
+ "fx_krw_per_usdt":1400,"fx_status":"FIXED_RESEARCH_ASSUMPTION_NOT_FX_QUOTE",
+ "instrument":"SPOT_LONG","live_trading":False,"risk_fraction_per_position":.05,
+ "max_symbol_krw":2000000,"max_cf_exposure_krw":6000000,"max_drawdown":.05,
+ "max_spread_bps":20,"max_book_impact_bps":50,"book_participation":.01,
+ "fee_bps_per_side":10,"slippage_bps_per_side":5,"hedge_error_bps":0,
+ "signal_markout_cost_per_side":.0025,"stress_cost_per_side":.01,
+ "entry_delay_seconds":60,"entry_expiry_seconds":7200,"hold_hours":24,
+ "max_input_age_seconds":180,"max_clock_skew_seconds":3,
+ "base_residual_threshold":-.005,"numeric_oi_quantity_threshold":-.01,
+ "numeric_funding_hourly_max":.0001,"numeric_taker_buy_min":.35,
+ "model_backend":"codex","model_executable":"codex","model_name":"gpt-6-astra","model_timeout_seconds":180,
+ "model_prompt_version":"cf-causal-state-v1","scheduler_interval_minutes":5,
+ "growth_champion":"G_INDIRECT","promotion_enabled":False
+}
