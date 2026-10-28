@@ -60,9 +60,9 @@ limited-permission, current-user task, hidden window, five-minute repetition,
 IgnoreNew concurrency, bounded restarts and StartWhenAvailable. Repetition has
 no seven-day expiration. The host must be awake and that user logged in;
 this is not a remote server and does not wake a powered-off computer.
-The installer pins the discovered Codex executable path privately because
+The installer pins the discovered Codex and Git executable paths privately because
 Task Scheduler does not necessarily inherit the interactive PATH.
-Scheduler logs and task XML are private. A fresh scheduler query, rather than
+The wrapper launches a hidden Python process with separate stdout/stderr files, so PowerShell native-error handling cannot truncate Python tracebacks. Scheduler logs and task XML are private. A fresh scheduler query, rather than
 the mere existence of past runs, determines FORWARD_RUNNING.
 
 ## Frozen CASHFLOW experiment

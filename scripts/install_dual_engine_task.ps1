@@ -27,6 +27,8 @@ if (-not $Activate) {
 if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) { throw 'Task exists; inspect it before replacing.' }
 $modelCommand = Get-Command codex.exe -ErrorAction SilentlyContinue
 if ($modelCommand) { $modelCommand.Source | Out-File -LiteralPath (Join-Path $runtimePath 'model-executable.txt') -Encoding utf8 }
+$gitCommand = Get-Command git.exe -ErrorAction SilentlyContinue
+if ($gitCommand) { $gitCommand.Source | Out-File -LiteralPath (Join-Path $runtimePath 'git-executable.txt') -Encoding utf8 }
 Register-ScheduledTask -TaskName $TaskName -InputObject $task | Out-Null
 Export-ScheduledTask -TaskName $TaskName | Out-File -LiteralPath (Join-Path $runtimePath 'scheduler-task.xml') -Encoding utf8
 Start-ScheduledTask -TaskName $TaskName
