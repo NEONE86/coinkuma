@@ -90,7 +90,7 @@ quotes, model subprocess starts, valid responses and matured outcomes. A future
 normal Alpha case keeps its original costs, validity and maturity; no expired
 case is reopened to demonstrate recovery. Provider usage summaries are not bills.
 
-Validation: 487 inherited tests plus 10 focused regressions; original reviewer
+Validation: 487 inherited tests plus 11 focused regressions; original reviewer
 probes retained. The reviewer's two POSIX mocked path expectations need native
 `Path` normalization on Windows; the unchanged probe and exact adaptation are
 both delivered. Synthetic tests are not financial performance evidence.

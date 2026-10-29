@@ -28,9 +28,16 @@ def owned(s,key,spec,seconds,fn,engine='CASHFLOW'):
     c=s.all('batch_config')[-1];alpha=Path(c['alpha_runtime']);p=readonly_rows(alpha,'alpha_protocol')[0]
     loop=open_loop(alpha,p['config']);started=time.monotonic()
     try:
+        existing=loop.db.execute('select 1 from tasks where task_key=?',(key,)).fetchone()
+        task=loop.get_task(key) if existing else None
+        old=s.get('extension_operation',key,True)
+        if old:
+            if old['spec_hash']!=digest(spec) or not task or task['task']['input_hash']!=digest(spec):raise ValueError('DURABLE_OPERATION_IDENTITY')
+            if task['state']=='CLAIMED':ack_preserving_overrun(loop,task,old,old['elapsed_seconds'],old['success'])
+            return old
         if not loop.db.execute('select 1 from experiments where id=?',(key,)).fetchone():
             loop.register_experiment(ExperimentSpec(key,'bounded-economic-extension/'+key,engine,1,spec['registered_at'],spec['deadline'],0,seconds,'HISTORICAL'))
-        loop.record_data(key,digest(spec))
+        if not task:loop.record_data(key,digest(spec))
         if not loop.db.execute('select 1 from tasks where task_key=?',(key,)).fetchone():
             loop.enqueue_task(key,key,'research',input_hash=digest(spec),cash_units=0,time_seconds=seconds)
         task=loop.get_task(key);old=s.get('extension_operation',key,True)
@@ -67,6 +74,9 @@ class Inputs:
             unknown=[r for r in self.s.all('extension_http_intent') if instant(r['at'])>=since and not self.s.get('http_receipt',r['id'],True)]
             if len(rs)+len(unknown)>=self.max_attempts:raise ValueError('SHARED_ROLLING_24H_HTTP_CAP')
         if time.monotonic()-self.started>self.seconds-12:raise ValueError('OPERATION_TIME_CAP')
+    def byte_room(self):
+        used=sum(r['bytes'] for r in self.s.all('http_receipt') if r.get('operation_id')==self.key)
+        return min(2*1024*1024,max(0,self.max_bytes-used))
     def get(self,host,path,params):
         if path not in ALLOWED.get(urlsplit(host).hostname,set()):raise ValueError('PUBLIC_ENDPOINT_REQUIRED')
         url=host+path+'?'+urlencode(params);cachekey=self.key+':'+digest(url)
@@ -78,11 +88,11 @@ class Inputs:
             raw=b'';status=None;error=None
             try:
                 with build_opener(NoRedirect()).open(Request(url,headers={'User-Agent':'ONE-research/1.0'}),timeout=10) as response:
-                    status=response.status;raw=response.read(2*1024*1024+1)
-                if len(raw)>2*1024*1024:raise ValueError('RESPONSE_TOO_LARGE')
+                    status=response.status;room=self.byte_room();raw=response.read(room)
+                if len(raw)>=room:raise ValueError('RESPONSE_SIZE_LIMIT_OR_TRUNCATED_AT_BYTE_CAP')
                 data=json.loads(raw)
                 if isinstance(data,dict) and data.get('code',0)<0:raise ValueError('EXCHANGE_ERROR')
-            except HTTPError as exc:status=exc.code;raw=exc.read(65536);error='HTTP_'+str(status)
+            except HTTPError as exc:status=exc.code;raw=exc.read(min(65536,self.byte_room()));error='HTTP_'+str(status)
             except Exception as exc:error=type(exc).__name__+':'+str(exc)[:180]
             sha=hashlib.sha256(raw).hexdigest();atomic_bytes(self.s.root/'raw'/(sha+'.bin'),raw)
             r=self.s.append('http_receipt',key,dict(id=key,operation_id=self.key,url=url,requested_at=at,received_at=utc(),http_status=status,sha256=sha,bytes=len(raw),error=error,elapsed_seconds=time.monotonic()-begin,attempt=attempt+1,provenance='PUBLIC_HTTP_ACTUAL_RECEIPT'))

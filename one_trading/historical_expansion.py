@@ -163,7 +163,12 @@ def run(root):
         s=Store(root)
         try:
             spec=s.all('expansion_spec')[-1]
-            if spec['source_version']!=version():raise ValueError('EXPANSION_SOURCE_CHANGED')
+            if spec['source_version']!=version():
+                # A read of an already completed immutable result is not an
+                # evaluation under changed code. Reconcile only its durable ack.
+                if s.get('extension_operation',spec['id'],True):
+                    return owned(s,spec['id'],spec,240,lambda _:(_ for _ in ()).throw(ValueError('CACHED_RESULT_ONLY')))
+                raise ValueError('EXPANSION_SOURCE_CHANGED')
             def execute(started):
                 inp=Inputs(s,spec['id'],started,240);bindings=[];errors=[]
                 manifest=s.get('expansion_manifest',spec['id'])['manifest']

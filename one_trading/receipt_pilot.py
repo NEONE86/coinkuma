@@ -22,11 +22,13 @@ def register(s,now=None,revision=False):
     now=now or utc();key='receipt-pilot-v2';old=s.get('receipt_pilot_spec',key,True)
     if old:
         if not revision:return old
-        key='receipt-pilot-v3';new=s.get('receipt_pilot_spec',key,True)
+        old=s.all('receipt_pilot_spec')[-1]
+        if old['source_version']==version('pilot'):return old
+        key='receipt-pilot-source-'+version('pilot')[:12];new=s.get('receipt_pilot_spec',key,True)
         if new:return new
         if any(r['pilot_id']==old['id'] for r in s.all('pilot_observation')) or ms(now)>=ms(old['start_signal_at']):raise ValueError('SOURCE_ONLY_REVISION_REQUIRES_UNSTARTED_PILOT')
         body={k:v for k,v in old.items() if k not in ('id','stored_at')}
-        body.update(id=key,registered_at=now,source_version=version('pilot'),operational_predecessor=old['id'],revision_reason='Check frozen absolute stop/quote deadline before every HTTP attempt; clocks, costs, cadence and caps unchanged.')
+        body.update(id=key,registered_at=now,source_version=version('pilot'),operational_predecessor=old['id'],revision_reason='Reconcile durable acknowledgements before expiry guards and enforce byte/absolute-clock caps; clocks, costs, cadence and economic rules unchanged.')
         new=s.append('receipt_pilot_spec',key,body)
         s.append('pilot_stop',old['id'],dict(id=old['id'],at=now,reason='SUPERSEDED_SOURCE_ONLY_BEFORE_FIRST_SLOT',replacement_id=key))
         return new

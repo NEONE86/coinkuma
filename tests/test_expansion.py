@@ -65,6 +65,16 @@ class ExpansionTests(unittest.TestCase):
             finally:s.close()
 
 class PilotTests(unittest.TestCase):
+    def test_cached_ack_precedes_expired_registration_guards(self):
+        with tempfile.TemporaryDirectory() as t:
+            alpha,batch,loop=fixtures.TransitionTests().fixture(Path(t));s=Store(batch);spec=dict(registered_at=utc(),deadline='2099-01-01T00:00:00+00:00')
+            try:
+                with patch('one_trading.expansion_io.ack_preserving_overrun',side_effect=RuntimeError('crash')):
+                    with self.assertRaises(RuntimeError):owned(s,'old-ack',spec,30,lambda _:dict(status='DONE'))
+                with patch('one_trading.alpha_loop.reference.research_loop.ResearchLoop.record_data',side_effect=AssertionError('must not re-register completed operation')):
+                    result=owned(s,'old-ack',spec,30,lambda _:self.fail('must not rerun'))
+                self.assertTrue(result['success']);self.assertEqual(loop.get_task('old-ack')['state'],'DONE')
+            finally:s.close();loop.close()
     def test_each_http_attempt_respects_absolute_stop(self):
         from one_trading.receipt_pilot import PilotInputs
         with tempfile.TemporaryDirectory() as t:
