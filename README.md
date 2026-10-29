@@ -130,3 +130,11 @@ causal increment separate, and does not resolve pending forecasts.
 ## Hourly dual-engine forward research
 
 The separate paper-only vertical slice is documented in [the runbook](docs/DUAL_ENGINE_FORWARD_RUNBOOK.md). It does not replace the daily runner or imply a proven investment edge.
+
+## Alpha Loop native-time comparison
+
+The additive [Alpha Loop worker](docs/ALPHA_LOOP_V1.md) connects actual liquidation
+observations, frozen price/semantic/memory arms, each arm's own decision latency,
+conditional spot fills, delayed outcomes and an authoritative evidence registry.
+Its independent auditor reads raw receipts without importing the strategy.
+It preserves the earlier sealed runtime and makes no proven-edge or live-trading claim.
