@@ -27,7 +27,7 @@ ADDRESSES={'usdc_supply':'0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
 
 def implementation_hash():
     h=hashlib.sha256(source_hash().encode())
-    for name in ('batch_analysis.py','economic_batches.py','batch_control.py','batch_models.py','hypothesis_loop.py'):h.update((Path(__file__).parent/name).read_bytes())
+    for name in ('batch_analysis.py','economic_batches.py','batch_control.py','batch_models.py','hypothesis_loop.py','event_scan.py'):h.update((Path(__file__).parent/name).read_bytes())
     return h.hexdigest()
 
 def readonly_rows(root,kind):
@@ -77,8 +77,11 @@ def revise_implementation(root,reason):
             c.update(id='implementation-'+implementation_hash()[:12],source_hash=implementation_hash(),
                      prior_config_hash=digest(old),revision_at=utc(),revision_reason=reason)
             c.update(execution_contract_version=2,growth_decision_validity_seconds=600,
-                     new_decision_contract_effective_at=utc())
-            return s.append('batch_config',c['id'],c)
+                     new_decision_contract_effective_at=utc(),event_protocol='EVENT_SCAN_V1',source_files=['batch_analysis.py','economic_batches.py','batch_control.py','batch_models.py','hypothesis_loop.py','event_scan.py'])
+            revision=s.append('batch_config',c['id'],c)
+            from .event_scan import rebind_pending
+            rebind_pending(s)
+            return revision
         finally:s.close()
 
 class BoundedInputs:
@@ -329,61 +332,86 @@ def credit_growth(s,c,bid,inputs):
         next_hypothesis='Separate accrued-interest growth from new borrowing and trace retained revenue to token demand; repeat finalized state after 24h.',
         next_due=(instant(utc())+timedelta(days=1)).isoformat())
 
-def maintain_growth_positions(s,inputs=None):
+def maintain_growth_positions(s,inputs=None,entry_ids=None):
+    observed=[];errors=[];exited=[]
     for entry in s.all('growth_bridge_result'):
-        if entry['status']!='FILLED' or s.get('growth_bridge_exit',entry['id'],True):continue
+        if entry_ids is not None and entry['id'] not in entry_ids:continue
+        if entry['status']!='FILLED':continue
+        if s.get('growth_bridge_exit',entry['id'],True):exited.append(entry['id']);continue
         try:
             if inputs:inputs.check(50)
             book=fresh_book(s,entry['symbol']);due=instant(utc())>=instant(entry['exit_due'])
             stop=book['bids'][0][0]<=entry['fill']['average_price']*.98
+            observed.append(entry['id'])
             if not (due or stop):continue
             if inputs:inputs.check(50)
             ex,_=PublicClient(s).get(SPOT,'/api/v3/exchangeInfo',dict(symbol=entry['symbol']))
             f=fill(book,'SELL',defaults(),entry['fill']['quantity'],ex['symbols'][0]['filters'])
             s.append('growth_bridge_exit',entry['id'],dict(id=entry['id'],fill=f,reason='TIME' if due else 'STOP',
                 realized_pnl_usdt=entry['fill']['cash_delta_usdt']+f['cash_delta_usdt']-entry['information_cost_usdt']))
-        except Exception as exc:s.failure('growth_bridge_exit',exc,entry_id=entry['id'])
+            exited.append(entry['id'])
+        except Exception as exc:
+            s.failure('growth_bridge_exit',exc,entry_id=entry['id']);errors.append(dict(entry_id=entry['id'],error=str(exc)))
+    return dict(status='MAINTENANCE_ERROR' if errors else 'POSITIONS_OBSERVED',observed_ids=observed,exit_ids=exited,errors=errors)
 
 
 def growth_service(root):
-    """Position observation has its own durable, bounded shared-authority charge."""
+    """Durable operational tasks for existing positions, with no alpha allocation.
+
+    The authority's HISTORICAL/research lifecycle provides resource accounting;
+    it is explicitly not a hypothesis, significance trial or due_label forecast.
+    Intent precedes registration. Recovery precedes the no-open-position test.
+    """
     with process_lock(root):
         s=Store(root);loop=None
         try:
-            c=s.all('batch_config')[-1]
+            c=s.all('batch_config')[-1];s.verify()
             if c['source_hash']!=implementation_hash():raise ValueError('SOURCE_VERSION_NOT_REGISTERED')
+            intents=s.all('growth_maintenance_intent')
+            unfinished=[x for x in intents if not s.get('growth_maintenance_ack',x['id'],True)]
+            key='growth-maintain-'+utc()[:16].replace(':','')
+            intent=unfinished[0] if unfinished else s.get('growth_maintenance_intent',key,True)
             pending=[r for r in s.all('growth_bridge_result') if r['status']=='FILLED' and not s.get('growth_bridge_exit',r['id'],True)]
-            if not pending:return dict(status='NO_OPEN_GROWTH_POSITIONS',http_requests=0)
+            if not intent and not pending:return dict(status='NO_OPEN_GROWTH_POSITIONS',http_requests=0)
+            if not intent:
+                intent=s.append('growth_maintenance_intent',key,dict(id=key,started_at=utc(),entry_ids=[r['id'] for r in pending],
+                    entries_hash=digest(pending),http_before=[r['id'] for r in s.all('http_receipt')],
+                    deadline=(instant(utc())+timedelta(days=1)).isoformat(),source_version=implementation_hash(),
+                    kind='POSITION_MAINTENANCE_NOT_RESEARCH',new_alpha_allocations=0))
+            key=intent['id']
+            # An intent can only service already recorded filled positions.
+            if not intent['entry_ids'] or any(s.get('growth_bridge_result',k)['status']!='FILLED' for k in intent['entry_ids']):raise ValueError('INVALID_MAINTENANCE_BINDING')
             alpha=Path(c['alpha_runtime']);p=readonly_rows(alpha,'alpha_protocol')[0]
             with process_lock(alpha):
                 loop=open_loop(alpha,p['config'])
-                interrupted=loop.db.execute("SELECT task_key FROM tasks WHERE state='CLAIMED' AND task_key LIKE 'growth-maintain-%' ORDER BY claimed_at").fetchone()
-                key=interrupted['task_key'] if interrupted else 'growth-maintain-'+utc()[:16].replace(':','')
-                old=s.get('growth_maintenance_receipt',key,True)
-                if old:
-                    accounting=ack_preserving_overrun(loop,loop.get_task(key),old,old['elapsed_seconds'])
-                    if not s.get('batch_result',key,True):s.append('batch_result',key,dict(id=key,kind='POSITION_MAINTENANCE_NOT_RESEARCH',accounting=accounting))
-                    return dict(result=old,accounting=accounting)
                 if not loop.db.execute('SELECT 1 FROM experiments WHERE id=?',(key,)).fetchone():
-                    loop.register_experiment(ExperimentSpec(key,key,'CAPITAL_GROWTH',1,utc(),(instant(utc())+timedelta(days=1)).isoformat(),0,240,'HISTORICAL'))
-                    loop.record_data(key,digest(pending));loop.enqueue_task(key,key,'due_label',input_hash=digest(pending),cash_units=0,time_seconds=240,due_at=utc())
-                task=loop.get_task(key)
+                    loop.register_experiment(ExperimentSpec(key,'existing-position-maintenance/'+key,'CAPITAL_GROWTH',1,
+                        intent['started_at'],intent['deadline'],0,240,'HISTORICAL'))
+                loop.record_data(key,digest(intent))
+                # Registration and enqueue are independently idempotent.
+                loop.enqueue_task(key,key,'research',input_hash=digest(intent),cash_units=0,time_seconds=240)
+                task=loop.get_task(key);old=s.get('growth_maintenance_receipt',key,True)
                 if task.get('overrun_receipt_json'):return dict(status='RECONCILIATION_REQUIRED',task_key=key,reservation_retained=True)
-                if task['state']=='QUEUED':task=claim_owned(loop,[key],critical=True)
-                if not task:return dict(status='MAINTENANCE_BUDGET_BLOCKED')
-                if not s.get('research_batch',key,True):s.append('research_batch',key,dict(id=key,kind='POSITION_MAINTENANCE_NOT_RESEARCH',started_at=utc()))
-                inputs=BoundedInputs(s,key,dict(c,max_batch_seconds=240,max_http_requests_per_batch=18));inputs.start_trial()
-                before={r['id'] for r in s.all('http_receipt')};started=time.monotonic()
-                maintain_growth_positions(s,inputs)
-                elapsed=max(240 if interrupted else 0,math.ceil(time.monotonic()-started))
-                result=dict(id=key,status='POSITIONS_OBSERVED',http_receipt_ids=[r['id'] for r in s.all('http_receipt') if r['id'] not in before],elapsed_seconds=elapsed,source_version=implementation_hash())
-                s.append('growth_maintenance_receipt',key,result)
-                accounting=ack_preserving_overrun(loop,task,result,elapsed)
-                s.append('batch_result',key,dict(id=key,kind='POSITION_MAINTENANCE_NOT_RESEARCH',accounting=accounting))
-                return result
+                interrupted=task['state']=='CLAIMED' and not old
+                if task['state']=='QUEUED':task=claim_owned(loop,[key],maintenance_bindings={key:digest(intent)})
+                if not task:return dict(status='MAINTENANCE_BUDGET_BLOCKED',task_key=key)
+                if not old:
+                    if not s.get('research_batch',key,True):s.append('research_batch',key,dict(id=key,kind='POSITION_MAINTENANCE_NOT_RESEARCH',started_at=intent['started_at']))
+                    inputs=BoundedInputs(s,key,dict(c,max_batch_seconds=240,max_http_requests_per_batch=18));inputs.start_trial();started=time.monotonic()
+                    result=maintain_growth_positions(s,inputs,intent['entry_ids'])
+                    elapsed=max(240 if interrupted else 0,math.ceil(time.monotonic()-started))
+                    result.update(id=key,http_receipt_ids=[r['id'] for r in s.all('http_receipt') if r['id'] not in intent['http_before']],
+                        elapsed_seconds=elapsed,source_version=intent['source_version'],time_accounting='FULL_RESERVATION_UNCERTAIN_INTERRUPTION' if interrupted else 'MEASURED_SECONDS')
+                    old=s.append('growth_maintenance_receipt',key,dict(id=key,result=result,elapsed_seconds=elapsed,success=not result['errors']))
+                accounting=ack_preserving_overrun(loop,task,old['result'],old['elapsed_seconds'],old['success'])
+                if accounting['status']=='ACKNOWLEDGED':
+                    if not s.get('growth_maintenance_ack',key,True):s.append('growth_maintenance_ack',key,dict(id=key,accounting=accounting,result_hash=digest(old['result'])))
+                    if not s.get('batch_result',key,True):s.append('batch_result',key,dict(id=key,kind='POSITION_MAINTENANCE_NOT_RESEARCH',accounting=accounting))
+                return dict(**old['result'],accounting=accounting)
         finally:
             if loop:loop.close()
             s.close()
+
 
 def run(root,batch_id=None):
     root=Path(root).resolve()
@@ -402,7 +430,7 @@ def run(root,batch_id=None):
             if old:return dict(status='CACHED',result=old,new_independent_evidence=0)
             b=s.get('research_batch',bid,True)
             if not b:
-                prior=s.all('research_batch')
+                prior=[x for x in s.all('research_batch') if x.get('kind')!='POSITION_MAINTENANCE_NOT_RESEARCH']
                 if prior and (instant(utc())-instant(prior[-1]['started_at'])).total_seconds()<c['batch_interval_hours']*3600:
                     return dict(status='NOT_DUE',next_due=(instant(prior[-1]['started_at'])+timedelta(hours=24)).isoformat())
                 if (instant(utc())-instant(c['registered_at'])).days>=c['research_days']:return dict(status='RESEARCH_WINDOW_ENDED')
@@ -510,7 +538,7 @@ def recover(root):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--runtime',type=Path,required=True);p.add_argument('--alpha-runtime',type=Path)
     p.add_argument('--batch-id');p.add_argument('--request-id');p.add_argument('--max-items',type=int,default=2);p.add_argument('--revision-reason')
-    p.add_argument('command',choices=['init','run','recover','revise-implementation','alpha-service','growth-service','run-queue','accounts'])
+    p.add_argument('command',choices=['init','run','recover','revise-implementation','alpha-service','growth-service','run-queue','accounts','register-event-scan'])
     a=p.parse_args()
     if a.command=='init' and not a.alpha_runtime:p.error('--alpha-runtime required for init')
     if a.command=='recover':
@@ -527,6 +555,9 @@ def main():
         finally:s.close()
         result=alpha_service(Path(c['alpha_runtime']))
     elif a.command=='growth-service':result=growth_service(a.runtime)
+    elif a.command=='register-event-scan':
+        from .event_scan import seed
+        result=seed(a.runtime)
     elif a.command=='accounts':
         s=Store(a.runtime)
         try:result=policy_costs(s)
