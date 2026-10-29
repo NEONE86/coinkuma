@@ -10,6 +10,49 @@ from .alpha_loop import worker as alpha
 from .alpha_loop.reference.research_loop import KINDS,stamp
 from datetime import timedelta
 
+QUOTE_ATTEMPT_LIMIT=3
+QUOTE_RETRY_SECONDS=120
+
+def quote_state(s,c,case):
+    attempts=[r for r in s.all('alpha_quote_attempt') if r['case_id']==case['id']]
+    terminal=s.get('alpha_quote_terminal',case['id'],True)
+    expiry=instant(case['cutoff'])+timedelta(seconds=c['decision_validity_seconds'])
+    if case.get('due_at'):expiry=min(expiry,instant(case['due_at']))
+    due=instant(attempts[-1]['at'])+timedelta(seconds=QUOTE_RETRY_SECONDS) if attempts else None
+    return dict(attempts=len(attempts),limit=QUOTE_ATTEMPT_LIMIT,
+        next_due=due.isoformat() if due else None,eligible=bool(due and instant(utc())>=due),
+        expired=instant(utc())>expiry,deadline=expiry.isoformat(),terminal=bool(terminal))
+
+def advance_with_quote_gate(s,c,case,task_key):
+    """Operational retry only; sealed policies, model gates and fill rules stay intact.
+
+    An attempted quote is durable before I/O, so a crash also consumes a slot.
+    Missing matched diagnostics never acquire a zero-return CASH label.
+    """
+    complete=lambda: all(s.get('alpha_decision',case['id']+':'+a,True) for a in c['arms'])
+    missing=lambda: not s.get('alpha_matched_context',case['id'],True)
+    def terminal(reason):
+        old=s.get('alpha_quote_terminal',case['id'],True)
+        if not old:old=s.append('alpha_quote_terminal',case['id'],dict(id=case['id'],case_id=case['id'],at=utc(),reason=reason,status='MATCHED_QUOTE_MISSING',metrics=None))
+        return dict(status=old['status'],case_id=case['id'],reason=old['reason'],metrics=None)
+    def reserve():
+        key=case['id']+':'+str(quote_state(s,c,case)['attempts']+1)
+        return s.append('alpha_quote_attempt',key,dict(id=key,case_id=case['id'],at=utc(),task_key=task_key,
+            limit=QUOTE_ATTEMPT_LIMIT,retry_seconds=QUOTE_RETRY_SECONDS))
+    q=quote_state(s,c,case);attempt=None
+    if complete() and missing():
+        if q['terminal'] or q['expired'] or q['attempts']>=QUOTE_ATTEMPT_LIMIT:
+            return terminal('DECISION_WINDOW_CLOSED' if q['expired'] else 'QUOTE_ATTEMPTS_EXHAUSTED')
+        if q['attempts'] and not q['eligible']:return dict(status='WAITING_QUOTE_RETRY',case_id=case['id'],next_due=q['next_due'])
+        attempt=reserve()
+    result=alpha.advance(s,c,case)
+    if complete() and missing():
+        # First call can finish the decisions and encounter the quote error.
+        # Its worker receipt closes that slot; subsequent retries reserve first.
+        if not attempt:attempt=reserve()
+        if quote_state(s,c,case)['attempts']>=QUOTE_ATTEMPT_LIMIT:return terminal('QUOTE_ATTEMPTS_EXHAUSTED')
+    return result
+
 
 def advance_action(s,c,case):
     """A bounded retry changes only when durable progress or a frozen clock gate
@@ -28,7 +71,7 @@ def advance_action(s,c,case):
         if calls and len(calls)<c['max_model_attempts']:
             due=instant(calls[-1]['completed_at'])+timedelta(seconds=c['model_retry_seconds'][len(calls)-1])
             gates[arm]=dict(due_at=due.isoformat(),eligible=instant(utc())>=due)
-    return dict(operation='ADVANCE',case_id=case['id'],progress_hash=digest(rows),retry_gates=gates,
+    return dict(operation='ADVANCE',case_id=case['id'],progress_hash=digest(rows),retry_gates=gates,quote_gate=quote_state(s,c,case),
         decision_window_expired=instant(utc())>instant(case['cutoff'])+timedelta(seconds=c['decision_validity_seconds']))
 
 
@@ -85,7 +128,7 @@ def perform_maintenance(s,loop,p,task,action):
     try:
         case=s.get('alpha_case',action['case_id'])
         if action['operation']=='RESOLVE':result=alpha.resolve_case(s,p['config'],case)
-        elif action['operation']=='ADVANCE':result=alpha.advance(s,p['config'],case)
+        elif action['operation']=='ADVANCE':result=advance_with_quote_gate(s,p['config'],case,task['task_key'])
         else:
             alpha.maintain_exits(s,p['config'],case,s.get('alpha_snapshot',case['snapshot_id']));result=dict(status='POSITION_OBSERVED')
     except Exception as exc:ok=False;result=dict(status='MAINTENANCE_ERROR',error=str(exc))
@@ -144,7 +187,8 @@ def alpha_service(root):
             if not halted and not blocked:
                 for case in pending:
                     incomplete=any(not s.get('alpha_entry_result',case['id']+':'+arm+':'+track,True) for arm in c['arms'] for track in ('NATIVE','MATCHED'))
-                    if incomplete and instant(utc())<instant(case['due_at']):
+                    quote_terminal=s.get('alpha_quote_terminal',case['id'],True)
+                    if incomplete and not quote_terminal and instant(utc())<instant(case['due_at']):
                         action=advance_action(s,c,case);key='advance:'+case['id']+':'+digest(action)[:20]
                         alpha.enqueue(loop,s,alpha.claim_id(s,'semantic'),key,'research',action)
             if not pending and not halted and not blocked and instant(utc())<instant(p['new_case_deadline']):

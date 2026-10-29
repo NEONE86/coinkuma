@@ -9,6 +9,11 @@ New-Item -ItemType Directory -Force -Path $logRoot | Out-Null
 $modelPath = (Get-Content -Raw -LiteralPath (Join-Path $AlphaRuntime 'model-executable.txt')).Trim()
 $env:PATH = (Split-Path -Parent $modelPath) + ';' + $env:PATH
 $env:PYTHONUTF8='1'
+$env:ONE_PREFLIGHT_CONTEXT='EXISTING_SCHEDULER_WRAPPER'
+# Version probes do not invoke a model or inspect authentication. Preserve the
+# actual scheduler environment and record only sanitized executable diagnostics.
+$probeArguments = '-B -X utf8 -m one_trading.model_preflight --repair-process-path --runtime "' + $AlphaRuntime + '" --output "' + (Join-Path $BatchRuntime 'scheduler-model-preflight.json') + '"'
+$probe = Start-Process -FilePath $Python -ArgumentList $probeArguments -WorkingDirectory $repo -WindowStyle Hidden -PassThru -Wait -RedirectStandardOutput (Join-Path $logRoot 'model-preflight.stdout.log') -RedirectStandardError (Join-Path $logRoot 'model-preflight.stderr.log')
 function Invoke-BatchStep([string]$Step) {
     $stamp = (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfffZ')
     $stdout = Join-Path $logRoot ($stamp + '-' + $Step + '.stdout.log')
