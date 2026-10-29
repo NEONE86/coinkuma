@@ -14,6 +14,31 @@ def canonical(x):return json.dumps(x,sort_keys=True,ensure_ascii=False,separator
 def instant(x):return datetime.fromisoformat(x.replace('Z','+00:00'))
 def close(a,b):assert math.isclose(a,b,rel_tol=1e-10,abs_tol=1e-8),(a,b)
 
+def linked_funding(root,funding,models):
+    """Semantic join in addition to self-consistent hashes and arithmetic."""
+    assert len({m['id'] for m in models})==len(models),'DUPLICATE_MODEL_ID'
+    matches=[m for m in models if m['id']==funding['model_call_id']]
+    assert len(matches)==1,'MISSING_OR_CROSS_LINKED_MODEL'
+    call=matches[0];folder=Path(root)/'models'/'batch'/call['id']
+    answer=json.loads((folder/'answer.json').read_bytes());payload=json.loads((folder/'input.json').read_bytes())
+    assert answer==call['answer'],'ACTUAL_ANSWER_DIFFERS_FROM_LEDGER'
+    assert sha(canonical(answer))==call['response_hash']
+    assert sha(canonical(payload))==call['input_hash']
+    assert call['status']=='CONNECTED_VALID' and not call['tools_enabled']
+    assert answer['rule'] in ('PRICE_ONLY','FUNDING_RULE','CASH')
+    assert funding['selected_ai_rule']==answer['rule'],'MODEL_RULE_SELECTION_MISMATCH'
+    assert payload['earliest_context']==funding['contexts'][0],'MODEL_CONTEXT_CROSS_LINK'
+    if 'input_hash' in funding:
+        # This legacy field hashes the entire historical data panel, whereas the
+        # model hashes only its earliest-context decision packet. Verify both.
+        data={symbol:dict(zip(('bars','funding'),[json.loads((Path(root)/'raw/batch'/(r['sha256']+'.bin')).read_bytes()) for r in receipts])) for symbol,receipts in funding['source_receipts'].items()}
+        assert funding['input_hash']==sha(canonical(data))
+        assert payload['source_hashes']=={s:[r['sha256'] for r in rs] for s,rs in funding['source_receipts'].items()}
+    expected={(c['id'],a) for c in funding['contexts'] for a in ('PRICE_ONLY','FUNDING_RULE','AI_RETROSPECTIVE','CASH')}
+    actual=[(r['case_id'],r['arm']) for r in funding['rows']]
+    assert len(actual)==len(expected) and set(actual)==expected,'MISSING_DUPLICATE_OR_CROSS_LINKED_ROW'
+    return call
+
 def verify(root):
     root=Path(root);manifest=json.loads((root/'manifest.json').read_text('utf-8'))
     for rel,h in manifest.items():assert sha((root/rel).read_bytes())==h,rel
@@ -49,6 +74,7 @@ def verify(root):
                 path=root/'raw'/name/(b['sha256']+'.bin')
                 assert sha(path.read_bytes())==b['sha256'];raw_count+=1
     funding=next(r for r in trials if r['family']=='funding_crowding')
+    linked_funding(root,funding,records('batch','model_call'))
     data={}
     for symbol,receipts in funding['source_receipts'].items():
         bars,fees=[json.loads((root/'raw'/'batch'/(r['sha256']+'.bin')).read_bytes()) for r in receipts]
@@ -90,7 +116,8 @@ def verify(root):
         modelroot=root/'models'/'batch'/call['id']
         payload=json.loads((modelroot/'input.json').read_text('utf-8'))
         assert sha(canonical(payload))==call['input_hash']
-        assert sha(canonical(json.loads((modelroot/'answer.json').read_bytes())))==call['response_hash']
+        answer=json.loads((modelroot/'answer.json').read_bytes())
+        assert answer==call['answer'] and sha(canonical(answer))==call['response_hash']
         assert sha((modelroot/'prompt.txt').read_bytes())==call['prompt_hash']
         latencies.append((instant(call['completed_at'])-instant(call['started_at'])).total_seconds())
         if call['id']==funding['model_call_id']:

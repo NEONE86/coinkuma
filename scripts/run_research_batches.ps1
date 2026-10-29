@@ -19,10 +19,11 @@ function Invoke-BatchStep([string]$Step) {
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $BatchRuntime ('scheduler-' + $Step + '.json')) -Encoding UTF8
     return $child.ExitCode
 }
-# Reconcile this sidecar's durable claims before the old controller sees them.
+# Critical service uses sealed Alpha functions, owner-scoped claims and unchanged
+# budgets. A sidecar recovery failure cannot run before or starve this service.
+$alphaCode = Invoke-BatchStep 'alpha-service'
+$growthCode = Invoke-BatchStep 'growth-service'
 $recoveryCode = Invoke-BatchStep 'recover'
-if ($recoveryCode -ne 0) { exit $recoveryCode }
-# Existing sealed runner remains first for market risk and maturity.
-$alpha = Start-Process -FilePath 'powershell.exe' -ArgumentList ('-NoProfile -NonInteractive -ExecutionPolicy Bypass -File "' + $AlphaRunner + '" -Python "' + $Python + '" -Runtime "' + $AlphaRuntime + '"') -WindowStyle Hidden -PassThru -Wait
-if ($alpha.ExitCode -ne 0) { exit $alpha.ExitCode }
-exit (Invoke-BatchStep 'run')
+if ($alphaCode -ne 0 -or $growthCode -ne 0 -or $recoveryCode -ne 0) { exit 1 }
+# All subsequent research consumes immutable typed specs, not three fixed names.
+exit (Invoke-BatchStep 'run-queue')
