@@ -1,0 +1,3 @@
+# Only the actual public WebSocket observer requires this dependency.
+# Offline tests and the independent auditor otherwise use Python's standard library.
+websockets==16.0
