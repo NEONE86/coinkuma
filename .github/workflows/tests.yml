@@ -22,4 +22,5 @@ jobs:
           python one.py --help
           python -m one_trading.autonomy --help
           python -m one_trading.alpha_loop --help
+          python -m one_trading.economic_batches --help
           python one.py status --workspace workspace_ci
