@@ -23,6 +23,12 @@ def recompute(root,spec,trial):
     assert digest(spec['source_receipts'])==spec['input_binding']['source_hash']
     assert instant(spec['input_binding']['available_at'])<=instant(spec['registered_at'])<=instant(trial['completed_at'])
     assert spec['ai']['status']=='NOT_REQUESTED' and spec['resource_limits']['model_calls']==0
+    if spec.get('sampling_protocol'):
+        import importlib.util
+        module_spec=importlib.util.spec_from_file_location('event_audit',Path(__file__).with_name('verify_event_scan.py'))
+        module=importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(module)
+        if spec.get('action')!='EVALUATE_EVENTS':return audit_diagnostic(spec,trial)
+        return module.verify_event(root,spec,trial)
     if spec['mechanism_id']==PANEL:
         assert trial['status']=='DATA_OBSERVED' and trial['counts']['historical_hypothesis_trials']==0
         for receipts in trial['source_receipts'].values():
@@ -98,6 +104,66 @@ def recompute(root,spec,trial):
     assert trial['counts']==dict(historical_hypothesis_trials=1,historical_windows=len(expected),historical_hypothetical_entries=sum(trades.values()),independent_forward_events=0,paper_fills=0,matured_forward_results=0,data_collection_runs=0,model_calls=0)
     return totals
 
+COUNT_KEYS=('historical_hypothesis_trials','historical_windows','historical_hypothetical_entries','independent_forward_events','paper_fills','matured_forward_results','data_collection_runs','model_calls')
+ERRORS={'DATA_INSUFFICIENT','EXECUTION_ERROR','EXPIRED'}
+
+def audit_diagnostic(spec,trial):
+    assert trial['action']==spec['action'] and trial['status'] in ('DIAGNOSTIC_COMPLETED','FORWARD_CANDIDATE_FROZEN')
+    assert trial['counts']==dict.fromkeys(COUNT_KEYS,0) and not trial['adopted'] and not trial['independent_validation']
+    assert trial['ai_status']=='BLOCKED_MODEL_CALL_CAP_ZERO'
+    return None
+
+
+def audit_coverage(specs,trials,receipts,requests,request_results,recalculate):
+    # A status is not permission to omit a trial. Compare immutable receipts,
+    # request membership, statuses and allowed error payloads before arithmetic.
+    def indexed(rows):
+        d={r['id']:r for r in rows};assert len(d)==len(rows),'DUPLICATE_AUDIT_ID';return d
+    ts=indexed(trials);rs=indexed(receipts);qs=indexed(requests);ends=indexed(request_results)
+    expected=set(ts)|set(rs)|{k for q in request_results for k in q['trial_ids']};coverage=[];values={}
+    for key in sorted(expected):
+        category='missing';detail=None
+        try:
+            assert key in ts,'MISSING_TRIAL'
+            t=ts[key];spec=specs[key];assert t['parent_trial_id']==spec['parent_trial_id'] and t['source_version']==spec['source_version']
+            assert t['request_id'] in qs and t['request_id'] in ends,'MISSING_REQUEST_OR_COMPLETION'
+            end=ends[t['request_id']];assert end['trial_ids'].count(key)==1,'REQUEST_MEMBERSHIP'
+            assert digest({k:v for k,v in spec.items() if k not in ('id','spec_hash','stored_at')})==spec['spec_hash']
+            if key in rs:
+                r=rs[key];assert r['request_id']==t['request_id'] and r['input_hash']==spec['spec_hash'] and r['output_hash']==digest(r['result'])
+                payload={k:v for k,v in t.items() if k not in ('id','request_id','parent_trial_id','source_version','completed_at','stored_at')}
+                assert payload==r['result'],'RECEIPT_TRIAL_PAYLOAD_MISMATCH'
+            else:
+                assert t['status']=='EXPIRED' and t['resource_accounting']=='NO_EXECUTION_NO_NEW_RESERVATION','MISSING_EXECUTION_RECEIPT'
+                assert instant(t['completed_at'])>instant(spec['expiry'])
+            if t['status'] in ERRORS:
+                allowed={'id','request_id','parent_trial_id','source_version','completed_at','stored_at','status','error','missing','spec_id','spec_hash','mechanism_id','source_receipts','counts','resource_accounting','action'}
+                assert set(t)<=allowed,'FINANCIAL_PAYLOAD_HIDDEN_AS_ERROR'
+                assert not t.get('counts') and t['source_receipts']==spec['source_receipts']
+                if t['status']!='EXPIRED':assert isinstance(t.get('error'),str) and t['error'],'ERROR_REASON_REQUIRED'
+                category='data_insufficient' if t['status']=='DATA_INSUFFICIENT' else 'valid_error_or_expired'
+                detail=t.get('error','Expired without a financial result')
+            else:
+                values[key]=recalculate(spec,t);category='numerical_audited' if values[key] is not None else 'nonfinancial_audited'
+        except (AssertionError,KeyError,ValueError,TypeError) as exc:
+            category='missing' if key not in ts else 'rejected_inconsistent';detail=str(exc)
+        coverage.append(dict(trial_id=key,category=category,detail=detail))
+    request_errors=[]
+    for qid,result in ends.items():
+        try:
+            assert qid in qs
+            used=[r for r in trials if r['request_id']==qid]
+            assert result['trial_ids']==[r['id'] for r in used]
+            assert result['statuses']=={st:sum(r['status']==st for r in used) for st in sorted({r['status'] for r in used})},'REQUEST_STATUS_COUNTS'
+            for k in COUNT_KEYS:assert result['counts'][k]==sum(r.get('counts',{}).get(k,0) for r in used)
+        except (AssertionError,KeyError,TypeError) as exc:request_errors.append(dict(request_id=qid,error=str(exc)))
+    report=dict(expected_trial_ids=sorted(expected),trials=coverage,counts={cat:sum(r['category']==cat for r in coverage) for cat in ('numerical_audited','valid_error_or_expired','data_insufficient','nonfinancial_audited','rejected_inconsistent','missing')},request_errors=request_errors,
+        noncomputable_trial_ids=[r['trial_id'] for r in coverage if r['category'] in ('valid_error_or_expired','data_insufficient')])
+    assert len(coverage)==len(expected)
+    assert not request_errors and not any(r['category'] in ('missing','rejected_inconsistent') for r in coverage),report
+    return report,values
+
+
 def verify(root):
     root=Path(root).resolve();manifest=json.loads((root/'manifest.json').read_bytes())
     for path,h in manifest.items():
@@ -115,7 +181,7 @@ def verify(root):
     base=h.hexdigest();assert base==records('alpha-valid','alpha_protocol')[0]['implementation_hash']
     versions={}
     for c in records('batch','batch_config'):
-        names=('batch_analysis.py','economic_batches.py')+(('batch_control.py','batch_models.py','hypothesis_loop.py') if c.get('execution_contract_version')==2 else ())
+        names=c.get('source_files') or ('batch_analysis.py','economic_batches.py')+(('batch_control.py','batch_models.py','hypothesis_loop.py') if c.get('execution_contract_version')==2 else ())
         h=hashlib.sha256(base.encode())
         for name in names:h.update((root/'source-versions'/c['source_hash']/name).read_bytes())
         assert h.hexdigest()==c['source_hash'];versions[c['source_hash']]=c
@@ -125,17 +191,12 @@ def verify(root):
                 assert sha((root/'raw'/name/(r['body']['sha256']+'.bin')).read_bytes())==r['body']['sha256']
     specs={s['id']:s for s in records('batch','hypothesis_spec')};parents={r['id']:r for r in records('batch','trial_result')+records('batch','hypothesis_trial')};results={}
     for spec in specs.values():
+        assert spec['spec_hash']==digest({k:v for k,v in spec.items() if k not in ('id','spec_hash','stored_at')})
         assert spec['source_version'] in versions and spec['parent_result_hash']==digest(parents[spec['parent_trial_id']])
         assert instant(spec['registered_at'])>=instant(parents[spec['parent_trial_id']]['stored_at'])
-    for trial in records('batch','hypothesis_trial'):
-        spec=specs[trial['id']];assert trial['parent_trial_id']==spec['parent_trial_id'] and trial['source_version']==spec['source_version']
-        if trial['status'] not in ('DATA_INSUFFICIENT','EXECUTION_ERROR','EXPIRED'):results[trial['id']]=recompute(root,spec,trial)
     requests=records('batch','research_request_result')
-    for result in requests:
-        trials=[r for r in records('batch','hypothesis_trial') if r['request_id']==result['id']]
-        assert result['trial_ids']==[r['id'] for r in trials]
-        for key in ('historical_hypothesis_trials','historical_windows','historical_hypothetical_entries','independent_forward_events','paper_fills','matured_forward_results','data_collection_runs','model_calls'):
-            assert result['counts'][key]==sum(r.get('counts',{}).get(key,0) for r in trials)
+    coverage,results=audit_coverage(specs,records('batch','hypothesis_trial'),records('batch','hypothesis_receipt'),
+        records('batch','research_request'),requests,lambda spec,trial:recompute(root,spec,trial))
     # Raw model answer, recorded answer and all old policy selections are joined.
     models={r['id']:r for r in records('batch','model_call')};inputs={}
     for key,call in models.items():
@@ -199,8 +260,10 @@ def verify(root):
         tasks=[t for t in authority['tasks'] if next(e for e in authority['experiments'] if e['id']==t['experiment_id'])['engine']==budget['engine']]
         assert budget['time_spent']==sum(t['actual_time'] or 0 for t in tasks if t['state'] in ('DONE','FAILED'))
         assert budget['time_reserved']==sum(json.loads(t['task_json'])['time_seconds'] for t in tasks if t['state']=='CLAIMED')
+    receipt_ids={r['id'] for r in records('batch','hypothesis_receipt')}
+    assert all(t['task_key'][6:] in receipt_ids for t in authority['tasks'] if t['task_key'].startswith('child:') and t['state'] in ('DONE','FAILED')),'COMPLETED_AUTHORITY_TASK_MISSING_RECEIPT'
     for receipt in records('batch','hypothesis_receipt'):
         task=next(t for t in authority['tasks'] if t['task_key']=='child:'+receipt['id']);assert task['actual_time']==receipt['elapsed_seconds'] and json.loads(task['result_json'])==receipt['result']
-    return dict(status='PASS',typed_trial_results=results,policy_costs=costs,requests=len(requests),original_record_prefixes_preserved=True,forward_edge_proven=False)
+    return dict(status='PASS',audit_coverage=coverage,typed_trial_results=results,policy_costs=costs,requests=len(requests),original_record_prefixes_preserved=True,forward_edge_proven=False)
 
 if __name__=='__main__':print(json.dumps(verify(sys.argv[1]),ensure_ascii=False,indent=2))

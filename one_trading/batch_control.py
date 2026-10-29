@@ -8,9 +8,31 @@ from pathlib import Path
 from .autonomy.store import Store,utc,instant,digest,process_lock
 from .alpha_loop import worker as alpha
 from .alpha_loop.reference.research_loop import KINDS,stamp
+from datetime import timedelta
 
 
-def claim_owned(loop,keys,critical=False):
+def advance_action(s,c,case):
+    """A bounded retry changes only when durable progress or a frozen clock gate
+    changes. Minute-named keys with identical inputs violate authority identity.
+    """
+    rows=[];gates={}
+    for arm in c['arms']:
+        key=case['id']+':'+arm
+        for kind,identity in [('alpha_decision',key)]+[('alpha_entry_result',key+':'+t) for t in ('NATIVE','MATCHED')]:
+            row=s.get(kind,identity,True)
+            if row:rows.append([kind,identity,digest(row)])
+        calls=[]
+        for attempt in range(c['max_model_attempts']):
+            row=s.get('model_call',digest([key,'attempt',attempt+1]),True)
+            if row:calls.append(row);rows.append(['model_call',row['id'],digest(row)])
+        if calls and len(calls)<c['max_model_attempts']:
+            due=instant(calls[-1]['completed_at'])+timedelta(seconds=c['model_retry_seconds'][len(calls)-1])
+            gates[arm]=dict(due_at=due.isoformat(),eligible=instant(utc())>=due)
+    return dict(operation='ADVANCE',case_id=case['id'],progress_hash=digest(rows),retry_gates=gates,
+        decision_window_expired=instant(utc())>instant(case['cutoff'])+timedelta(seconds=c['decision_validity_seconds']))
+
+
+def claim_owned(loop,keys,critical=False,maintenance_bindings=None):
     keys=set(keys)
     with loop.transaction():
         candidates=[]
@@ -21,7 +43,15 @@ def claim_owned(loop,keys,critical=False):
             task=json.loads(row['task_json'])
             if task['due_at'] and instant(task['due_at'])>loop.now():continue
             engine=loop.db.execute('SELECT * FROM engine_budgets WHERE engine=?',(experiment['engine'],)).fetchone()
-            maintenance=critical and task['kind']=='due_label' and task['cash_units']==0
+            # An existing paper position is operational work, not a forward
+            # forecast label. Only the caller's durable position binding grants
+            # this narrow halt exception; all original resource caps still apply.
+            bound=(maintenance_bindings or {}).get(row['task_key'])
+            position_maintenance=(bound==task['input_hash'] and bool(bound)
+                and experiment['engine']=='CAPITAL_GROWTH'
+                and spec['lineage'].startswith('existing-position-maintenance/')
+                and task['kind']=='research')
+            maintenance=task['cash_units']==0 and (critical and task['kind']=='due_label' or position_maintenance)
             if engine['engine_halted'] and not maintenance:continue
             if not loop._affordable(experiment,spec,engine,task):continue
             candidates.append((KINDS[task['kind']],task['due_at'] or '',task['task_key'],experiment,task))
@@ -31,7 +61,7 @@ def claim_owned(loop,keys,critical=False):
         for table,column,value in (('experiments','id',experiment['id']),('engine_budgets','engine',experiment['engine'])):
             loop.db.execute(f'UPDATE {table} SET cash_reserved=cash_reserved+?,time_reserved=time_reserved+? WHERE {column}=?',(task['cash_units'],task['time_seconds'],value))
         loop._audit('TASK_CLAIMED',experiment['id'],task_key=key,claim_token=token,cash_reserved=task['cash_units'],time_reserved=task['time_seconds'],
-                    owner_scope='CRITICAL_EXISTING_CASE' if critical else 'EXPLICIT_OWNER_KEYS',research_halt_bypass=bool(critical))
+                    owner_scope='EXISTING_POSITION' if position_maintenance else 'CRITICAL_EXISTING_CASE' if critical else 'EXPLICIT_OWNER_KEYS',research_halt_bypass=bool(maintenance and engine['engine_halted']))
         return loop.get_task(key)
 
 
@@ -115,8 +145,8 @@ def alpha_service(root):
                 for case in pending:
                     incomplete=any(not s.get('alpha_entry_result',case['id']+':'+arm+':'+track,True) for arm in c['arms'] for track in ('NATIVE','MATCHED'))
                     if incomplete and instant(utc())<instant(case['due_at']):
-                        key='advance:'+case['id']+':'+utc()[:16]
-                        alpha.enqueue(loop,s,alpha.claim_id(s,'semantic'),key,'research',dict(operation='ADVANCE',case_id=case['id']))
+                        action=advance_action(s,c,case);key='advance:'+case['id']+':'+digest(action)[:20]
+                        alpha.enqueue(loop,s,alpha.claim_id(s,'semantic'),key,'research',action)
             if not pending and not halted and not blocked and instant(utc())<instant(p['new_case_deadline']):
                 prefix='batch-'+str(len(cases)+1).zfill(5)+'-'+instant(utc()).strftime('%Y%m%d%H')
                 attempts=loop.db.execute('SELECT task_key,state FROM tasks WHERE task_key LIKE ?',('new:'+prefix+'%',)).fetchall()

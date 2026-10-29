@@ -27,6 +27,17 @@ def parent_record(s,key):
 
 def propose(s,parent_id,mechanism=None):
     parent=parent_record(s,parent_id)
+    if s.get('hypothesis_spec',parent_id,True) and s.get('hypothesis_spec',parent_id).get('sampling_protocol'):
+        from .event_scan import successor
+        return successor(s,parent)
+    if parent.get('mechanism_id')==PANEL and s.all('batch_config')[-1].get('event_protocol'):
+        from .event_scan import register
+        if parent['status']=='DATA_OBSERVED':
+            first=register(s,parent_id,mechanism=ABSORPTION)
+            register(s,parent_id,mechanism=DELAY)
+            return first
+        from .event_scan import successor
+        return successor(s,parent)
     prior=parent.get('mechanism_id')
     mechanism=mechanism or (PANEL if parent['status'] in ('DATA_INSUFFICIENT','EXECUTION_ERROR','EXPIRED') else ABSORPTION if prior is None else DELAY if prior==ABSORPTION else PANEL if prior==DELAY else ABSORPTION)
     if mechanism not in RULES:raise ValueError('UNSUPPORTED_MECHANISM')
@@ -68,6 +79,10 @@ def validate_spec(spec):
     if digest(spec['source_receipts'])!=spec['input_binding']['source_hash']:raise ValueError('SPEC_SOURCE_IDENTITY')
     if instant(spec['input_binding']['available_at'])>instant(spec['registered_at']):raise ValueError('FUTURE_RECEIPT_IN_SPEC')
     if spec['ai']['status']!='NOT_REQUESTED' or spec['resource_limits']['model_calls']!=0:raise ValueError('UNSUPPORTED_AI_SPEC')
+    if spec.get('sampling_protocol'):
+        from .event_scan import PROTOCOL,ACTIONS
+        if spec['sampling_protocol']!=PROTOCOL or spec.get('action') not in ACTIONS:raise ValueError('UNREGISTERED_EVENT_PROTOCOL')
+        if spec['entry_delay_seconds']!=7200 or spec['horizon_seconds']!=86400 or spec['costs']!=dict(capital_usdt=10000,exposure_fraction=.125,fee_bps_per_side=10,slippage_bps_per_side=5,assumed_half_spread_bps=1,information_cost_per_call_usdt=.1,information_cost_status='SENSITIVITY_NOT_INVOICE',spot_funding_cashflow=0,accounting='FIXED_NOTIONAL_NOT_COMPOUNDED'):raise ValueError('EVENT_COST_OR_CLOCK_CHANGED')
     return spec
 
 def read_inputs(s,spec):
@@ -118,6 +133,9 @@ def select(ctx,rule):
     return candidates[0] if candidates else None
 
 def evaluate(s,spec):
+    if spec.get('sampling_protocol'):
+        from .event_scan import evaluate as evaluate_events
+        return evaluate_events(s,spec)
     data=read_inputs(s,spec);contexts=features(data);prices={s:{b[0]:b for b in d['bars']} for s,d in data.items()};rows=[]
     cost=spec['costs'];rate=(cost['fee_bps_per_side']+cost['slippage_bps_per_side']+cost['assumed_half_spread_bps'])/10000
     for ctx in contexts:
@@ -173,11 +191,11 @@ def run_queue(root,request_id=None,max_items=2):
             if not request:
                 if (instant(utc())-instant(c['registered_at'])).days>=c['research_days']:return dict(status='RESEARCH_WINDOW_ENDED')
                 if mode=='SCHEDULED':
-                    starts=[x['started_at'] for x in s.all('research_request')]+[x['started_at'] for x in s.all('research_batch')]
+                    starts=[x['started_at'] for x in s.all('research_request')]+[x['started_at'] for x in s.all('research_batch') if x.get('kind')!='POSITION_MAINTENANCE_NOT_RESEARCH']
                     if starts and (instant(utc())-max(map(instant,starts))).total_seconds()<c['batch_interval_hours']*3600:return dict(status='NOT_DUE')
                 request=s.append('research_request',request_id,dict(id=request_id,mode=mode,started_at=utc(),max_items=max_items,
                     source_version=implementation_hash(),config_hash=digest(c),resource_caps=dict(max_trials=c['max_trials_per_batch'],max_seconds=c['max_batch_seconds'],max_model_calls=0,new_cash_units=0),
-                    authorization='Explicit user follow-up after PR12 review' if mode!='SCHEDULED' else 'Existing daily paper research cadence',
+                    authorization='Explicit user-requested bounded follow-up; attached review execution specification' if mode!='SCHEDULED' else 'Existing daily paper research cadence',
                     cadence_note='Explicit user-triggered follow-up counted separately; does not change or reset shared budgets or automatic daily interval.'))
                 s.append('research_batch',request_id,dict(id=request_id,started_at=request['started_at'],kind='TYPED_HYPOTHESIS_REQUEST',config_hash=digest(c)))
             if not s.all('hypothesis_spec'):
@@ -188,12 +206,12 @@ def run_queue(root,request_id=None,max_items=2):
             # Reconcile this transition before excluding finished work from the queue.
             for trial in s.all('hypothesis_trial'):
                 successor=propose(s,trial['id'])
-                state(s,trial['id'],'SUCCESSOR_REGISTERED',child_spec_id=successor['id'])
+                state(s,trial['id'],'SUCCESSOR_REGISTERED' if successor else 'AWAIT_NEW_EVIDENCE',**({'child_spec_id':successor['id']} if successor else {}))
             alpha=Path(c['alpha_runtime']);protocol=readonly_rows(alpha,'alpha_protocol')[0];completed=[];started=time.monotonic()
             already=[r for r in s.all('hypothesis_trial') if r['request_id']==request_id]
             used=sum(r['elapsed_seconds'] for r in s.all('hypothesis_receipt') if r['request_id']==request_id)
             for _ in range(max(0,request['max_items']-len(already))):
-                candidates=[q for q in s.all('next_hypothesis') if q.get('spec_id') and not s.get('hypothesis_trial',q['spec_id'],True) and instant(q['due_at'])<=instant(utc())]
+                candidates=[q for q in s.all('next_hypothesis') if q.get('spec_id') and not s.get('hypothesis_queue_revision',q['spec_id'],True) and not s.get('hypothesis_trial',q['spec_id'],True) and instant(q['due_at'])<=instant(utc())]
                 if not candidates:break
                 q=min(candidates,key=lambda x:(x['priority'],x['due_at'],x['id']));spec=validate_spec(s.get('hypothesis_spec',q['spec_id']))
                 if spec['source_version']!=implementation_hash():return dict(status='FROZEN_SPEC_REQUIRES_ORIGINAL_EXECUTOR',spec_id=spec['id'])
@@ -208,6 +226,9 @@ def run_queue(root,request_id=None,max_items=2):
                     if not loop.db.execute('SELECT 1 FROM experiments WHERE id=?',(eid,)).fetchone():
                         loop.register_experiment(ExperimentSpec(eid,spec['mechanism_id']+'/'+spec['id'],'CASHFLOW',spec['version'],spec['registered_at'],spec['expiry'],0,c['max_trial_seconds'],'HISTORICAL'))
                         loop.record_data(eid,spec['spec_hash']);loop.enqueue_task(key,eid,'research',input_hash=spec['spec_hash'],cash_units=0,time_seconds=c['max_trial_seconds'])
+                    # A crash between experiment and task creation is recoverable.
+                    loop.record_data(eid,spec['spec_hash'])
+                    loop.enqueue_task(key,eid,'research',input_hash=spec['spec_hash'],cash_units=0,time_seconds=c['max_trial_seconds'])
                     task=loop.get_task(key);recovery=task['state']=='CLAIMED'
                     if task.get('overrun_receipt_json'):return dict(status='RECONCILIATION_REQUIRED',task_key=key,reservation_retained=True)
                     if task['state']=='QUEUED':
@@ -225,17 +246,18 @@ def run_queue(root,request_id=None,max_items=2):
                             else:result=observe_panel(s,c,spec,request) if spec['mechanism_id']==PANEL else evaluate(s,spec)
                         except (ValueError,KeyError,FileNotFoundError) as exc:result=dict(status='DATA_INSUFFICIENT',error=str(exc),mechanism_id=spec['mechanism_id'],source_receipts=spec['source_receipts'],counts={})
                         except Exception as exc:result=dict(status='EXECUTION_ERROR',error=str(exc),mechanism_id=spec['mechanism_id'],source_receipts=spec['source_receipts'],counts={})
+                        if spec.get('sampling_protocol'):result.setdefault('action',spec['action'])
                         elapsed=math.ceil(time.monotonic()-at)
                         if recovery:elapsed=max(elapsed,c['max_trial_seconds'])
                         receipt=s.append('hypothesis_receipt',spec['id'],dict(id=spec['id'],request_id=request_id,result=result,input_hash=spec['spec_hash'],output_hash=digest(result),elapsed_seconds=elapsed,
                             time_accounting='FULL_RESERVATION_UNCERTAIN_INTERRUPTION' if recovery else 'MEASURED_SECONDS',new_paid_cash_units=0))
-                    account=ack_preserving_overrun(loop,task,receipt['result'],receipt['elapsed_seconds'])
+                    account=ack_preserving_overrun(loop,task,receipt['result'],receipt['elapsed_seconds'],receipt['result']['status'] not in ('EXECUTION_ERROR','DATA_INSUFFICIENT','EXPIRED'))
                     if account['status']!='ACKNOWLEDGED':return account
                     result=s.get('hypothesis_trial',spec['id'],True) or s.append('hypothesis_trial',spec['id'],dict(id=spec['id'],request_id=request_id,parent_trial_id=spec['parent_trial_id'],
                         source_version=spec['source_version'],completed_at=utc(),**receipt['result']))
                     state(s,spec['id'],'COMPLETED',result_hash=digest(result),verdict=result['status'])
                     successor=propose(s,result['id'])
-                    state(s,spec['id'],'SUCCESSOR_REGISTERED',child_spec_id=successor['id'])
+                    state(s,spec['id'],'SUCCESSOR_REGISTERED' if successor else 'AWAIT_NEW_EVIDENCE',**({'child_spec_id':successor['id']} if successor else {}))
                     completed.append(result);loop.close();loop=None
             trials=[r for r in s.all('hypothesis_trial') if r['request_id']==request_id]
             counts={k:sum(r.get('counts',{}).get(k,0) for r in trials) for k in ('historical_hypothesis_trials','historical_windows','historical_hypothetical_entries','independent_forward_events','paper_fills','matured_forward_results','data_collection_runs','model_calls')}
@@ -243,7 +265,7 @@ def run_queue(root,request_id=None,max_items=2):
             counts.update(numerical_variants=0,data_reobservations=sum(s.get('hypothesis_spec',r['id'])['lineage_class']=='DATA_REOBSERVATION' for r in trials),cache_reexecutions=0)
             result=s.append('research_request_result',request_id,dict(id=request_id,completed_at=utc(),trial_ids=[r['id'] for r in trials],counts=counts,
                 statuses={status:sum(r['status']==status for r in trials) for status in sorted({r['status'] for r in trials})},
-                next_queue=[q['spec_id'] for q in s.all('next_hypothesis') if q.get('spec_id') and not s.get('hypothesis_trial',q['spec_id'],True)],
+                next_queue=[q['spec_id'] for q in s.all('next_hypothesis') if q.get('spec_id') and not s.get('hypothesis_queue_revision',q['spec_id'],True) and not s.get('hypothesis_trial',q['spec_id'],True)],
                 new_global_alpha_allocations=0,edge_proven=False))
             s.append('batch_result',request_id,dict(id=request_id,kind='TYPED_HYPOTHESIS_REQUEST',result_id=request_id,completed_at=utc()))
             return result
