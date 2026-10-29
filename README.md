@@ -1,6 +1,8 @@
 # ONE Trading v0.3.1 — code-only research baseline
 
 Latest independent study: [Cashflow Alpha v3 — Repricing Opportunity Atlas](docs/experiments/repricing-v3-2026-10-25/RESULTS.md).
+
+Current bounded follow-up: [fixed economic expansion and receipt pilot](docs/ECONOMIC_EXPANSION.md).
 Both fixed hypotheses are **REJECTED** after 473,267 historical label checks and
 30 account backtests. No validated edge or live-trading approval. See the
 [reproduction workflow](docs/REPRICING_V3.md); previous rejection results are preserved.

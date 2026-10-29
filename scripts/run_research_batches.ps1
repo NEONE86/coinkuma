@@ -14,11 +14,11 @@ $env:ONE_PREFLIGHT_CONTEXT='EXISTING_SCHEDULER_WRAPPER'
 # actual scheduler environment and record only sanitized executable diagnostics.
 $probeArguments = '-B -X utf8 -m one_trading.model_preflight --repair-process-path --runtime "' + $AlphaRuntime + '" --output "' + (Join-Path $BatchRuntime 'scheduler-model-preflight.json') + '"'
 $probe = Start-Process -FilePath $Python -ArgumentList $probeArguments -WorkingDirectory $repo -WindowStyle Hidden -PassThru -Wait -RedirectStandardOutput (Join-Path $logRoot 'model-preflight.stdout.log') -RedirectStandardError (Join-Path $logRoot 'model-preflight.stderr.log')
-function Invoke-BatchStep([string]$Step) {
+function Invoke-BatchStep([string]$Step, [string]$Module='one_trading.economic_batches') {
     $stamp = (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfffZ')
     $stdout = Join-Path $logRoot ($stamp + '-' + $Step + '.stdout.log')
     $stderr = Join-Path $logRoot ($stamp + '-' + $Step + '.stderr.log')
-    $arguments = '-B -X utf8 -m one_trading.economic_batches --runtime "' + $BatchRuntime + '" ' + $Step
+    $arguments = '-B -X utf8 -m ' + $Module + ' --runtime "' + $BatchRuntime + '" ' + $Step
     $child = Start-Process -FilePath $Python -ArgumentList $arguments -WorkingDirectory $repo -WindowStyle Hidden -PassThru -Wait -RedirectStandardOutput $stdout -RedirectStandardError $stderr
     [ordered]@{completed_at=(Get-Date).ToUniversalTime().ToString('o');step=$Step;exit_code=$child.ExitCode;stdout=$stdout;stderr=$stderr} |
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $BatchRuntime ('scheduler-' + $Step + '.json')) -Encoding UTF8
@@ -31,4 +31,9 @@ $growthCode = Invoke-BatchStep 'growth-service'
 $recoveryCode = Invoke-BatchStep 'recover'
 if ($alphaCode -ne 0 -or $growthCode -ne 0 -or $recoveryCode -ne 0) { exit 1 }
 # All subsequent research consumes immutable typed specs, not three fixed names.
-exit (Invoke-BatchStep 'run-queue')
+$queueCode = Invoke-BatchStep 'run-queue'
+# A finite receipt-only pilot is last: it cannot precede sealed case maintenance.
+# Its own frozen spec enforces clocks, shared resource caps and automatic stop.
+$pilotCode = Invoke-BatchStep 'service' 'one_trading.receipt_pilot'
+if ($queueCode -ne 0 -or $pilotCode -ne 0) { exit 1 }
+exit 0
