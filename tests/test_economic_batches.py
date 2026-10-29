@@ -160,4 +160,53 @@ class EconomicBatchTests(unittest.TestCase):
             with patch('one_trading.economic_batches.implementation_hash',return_value='thirdhash'):
                 with self.assertRaisesRegex(ValueError,'UNFINISHED_BATCH'):revise_implementation(Path(tmp),'must not revise')
 
+    def controller_fixture(self,root):
+        from one_trading.alpha_loop.worker import initialize as alpha_init,open_loop
+        from one_trading.economic_batches import initialize
+        from one_trading.alpha_loop.reference.research_loop import ExperimentSpec
+        alpha=root/'alpha';batch=root/'batch';p=alpha_init(alpha);initialize(batch,alpha)
+        loop=open_loop(alpha,p['config']);deadline=(datetime.now(timezone.utc)+timedelta(days=2)).isoformat()
+        try:
+            loop.register_experiment(ExperimentSpec('original','original','CASHFLOW',1,utc(),deadline,0,1000,'SYNTHETIC'))
+            loop.record_data('original',digest({'received':'synthetic'}));loop.begin_forward('original')
+        except BaseException:
+            loop.close();raise
+        return batch,loop,deadline
+
+    def test_interrupted_controller_claim_recovers_without_budget_refund_or_duplicate(self):
+        from one_trading.economic_batches import run
+        with tempfile.TemporaryDirectory() as tmp:
+            batch,loop,_=self.controller_fixture(Path(tmp))
+            result=dict(status='REJECTED',paper_trades=0,next_hypothesis='new independent data',next_due=utc())
+            try:
+                with patch('one_trading.economic_batches.FAMILIES',{'forced_flow':('CASHFLOW','fixture')}):
+                    with patch('one_trading.economic_batches.forced_flow',side_effect=KeyboardInterrupt):
+                        with self.assertRaises(KeyboardInterrupt):run(batch,'interrupted')
+                    self.assertEqual(loop.get_task('interrupted:forced_flow')['state'],'CLAIMED')
+                    with patch('one_trading.economic_batches.forced_flow',return_value=result) as action:
+                        recovered=run(batch);cached=run(batch,'interrupted')
+                    self.assertEqual(action.call_count,1);self.assertEqual(cached['status'],'CACHED')
+                    self.assertEqual(recovered['attempted'],1)
+                    task=loop.get_task('interrupted:forced_flow');self.assertEqual(task['actual_time'],240)
+                    self.assertEqual(task['state'],'DONE')
+                    self.assertEqual(loop.db.execute('select count(*) from alpha_registry').fetchone()[0],1)
+            finally:loop.close()
+
+    def test_deferred_sidecar_queue_cannot_be_claimed_by_original_worker(self):
+        from one_trading.economic_batches import run
+        with tempfile.TemporaryDirectory() as tmp:
+            batch,loop,_=self.controller_fixture(Path(tmp))
+            h=digest({'received':'synthetic'})
+            loop.enqueue_task('original-task','original','research',input_hash=h,cash_units=0,time_seconds=1)
+            try:
+                with patch('one_trading.economic_batches.FAMILIES',{'forced_flow':('CASHFLOW','fixture')}):
+                    self.assertEqual(run(batch,'deferred')['status'],'DEFER_TO_EXISTING_CONTROLLER_TASK')
+                    self.assertEqual(loop.db.execute("select state from experiments where id='batch-deferred:forced_flow'").fetchone()[0],'PAUSED')
+                    task=loop.tick();self.assertEqual(task['task_key'],'original-task')
+                    loop.ack(task['task_key'],task['claim_token'],result={},actual_cash_units=0,actual_time_seconds=1)
+                    self.assertIsNone(loop.tick())
+                    with patch('one_trading.economic_batches.forced_flow',return_value=dict(status='REJECTED',paper_trades=0,next_hypothesis='observe',next_due=utc())):
+                        self.assertEqual(run(batch)['attempted'],1)
+            finally:loop.close()
+
 if __name__=='__main__':unittest.main()
