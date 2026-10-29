@@ -28,6 +28,14 @@ def verify(root):
                 assert r['export_body_sha256']==r['original_body_sha256'];unchanged+=1
         ledgers[path.stem]=rows
     records=lambda name,kind:[r['body'] for r in ledgers[name] if r['kind']==kind]
+    source=root/'source-current'/'one_trading';base=hashlib.sha256()
+    files=sorted((source/'alpha_loop').rglob('*.py'))+sorted((source/'autonomy').glob('*.py'))+sorted((source/'economic_research').glob('*.py'))
+    for path in files:base.update(path.relative_to(source).as_posix().encode());base.update(path.read_bytes())
+    assert base.hexdigest()==records('alpha-valid','alpha_protocol')[0]['implementation_hash']
+    for config in records('batch','batch_config'):
+        version=root/'source-versions'/config['source_hash'];h=hashlib.sha256(base.hexdigest().encode())
+        for name in ('batch_analysis.py','economic_batches.py'):h.update((version/name).read_bytes())
+        assert h.hexdigest()==config['source_hash']
     batch=records('batch','batch_result')[0];trials=records('batch','trial_result')
     assert batch['attempted']==len(trials)==3 and batch['paper_entries']==0
     assert batch['counts']=={'REJECTED':2,'DATA_INSUFFICIENT':1,'NEXT_VALIDATION':0,'MORE_OBSERVATION':0,'EXECUTION_ERROR':0}
