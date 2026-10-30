@@ -1,0 +1,64 @@
+name: Observer audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: observer-audit-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  observer-audit:
+    name: Observer offline audit (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.12'
+          - os: windows-latest
+            python: '3.13'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Reject private Observer payloads in public Git
+        run: python -B -X utf8 scripts/check_observer_publication.py
+      - name: Offline regressions, independent ledgers and semantic tampering
+        shell: bash
+        run: python -B -X utf8 scripts/run_observer_audit.py --out "$RUNNER_TEMP/observer-audit"
+      - name: Publish synthetic audit summary only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: observer-audit-${{ matrix.os }}
+          path: ${{ runner.temp }}/observer-audit/summary.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  evidence-handoff:
+    name: Observer private evidence handoff
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Require stored, digest-bound private evidence references
+        run: python -B -X utf8 scripts/check_observer_publication.py --require-stored
+        # This checks public references only. No private tokens, payload downloads,
+        # external model, live adapter, or pull_request_target execution is used.
