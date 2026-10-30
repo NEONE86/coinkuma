@@ -7,14 +7,14 @@
   "archive_sha256": "9d62f5e5be56f6ccb4fbd7974ce80817225003df4f275e3b005bcb6d191bea0c",
   "archive_bytes": 13880987,
   "audit_status": "PASS_REAL_PUBLIC_TRIAL_AUDIT",
-  "storage_status": "AWAITING_PRIVATE_STORAGE",
+  "storage_status": "STORED_PRIVATE",
   "private_repository": "NEONE86/coinkuma-observer-evidence",
-  "private_url": null,
-  "private_asset_id": null,
-  "remote_digest_verified": false,
+  "private_url": "https://github.com/NEONE86/coinkuma-observer-evidence/releases/tag/observer-20261030-114233-2d67741",
+  "private_asset_id": 692545295,
+  "remote_digest_verified": true,
   "public_raw_data": false,
   "limitations": [
-    "Actual private evidence upload is pending access; local independent audit passed.",
+    "Private repository visibility confirmed; authenticated redownload matches the original archive SHA256 and size. Local independent audit passed.",
     "No policy event, PAPER decision or fill occurred; no trading edge was validated.",
     "Public CI uses separate synthetic data and does not access this actual archive."
   ]
