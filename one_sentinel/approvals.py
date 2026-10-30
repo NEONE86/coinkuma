@@ -10,13 +10,18 @@ import sqlite3
 import uuid
 from .store import digest, encode
 
+def claim_store():
+    # Stable for the operating account across runtime parents and code checkouts.
+    # No approval field, CLI runtime flag or per-run environment override selects it.
+    return Path.home()/'.one-observer'/'approval-claims.sqlite3'
+
 def location(ledger,value):
     target=value.get('approved_runtime')
     if not isinstance(target,str) or not Path(target).is_absolute() or Path(target).resolve()!=ledger.root:
         raise ValueError('APPROVED_RUNTIME_REQUIRED')
     if not isinstance(value.get('run_id'),str) or not value['run_id'].strip():
         raise ValueError('APPROVED_RUN_ID_REQUIRED')
-    return ledger.root.parent/'.observer-approval-claims'/'claims.sqlite3'
+    return claim_store()
 
 def claim_key(value):return digest(value['approval_reference'])
 

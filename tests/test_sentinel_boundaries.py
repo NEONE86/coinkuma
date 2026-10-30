@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock,patch
 from urllib.error import URLError
+from sentinel_test_support import isolate_claims
 from one_sentinel.engine import Observer
 from one_sentinel.demo import T,SYMBOL,metadata,mini,bar,book,sequence
 from one_sentinel.clocks import calibration,assess
@@ -20,6 +21,7 @@ def stamp(w,m,s='fixture'):
 class Boundaries(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)/'r';self.o=Observer(self.root)
+        isolate_claims(self,self.o.l.root.parent)
     def tearDown(self):self.o.close();self.tmp.cleanup()
     def put(self,s,t,d,**kw):return self.o.ingest(s,json.dumps(d).encode(),t,t,**kw)
     def opened(self):

@@ -7,6 +7,7 @@ from http.client import IncompleteRead
 from pathlib import Path
 from unittest.mock import patch
 
+from sentinel_test_support import isolate_claims
 from one_sentinel.engine import Observer
 from one_sentinel.demo import T, SYMBOL, sequence, mini, bar, book, metadata
 from one_sentinel.paper import account
@@ -23,6 +24,7 @@ class Corrections(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)/'r'
         self.o = Observer(self.root)
+        isolate_claims(self,self.o.l.root.parent)
     def tearDown(self):
         self.o.close(); self.tmp.cleanup()
     def put(self, source, at, value, **kw):

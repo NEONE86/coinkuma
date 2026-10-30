@@ -3,6 +3,7 @@ import asyncio,io,json,tempfile,time,unittest
 from pathlib import Path
 from unittest.mock import patch,Mock
 from urllib.error import HTTPError
+from sentinel_test_support import isolate_claims
 from one_sentinel.engine import Observer
 from one_sentinel.transport import public_get,validate_approval,smoke
 from one_sentinel.store import raw_usage
@@ -15,6 +16,7 @@ class IngressTests(unittest.TestCase):
         self.o=Observer(self.root/'r');c=self.o.l.get('contract','v1')
         self.a={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
         self.a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_NO_ACTUAL_NETWORK',public_data=True,start_at=T-1,stop_at=T+1000,model_cash_budget=0,live_orders=False)
+        isolate_claims(self,self.o.l.root.parent)
         validate_approval(self.o,self.a,T)
     def tearDown(self):self.o.close();self.tmp.cleanup()
     def test_unused_permission_sets_omitted_without_symbol_filter(self):

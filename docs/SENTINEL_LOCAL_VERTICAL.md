@@ -136,9 +136,11 @@ is the later manually invoked entry point; it is not scheduled now. It uses the
 installed `websockets` package only for actual smoke; offline tests use stdlib.
 Creating a manifest is not a substitute for human approval.
 
-PR #17 adds a persistent approval claim outside the runtime in its parent's
-`.observer-approval-claims/claims.sqlite3`. Keep it with the run; it must not be
-deleted or copied to reset budgets. A legacy approval without an explicit target
+PR #17 adds a persistent approval claim at the operating account's fixed
+`~/.one-observer/approval-claims.sqlite3`, independent of runtime directories and
+code checkouts. It must not be deleted or copied to reset budgets. Offline tests
+substitute a temporary store and never change that actual account state.
+A legacy approval without an explicit target
 is rejected by the new code. Resuming the same run retains its ledger instance
 and consumed attempts. This local guard is not cryptographic authorization
 against someone who can edit both the approval and all filesystem records.

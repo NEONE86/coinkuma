@@ -9,6 +9,7 @@ import sys
 import time
 from http.client import IncompleteRead
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from one_sentinel.engine import Observer
@@ -19,6 +20,10 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--original',type=Path,required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args()
     if a.out.exists():raise ValueError('NEW_OUTPUT_REQUIRED')
     a.out.mkdir(parents=True)
+    with patch('one_sentinel.approvals.claim_store',return_value=a.out/'synthetic-claims.sqlite3'):
+        replay(a)
+
+def replay(a):
     def no_network(*args,**kw):raise AssertionError('OFFLINE_ONLY')
     socket.socket.connect=no_network;socket.create_connection=no_network
     reports={}
@@ -68,7 +73,7 @@ def main():
     for mode in ('partial','timeout'):
         name='synthetic_http_'+mode;o=Observer(a.out/name/'runtime');c=o.l.get('contract','v1')
         approval={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
-        approval.update(approved_runtime=str(o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_ONLY_NO_NETWORK',public_data=True,start_at=T-1,stop_at=T+100,model_cash_budget=0,live_orders=False,trial_received_byte_cap=100)
+        approval.update(approved_runtime=str(o.l.root),run_id='synthetic-http-'+mode,approval_reference='SYNTHETIC_ONLY_NO_NETWORK:'+mode,public_data=True,start_at=T-1,stop_at=T+100,model_cash_budget=0,live_orders=False,trial_received_byte_cap=100)
         validate_approval(o,approval,T)
         class Response:
             status=200

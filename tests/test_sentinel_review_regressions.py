@@ -9,6 +9,7 @@ import tempfile
 import unittest
 
 from one_sentinel.demo import T, SYMBOL, sequence, mini, book, bar
+from sentinel_test_support import isolate_claims
 from one_sentinel.engine import Observer
 from one_sentinel.transport import validate_approval, public_get
 
@@ -37,6 +38,7 @@ class ReviewCounterexamples(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
         self.o=Observer(self.root/'runtime')
+        isolate_claims(self,self.o.l.root.parent)
     def tearDown(self):self.o.close();self.tmp.cleanup()
     def put(self,source,at,data):
         return self.o.ingest(source,json.dumps(data).encode(),at,at)
@@ -112,6 +114,16 @@ class ReviewCounterexamples(unittest.TestCase):
         try:
             with self.assertRaisesRegex(ValueError,'APPROVAL_ALREADY_CONSUMED'):
                 validate_approval(other,dict(a,approved_runtime=str(other.l.root)),T)
+        finally:other.close()
+    def test_changing_runtime_parent_does_not_reset_consumed_reference(self):
+        a=approval(self.o);validate_approval(self.o,a,T)
+        public_get(self.o,'metadata',clock=lambda:T,opener=Fake())
+        other=Observer(self.root/'different-parent'/'runtime')
+        try:
+            with self.assertRaisesRegex(ValueError,'APPROVAL_ALREADY_CONSUMED'):
+                validate_approval(other,dict(a,approved_runtime=str(other.l.root)),T)
+                public_get(other,'metadata',clock=lambda:T,opener=Fake())
+            self.assertFalse(other.l.all('http_intent'))
         finally:other.close()
     def test_unbound_legacy_approval_is_rejected_before_transport(self):
         a=approval(self.o);del a['approved_runtime']

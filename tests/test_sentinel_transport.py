@@ -1,6 +1,7 @@
 """All network/provider objects below are fake; no actual transmissions."""
 import hashlib,json,tempfile,unittest
 from pathlib import Path
+from sentinel_test_support import isolate_claims
 from one_sentinel.engine import Observer
 from one_sentinel.transport import validate_approval,public_get,send_webhook
 from one_sentinel.demo import T,metadata,sequence
@@ -23,6 +24,7 @@ class TransportTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory();self.o=Observer(Path(self.tmp.name)/'r');self.url='https://example.invalid/test-channel'
         c=self.o.l.get('contract','v1');self.approval={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
         self.approval.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_TEST_NOT_REAL_APPROVAL',public_data=True,start_at=T-1,stop_at=T+1000,model_cash_budget=0,live_orders=False,channel_url_sha256=hashlib.sha256(self.url.encode()).hexdigest())
+        isolate_claims(self,self.o.l.root.parent)
     def tearDown(self):self.o.close();self.tmp.cleanup()
     def approve(self):validate_approval(self.o,self.approval,T)
     def event(self):

@@ -3,6 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from sentinel_test_support import isolate_claims
 from one_sentinel.engine import Observer
 from one_sentinel.demo import T,SYMBOL,metadata,mini,bar,book,sequence
 
@@ -23,6 +24,7 @@ def uncertain(o):
 class PendingEpochTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)/'runtime';self.o=Observer(self.root)
+        isolate_claims(self,self.o.l.root.parent)
     def tearDown(self):self.o.close();self.temp.cleanup()
     def calibrate(self):
         put(self.o,'clock',T+.6,dict(serverTime=int((T+.3)*1000)),timing=stamp(T+.6),context=dict(request_timing=stamp(T)))

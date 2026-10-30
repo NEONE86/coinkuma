@@ -12,14 +12,15 @@ No actual market data was collected during reproduction or repair.
 | Pending buy after a FUTURE mini | An ENTER still filled after a future-dated mini arrived before its book. | At execution, check current mini/bar eligibility and bar freshness, with the existing entry liquidity threshold. Valid input and unrelated-symbol updates still allow the existing fill; invalid current data rejects the pending buy. |
 
 All reproductions use `tests/test_sentinel_review_regressions.py`; the expanded
-ten-case suite also covers normal buys, other symbols, a future newer bar,
+suite also covers normal buys, other symbols, a future newer bar,
 legitimate restart, recreated ledgers, changed targets and legacy approval
 rejection. Existing P1/P2, bounded pending releases and bar-order cases remain in
 `scripts/run_observer_audit.py`. No policy threshold changed.
 
 Reproduce the three original failures in a separate checkout of the initial
-publication by copying only the new regression module into its `tests/`, adding
-that directory to `PYTHONPATH`, and running from that checkout:
+publication by copying the regression module from commit `7004ce8` into its
+`tests/`, adding that directory to `PYTHONPATH`, and running from that checkout.
+That version predates the account-claim fixture helper and needs no new imports:
 
 ```sh
 python -m unittest -v \
@@ -43,3 +44,11 @@ decisions or fills. New approval requirements are not backdated into old records
 An updated development source is not authorized to collect under the old
 approval. The original archive's embedded verifier is preserved for provenance;
 the strengthened trusted verifier in this PR supplies the additional check.
+
+The follow-up review on `7004ce8` added a cross-parent variant: changing the
+approved runtime to a different parent also bypassed the original per-parent
+claim registry. Its regression failed before correction. Claims now use the
+operating account's fixed `~/.one-observer/approval-claims.sqlite3`, independent
+of runtime or checkout. Test-only mocks redirect claims to temporary storage;
+no actual account claim store is written during tests. The additional control
+rejects reuse across parents as well as sibling and recreated runtimes.
