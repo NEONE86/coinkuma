@@ -1,0 +1,20 @@
+{
+  "id": "SENTINEL_PAPER_USDT_V1",
+  "policy_id": "MARKET_ACCESS_REOPEN_V1",
+  "currency": "USDT",
+  "initial_cash": "10000",
+  "max_gross_cost": "3000",
+  "max_symbol_cost": "2000",
+  "max_gross_mark": "3000",
+  "max_symbol_mark": "2000",
+  "fee_rate": "0.001",
+  "slippage_bps": "5",
+  "quantity_step": "0.001",
+  "risk_priority": ["EXIT", "REDUCE", "HOLD", "ADD", "ENTER"],
+  "reservation": "Reserve buy notional plus fee at decision, atomically with decision. Pending reservations reduce cash and remaining cost exposure. Recheck marked exposure and symbol constraints at fill. Release on fill/rejection/expiry.",
+  "position_cost": "Gross acquisition cost including buy fee; partial sell removes proportional cost, realized PnL is net proceeds minus removed cost.",
+  "sharing": "One policy and one synthetic account. No CF/GROWTH shared capital or connection to existing runtime/authority.",
+  "delivery": {"channel": "UNCONFIGURED", "enabled": false, "approval_reference": null},
+  "model": {"enabled": false, "cash_budget": "0", "approval_reference": null},
+  "actual_order_capability": false
+}

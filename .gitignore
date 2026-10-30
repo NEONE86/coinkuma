@@ -19,3 +19,10 @@ recovery/
 *.zip
 *.bundle
 .DS_Store
+observer-audit-output/
+observer-runtime/
+private_evidence/
+*.bin
+**/ledger.jsonl
+**/execution_approval.json
+**/approval.final.json

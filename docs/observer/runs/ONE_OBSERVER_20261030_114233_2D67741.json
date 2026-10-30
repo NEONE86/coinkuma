@@ -1,0 +1,21 @@
+{
+  "schema": "ONE_OBSERVER_EVIDENCE_REFERENCE_V1",
+  "run_id": "ONE_OBSERVER_20261030_114233_2D67741",
+  "classification": "REAL_FORWARD",
+  "executed_commit": "2d67741ae6624881d02619f1513a2d556bc114fe",
+  "source_sha256": "00601caa13df0b19e7853f457715cadcfbef0882756dec26bdfba9bc17593338",
+  "archive_sha256": "9d62f5e5be56f6ccb4fbd7974ce80817225003df4f275e3b005bcb6d191bea0c",
+  "archive_bytes": 13880987,
+  "audit_status": "PASS_REAL_PUBLIC_TRIAL_AUDIT",
+  "storage_status": "AWAITING_PRIVATE_STORAGE",
+  "private_repository": "NEONE86/coinkuma-observer-evidence",
+  "private_url": null,
+  "private_asset_id": null,
+  "remote_digest_verified": false,
+  "public_raw_data": false,
+  "limitations": [
+    "Actual private evidence upload is pending access; local independent audit passed.",
+    "No policy event, PAPER decision or fill occurred; no trading edge was validated.",
+    "Public CI uses separate synthetic data and does not access this actual archive."
+  ]
+}

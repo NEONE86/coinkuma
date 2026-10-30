@@ -1,0 +1,136 @@
+{
+  "id": "MARKET_ACCESS_REOPEN_V1",
+  "engine": "GROWTH",
+  "mode": "PAPER_ONLY",
+  "hypothesis": "A previously observed suspension followed by restored official spot access may permit delayed participation demand. This is an unvalidated hypothesis, not evidence of positive return.",
+  "eligibility": "Known non-TRADING to TRADING, spot allowed, USDT quote; first snapshot is baseline, never an event.",
+  "invalidation": "Official non-TRADING/spot forbidden/removal, 5% price loss, or seven days after initial fill.",
+  "horizon_seconds": 604800,
+  "event_ttl_seconds": 1800,
+  "price_fresh_seconds": 15,
+  "metadata_fresh_seconds": 600,
+  "bar_fresh_seconds": 120,
+  "book_fresh_seconds": 5,
+  "decision_ttl_seconds": 30,
+  "minimum_execution_delay_seconds": 2,
+  "minimum_1m_quote_volume": "10000",
+  "enter_notional": "1000",
+  "add_notional": "500",
+  "add_return": "0.02",
+  "reduce_return": "-0.03",
+  "exit_return": "-0.05",
+  "max_spread_bps": "20",
+  "depth_participation": "0.1",
+  "deep_slots": 5,
+  "deep_initial": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT"
+  ],
+  "deep_min_residency_seconds": 300,
+  "deep_release_seconds": 21600,
+  "model_daily_attempts": 6,
+  "model_allocation": {
+    "HOLDINGS": 2,
+    "NEW": 2,
+    "STRUCTURAL": 2
+  },
+  "model_queue_capacity": 32,
+  "model_max_wait_seconds": 1800,
+  "basic_notification_target_seconds": 60,
+  "failure_rule": "Never infer zero inventory on gaps. Freeze ENTER/ADD; retain OPEN quantities; send RISK. Exit intent persists without a fresh book; no invented fill. Model unavailable does not block deterministic risk or BASIC_EVENT.",
+  "threshold_basis": "All sizes, seven-day horizon and numeric gates are conservative engineering assumptions frozen before local tests. No market outcome was used to tune them.",
+  "unsupported": [
+    "whole-market exact 1m volume from miniTicker",
+    "open interest",
+    "cross-venue coverage",
+    "economic profitability",
+    "live orders"
+  ],
+  "sources": {
+    "mini": {
+      "url": "wss://stream.binance.com:9443/ws/!miniTicker@arr",
+      "method": "WS",
+      "cadence_seconds": 1,
+      "semantics": "changed symbols only; v/q rolling 24h; missing symbols are not delisted"
+    },
+    "metadata": {
+      "url": "https://api.binance.com/api/v3/exchangeInfo?showPermissionSets=false",
+      "method": "GET",
+      "cadence_seconds": 300,
+      "requests_per_day": 288,
+      "expected_poll_wait_seconds": 150,
+      "trust": "Official exchange state; omit unused permissionSets payload, retain statuses/spot/filters and all symbols; revision retained with previous receipt"
+    },
+    "bar": {
+      "url": "wss://stream.binance.com:9443/ws/<symbol>@kline_1m",
+      "method": "WS",
+      "max_symbols": 5,
+      "semantics": "closed bars only, actual quote volume, dedup by symbol/open time; conflicting revision quarantined"
+    },
+    "book": {
+      "url": "https://api.binance.com/api/v3/depth",
+      "method": "GET",
+      "limit": 20,
+      "max_requests_per_day": 400
+    },
+    "slow_economic": {
+      "enabled": false,
+      "cadence_seconds": 900,
+      "uniform_expected_wait_seconds": 450,
+      "reason": "Additional adapters deferred; no claim of eight active sources"
+    },
+    "clock": {
+      "url": "https://api.binance.com/api/v3/time",
+      "method": "GET",
+      "cadence_seconds": 60,
+      "requests_per_day": 1440,
+      "max_response_bytes": 1024,
+      "enabled_only_in_separately_approved_trial": true
+    }
+  },
+  "proposed_new_trial_limits": {
+    "http_attempts_per_24h": 1000,
+    "recovery_reserved_attempts": 312,
+    "raw_bytes_per_day": 268435456,
+    "ws_connections": 2,
+    "max_deep_streams": 5,
+    "enabled": false,
+    "authorization": "Separate observer trial approval required; never resets or borrows existing Alpha authority"
+  },
+  "retention": "No automatic deletion. Evidence pins extend beyond latest horizon, thesis closure, position closure and audit completion. OPEN or unaudited means indefinite pin.",
+  "implementation_revision": "OBSERVER_CORRECTIONS_V2",
+  "clock_model": {
+    "id": "SOURCE_INTERVAL_V1",
+    "max_rtt_seconds": 2,
+    "max_age_seconds": 120,
+    "max_drift_ppm": 50,
+    "wall_jump_seconds": 0.05,
+    "assumptions": "Engineering bounds, not a fitted offset. Full RTT includes asymmetry; stale/new-session/unbounded clocks freeze buys. No retrospective calibration."
+  },
+  "data_contract": {
+    "version": "RECEIVED_AND_RETAINED_V2",
+    "existing_received_cap_preserved": 268435456,
+    "continuous_operation_approved": false,
+    "cap_action": "STOP_TRANSPORT_AND_RECORD_GAP_NO_AUTO_RECONNECT",
+    "clock_request_budget_note": "New calibration requests share the unchanged 688 active HTTP attempt cap; no existing quota increase. Long-run budget approval required."
+  },
+  "clock_pending": {
+    "version": "BOUNDED_PENDING_RELEASE_V1",
+    "max_items": 512,
+    "max_envelope_bytes": 4194304,
+    "ttl_seconds": 5,
+    "retention": "Only active queue is bounded. Terminal outcomes and original evidence remain append-only."
+  },
+  "epoch_exit_retry": {
+    "version": "EPOCH_EXIT_RETRY_V1",
+    "eligible_reasons": [
+      "STRUCTURAL_INVALIDATION",
+      "HORIZON_EXPIRED"
+    ],
+    "max_generations_per_position": 3,
+    "retryable_execution_reason": "NEW_MONOTONIC_EPOCH"
+  }
+}
