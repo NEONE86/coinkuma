@@ -14,7 +14,7 @@ class IngressTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
         self.o=Observer(self.root/'r');c=self.o.l.get('contract','v1')
         self.a={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
-        self.a.update(approval_reference='SYNTHETIC_NO_ACTUAL_NETWORK',public_data=True,start_at=T-1,stop_at=T+1000,model_cash_budget=0,live_orders=False)
+        self.a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_NO_ACTUAL_NETWORK',public_data=True,start_at=T-1,stop_at=T+1000,model_cash_budget=0,live_orders=False)
         validate_approval(self.o,self.a,T)
     def tearDown(self):self.o.close();self.tmp.cleanup()
     def test_unused_permission_sets_omitted_without_symbol_filter(self):
@@ -56,7 +56,7 @@ class IngressTests(unittest.TestCase):
         # Tiny actual clock window, fake WS and HTTP. Six distinct broad frames
         # must survive one failed metadata call in the independently running task.
         self.o.close();self.o=Observer(self.root/'async');c=self.o.l.get('contract','v1');now=time.time()
-        a={k:c[k] for k in ('policy_hash','account_hash','source_hash')};a.update(approval_reference='SYNTHETIC_ASYNC',public_data=True,start_at=now-1,stop_at=now+.5,model_cash_budget=0,live_orders=False)
+        a={k:c[k] for k in ('policy_hash','account_hash','source_hash')};a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_ASYNC',public_data=True,start_at=now-1,stop_at=now+.5,model_cash_budget=0,live_orders=False)
         class WS:
             async def __aenter__(self):return self
             async def __aexit__(self,*a):pass
@@ -82,7 +82,7 @@ class IngressTests(unittest.TestCase):
         self.assertGreaterEqual(len(self.o.l.all('input')),2);self.assertEqual(self.o.l.all('stream_gap'),[]);self.assertEqual(len(self.o.l.all('source_gap')),1)
     def test_restart_respects_prior_failed_metadata_cadence(self):
         self.o.close();self.o=Observer(self.root/'restart');c=self.o.l.get('contract','v1');now=time.time()
-        a={k:c[k] for k in ('policy_hash','account_hash','source_hash')};a.update(approval_reference='SYNTHETIC_ASYNC',public_data=True,start_at=now-1,stop_at=now+.1,model_cash_budget=0,live_orders=False)
+        a={k:c[k] for k in ('policy_hash','account_hash','source_hash')};a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_ASYNC',public_data=True,start_at=now-1,stop_at=now+.1,model_cash_budget=0,live_orders=False)
         with self.o.l.transaction():
             self.o.l.add('http_intent','prior',dict(id='prior',at=now-20,source='metadata',read_reservation=0))
             self.o.l.add('http_intent','prior-clock',dict(id='prior-clock',at=now-20,source='clock',read_reservation=0))

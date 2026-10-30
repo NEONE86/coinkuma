@@ -94,7 +94,9 @@ Run these commands locally with private evidence; never supply it to public CI.
 
 The approved execution bytes remain SHA256
 `00601caa13df0b19e7853f457715cadcfbef0882756dec26bdfba9bc17593338`.
-This new checkout's normalized source bytes have SHA256
-`9ce23a3b120b3abdbea6b3d882f695c8944531af844c5d36e318bf2c14979518`.
-There is no behavioral source diff in `one_sentinel` from 2d67741, but these byte
-identities differ; this PR does not reuse the old approval to run a new checkout.
+The initial publication used the same implementation with different line endings.
+Subsequent [Codex review fixes](OBSERVER_PR17_REVIEW_FIXES.md) change the new
+development source. They do not modify the frozen executed checkout, original
+approval, archive or runtime. This PR does not reuse an old approval to run a new
+checkout. Any future collection requires a fresh exact source/config approval,
+including its run ID and canonical runtime path.

@@ -68,7 +68,7 @@ def main():
     for mode in ('partial','timeout'):
         name='synthetic_http_'+mode;o=Observer(a.out/name/'runtime');c=o.l.get('contract','v1')
         approval={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
-        approval.update(approval_reference='SYNTHETIC_ONLY_NO_NETWORK',public_data=True,start_at=T-1,stop_at=T+100,model_cash_budget=0,live_orders=False,trial_received_byte_cap=100)
+        approval.update(approved_runtime=str(o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_ONLY_NO_NETWORK',public_data=True,start_at=T-1,stop_at=T+100,model_cash_budget=0,live_orders=False,trial_received_byte_cap=100)
         validate_approval(o,approval,T)
         class Response:
             status=200

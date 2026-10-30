@@ -32,7 +32,11 @@ def verify(root):
             raw=(root/'raw'/f"{b['sha256']}.bin").read_bytes();assert sha(raw)==b['sha256'],'RAW_HASH'
             assert b['received_at']<=b['processed_at'],'FUTURE_RECEIPT'
         if k=='input':
-            original=json.loads((root/'raw'/f"{b['sha256']}.bin").read_bytes());parsed=b['parsed'];source=b['source']
+            receipt=index['receipt',b.get('receipt_id',r['id'])]
+            immutable=('source','sha256','bytes','received_at','processed_at','classification','origin','context','timing','provenance')
+            assert b['id']==r['id'] and all(b.get(field)==receipt.get(field) for field in immutable),'INPUT_RECEIPT_BINDING'
+            assert b.get('release_id') or r['id']==receipt['id'],'INPUT_RECEIPT_ID_BINDING'
+            original=json.loads((root/'raw'/f"{receipt['sha256']}.bin").read_bytes());parsed=b['parsed'];source=receipt['source']
             if isinstance(original,dict) and 'stream' in original:original=original['data']
             if source=='mini':
                 for item_index,item in enumerate(original):

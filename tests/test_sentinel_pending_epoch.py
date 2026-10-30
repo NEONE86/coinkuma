@@ -176,7 +176,7 @@ class PendingEpochTests(unittest.TestCase):
         from unittest.mock import patch
         from one_sentinel.transport import validate_approval
         c=self.o.l.get('contract','v1');a={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
-        a.update(approval_reference='SYNTHETIC_ONLY_NO_IO',public_data=True,start_at=T-1,stop_at=T+100,model_cash_budget=0,live_orders=False)
+        a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_ONLY_NO_IO',public_data=True,start_at=T-1,stop_at=T+100,model_cash_budget=0,live_orders=False)
         validate_approval(self.o,a,T)
         def live(source,at,value,processed,**kw):
             with patch('one_sentinel.engine.time.time',return_value=at),patch('one_sentinel.engine.capture',return_value=stamp(processed)):

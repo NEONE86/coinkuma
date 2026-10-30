@@ -15,6 +15,7 @@ from .store import Ledger,digest,raw_usage,halt_observation
 from .clocks import capture, SESSION_ID
 from .paper import account
 from .notify import analyze_one
+from .approvals import bind as bind_approval, verify_binding
 
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs):raise ValueError('REDIRECT_FORBIDDEN')
@@ -24,6 +25,7 @@ def validate_approval(observer,value,now,timing=None):
     if not value.get('approval_reference') or value.get('policy_hash')!=contract['policy_hash'] or value.get('account_hash')!=contract['account_hash'] or value.get('source_hash')!=contract['source_hash']:raise ValueError('EXACT_APPROVAL_REQUIRED')
     if not value.get('public_data') or not value['start_at']<=now<value['stop_at'] or value['stop_at']-value['start_at']>172800:raise ValueError('TRIAL_WINDOW')
     if value.get('model_cash_budget')!=0 or value.get('live_orders') is not False:raise ValueError('NO_SPENDING_OR_ORDERS')
+    bind_approval(observer.l,value)
     with observer.l.transaction():
         observer.l.add('trial_approval','v1',value)
         if timing:
@@ -50,6 +52,7 @@ def received_cap(observer):
 def public_get(observer,source,symbol=None,clock=time.time,opener=None):
     sent=capture(clock);now=sent['wall'];a=observer.live_approval
     if not trial_active(observer,sent):raise ValueError('TRIAL_WINDOW')
+    verify_binding(observer.l,a)
     if source not in ('metadata','book','clock'):raise ValueError('PUBLIC_PATH_ONLY')
     if symbol is not None and (not symbol.isalnum() or not symbol.endswith('USDT')):raise ValueError('SYMBOL')
     if raw_usage(observer.l,now)>=received_cap(observer):
@@ -138,6 +141,7 @@ def send_webhook(root,url,clock=time.time,opener=None):
         if not pending:return None
         a=l.get('trial_approval','v1');now=clock()
         if not a or not a['start_at']<=now<a['stop_at'] or a.get('channel_url_sha256')!=hashlib.sha256(url.encode()).hexdigest():raise ValueError('CHANNEL_APPROVAL_REQUIRED')
+        verify_binding(l,a)
         parts=urlsplit(url)
         if parts.scheme!='https' or parts.username or parts.password:raise ValueError('HTTPS_CHANNEL_REQUIRED')
         with l.transaction():

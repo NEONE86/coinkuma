@@ -128,12 +128,20 @@ A first actual smoke needs explicit approval for a new isolated bounded public
 data run, and a user-owned HTTPS JSON receiving channel approved for transmission.
 Keep the channel URL in local `ONE_OBSERVER_WEBHOOK_URL`, not chat or the ZIP.
 The approval file must bind policy_hash, account_hash, source_hash,
-approval_reference, start_at, stop_at (≤48h), public_data=true,
+approval_reference, run_id, approved_runtime (absolute canonical runtime path),
+start_at, stop_at (≤48h), public_data=true,
 model_cash_budget=0, live_orders=false, and channel_url_sha256 if delivery is
 approved. `python -m one_sentinel --runtime NEW smoke --approval FILE --seconds 300`
 is the later manually invoked entry point; it is not scheduled now. It uses the
 installed `websockets` package only for actual smoke; offline tests use stdlib.
 Creating a manifest is not a substitute for human approval.
+
+PR #17 adds a persistent approval claim outside the runtime in its parent's
+`.observer-approval-claims/claims.sqlite3`. Keep it with the run; it must not be
+deleted or copied to reset budgets. A legacy approval without an explicit target
+is rejected by the new code. Resuming the same run retains its ledger instance
+and consumed attempts. This local guard is not cryptographic authorization
+against someone who can edit both the approval and all filesystem records.
 
 First run5min before seeking48h acceptance: verify endpoint accessibility, clock
 skew, bounded errors, provider ACK and manually confirmed phone receipt. Long-run

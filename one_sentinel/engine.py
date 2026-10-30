@@ -253,6 +253,10 @@ class Observer:
             if d['action'] in ('ENTER','ADD'):
                 m=latest(self.l,'metadata');pr=symbol_input(self.l,'mini',d['symbol']);e=self.l.get('event',d['event_id'])
                 ok=m and d['symbol'] in m['parsed'] and m['parsed'][d['symbol']]['status']=='TRADING' and m['parsed'][d['symbol']]['spot'] and now-m['received_at']<=self.policy['metadata_fresh_seconds'] and fresh(pr,'mini',d['symbol'],now,self.policy['price_fresh_seconds'],self.current_timing) and now-e['at']<=self.policy['event_ttl_seconds']
+                states=[self.l.item_state(source,d['symbol']) for source in ('mini','bar')]
+                current_bar=symbol_input(self.l,'bar',d['symbol'])
+                ok=ok and all(not state or state['state']=='VALID' for state in states) and fresh(current_bar,'bar',d['symbol'],now,self.policy['bar_fresh_seconds'],self.current_timing)
+                if ok and d['action']=='ENTER':ok=D(current_bar['parsed']['quote_volume'])>=D(self.policy['minimum_1m_quote_volume'])
                 if ok and d['action']=='ADD':
                     pos=account(self.l,self.config)['positions'].get(d['symbol'])
                     ok=bool(pos and pos['qty'] and D(pr['parsed'][d['symbol']]['price'])*pos['qty']/pos['cost']-1>D(self.policy['exit_return']))

@@ -26,7 +26,7 @@ class Boundaries(unittest.TestCase):
         for s,t,d in sequence()[:5]:self.put(s,t,d)
     def approve(self):
         c=self.o.l.get('contract','v1');a={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
-        a.update(approval_reference='SYNTHETIC_NO_IO',public_data=True,start_at=T-1,stop_at=T+1000,model_cash_budget=0,live_orders=False)
+        a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC_NO_IO',public_data=True,start_at=T-1,stop_at=T+1000,model_cash_budget=0,live_orders=False)
         validate_approval(self.o,a,T);return a
     def test_calibrated_items_and_bar_preserve_original_time(self):
         self.put('metadata',T,metadata('TRADING'))
@@ -117,7 +117,7 @@ class Boundaries(unittest.TestCase):
         import time
         now=time.time();c=self.o.l.get('contract','v1')
         a={k:c[k] for k in ('policy_hash','account_hash','source_hash')}
-        a.update(approval_reference='SYNTHETIC',public_data=True,start_at=now-1,stop_at=now+.2,model_cash_budget=0,live_orders=False)
+        a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC',public_data=True,start_at=now-1,stop_at=now+.2,model_cash_budget=0,live_orders=False)
         class WS:
             async def __aenter__(self):return self
             async def __aexit__(self,*args):pass
@@ -139,7 +139,7 @@ class Boundaries(unittest.TestCase):
         import time
         self.o.policy['proposed_new_trial_limits']['raw_bytes_per_day']=1
         c=self.o.l.get('contract','v1');a={k:c[k] for k in ('policy_hash','account_hash','source_hash')};now=time.time()
-        a.update(approval_reference='SYNTHETIC',public_data=True,start_at=now-1,stop_at=now+.2,model_cash_budget=0,live_orders=False)
+        a.update(approved_runtime=str(self.o.l.root),run_id='synthetic-test-run',approval_reference='SYNTHETIC',public_data=True,start_at=now-1,stop_at=now+.2,model_cash_budget=0,live_orders=False)
         connect=Mock(side_effect=AssertionError('NO_CONNECT'))
         with patch('one_sentinel.transport._public_thread') as request:asyncio.run(smoke(self.o,a,.2,connector=connect))
         self.assertEqual(connect.call_count,0);self.assertEqual(request.call_count,0)

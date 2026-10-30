@@ -22,6 +22,7 @@ recovery/
 observer-audit-output/
 observer-runtime/
 private_evidence/
+.observer-approval-claims/
 *.bin
 **/ledger.jsonl
 **/execution_approval.json
