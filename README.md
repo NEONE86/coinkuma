@@ -140,3 +140,12 @@ observations, frozen price/semantic/memory arms, each arm's own decision latency
 conditional spot fills, delayed outcomes and an authoritative evidence registry.
 Its independent auditor reads raw receipts without importing the strategy.
 It preserves the earlier sealed runtime and makes no proven-edge or live-trading claim.
+
+## AI-native decision lab (offline research)
+
+The additive [AI-native decision lab](docs/AI_NATIVE_V1.md) provides a finite,
+isolated multi-arm PAPER replay with optional bounded free-form Codex decisions,
+an online-feedback comparator, later-book conditional fills and an independently
+recalculated append-only ledger. It is **not** an always-on collector or a
+demonstration of investment edge; model calls and any new data collection remain
+off by default.
