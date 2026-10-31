@@ -64,7 +64,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                    "fills": 0, "rejections": 0, "unavailable": 0,
                    "decisions": {}, "pending": None, "episodes": {}, "matured": [],
                    "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
-                   "peak": cash_start, "worst_drawdown": 0.0}
+                   "peak": cash_start, "worst_drawdown": 0.0, "halted": False}
             for name in record["summary"]}
     check("CASH" in arms, "NO_CASH_CONTROL")
     ledger = record["ledger"]
@@ -83,6 +83,8 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             marked = arm["cash"] + exposure
             arm["peak"] = max(marked, arm["peak"])
             arm["worst_drawdown"] = max(arm["worst_drawdown"], 1 - marked / arm["peak"])
+            if marked / arm["peak"] <= 1 - protocol["max_drawdown_fraction"]:
+                arm["halted"] = True
     for seq, row in enumerate(ledger):
         check(row.get("seq") == seq and row.get("previous_hash") == tip,
               "BROKEN_APPEND_ONLY_CHAIN")
@@ -173,22 +175,53 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                   "SAME_FRAME_OR_EARLY_EXECUTION")
             arm["pending"] = None
             quote = receipt["quotes"][order["symbol"]]
-            if kind == "order_rejected":
-                arm["rejections"] += 1
-                counts["rejected"] += 1
-                continue
-            check(entry["quote_frame"] == receipt["id"] and
-                  at(entry["quote_received_at"]) == last and
-                  at(entry["exchange_quote_at"]) == at(quote["exchange_at"]),
-                  "FILL_QUOTE_PROJECTION")
             age = (last - at(quote["exchange_at"])).total_seconds()
             spread = (quote["ask"] - quote["bid"]) / ((quote["ask"] + quote["bid"]) / 2) * 10_000
-            check(0 <= age <= protocol["max_quote_age_seconds"] and
-                  spread <= protocol["max_spread_bps"], "FILL_STALE_OR_WIDE_QUOTE")
             mark = sum(position["quantity"] * receipt["quotes"][s]["bid"]
                        for s, position in arm["positions"].items())
             equity = arm["cash"] + mark
             fraction = min(order["fraction"], protocol["max_position_fraction"])
+            expected_rejection = None
+            if not 0 <= age <= protocol["max_quote_age_seconds"]:
+                expected_rejection = "STALE_QUOTE"
+            elif spread > protocol["max_spread_bps"]:
+                expected_rejection = "SPREAD_LIMIT"
+            elif arm["halted"] and order["action"] == "BUY":
+                expected_rejection = "DRAWDOWN_HALT"
+            elif order["action"] == "BUY":
+                theoretical_price = quote["ask"] * (1 + slippage)
+                theoretical_notional = min(fraction * equity, arm["cash"] / (1 + fee_rate))
+                if order["symbol"] in arm["positions"]:
+                    expected_rejection = "POSITION_ALREADY_OPEN"
+                elif mark + theoretical_notional > equity * protocol["max_total_exposure_fraction"]:
+                    expected_rejection = "TOTAL_EXPOSURE_LIMIT"
+                elif theoretical_notional < protocol["min_notional_usdt"]:
+                    expected_rejection = "MIN_NOTIONAL"
+                elif theoretical_notional / theoretical_price > quote["ask_size"] * protocol["max_book_participation"]:
+                    expected_rejection = "INSUFFICIENT_VISIBLE_ASK"
+            else:
+                position = arm["positions"].get(order["symbol"])
+                if position is None:
+                    expected_rejection = "NO_POSITION_TO_SELL"
+                else:
+                    theoretical_price = quote["bid"] * (1 - slippage)
+                    theoretical_quantity = position["quantity"] * order["fraction"]
+                    if theoretical_quantity * theoretical_price < protocol["min_notional_usdt"]:
+                        expected_rejection = "MIN_NOTIONAL"
+                    elif theoretical_quantity > quote["bid_size"] * protocol["max_book_participation"]:
+                        expected_rejection = "INSUFFICIENT_VISIBLE_BID"
+            if kind == "order_rejected":
+                check(entry["receipt_frame"] == receipt["id"] and
+                      expected_rejection == entry["reason"] and expected_rejection is not None,
+                      "FALSE_OR_WRONG_REJECTION")
+                arm["rejections"] += 1
+                counts["rejected"] += 1
+                continue
+            check(expected_rejection is None, "FILL_BYPASSED_REJECTION_RULE")
+            check(entry["quote_frame"] == receipt["id"] and
+                  at(entry["quote_received_at"]) == last and
+                  at(entry["exchange_quote_at"]) == at(quote["exchange_at"]),
+                  "FILL_QUOTE_PROJECTION")
             if order["action"] == "BUY":
                 check(order["symbol"] not in arm["positions"], "DUPLICATE_BUY")
                 price = quote["ask"] * (1 + slippage)
@@ -286,5 +319,6 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                             ("matured_independent_labels", len(arm["matured"]))):
             check(report[key] == amount, "SUMMARY_COUNT:" + name + ":" + key)
         check(report["pending_order"] == (arm["pending"] is not None), "PENDING_ORDER_SUMMARY")
+        check(report["drawdown_halted"] == arm["halted"], "DRAWDOWN_HALT_SUMMARY")
     return {"status": "PASS_INDEPENDENT_RECALCULATION", "counts": counts,
             "ledger_tip": tip, "arms": sorted(arms), "not_forward_alpha": True}

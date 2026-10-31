@@ -163,6 +163,25 @@ class AINativeTest(unittest.TestCase):
         with self.assertRaisesRegex(AuditError, "ACCOUNT_MISMATCH:execution_price"):
             verify(forged)
 
+    def test_fabricated_rejection_cannot_hide_a_valid_losing_fill(self):
+        engine, _ = self.experiment({"source-0": "BUY"})
+        for i, price in enumerate((100, 101, 90)):
+            engine.observe(packet(i, price))
+        forged = copy.deepcopy(engine.finish())
+        row = next(item for item in forged["ledger"] if item["kind"] == "paper_fill")
+        prior = row["payload"]
+        row["kind"] = "order_rejected"
+        row["payload"] = dict(arm=prior["arm"], order=prior["order"],
+                              receipt_frame=prior["quote_frame"], reason="SPREAD_LIMIT")
+        tip = "0" * 64
+        for item in forged["ledger"]:
+            item["previous_hash"] = tip
+            item["hash"] = digest({k: v for k, v in item.items() if k != "hash"})
+            tip = item["hash"]
+        forged["ledger_tip"] = tip
+        with self.assertRaisesRegex(AuditError, "FALSE_OR_WRONG_REJECTION"):
+            verify(forged)
+
     def test_tampered_mature_label_rejected_even_if_rehashed(self):
         engine, _ = self.experiment()
         for i in range(4):
@@ -209,7 +228,8 @@ class AINativeTest(unittest.TestCase):
             target = Path(dirname) / "result.json"
             opts = SimpleNamespace(input=str(source), output=str(target), data_use="SYNTHETIC",
                                    ai_mode="off", private_model_runtime=None,
-                                   max_ai_calls=None, model="gpt-6-astra")
+                                   max_ai_calls=None, model="gpt-6-astra",
+                                   model_executable="codex", model_timeout_seconds=60)
             response = run(opts)
             self.assertEqual(response["independent_audit"], "PASS")
             report = json.loads(target.read_text())

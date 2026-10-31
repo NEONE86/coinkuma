@@ -74,6 +74,10 @@ python -m one_trading.ai_native run \
   --model gpt-6-astra
 ```
 
+On a Windows scheduler where `codex` is missing from the child process PATH,
+specify `--model-executable` with the **already installed, verified** absolute
+Codex executable path (no installation or PATH mutation by the experiment).
+
 The latter command is a **future opt-in example**, not an executed instruction
 and not authorization to start collecting data. Calls incur provider usage; no
 model inference was executed by this revision's no-model offline checks.

@@ -36,7 +36,9 @@ def run(args: argparse.Namespace) -> dict:
         if args.private_model_runtime is None or args.max_ai_calls is None:
             raise ReplayError("AI_OPT_IN_NEEDS_PRIVATE_RUNTIME_AND_CALL_LIMIT")
         arms["AI_FREE_DECISION"] = CodexPlanner(runtime=Path(args.private_model_runtime),
-                                                model=args.model, max_calls=args.max_ai_calls)
+                                                model=args.model, max_calls=args.max_ai_calls,
+                                                executable=args.model_executable,
+                                                timeout_seconds=args.model_timeout_seconds)
     engine = Experiment(Protocol(), arms, data_use=args.data_use)
     with open(args.input, encoding="utf-8") as stream:
         for line_no, line in enumerate(stream, start=1):
@@ -74,6 +76,10 @@ def main(argv: list[str] | None = None) -> int:
     trial.add_argument("--private-model-runtime", help="Preexisting isolated model call folder")
     trial.add_argument("--max-ai-calls", type=int, help="Required bounded model budget")
     trial.add_argument("--model", default="gpt-6-astra", help="Provider model identifier, explicit opt-in only")
+    trial.add_argument("--model-executable", default="codex",
+                       help="Existing authenticated Codex executable (absolute path on Windows if PATH is missing)")
+    trial.add_argument("--model-timeout-seconds", type=int, default=60,
+                       help="Bounded per-call timeout, 1–300 seconds")
     audit = commands.add_parser("verify", help="Independent offline audit of a saved result")
     audit.add_argument("--input", required=True)
     args = parser.parse_args(argv)
