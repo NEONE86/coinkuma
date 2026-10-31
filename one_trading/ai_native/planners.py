@@ -14,7 +14,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from .engine import Plan, ReplayError, canonical, sha256
+from .engine import ModelDecision, Plan, ReplayError, canonical, numeric, sha256
 
 
 def plan(action: str, symbol: str, fraction: float, thesis: str,
@@ -171,7 +171,8 @@ class CodexPlanner:
         self.timeout_seconds = timeout_seconds
         self.call_count = 0
 
-    def propose(self, context: dict[str, Any]) -> dict[str, Any] | None:
+    def propose(self, context: dict[str, Any]) -> ModelDecision | dict[str, Any] | None:
+        invocation_started = time.monotonic()
         if self.call_count >= self.max_calls:
             return None
         if context["pending_order"]:
@@ -188,7 +189,18 @@ class CodexPlanner:
             if stored["status"] != "CONNECTED_VALID":
                 return None
             Plan.parse(stored["answer"], set(context["universe"]))
-            return stored["answer"]
+            if stored.get("output_hash") != sha256(stored["answer"]):
+                raise ReplayError("CACHED_MODEL_OUTPUT_MISMATCH")
+            # Old cache entries have only subprocess time, not complete model
+            # decision latency. They must not create a faster replay fill.
+            original_latency = stored.get("decision_latency_seconds")
+            try:
+                original_latency = numeric(original_latency)
+            except ReplayError as exc:
+                raise ReplayError("CACHED_MODEL_LATENCY_UNVERIFIED") from exc
+            if original_latency < 0:
+                raise ReplayError("CACHED_MODEL_LATENCY_UNVERIFIED")
+            return ModelDecision(stored["answer"], original_latency)
         if intent.exists():
             # The external call may have completed without an acknowledgement;
             # never launch a second model attempt for the same opaque request.
@@ -230,9 +242,12 @@ class CodexPlanner:
         except (ValueError, OSError, ReplayError) as exc:
             status, error = "MODEL_INVALID_OUTPUT", str(exc)[:200]
             answer = None
+        model_elapsed = time.monotonic() - started
+        original_latency = time.monotonic() - invocation_started
         _write_exclusive(result, dict(input_hash=sha256(context), answer=answer,
                                        output_hash=sha256(answer) if answer is not None else None,
                                        status=status, error=error,
-                                       elapsed_seconds=time.monotonic()-started,
+                                       elapsed_seconds=model_elapsed,
+                                       decision_latency_seconds=original_latency,
                                        provider_cost_usdt="UNKNOWN_NOT_ZERO"))
-        return answer
+        return ModelDecision(answer, original_latency) if answer is not None else None

@@ -39,6 +39,29 @@ There is **no real order router, real wallet, live notification, scheduler,
 portfolio mutation or automatic retry** in this module. The Observer and sealed
 trial remain unchanged. No live economic advantage is claimed.
 
+### PR #18 review corrections (offline only)
+
+- **Settlement completeness:** independent verification now requires each order
+  that is eligible at a received quote to produce exactly one fill or justified
+  rejection *on that receipt*. Deleting a losing fill/rejection and rehashing
+  the ledger cannot leave a fictitious pending order that passes the audit.
+  Orders not yet eligible, including orders created on the final receipt, may
+  legitimately remain pending.
+- **Replay-stable model timing:** a successful Codex decision now carries its
+  original recorded decision latency into replay from a private cache. A cache
+  created by an older version without that evidence fails closed; create a
+  separate private model runtime for a new bounded attempt, preserving the old
+  artifact for investigation. No earlier PAPER fill is inferred from cache-read
+  speed. Algorithmic control arms still use measured local proposal duration.
+- **Current-frame risk:** mark existing positions at the current receipt's bid
+  and latch any drawdown halt **before** settling a pending BUY, then recheck
+  equity after settlement costs. A drawdown halt does not obstruct permitted
+  SELL exits.
+
+These are verified with deliberately forged ledgers, a delayed mocked model
+response, and a two-asset price-shock test. They are software integrity evidence,
+not a market-return result.
+
 ## Minimal reproducible exercise
 
 From the checkout root:

@@ -158,7 +158,19 @@ class Plan:
 
 
 class Planner(TypeProtocol):
-    def propose(self, context: dict[str, Any]) -> dict[str, Any] | None: ...
+    def propose(self, context: dict[str, Any]) -> "ModelDecision | dict[str, Any] | None": ...
+
+
+@dataclass(frozen=True)
+class ModelDecision:
+    """Persisted model decision and its original, replay-stable latency.
+
+    Cached outputs cannot gain earlier execution eligibility by skipping the
+    actual inference time paid to produce the original decision.
+    """
+
+    plan: dict[str, Any]
+    latency_seconds: float
 
 
 class Chain:
@@ -224,6 +236,13 @@ class Experiment:
         # Mark open positions at bid, which is closer to an executable exit.
         mark = sum(pos.quantity * frame.quotes[s].bid for s, pos in arm.positions.items())
         return arm.cash + mark, mark
+
+    def _mark_risk(self, arm: Arm, frame: Frame) -> None:
+        equity, _ = self._equity(arm, frame)
+        arm.peak_equity = max(equity, arm.peak_equity)
+        arm.worst_drawdown = max(arm.worst_drawdown, 1 - equity / arm.peak_equity)
+        if equity / arm.peak_equity <= 1 - self.protocol.max_drawdown_fraction:
+            arm.halted = True
 
     def _mature(self, arm: Arm, frame: Frame) -> None:
         for episode in arm.episodes:
@@ -345,13 +364,13 @@ class Experiment:
                           raw_sha256=frame.raw_hash, symbols=sorted(frame.quotes),
                           raw=raw))
         for arm in self.arms.values():
+            # Existing positions can cross the halt threshold on this receipt.
+            # Latch the current mark before permitting a pending BUY to settle.
+            self._mark_risk(arm, frame)
             self._settle(arm, frame)
             self._mature(arm, frame)
-            equity, _ = self._equity(arm, frame)
-            arm.peak_equity = max(equity, arm.peak_equity)
-            arm.worst_drawdown = max(arm.worst_drawdown, 1 - equity / arm.peak_equity)
-            if equity / arm.peak_equity <= 1 - self.protocol.max_drawdown_fraction:
-                arm.halted = True
+            # Fees and slippage can themselves cause a drawdown after a fill.
+            self._mark_risk(arm, frame)
         self._evaluate(frame)
         self._last = frame
 
@@ -373,10 +392,17 @@ class Experiment:
                            resolved_memory=memory[-30:], protocol=dict(vars(self.protocol)))
             start = time.monotonic()
             try:
-                raw = arm.planner.propose(context)
+                proposal = arm.planner.propose(context)
                 latency = time.monotonic() - start
-                if raw is None:
+                if proposal is None:
                     raise ReplayError("MODEL_UNAVAILABLE_NOT_CASH")
+                if isinstance(proposal, ModelDecision):
+                    latency = numeric(proposal.latency_seconds)
+                    if latency < 0:
+                        raise ReplayError("INVALID_RECORDED_MODEL_LATENCY")
+                    raw = proposal.plan
+                else:
+                    raw = proposal
                 plan = Plan.parse(raw, self._universe or set())
             except Exception as exc:
                 arm.model_unavailable += 1

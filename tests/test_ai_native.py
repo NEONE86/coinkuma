@@ -5,10 +5,12 @@ from __future__ import annotations
 import copy
 import json
 import tempfile
+import time
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from one_trading.ai_native.__main__ import run
 from one_trading.ai_native.audit import AuditError, digest, verify
@@ -28,6 +30,16 @@ def packet(index, price=100.0, *, age=0, gap=0.1, ask_depth=50_000,
                         exchange_at=(recv - timedelta(seconds=age)).isoformat())})
 
 
+def rehash_ledger(result):
+    tip = "0" * 64
+    for index, row in enumerate(result["ledger"]):
+        row["seq"] = index
+        row["previous_hash"] = tip
+        row["hash"] = digest({k: v for k, v in row.items() if k != "hash"})
+        tip = row["hash"]
+    result["ledger_tip"] = tip
+
+
 class SequencePlanner:
     def __init__(self, actions):
         self.actions = actions
@@ -44,6 +56,15 @@ class SequencePlanner:
 class MissingPlanner:
     def propose(self, context):
         return None
+
+
+class TwoAssetPlanner:
+    def propose(self, context):
+        if context["frame_id"] == "source-0":
+            return plan("BUY", "BTCUSDT", 0.10, "Initial BTC exposure")
+        if context["frame_id"] == "source-1":
+            return plan("BUY", "ETHUSDT", 0.10, "Second position before price shock")
+        return plan("HOLD", "CASH", 0.0, "No additional position")
 
 
 class AINativeTest(unittest.TestCase):
@@ -82,6 +103,67 @@ class AINativeTest(unittest.TestCase):
         fills = [r["payload"] for r in engine.finish()["ledger"] if r["kind"] == "paper_fill"]
         self.assertEqual(len(fills), 1)
         self.assertEqual(fills[0]["quote_frame"], "source-2")
+
+    def test_cached_model_keeps_original_latency_and_does_not_backfill(self):
+        def fake_model_run(_command, **kwargs):
+            time.sleep(0.08)
+            (Path(kwargs["cwd"]) / "answer.json").write_text(json.dumps(
+                plan("BUY", "BTCUSDT", 0.10, "Synthetic slow model")))
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+        with tempfile.TemporaryDirectory() as dirname:
+            def experiment():
+                ai = CodexPlanner(runtime=Path(dirname), model="mock-model", max_calls=2)
+                return Experiment(Protocol(execution_delay_seconds=0),
+                                  {"CASH": CashPlanner(), "AI": ai}, data_use="SYNTHETIC")
+
+            with patch("one_trading.ai_native.planners.shutil.which", return_value="/mock/codex"), \
+                 patch("one_trading.ai_native.planners.subprocess.run", side_effect=fake_model_run) as model_run:
+                first = experiment()
+                replayed = experiment()
+                for i in range(3):
+                    raw = packet(i, second_step=0.03)
+                    first.observe(raw)
+                    replayed.observe(raw)
+                model_run.assert_called_once()
+                for engine in (first, replayed):
+                    self.assertFalse(any(row["kind"] == "paper_fill"
+                                         for row in engine.ledger.records))
+                raw = packet(3, second_step=0.1)
+                first.observe(raw)
+                replayed.observe(raw)
+            initial = first.finish()
+            cached = replayed.finish()
+            decisions = [next(row["payload"] for row in result["ledger"]
+                              if row["kind"] == "decision" and row["payload"]["arm"] == "AI")
+                         for result in (initial, cached)]
+            self.assertGreater(decisions[0]["model_latency_seconds"], 0.03)
+            self.assertEqual(decisions[0]["model_latency_seconds"],
+                             decisions[1]["model_latency_seconds"])
+            for result in (initial, cached):
+                fills = [row["payload"] for row in result["ledger"]
+                         if row["kind"] == "paper_fill" and row["payload"]["arm"] == "AI"]
+                self.assertTrue(fills)
+                self.assertEqual(fills[0]["quote_frame"], "source-3")
+                verify(result)
+
+    def test_new_receipt_drawdown_halts_pending_buy_before_execution(self):
+        engine = Experiment(Protocol(execution_delay_seconds=0, max_drawdown_fraction=0.01),
+                            {"CASH": CashPlanner(), "AI": TwoAssetPlanner()},
+                            data_use="SYNTHETIC")
+        for index, btc_price in enumerate((100, 102, 60)):
+            raw = packet(index, btc_price)
+            raw["quotes"]["ETHUSDT"] = dict(raw["quotes"]["BTCUSDT"],
+                                             bid=100, ask=100.1)
+            engine.observe(raw)
+        result = engine.finish()
+        self.assertEqual(result["summary"]["AI"]["fills"], 1)
+        self.assertTrue(result["summary"]["AI"]["drawdown_halted"])
+        rejections = [row["payload"] for row in result["ledger"]
+                      if row["kind"] == "order_rejected" and row["payload"]["arm"] == "AI"]
+        self.assertEqual([row["reason"] for row in rejections], ["DRAWDOWN_HALT"])
+        self.assertGreater(result["summary"]["AI"]["max_observed_drawdown_fraction"], 0.01)
+        verify(result)
 
     def test_stale_quote_rejects_paper_fill(self):
         engine, _ = self.experiment({"source-0": "BUY"})
@@ -180,6 +262,57 @@ class AINativeTest(unittest.TestCase):
             tip = item["hash"]
         forged["ledger_tip"] = tip
         with self.assertRaisesRegex(AuditError, "FALSE_OR_WRONG_REJECTION"):
+            verify(forged)
+
+    def test_deleted_losing_fill_cannot_hide_as_pending_order(self):
+        engine, _ = self.experiment({"source-0": "BUY"})
+        for index, price in enumerate((100, 101, 80)):
+            engine.observe(packet(index, price))
+        forged = copy.deepcopy(engine.finish())
+        forged["ledger"] = [r for r in forged["ledger"] if r["kind"] != "paper_fill"]
+        account = forged["summary"]["AI"]
+        initial = forged["initial_capital_per_arm"]
+        account.update(cash=initial, equity_marked_at_bid=initial, pnl_marked_at_bid=0.0,
+                       return_fraction=0.0, realized_pnl=0.0,
+                       open_exposure_marked_at_bid=0.0, open_positions=0,
+                       pending_order=True, fills=0, fees_paid=0.0,
+                       modeled_slippage_paid=0.0, gross_turnover_usdt=0.0,
+                       max_observed_drawdown_fraction=0.0)
+        rehash_ledger(forged)
+        with self.assertRaisesRegex(AuditError, "MISSING_ELIGIBLE_SETTLEMENT"):
+            verify(forged)
+
+    def test_pending_order_may_reach_ledger_end_before_eligibility(self):
+        engine, _ = self.experiment({"source-0": "BUY"}, execution_delay_seconds=500)
+        for i in range(3):
+            engine.observe(packet(i))
+        result = engine.finish()
+        self.assertTrue(result["summary"]["AI"]["pending_order"])
+        self.assertEqual(verify(result)["counts"]["fills"], 0)
+
+    def test_cached_model_without_original_latency_fails_closed(self):
+        with tempfile.TemporaryDirectory() as dirname:
+            context = dict(frame_id="source-0", cutoff=BASE.isoformat(), history={},
+                           universe=["BTCUSDT"], positions={}, pending_order=False)
+            folder = Path(dirname) / digest(["mock-model", context])
+            folder.mkdir()
+            answer = plan("BUY", "BTCUSDT", 0.1, "Legacy cached proposal")
+            (folder / "result.json").write_text(json.dumps(dict(
+                input_hash=digest(context), status="CONNECTED_VALID", answer=answer,
+                output_hash=digest(answer), elapsed_seconds=0.08)))
+            planner = CodexPlanner(runtime=Path(dirname), model="mock-model", max_calls=1)
+            with self.assertRaisesRegex(ReplayError, "CACHED_MODEL_LATENCY_UNVERIFIED"):
+                planner.propose(context)
+
+    def test_deleted_rejected_order_cannot_hide_as_pending(self):
+        engine, _ = self.experiment({"source-0": "BUY"})
+        engine.observe(packet(0))
+        engine.observe(packet(1, age=31))
+        forged = copy.deepcopy(engine.finish())
+        forged["ledger"] = [row for row in forged["ledger"] if row["kind"] != "order_rejected"]
+        forged["summary"]["AI"].update(rejected_orders=0, pending_order=True)
+        rehash_ledger(forged)
+        with self.assertRaisesRegex(AuditError, "MISSING_ELIGIBLE_SETTLEMENT"):
             verify(forged)
 
     def test_tampered_mature_label_rejected_even_if_rehashed(self):

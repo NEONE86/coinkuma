@@ -74,6 +74,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     receipt = None
     seen = set()
     symbols = None
+    due_settlements: dict[str, dict[str, Any]] = {}
     counts = {"receipts": 0, "decisions": 0, "fills": 0, "rejected": 0,
               "matured_labels": 0, "unavailable": 0}
     def track_equity(mark_frame: dict[str, Any]) -> None:
@@ -93,6 +94,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
         tip = row["hash"]
         kind, entry = row["kind"], row["payload"]
         if kind == "receipt":
+            # Once the following receipt arrives, a due order cannot be left
+            # pending or quietly settled against a still later quote.
+            check(not due_settlements, "MISSING_ELIGIBLE_SETTLEMENT")
             if receipt is not None:
                 track_equity(receipt)
             raw = entry["raw"]
@@ -120,6 +124,13 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                           for k in ("bid", "ask", "bid_size", "ask_size")), "QUOTE_NUMBER")
                 check(quote["bid"] < quote["ask"] and at(quote["exchange_at"]) <= current,
                       "CROSSED_OR_FUTURE_QUOTE")
+            # Mark the new price shock before a queued BUY can fill, mirroring
+            # the engine's pre-settlement drawdown latch.
+            track_equity(raw)
+            due_settlements = {
+                name: arm["pending"] for name, arm in arms.items()
+                if arm["pending"] is not None and at(arm["pending"]["eligible_at"]) <= current
+            }
             counts["receipts"] += 1
             continue
         check(receipt is not None, "EVENT_WITHOUT_RECEIPT")
@@ -170,9 +181,12 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             continue
         if kind in ("paper_fill", "order_rejected"):
             order = entry["order"]
+            check(due_settlements.get(entry["arm"]) == order,
+                  "SETTLEMENT_NOT_DUE_ON_THIS_RECEIPT")
             check(arm["pending"] == order and order["source_frame"] != receipt["id"] and
                   at(order["decision_at"]) < last and at(order["eligible_at"]) <= last,
                   "SAME_FRAME_OR_EARLY_EXECUTION")
+            del due_settlements[entry["arm"]]
             arm["pending"] = None
             quote = receipt["quotes"][order["symbol"]]
             age = (last - at(quote["exchange_at"])).total_seconds()
@@ -293,6 +307,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             counts["matured_labels"] += 1
             continue
         fail("UNKNOWN_LEDGER_EVENT:" + str(kind))
+    check(not due_settlements, "MISSING_ELIGIBLE_SETTLEMENT")
     check(tip == record["ledger_tip"] and counts["receipts"] == record["input_frames"],
           "LEDGER_TIP_OR_RECEIPT_COUNT")
     check(at(record["last_receipt"]) == last, "FINAL_RECEIPT_MISMATCH")
