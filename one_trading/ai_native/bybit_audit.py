@@ -285,12 +285,11 @@ def audit(path: Path) -> dict:
         next_receipt = successor_receipts.get(prov["raw_cutoff_seq"] + 1)
         if next_receipt is not None:
             next_wall, next_tick = next_receipt
-            # The monotonic ordering is authoritative. UTC can legitimately
-            # tie despite strictly ordered processing, so requiring BOTH
-            # clocks to be earlier would allow omitted invalidations.
+            # Both clocks must be nonregressing across the sample boundary.
+            # Equality in either clock is allowed for same-tick processing,
+            # but an earlier UTC with later monotonic is still contradictory.
             sample_tick = prov["sample_elapsed_seconds"]
-            require(not (next_tick < sample_tick or
-                         next_tick == sample_tick and next_wall < utc(frame["received_at"])),
+            require(next_tick >= sample_tick and next_wall >= utc(frame["received_at"]),
                     "CUTOFF_OMITS_EARLIER_RECEIPT")
 
     last_by_symbol = {}
@@ -334,10 +333,22 @@ def audit(path: Path) -> dict:
             require(expected[0] < expected[1] and actual == expected, "FRAME_RAW_QUOTE_MISMATCH")
             require(utc(quote["exchange_at"]) == exchange, "FRAME_RAW_CTS_MISMATCH")
 
+    # The live collector has a hard 300s deadline since its last emitted valid
+    # book. A forged DURATION terminal cannot claim a full capture after an
+    # uninterrupted gap that would have stopped the actual network loop.
+    if terminal["reason"] == "DURATION":
+        emitted = [p["sample_elapsed_seconds"] for p in provenance]
+        intervals = [emitted[0], *[later - earlier for earlier, later in
+                                  zip(emitted, emitted[1:])], terminal_tick - emitted[-1]]
+        require(all(0 <= gap < 300 for gap in intervals), "NO_VALID_BOOK_DEADLINE_VIOLATION")
+
+    nominal_coverage = len(frames) / max(1, duration - 1)
+
     return {"status": "PASS_SOURCE_CONSISTENCY_ONLY", "complete_24h":
-            terminal["reason"] == "DURATION" and duration == 86400,
+            terminal["reason"] == "DURATION" and duration == 86400 and nominal_coverage >= 0.90,
             "terminal_reason": terminal["reason"], "raw_count": total_raw,
             "frame_count": len(frames), "missed_count": terminal["missed_count"],
+            "nominal_sample_coverage": round(nominal_coverage, 6),
             "bytes": byte_count, "model_decisions": 0, "economic_alpha": "NOT_TESTED"}
 
 

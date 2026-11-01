@@ -186,6 +186,48 @@ class IndependentBybitAuditTests(unittest.TestCase):
         with self.assertRaisesRegex(AuditError, "CUTOFF_OMITS_EARLIER_RECEIPT"):
             audit(folder)
 
+    def test_post_sample_raw_wall_regression_rejected_with_later_monotonic(self):
+        # Raw #4 has UTC t=2 but forged monotonic t=4; frame #2 is t=3 on
+        # both clocks, so neither interpretation can be a valid append order.
+        def forge_raw(raw):
+            raw[3]["elapsed_seconds"] = 4
+        rewrite(self.folder / "raw.jsonl", forge_raw)
+        def forge_frame(frames):
+            additional = json.loads(json.dumps(frames[0]))
+            additional["id"] = "bybit-00000002"
+            additional["received_at"] = (BASE + timedelta(seconds=3)).isoformat()
+            frames.append(additional)
+        rewrite(self.folder / "frames.jsonl", forge_frame)
+        def forge_event(events):
+            events[-1]["frame_count"] = 2
+            events[-1]["at"] = (BASE + timedelta(seconds=5)).isoformat()
+            events[-1]["elapsed_seconds"] = 5
+            events.insert(-1, {"kind": "frame_provenance", "frame_id": "bybit-00000002",
+                               "generation": 1, "sample_elapsed_seconds": 3,
+                               "raw_cutoff_seq": 3,
+                               "source_seqs": dict(zip(SYMBOLS, (1, 2, 3)))})
+        rewrite(self.folder / "events.jsonl", forge_event)
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "CUTOFF_OMITS_EARLIER_RECEIPT"):
+            audit(self.folder)
+
+    def test_forged_24h_completion_after_300s_book_gap_is_rejected(self):
+        folder = Path(self.temp.name) / "forged-complete"
+        capture = Capture(folder, BASE, 0, duration=86400, max_bytes=20000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        capture.close("NO_VALID_BOOK", BASE + timedelta(seconds=301), 301)
+        def forge_terminal(events):
+            events[-1]["reason"] = "DURATION"
+            events[-1]["at"] = (BASE + timedelta(seconds=86400)).isoformat()
+            events[-1]["elapsed_seconds"] = 86400
+        rewrite(folder / "events.jsonl", forge_terminal)
+        reconcile_terminal(folder)
+        with self.assertRaisesRegex(AuditError, "NO_VALID_BOOK_DEADLINE_VIOLATION"):
+            audit(folder)
+
     def test_equal_sample_and_later_receipt_clocks_are_not_backdated(self):
         folder = Path(self.temp.name) / "tie-after"
         capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)

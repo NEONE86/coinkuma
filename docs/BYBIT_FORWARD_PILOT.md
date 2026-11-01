@@ -80,6 +80,11 @@ and terminal bounds, connection generations, sequence restarts,
 missing-sample totals, terminal counts and the total byte quota. It also detects
 price changes made to a frame and **rehashed** changes to its source that no
 longer match the frame. A nonzero exit means evidence is unfit for promotion.
+It rejects contradictory UTC/monotonic ordering across post-sample raw receipts
+and rejects a forged `DURATION` completion with a 300-second or longer valid-book
+gap. The `complete_24h` flag additionally requires at least 90% of nominal
+one-second slots to contain valid frames; source consistency alone is not
+sufficient to claim a completed 24-hour forward sample.
 
 The result `PASS_SOURCE_CONSISTENCY_ONLY` is deliberately limited: it does not
 authenticate Bybit's server, protect against all coordinated rewriting of the
