@@ -61,7 +61,7 @@ def numeric(value) -> float:
         raise AuditError("INVALID_BOOK_NUMBER") from exc
 
 
-def apply_raw_snapshot(payload: bytes, record: dict, state: dict, clocks: dict) -> None:
+def apply_raw_snapshot(payload: bytes, record: dict, state: dict, clocks: dict):
     """Independently reconstruct book validity from *every* original receipt.
 
     Invalid symbol-scoped messages invalidate that symbol. Unidentifiable
@@ -109,6 +109,9 @@ def apply_raw_snapshot(payload: bytes, record: dict, state: dict, clocks: dict) 
         return
     state[symbol] = record["seq"]
     clocks[symbol] = (data["seq"], cts)
+    if earlier is not None and data["seq"] < earlier[0]:
+        return dict(raw_seq=record["seq"], symbol=symbol,
+                    generation=record["generation"], at=record["received_at"])
 
 
 def audit(path: Path) -> dict:
@@ -145,6 +148,7 @@ def audit(path: Path) -> dict:
         require(terminal.get("elapsed_seconds", -1) >= duration, "PREMATURE_DURATION_CLAIM")
 
     provenance = [e for e in events if e.get("kind") == "frame_provenance"]
+    missed_samples = [e for e in events if e.get("kind") == "missed_frame"]
     require(len(provenance) == len(frames), "PROVENANCE_COUNT_MISMATCH")
     require(terminal.get("missed_count") ==
             sum(e.get("count", 0) for e in events if e.get("kind") == "missed_ticks") +
@@ -182,11 +186,14 @@ def audit(path: Path) -> dict:
             at = utc(frames[frame_cursor]["received_at"])
             tick = event["sample_elapsed_seconds"]
             frame_cursor += 1
+        elif kind == "missed_frame":
+            require("sample_elapsed_seconds" in event, "SAMPLING_EVIDENCE_REQUIRED")
+            at, tick = utc(event["at"]), event["sample_elapsed_seconds"]
         else:
             continue
         require(tick >= event_tick and at >= event_wall,
                 "RESET_SAMPLE_CLOCK_CONTRADICTION")
-        if kind == "frame_provenance":
+        if kind in ("frame_provenance", "missed_frame"):
             require(event.get("generation") == active_generation,
                     "FRAME_RECONNECT_INVALIDATION")
         event_tick, event_wall = tick, at
@@ -213,6 +220,7 @@ def audit(path: Path) -> dict:
                 "NON_MONOTONIC_SAMPLE")
         require(at > prior_wall, "NON_MONOTONIC_FRAME_TIME")
         require(tick < duration, "FRAME_AFTER_DURATION")
+        require(tick - prior_tick < 300, "NO_VALID_BOOK_DEADLINE_VIOLATION")
         require(tick <= terminal_tick and at <= terminal_at, "FRAME_AFTER_TERMINAL")
         require(type(prov.get("generation")) is int and prov["generation"] >= 1,
                 "INVALID_FRAME_GENERATION")
@@ -237,6 +245,31 @@ def audit(path: Path) -> dict:
     reconstructed = {}
     source_clocks = {}
     generation = 0
+    replayed_restarts = []
+    missed_cutoffs = {}
+    for sample in missed_samples:
+        cutoff = sample.get("raw_cutoff_seq")
+        require(type(cutoff) is int and 0 <= cutoff <= terminal["raw_count"], "SAMPLING_RAW_CUTOFF")
+        missed_cutoffs.setdefault(cutoff, []).append(sample)
+        successor_ids.add(cutoff + 1)
+    book_receipts = {}
+    def check_missed(cutoff, received, elapsed):
+        for sample in missed_cutoffs.get(cutoff, ()):
+            at, tick = utc(sample["at"]), sample["sample_elapsed_seconds"]
+            require(received <= at and elapsed <= tick, "SAMPLING_FUTURE_CUTOFF")
+            missing = []
+            for symbol in SYMBOLS:
+                if symbol not in reconstructed or sample["generation"] != generation:
+                    missing.append(symbol)
+                    continue
+                wall, mono = book_receipts[symbol]
+                exchange = datetime.fromtimestamp(source_clocks[symbol][1] / 1000, timezone.utc)
+                if not (0 <= tick-mono < 5 and 0 <= (at-wall).total_seconds() < 5
+                        and 0 <= (at-exchange).total_seconds() < 5):
+                    missing.append(symbol)
+            require(missing and sample.get("symbols") == missing, "SAMPLING_FALSE_MISSING_BOOK")
+    check_missed(0, first_at, 0)
+    emitted_cursor, last_emitted_tick = 0, 0.0
     for record in rows(root / "raw.jsonl"):
         # A rejected subscription is terminal for Capture.ingest()/network().
         # Clearing books alone is insufficient: a forged stream could present
@@ -249,15 +282,23 @@ def audit(path: Path) -> dict:
         require(type(elapsed) in (int, float) and math.isfinite(elapsed) and
                 raw_tick <= elapsed < duration and received >= raw_wall, "RAW_CHRONOLOGY")
         require(elapsed <= terminal_tick and received <= terminal_at, "RAW_AFTER_TERMINAL")
+        while emitted_cursor < len(provenance) and provenance[emitted_cursor]["raw_cutoff_seq"] < total_raw:
+            last_emitted_tick = provenance[emitted_cursor]["sample_elapsed_seconds"]
+            emitted_cursor += 1
+        require(elapsed - last_emitted_tick < 300, "NO_VALID_BOOK_DEADLINE_RAW")
         require(type(record.get("generation")) is int and record["generation"] >= 1,
                 "RAW_GENERATION")
         require(record["generation"] >= generation and record["generation"] in reset_lookup,
                 "RAW_GENERATION_ORDER")
         reset_at, reset_tick = reset_lookup[record["generation"]]
         require(reset_at <= received and reset_tick <= elapsed, "RAW_BEFORE_CONNECTION")
+        following = reset_lookup.get(record["generation"] + 1)
+        if following is not None:
+            require(received <= following[0] and elapsed <= following[1], "RAW_AFTER_CONNECTION")
         if record["generation"] != generation:
             reconstructed.clear()
             source_clocks.clear()
+            book_receipts.clear()
             generation = record["generation"]
         try:
             payload = base64.b64decode(record["payload_base64"], validate=True)
@@ -271,7 +312,13 @@ def audit(path: Path) -> dict:
         if (isinstance(control, dict) and control.get("op") == "subscribe" and
                 control.get("success") is False):
             subscription_rejection = (total_raw, received, elapsed, generation)
-        apply_raw_snapshot(payload, record, reconstructed, source_clocks)
+        restart = apply_raw_snapshot(payload, record, reconstructed, source_clocks)
+        if restart is not None:
+            replayed_restarts.append(restart)
+        for symbol, seq in reconstructed.items():
+            if seq == total_raw:
+                book_receipts[symbol] = (received, elapsed)
+        check_missed(total_raw, received, elapsed)
         if total_raw in wanted:
             try:
                 obj = json.loads(payload)
@@ -288,6 +335,22 @@ def audit(path: Path) -> dict:
             successor_receipts[total_raw] = (received, elapsed)
         raw_wall, raw_tick = received, elapsed
     require(total_raw == terminal["raw_count"], "RAW_COUNT_MISMATCH")
+    restart_events = [{k: e.get(k) for k in ("raw_seq", "symbol", "generation", "at")}
+                      for e in events if e.get("kind") == "source_restart"]
+    require(restart_events == replayed_restarts, "SOURCE_RESTART_EVIDENCE_MISMATCH")
+    event_cutoff, event_generation = 0, 0
+    pending_restarts = []
+    for event in events[1:-1]:
+        if event.get("kind") == "connection_reset":
+            event_generation = event["generation"]
+        elif event.get("kind") == "source_restart":
+            require(event["raw_seq"] > event_cutoff and event["generation"] == event_generation,
+                    "SOURCE_RESTART_EVENT_ORDER")
+            pending_restarts.append(event["raw_seq"])
+        elif event.get("kind") in ("frame_provenance", "missed_frame"):
+            event_cutoff = event["raw_cutoff_seq"]
+            require(all(seq <= event_cutoff for seq in pending_restarts), "SOURCE_RESTART_EVENT_ORDER")
+            pending_restarts.clear()
     subscription_events = [e for e in events if e.get("kind") == "subscription_failure"]
     if subscription_rejection is None:
         require(not subscription_events and terminal.get("reason") != "SUBSCRIPTION_REJECTED",
@@ -321,7 +384,6 @@ def audit(path: Path) -> dict:
             require(next_tick >= sample_tick and next_wall >= utc(frame["received_at"]),
                     "CUTOFF_OMITS_EARLIER_RECEIPT")
 
-    last_by_symbol = {}
     for frame, prov in zip(frames, provenance):
         frame_at = utc(frame["received_at"])
         tick = prov["sample_elapsed_seconds"]
@@ -341,16 +403,6 @@ def audit(path: Path) -> dict:
             require(type(obj.get("cts")) is int and obj["cts"] >= 0, "REFERENCED_CTS_INVALID")
             exchange = datetime.fromtimestamp(obj["cts"] / 1000, tz=timezone.utc)
             require(0 <= (frame_at - exchange).total_seconds() < 5, "EXCHANGE_FUTURE_OR_STALE")
-            previous = last_by_symbol.get(symbol)
-            if previous is not None and previous[0] == prov["generation"]:
-                _, old_seq, old_cts = previous
-                require(obj["cts"] >= old_cts, "REFERENCED_CTS_REGRESSION")
-                if data["seq"] < old_seq:
-                    require(data["u"] == 1, "REFERENCED_SEQ_REGRESSION")
-                    require(any(e.get("kind") == "source_restart" and
-                                e.get("raw_seq") == receipt["seq"] and
-                                e.get("symbol") == symbol for e in events), "UNLOGGED_SOURCE_RESTART")
-            last_by_symbol[symbol] = (prov["generation"], data["seq"], obj["cts"])
             quote = frame["quotes"][symbol]
             try:
                 bid, bsize = data["b"][0]
@@ -362,14 +414,74 @@ def audit(path: Path) -> dict:
             require(expected[0] < expected[1] and actual == expected, "FRAME_RAW_QUOTE_MISMATCH")
             require(utc(quote["exchange_at"]) == exchange, "FRAME_RAW_CTS_MISMATCH")
 
-    # The live collector has a hard 300s deadline since its last emitted valid
-    # book. A forged DURATION terminal cannot claim a full capture after an
-    # uninterrupted gap that would have stopped the actual network loop.
-    if terminal["reason"] == "DURATION":
-        emitted = [p["sample_elapsed_seconds"] for p in provenance]
-        intervals = [emitted[0], *[later - earlier for earlier, later in
-                                  zip(emitted, emitted[1:])], terminal_tick - emitted[-1]]
-        require(all(0 <= gap < 300 for gap in intervals), "NO_VALID_BOOK_DEADLINE_VIOLATION")
+    # Reconstruct the actual sampler state; counts in two mutable summaries
+    # are not independent evidence. Older missed-frame records lack a clock
+    # and are explicitly unverifiable rather than assigned an invented time.
+    next_tick, last_valid, attempts, misses = 1.0, 0.0, 0, 0
+    pending_skip = None
+    prior_cutoff = 0
+    sample_version = start.get("sampling_evidence_version", 1)
+    require(type(sample_version) is int and sample_version in (1, 2), "SAMPLING_VERSION")
+    for event in events[1:-1]:
+        kind = event.get("kind")
+        if kind == "missed_ticks":
+            require(pending_skip is None, "SAMPLING_DUPLICATE_SKIP")
+            pending_skip = event
+            continue
+        if kind not in ("frame_provenance", "missed_frame"):
+            require(pending_skip is None, "SAMPLING_UNBOUND_SKIP")
+            continue
+        tick = event.get("sample_elapsed_seconds")
+        require(type(tick) in (int, float) and math.isfinite(tick) and tick >= next_tick,
+                "SAMPLING_ATTEMPT_ORDER")
+        require(tick < duration and tick <= terminal_tick, "SAMPLING_AFTER_TERMINAL")
+        require(tick-last_valid < 300, "NO_VALID_BOOK_DEADLINE_SAMPLE")
+        cutoff = event["raw_cutoff_seq"]
+        require(cutoff >= prior_cutoff, "SAMPLING_CUTOFF_ORDER")
+        prior_cutoff = cutoff
+        attempts += 1
+        if sample_version == 2:
+            require(type(event.get("sample_index")) is int and event["sample_index"] == attempts,
+                    "SAMPLING_INDEX")
+        skipped = int(tick-next_tick)
+        require((pending_skip is not None) == (skipped > 0), "SAMPLING_MISSED_TICKS_MISSING")
+        sample_at = utc(event["at"]) if kind == "missed_frame" else utc(frames[int(event["frame_id"].split("-")[1])-1]["received_at"])
+        if pending_skip is not None:
+            require(type(pending_skip.get("count")) is int and pending_skip["count"] == skipped
+                    and utc(pending_skip["at"]) == sample_at, "SAMPLING_MISSED_TICKS_COUNT")
+            if sample_version == 2:
+                require(all(pending_skip.get(k) == event.get(k) for k in
+                            ("sample_index", "sample_elapsed_seconds", "raw_cutoff_seq", "generation")),
+                        "SAMPLING_SKIP_PROVENANCE")
+        if kind == "missed_frame":
+            successor = successor_receipts.get(cutoff + 1)
+            if successor is not None:
+                require(successor[0] >= sample_at and successor[1] >= tick,
+                        "SAMPLING_CUTOFF_OMITS_EARLIER_RECEIPT")
+        else:
+            last_valid = tick
+        misses += skipped + (kind == "missed_frame")
+        pending_skip = None
+        next_tick = tick + 1
+    require(pending_skip is None, "SAMPLING_UNBOUND_SKIP")
+    deadline = last_valid + 300
+    if terminal["reason"] == "NO_VALID_BOOK":
+        require(deadline <= duration or not frames, "NO_VALID_BOOK_TERMINAL_PRIORITY")
+        require(terminal_tick >= min(deadline, duration), "PREMATURE_NO_VALID_BOOK")
+        require(terminal_tick >= deadline or not frames, "PREMATURE_NO_VALID_BOOK")
+    elif terminal["reason"] == "DURATION":
+        require(duration <= deadline, "NO_VALID_BOOK_DEADLINE_VIOLATION")
+    elif subscription_rejection is None:
+        require(terminal_tick <= deadline, "NO_VALID_BOOK_DEADLINE_TERMINAL")
+
+    unsampled = max(0, math.ceil(min(terminal_tick, duration)-next_tick))
+    require(type(terminal.get("missed_count")) is int and terminal["missed_count"] == misses,
+            "SAMPLING_MISSED_COUNT")
+    require(type(terminal.get("unsampled_due_ticks")) is int and
+            terminal["unsampled_due_ticks"] == unsampled, "SAMPLING_UNSAMPLED_COUNT")
+    if sample_version == 2:
+        require(type(terminal.get("sample_attempts")) is int and terminal["sample_attempts"] == attempts,
+                "SAMPLING_ATTEMPT_COUNT")
 
     nominal_coverage = len(frames) / max(1, duration - 1)
 
@@ -377,6 +489,9 @@ def audit(path: Path) -> dict:
             terminal["reason"] == "DURATION" and duration == 86400 and nominal_coverage >= 0.90,
             "terminal_reason": terminal["reason"], "raw_count": total_raw,
             "frame_count": len(frames), "missed_count": terminal["missed_count"],
+            "sampling_evidence_version": sample_version, "sample_attempts": attempts,
+            "missed_frame_count": len(missed_samples), "missed_ticks": misses-len(missed_samples),
+            "unsampled_due_ticks": unsampled,
             "nominal_sample_coverage": round(nominal_coverage, 6),
             "bytes": byte_count, "model_decisions": 0, "economic_alpha": "NOT_TESTED"}
 

@@ -67,13 +67,14 @@ class Capture:
         self.quotes = {}
         self.source_clocks = {}
         self.seq = self.frames = self.missed = self.generation = 0
+        self.sample_attempts = 0
         self.last_frame_at = None
         self.last_frame_mono = start_mono
         self.closed = False
         self.write("events", {"kind": "start", "started_at": start, "endpoint": ENDPOINT,
                    "topics": TOPICS, "duration_seconds": duration, "max_bytes": max_bytes,
                    "sample_interval_seconds": 1, "freshness_seconds_exclusive": 5,
-                   "model_calls": 0, "real_orders": 0})
+                   "model_calls": 0, "real_orders": 0, "sampling_evidence_version": 2})
 
     def write(self, name: str, value: dict, *, terminal: bool = False) -> None:
         data = line(value)
@@ -98,10 +99,16 @@ class Capture:
         self.write("events", {"kind": "connection_reset", "at": stamp(at),
                               "elapsed_seconds": mono-self.start_mono, "generation": self.generation})
 
+    def check_deadline(self, mono: float) -> None:
+        duration_at = self.start_mono + self.duration
+        book_at = self.last_frame_mono + 300
+        if mono >= min(duration_at, book_at):
+            # A delayed wake-up cannot relabel the earlier mandatory stop.
+            raise StopCapture("NO_VALID_BOOK" if book_at < duration_at else "DURATION")
+
     def ingest(self, payload: bytes, at: datetime, mono: float) -> None:
         self.clock(at, mono)
-        if mono - self.start_mono >= self.duration:
-            raise StopCapture("DURATION")
+        self.check_deadline(mono)
         if not isinstance(payload, bytes):
             raise TypeError("payload must be bytes")
         self.write("raw", {"seq": self.seq + 1, "received_at": stamp(at),
@@ -172,15 +179,14 @@ class Capture:
 
     def sample(self, at: datetime, mono: float) -> None:
         self.clock(at, mono)
-        if mono - self.start_mono >= self.duration:
-            raise StopCapture("DURATION")
-        if mono - self.last_frame_mono >= 300:
-            raise StopCapture("NO_VALID_BOOK")
+        self.check_deadline(mono)
         if mono < self.next_tick:
             return
         # Never backdate a missed tick or use a later message for an earlier tick.
         skipped = max(0, int(mono - self.next_tick))
-        self.next_tick = mono + 1
+        evidence = {"sample_index": self.sample_attempts + 1,
+                    "sample_elapsed_seconds": mono-self.start_mono,
+                    "generation": self.generation, "raw_cutoff_seq": self.seq}
         reasons = []
         for symbol in SYMBOLS:
             q = self.quotes.get(symbol)
@@ -188,30 +194,35 @@ class Capture:
                 reasons.append(symbol)
             elif not 0 <= (at-datetime.fromisoformat(q[0]["exchange_at"])).total_seconds() < 5:
                 reasons.append(symbol)
+        pending = []
         if skipped:
-            self.missed += skipped
-            self.write("events", {"kind": "missed_ticks", "count": skipped, "at": stamp(at), "reason": "SAMPLER_DELAY"})
+            pending.append(("events", {"kind": "missed_ticks", "count": skipped,
+                            "at": stamp(at), "reason": "SAMPLER_DELAY", **evidence}))
         if reasons:
-            self.missed += 1
-            self.write("events", {"kind": "missed_frame", "at": stamp(at), "symbols": reasons,
-                                  "reason": "MISSING_STALE_OR_CLOCK_SKEW"})
-            return
-        if self.last_frame_at is not None and at <= self.last_frame_at:
-            raise StopCapture("LOCAL_CLOCK_NOT_ADVANCING")
-        packet = {"id": f"bybit-{self.frames+1:08d}", "received_at": stamp(at),
-                  "quotes": {s: self.quotes[s][0] for s in SYMBOLS}}
-        Frame.parse(packet)
-        provenance = {"kind": "frame_provenance", "frame_id": packet["id"],
-                      "generation": self.generation, "sample_elapsed_seconds": mono-self.start_mono,
-                      "raw_cutoff_seq": self.seq,
-                      "source_seqs": {s: self.quotes[s][3] for s in SYMBOLS}}
-        if self.used + len(line(packet)) + len(line(provenance)) > self.limit - TERMINAL_RESERVE:
+            pending.append(("events", {"kind": "missed_frame", "at": stamp(at), "symbols": reasons,
+                            "reason": "MISSING_STALE_OR_CLOCK_SKEW", **evidence}))
+        else:
+            if self.last_frame_at is not None and at <= self.last_frame_at:
+                raise StopCapture("LOCAL_CLOCK_NOT_ADVANCING")
+            packet = {"id": f"bybit-{self.frames+1:08d}", "received_at": stamp(at),
+                      "quotes": {s: self.quotes[s][0] for s in SYMBOLS}}
+            Frame.parse(packet)
+            provenance = {"kind": "frame_provenance", "frame_id": packet["id"], **evidence,
+                          "source_seqs": {s: self.quotes[s][3] for s in SYMBOLS}}
+            pending.extend((("frames", packet), ("events", provenance)))
+        # Reserve the complete sampling outcome before writing any part of it.
+        # A quota stop must not advance next_tick or lose a claimed miss event.
+        if self.used + sum(len(line(row)) for _, row in pending) > self.limit - TERMINAL_RESERVE:
             raise StopCapture("STORAGE_QUOTA")
-        self.write("frames", packet)
-        self.frames += 1
-        self.last_frame_at = at
-        self.last_frame_mono = mono
-        self.write("events", provenance)
+        for name, row in pending:
+            self.write(name, row)
+        self.next_tick = mono + 1
+        self.sample_attempts += 1
+        self.missed += skipped + bool(reasons)
+        if not reasons:
+            self.frames += 1
+            self.last_frame_at = at
+            self.last_frame_mono = mono
 
     def close(self, reason: str, at: datetime, mono: float) -> None:
         if self.closed:
@@ -222,6 +233,7 @@ class Capture:
             self.write("events", {"kind": "terminal", "reason": reason, "at": stamp(at),
                        "elapsed_seconds": max(0, mono-self.start_mono), "raw_count": self.seq,
                        "frame_count": self.frames, "missed_count": self.missed,
+                       "sample_attempts": self.sample_attempts,
                        "unsampled_due_ticks": unsampled,
                        "bytes_before_terminal": self.used}, terminal=True)
         finally:
@@ -240,24 +252,21 @@ async def network(capture: Capture) -> str:
     failures = 0
     while True:
         try:
-            if time.monotonic() - capture.start_mono >= capture.duration:
-                return "DURATION" if capture.frames else "NO_VALID_BOOK"
-            if time.monotonic() - capture.last_frame_mono >= 300:
-                return "NO_VALID_BOOK"
+            capture.check_deadline(time.monotonic())
             capture.reconnect(now(), time.monotonic())
             remaining = min(capture.start_mono + capture.duration, capture.last_frame_mono + 300) - time.monotonic()
             if remaining <= 0:
-                return "DURATION" if capture.frames else "NO_VALID_BOOK"
+                capture.check_deadline(time.monotonic())
             async with websockets.connect(ENDPOINT, max_size=1_000_000, open_timeout=min(10, remaining)) as ws:
                 remaining = min(capture.start_mono + capture.duration, capture.last_frame_mono + 300) - time.monotonic()
                 if remaining <= 0:
-                    return "DURATION" if capture.frames else "NO_VALID_BOOK"
+                    capture.check_deadline(time.monotonic())
                 await asyncio.wait_for(ws.send(json.dumps({"op": "subscribe", "args": TOPICS})), remaining)
                 next_ping = time.monotonic() + 20
                 while True:
                     remaining = min(capture.start_mono + capture.duration, capture.last_frame_mono + 300) - time.monotonic()
                     if remaining <= 0:
-                        return "NO_VALID_BOOK" if time.monotonic() - capture.last_frame_mono >= 300 else ("DURATION" if capture.frames else "NO_VALID_BOOK")
+                        capture.check_deadline(time.monotonic())
                     if time.monotonic() >= next_ping:
                         await asyncio.wait_for(ws.send('{"op":"ping"}'), remaining)
                         next_ping = time.monotonic() + 20

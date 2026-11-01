@@ -81,10 +81,61 @@ missing-sample totals, terminal counts and the total byte quota. It also detects
 price changes made to a frame and **rehashed** changes to its source that no
 longer match the frame. A nonzero exit means evidence is unfit for promotion.
 It rejects contradictory UTC/monotonic ordering across post-sample raw receipts
-and rejects a forged `DURATION` completion with a 300-second or longer valid-book
-gap. The `complete_24h` flag additionally requires at least 90% of nominal
+and rejects post-deadline raw receipts or samples for **every** terminal reason.
+The deadline is 300 seconds from start or the last emitted valid frame, not from
+the latest receipt. At exactly the deadline no new receipt/sample is accepted.
+A delayed wake-up uses the earlier of duration and the book deadline (duration
+wins ties). A genuine `NO_VALID_BOOK` terminal can record the stop and cleanup
+after the deadline; a fatal subscription receipt before it may similarly finish
+cleanup later. Neither permits further receipts or samples. The `complete_24h`
+flag additionally requires at least 90% of nominal
 one-second slots to contain valid frames; source consistency alone is not
 sufficient to claim a completed 24-hour forward sample.
+
+Sequence/CTS checks replay all original messages, including a `u=1` restart
+between sampled frames. Each accepted sequence reset must have a matching
+`source_restart` with the actual receipt ID, symbol, generation and UTC time in
+processing order. Old-generation receipts must fall between that generation's
+opening reset and the next reset on **both** clocks independently; exact ties
+are permitted. Reconnects still invalidate all quotes and source clocks.
+
+### Sampling evidence version 2
+
+New captures declare `sampling_evidence_version: 2`. Each completed sampling
+attempt writes exactly one `frame_provenance` or `missed_frame` outcome with a
+consecutive `sample_index`, monotonic `sample_elapsed_seconds`, connection
+`generation` and `raw_cutoff_seq`. A preceding `missed_ticks`, when needed, binds
+to the same attempt. This adds metadata to existing events, not interpolated
+frames or another periodic stream. The complete outcome's bytes are reserved
+before writing, so a storage-quota stop does not advance counters without evidence.
+All metadata remains inside the unchanged 1 GB cap and terminal reserve.
+
+The independent auditor starts `next_tick` at 1 and, for each observed attempt
+at elapsed `t`, recomputes skipped ticks as `floor(t-next_tick)`, then advances
+`next_tick` to `t+1`. It separately reconstructs missing/stale symbols from raw
+receipts at that attempt's cutoff. `missed_count` is skipped ticks plus failed
+book attempts; terminal `unsampled_due_ticks` is
+`max(0, ceil(min(terminal_elapsed, duration)-next_tick))` and is not added to
+`missed_count`. It is a count of unattempted slots, not observed market data.
+The terminal also records completed `sample_attempts`.
+
+Legacy files are never rewritten. Legacy frame-only traces can still be checked
+from their recorded sample times. A legacy `missed_frame` without monotonic
+sampling evidence fails explicitly with `SAMPLING_EVIDENCE_REQUIRED`; the auditor
+does not invent a timestamp or promote that incomplete trace as fully verified.
+Zero valid frames remain `NO_VALID_MARKET_EVIDENCE`, even when failure termination
+is structurally sensible. This is not a claim that zero-data failures are market
+evidence.
+
+PR #19 remediation controls are in `ReviewBoundaryTests` and `ForwardTests`:
+300-second boundary/recovery/terminal cases; intermediate restart versus
+rehashed sequence/CTS regressions and forged restart markers; both independent
+generation clocks and exact ties; deleted sampling events/counters versus normal
+delayed and missing-book attempts. Run:
+
+```sh
+python -m unittest tests.test_bybit_audit_independent tests.test_bybit_forward -v
+```
 
 The result `PASS_SOURCE_CONSISTENCY_ONLY` is deliberately limited: it does not
 authenticate Bybit's server, protect against all coordinated rewriting of the

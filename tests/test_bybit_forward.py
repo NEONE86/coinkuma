@@ -149,6 +149,40 @@ class ForwardTests(unittest.TestCase):
     def test_retry_backoff_is_bounded(self):
         self.assertEqual([retry_delay(i) for i in range(1, 8)], [1, 2, 4, 8, 16, 30, 30])
 
+    def test_sampling_evidence_and_quota_stop_preserve_complete_attempts(self):
+        for s in SYMBOLS: self.ingest(s)
+        self.sample(1)
+        before = (self.c.sample_attempts, self.c.next_tick, self.c.missed, self.c.frames, self.c.used)
+        self.c.limit = self.c.used + 4097
+        with self.assertRaisesRegex(StopCapture, "STORAGE_QUOTA"):
+            self.sample(4)
+        self.assertEqual(before, (self.c.sample_attempts, self.c.next_tick,
+                                 self.c.missed, self.c.frames, self.c.used))
+        self.assertEqual(self.rows("events")[-1]["sample_index"], 1)
+        self.assertEqual(self.rows("events")[0]["sampling_evidence_version"], 2)
+
+    def test_exact_first_book_deadline_does_not_record_receipt(self):
+        c = Capture(Path(self.tmp.name)/"first-deadline", BASE, 0, duration=600, max_bytes=10000)
+        c.reconnect(BASE, 0)
+        try:
+            with self.assertRaisesRegex(StopCapture, "NO_VALID_BOOK"):
+                c.ingest(payload(SYMBOLS[0], 300), BASE+timedelta(seconds=300), 300)
+            self.assertEqual(c.seq, 0)
+            with self.assertRaisesRegex(StopCapture, "NO_VALID_BOOK"):
+                c.sample(BASE+timedelta(seconds=300), 300)
+            self.assertEqual(c.sample_attempts, 0)
+        finally:
+            c.close("NO_VALID_BOOK", BASE+timedelta(seconds=300), 300)
+
+    def test_delayed_wakeup_uses_earliest_deadline(self):
+        c = Capture(Path(self.tmp.name)/"delayed-deadline", BASE, 0, duration=600, max_bytes=10000)
+        try:
+            for tick in (300, 600, 601):
+                with self.subTest(tick=tick), self.assertRaisesRegex(StopCapture, "NO_VALID_BOOK"):
+                    c.sample(BASE+timedelta(seconds=tick), tick)
+        finally:
+            c.close("NO_VALID_BOOK", BASE+timedelta(seconds=601), 601)
+
     def test_subscription_failure_is_retained_and_stops(self):
         with self.assertRaisesRegex(StopCapture, "SUBSCRIPTION_REJECTED"):
             self.c.ingest(b'{"op":"subscribe","success":false}', BASE, 0)
