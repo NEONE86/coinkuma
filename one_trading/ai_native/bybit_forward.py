@@ -71,19 +71,32 @@ class Capture:
         self.last_frame_at = None
         self.last_frame_mono = start_mono
         self.closed = False
+        self.fatal_stop = None
         self.write("events", {"kind": "start", "started_at": start, "endpoint": ENDPOINT,
                    "topics": TOPICS, "duration_seconds": duration, "max_bytes": max_bytes,
                    "sample_interval_seconds": 1, "freshness_seconds_exclusive": 5,
                    "model_calls": 0, "real_orders": 0, "sampling_evidence_version": 2})
 
     def write(self, name: str, value: dict, *, terminal: bool = False) -> None:
+        if self.fatal_stop is not None and not terminal:
+            raise StopCapture(self.fatal_stop["reason"])
         data = line(value)
         cap = self.limit if terminal else self.limit - TERMINAL_RESERVE
         if self.used + len(data) > cap:
-            raise StopCapture("STORAGE_QUOTA")
+            self.quota_stop(len(data))
         self.files[name].write(data)
         self.files[name].flush()
         self.used += len(data)
+
+    def quota_stop(self, attempted_bytes: int) -> None:
+        # Keep the first failure boundary in the reserved terminal record.
+        # WebSocket context cleanup can finish after the book deadline.
+        if self.fatal_stop is None:
+            self.fatal_stop = dict(reason="STORAGE_QUOTA", at=stamp(self.last_wall),
+                elapsed_seconds=self.last_mono-self.start_mono, raw_count=self.seq,
+                frame_count=self.frames, sample_attempts=self.sample_attempts,
+                used_bytes=self.used, attempted_bytes=attempted_bytes)
+        raise StopCapture("STORAGE_QUOTA")
 
     def clock(self, at: datetime, mono: float) -> None:
         at = at.astimezone(timezone.utc) if at.tzinfo is not None and at.utcoffset() is not None else None
@@ -213,7 +226,7 @@ class Capture:
         # Reserve the complete sampling outcome before writing any part of it.
         # A quota stop must not advance next_tick or lose a claimed miss event.
         if self.used + sum(len(line(row)) for _, row in pending) > self.limit - TERMINAL_RESERVE:
-            raise StopCapture("STORAGE_QUOTA")
+            self.quota_stop(sum(len(line(row)) for _, row in pending))
         for name, row in pending:
             self.write(name, row)
         self.next_tick = mono + 1
@@ -229,12 +242,15 @@ class Capture:
             return
         try:
             # Account for unsampled scheduled slots without inventing their wall times.
-            unsampled = max(0, math.ceil(min(mono, self.start_mono+self.duration) - self.next_tick))
+            stop_mono = (self.start_mono + self.fatal_stop["elapsed_seconds"]
+                         if self.fatal_stop is not None else mono)
+            unsampled = max(0, math.ceil(min(stop_mono, self.start_mono+self.duration) - self.next_tick))
             self.write("events", {"kind": "terminal", "reason": reason, "at": stamp(at),
                        "elapsed_seconds": max(0, mono-self.start_mono), "raw_count": self.seq,
                        "frame_count": self.frames, "missed_count": self.missed,
                        "sample_attempts": self.sample_attempts,
                        "unsampled_due_ticks": unsampled,
+                       "fatal_stop": self.fatal_stop,
                        "bytes_before_terminal": self.used}, terminal=True)
         finally:
             for stream in self.files.values():

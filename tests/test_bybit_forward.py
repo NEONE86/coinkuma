@@ -183,6 +183,21 @@ class ForwardTests(unittest.TestCase):
         finally:
             c.close("NO_VALID_BOOK", BASE+timedelta(seconds=601), 601)
 
+    def test_quota_stop_is_sticky_and_cleanup_does_not_create_sampling_slots(self):
+        for s in SYMBOLS: self.ingest(s)
+        self.sample(1)
+        with self.assertRaisesRegex(StopCapture, "STORAGE_QUOTA"):
+            self.c.ingest(b'x'*20000, BASE+timedelta(seconds=2), 2)
+        first_stop = dict(self.c.fatal_stop)
+        with self.assertRaisesRegex(StopCapture, "STORAGE_QUOTA"):
+            self.ingest(SYMBOLS[0], 3)
+        self.assertEqual(self.c.fatal_stop, first_stop)
+        self.c.close("STORAGE_QUOTA", BASE+timedelta(seconds=10), 10)
+        terminal = self.rows("events")[-1]
+        self.assertEqual(terminal["fatal_stop"]["elapsed_seconds"], 2)
+        self.assertEqual(terminal["raw_count"], 3)
+        self.assertEqual(terminal["unsampled_due_ticks"], 0)
+
     def test_subscription_failure_is_retained_and_stops(self):
         with self.assertRaisesRegex(StopCapture, "SUBSCRIPTION_REJECTED"):
             self.c.ingest(b'{"op":"subscribe","success":false}', BASE, 0)

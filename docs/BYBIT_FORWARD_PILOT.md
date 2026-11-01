@@ -119,6 +119,17 @@ book attempts; terminal `unsampled_due_ticks` is
 `missed_count`. It is a count of unattempted slots, not observed market data.
 The terminal also records completed `sample_attempts`.
 
+A storage-quota exception freezes a `fatal_stop` in the reserved terminal space:
+observed UTC/monotonic stop time, receipt/frame/attempt counts, used bytes and
+the rejected write's byte requirement. Further writes are stopped; terminal
+cleanup remains allowed. The auditor independently checks the quota inequality,
+counts and all data against this earlier boundary, separately from the terminal
+cleanup clock. `unsampled_due_ticks` ends at this recorded stop when present,
+so cleanup does not create apparent collection slots. Old quota records without
+stop evidence cannot claim a cleanup-only interval past the book deadline.
+For runs with valid frames, an exactly equal duration/book deadline must be
+reported as `DURATION`, matching the collector's tie rule.
+
 Legacy files are never rewritten. Legacy frame-only traces can still be checked
 from their recorded sample times. A legacy `missed_frame` without monotonic
 sampling evidence fails explicitly with `SAMPLING_EVIDENCE_REQUIRED`; the auditor

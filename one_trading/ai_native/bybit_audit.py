@@ -144,6 +144,23 @@ def audit(path: Path) -> dict:
     require(byte_count <= maximum, "STORAGE_CAP_EXCEEDED")
     term_line = (json.dumps(terminal, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n").encode()
     require(terminal.get("bytes_before_terminal") == byte_count - len(term_line), "BYTE_ACCOUNTING_MISMATCH")
+    cleanup_tick = terminal_tick
+    fatal_stop = terminal.get("fatal_stop")
+    if fatal_stop is not None:
+        require(isinstance(fatal_stop, dict) and fatal_stop.get("reason") == "STORAGE_QUOTA"
+                and terminal.get("reason") == "STORAGE_QUOTA", "FATAL_STOP_REASON")
+        tick, at = fatal_stop.get("elapsed_seconds"), utc(fatal_stop.get("at"))
+        require(type(tick) in (int, float) and math.isfinite(tick) and 0 <= tick <= terminal_tick
+                and first_at <= at <= terminal_at, "FATAL_STOP_CHRONOLOGY")
+        require(all(type(fatal_stop.get(k)) is int and fatal_stop[k] == terminal.get(k)
+                    for k in ("raw_count", "frame_count", "sample_attempts")), "FATAL_STOP_COUNTS")
+        used, attempted = fatal_stop.get("used_bytes"), fatal_stop.get("attempted_bytes")
+        require(type(used) is int and used == terminal["bytes_before_terminal"] and used <= maximum-4096
+                and type(attempted) is int and attempted > 0 and used + attempted > maximum-4096,
+                "FATAL_STOP_QUOTA_EVIDENCE")
+        # All collection events must precede the recorded fatal boundary;
+        # only cleanup/terminal serialization may happen afterwards.
+        terminal_tick, terminal_at = tick, at
     if terminal.get("reason") == "DURATION":
         require(terminal.get("elapsed_seconds", -1) >= duration, "PREMATURE_DURATION_CLAIM")
 
@@ -466,7 +483,7 @@ def audit(path: Path) -> dict:
     require(pending_skip is None, "SAMPLING_UNBOUND_SKIP")
     deadline = last_valid + 300
     if terminal["reason"] == "NO_VALID_BOOK":
-        require(deadline <= duration or not frames, "NO_VALID_BOOK_TERMINAL_PRIORITY")
+        require(deadline < duration or not frames, "NO_VALID_BOOK_TERMINAL_PRIORITY")
         require(terminal_tick >= min(deadline, duration), "PREMATURE_NO_VALID_BOOK")
         require(terminal_tick >= deadline or not frames, "PREMATURE_NO_VALID_BOOK")
     elif terminal["reason"] == "DURATION":
@@ -492,6 +509,7 @@ def audit(path: Path) -> dict:
             "sampling_evidence_version": sample_version, "sample_attempts": attempts,
             "missed_frame_count": len(missed_samples), "missed_ticks": misses-len(missed_samples),
             "unsampled_due_ticks": unsampled,
+            "collection_stop_elapsed_seconds": terminal_tick, "cleanup_elapsed_seconds": cleanup_tick,
             "nominal_sample_coverage": round(nominal_coverage, 6),
             "bytes": byte_count, "model_decisions": 0, "economic_alpha": "NOT_TESTED"}
 

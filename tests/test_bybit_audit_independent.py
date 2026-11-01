@@ -505,6 +505,63 @@ class ReviewBoundaryTests(unittest.TestCase):
         with self.assertRaisesRegex(AuditError, "NO_VALID_BOOK_TERMINAL_PRIORITY"):
             audit(self.folder)
 
+    def test_review_quota_stop_before_deadline_allows_later_cleanup(self):
+        with self.assertRaisesRegex(StopCapture, "STORAGE_QUOTA"):
+            self.capture.ingest(b'x' * 100_000, BASE+timedelta(seconds=300), 300)
+        self.close("STORAGE_QUOTA", 302)
+        self.assertEqual(audit(self.folder)["frame_count"], 1)
+
+    def test_review_equal_deadline_requires_duration_reason(self):
+        self.close("DURATION", 301)
+        def shorten(events):
+            events[0]["duration_seconds"] = 301
+        rewrite(self.folder / "events.jsonl", shorten)
+        reconcile_terminal(self.folder)
+        self.assertEqual(audit(self.folder)["terminal_reason"], "DURATION")
+        rewrite(self.folder / "events.jsonl", lambda e: e[-1].update(reason="NO_VALID_BOOK"))
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "NO_VALID_BOOK_TERMINAL_PRIORITY"):
+            audit(self.folder)
+
+    def quota_capture(self):
+        with self.assertRaisesRegex(StopCapture, "STORAGE_QUOTA"):
+            self.capture.ingest(b'x' * 100_000, BASE+timedelta(seconds=300), 300)
+        self.close("STORAGE_QUOTA", 302)
+
+    def test_review_quota_fatal_boundary_fields_cannot_be_forged(self):
+        self.quota_capture()
+        original = (self.folder / "events.jsonl").read_bytes()
+        for field, value, error in (("reason", "TEST", "FATAL_STOP_REASON"),
+                                    ("raw_count", 4, "FATAL_STOP_COUNTS"),
+                                    ("sample_attempts", 2, "FATAL_STOP_COUNTS"),
+                                    ("used_bytes", 0, "FATAL_STOP_QUOTA_EVIDENCE"),
+                                    ("attempted_bytes", 1, "FATAL_STOP_QUOTA_EVIDENCE"),
+                                    ("elapsed_seconds", 303, "FATAL_STOP_CHRONOLOGY"),
+                                    ("at", (BASE+timedelta(seconds=303)).isoformat(), "FATAL_STOP_CHRONOLOGY")):
+            with self.subTest(field=field):
+                (self.folder / "events.jsonl").write_bytes(original)
+                rewrite(self.folder / "events.jsonl", lambda e: e[-1]["fatal_stop"].update({field: value}))
+                reconcile_terminal(self.folder)
+                with self.assertRaisesRegex(AuditError, error):
+                    audit(self.folder)
+
+    def test_review_quota_fatal_boundary_cannot_precede_recorded_sample(self):
+        self.quota_capture()
+        def backdate(events):
+            events[-1]["fatal_stop"].update(elapsed_seconds=0.5, at=(BASE+timedelta(seconds=.5)).isoformat())
+        rewrite(self.folder / "events.jsonl", backdate)
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "EVENT_TERMINAL_ORDER"):
+            audit(self.folder)
+
+    def test_review_quota_missing_stop_evidence_cannot_claim_late_cleanup(self):
+        self.quota_capture()
+        self.assertEqual(audit(self.folder)["collection_stop_elapsed_seconds"], 300)
+        rewrite(self.folder / "events.jsonl", lambda e: e[-1].pop("fatal_stop"))
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "NO_VALID_BOOK_DEADLINE_TERMINAL"):
+            audit(self.folder)
+
     def test_A_raw_after_deadline_without_another_frame_rejected(self):
         self.books(2)
         self.close("TEST", 302)
