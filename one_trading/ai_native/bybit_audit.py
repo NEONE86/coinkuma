@@ -258,8 +258,12 @@ def audit(path: Path) -> dict:
         next_receipt = successor_receipts.get(prov["raw_cutoff_seq"] + 1)
         if next_receipt is not None:
             next_wall, next_tick = next_receipt
-            require(not (next_tick < prov["sample_elapsed_seconds"] and
-                         next_wall < utc(frame["received_at"])),
+            # The monotonic ordering is authoritative. UTC can legitimately
+            # tie despite strictly ordered processing, so requiring BOTH
+            # clocks to be earlier would allow omitted invalidations.
+            sample_tick = prov["sample_elapsed_seconds"]
+            require(not (next_tick < sample_tick or
+                         next_tick == sample_tick and next_wall < utc(frame["received_at"])),
                     "CUTOFF_OMITS_EARLIER_RECEIPT")
 
     last_by_symbol = {}

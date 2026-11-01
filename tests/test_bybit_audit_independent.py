@@ -157,6 +157,48 @@ class IndependentBybitAuditTests(unittest.TestCase):
         with self.assertRaisesRegex(AuditError, "CUTOFF_OMITS_EARLIER_RECEIPT"):
             audit(self.folder)
 
+    def test_monotonic_pre_sample_invalidation_rejected_even_if_wall_time_ties(self):
+        folder = Path(self.temp.name) / "same-wall"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        bad = json.loads(message(SYMBOLS[0], 2))
+        bad["data"]["seq"] = 0
+        capture.ingest(json.dumps(bad).encode(), BASE + timedelta(seconds=3), 2)
+        capture.sample(BASE + timedelta(seconds=3), 3)
+        capture.close("TEST", BASE + timedelta(seconds=4), 4)
+        def forge_frame(frames):
+            second = json.loads(json.dumps(frames[0]))
+            second["id"] = "bybit-00000002"
+            second["received_at"] = (BASE + timedelta(seconds=3)).isoformat()
+            frames.append(second)
+        rewrite(folder / "frames.jsonl", forge_frame)
+        def forge_event(events):
+            events[-1]["frame_count"] = 2
+            events.insert(-1, {"kind": "frame_provenance", "frame_id": "bybit-00000002",
+                               "generation": 1, "sample_elapsed_seconds": 3,
+                               "raw_cutoff_seq": 3,
+                               "source_seqs": dict(zip(SYMBOLS, (1, 2, 3)))})
+        rewrite(folder / "events.jsonl", forge_event)
+        reconcile_terminal(folder)
+        with self.assertRaisesRegex(AuditError, "CUTOFF_OMITS_EARLIER_RECEIPT"):
+            audit(folder)
+
+    def test_equal_sample_and_later_receipt_clocks_are_not_backdated(self):
+        folder = Path(self.temp.name) / "tie-after"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        # Network adapter records this after sampling even if one clock read
+        # is reused for both operations; do not pretend it preceded the frame.
+        capture.ingest(message(SYMBOLS[0], 1), BASE + timedelta(seconds=1), 1)
+        capture.close("TEST", BASE + timedelta(seconds=2), 2)
+        self.assertEqual(audit(folder)["frame_count"], 1)
+
     def test_reconnect_without_new_receipts_invalidates_prior_generation(self):
         folder = Path(self.temp.name) / "reconnected"
         capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
