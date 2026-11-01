@@ -149,3 +149,12 @@ an online-feedback comparator, later-book conditional fills and an independently
 recalculated append-only ledger. It is **not** an always-on collector or a
 demonstration of investment edge; model calls and any new data collection remain
 off by default.
+
+## Bounded prospective Bybit source pilot (opt-in)
+
+The [public Bybit L1 capture](docs/BYBIT_FORWARD_PILOT.md) and a separate,
+read-only source auditor collect and independently reconcile prospective public
+best-bid/ask receipts for BTC, ETH and SOL. Capture requires explicit network
+opt-in, stops within 24 hours or 1 GB, writes only outside the repository and
+does not run by default. It has no model decisions, trading orders or claims of
+economic alpha. Later offline replay is **not** contemporaneous AI inference.
