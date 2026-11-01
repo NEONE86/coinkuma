@@ -72,7 +72,11 @@ python -m one_trading.ai_native.bybit_audit --capture-dir /private/existing-pare
 This separate auditor never imports the source collector or trading engine.
 It independently decodes and hashes every raw receipt, reconciles framed
 bid/ask/size and exchange timestamps against the specific source receipt,
-checks received-before-sample timing, connection generations, sequence restarts,
+reconstructs the valid book from **every preceding raw receipt** (including
+malformed updates and reconnection invalidation), and verifies each frame's
+explicit `raw_cutoff_seq` source-processing boundary. It checks
+received-before-sample timing, samples strictly inside the configured duration
+and terminal bounds, connection generations, sequence restarts,
 missing-sample totals, terminal counts and the total byte quota. It also detects
 price changes made to a frame and **rehashed** changes to its source that no
 longer match the frame. A nonzero exit means evidence is unfit for promotion.

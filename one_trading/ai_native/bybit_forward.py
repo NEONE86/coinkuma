@@ -203,6 +203,7 @@ class Capture:
         Frame.parse(packet)
         provenance = {"kind": "frame_provenance", "frame_id": packet["id"],
                       "generation": self.generation, "sample_elapsed_seconds": mono-self.start_mono,
+                      "raw_cutoff_seq": self.seq,
                       "source_seqs": {s: self.quotes[s][3] for s in SYMBOLS}}
         if self.used + len(line(packet)) + len(line(provenance)) > self.limit - TERMINAL_RESERVE:
             raise StopCapture("STORAGE_QUOTA")

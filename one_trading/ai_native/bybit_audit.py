@@ -61,6 +61,56 @@ def numeric(value) -> float:
         raise AuditError("INVALID_BOOK_NUMBER") from exc
 
 
+def apply_raw_snapshot(payload: bytes, record: dict, state: dict, clocks: dict) -> None:
+    """Independently reconstruct book validity from *every* original receipt.
+
+    Invalid symbol-scoped messages invalidate that symbol. Unidentifiable
+    payloads invalidate all quotes. Unknown control topics do not mutate books.
+    """
+    try:
+        obj = json.loads(payload)
+    except (UnicodeError, ValueError):
+        state.clear()
+        return
+    if not isinstance(obj, dict):
+        state.clear()
+        return
+    if obj.get("op") == "subscribe" and obj.get("success") is False:
+        state.clear()
+        return
+    topic = obj.get("topic")
+    if topic not in TOPICS:
+        return
+    symbol = topic.removeprefix("orderbook.1.")
+    try:
+        data = obj["data"]
+        require(obj["type"] == "snapshot" and data["s"] == symbol, "BAD_SNAPSHOT")
+        cts, ts = obj["cts"], obj["ts"]
+        require(type(cts) is int and cts >= 0, "BAD_CTS")
+        require(type(ts) is int and ts >= 0 or
+                type(ts) is str and ts.isascii() and ts.isdigit(), "BAD_TS")
+        require(type(data["u"]) is int and data["u"] >= 0 and
+                type(data["seq"]) is int and data["seq"] >= 0, "BAD_ORDER")
+        earlier = clocks.get(symbol)
+        if earlier is not None:
+            old_seq, old_cts = earlier
+            require(cts >= old_cts and (data["seq"] >= old_seq or data["u"] == 1),
+                    "SOURCE_REGRESSION")
+        bids, asks = data["b"], data["a"]
+        require(len(bids) == len(asks) == 1 and
+                len(bids[0]) == len(asks[0]) == 2, "BAD_DEPTH")
+        bid, bsize = map(numeric, bids[0])
+        ask, asize = map(numeric, asks[0])
+        require(bid < ask, "BAD_SPREAD")
+        source_at = datetime.fromtimestamp(cts / 1000, timezone.utc)
+        require(source_at <= utc(record["received_at"]), "SOURCE_RECEIPT_FUTURE")
+    except (KeyError, IndexError, ValueError, TypeError, OverflowError, OSError):
+        state.pop(symbol, None)
+        return
+    state[symbol] = record["seq"]
+    clocks[symbol] = (data["seq"], cts)
+
+
 def audit(path: Path) -> dict:
     root = Path(path)
     names = ("raw.jsonl", "frames.jsonl", "events.jsonl")
@@ -79,6 +129,10 @@ def audit(path: Path) -> dict:
     require(type(maximum) is int and 5120 <= maximum <= 1_000_000_000, "INVALID_MAX_BYTES")
     require(type(duration) is int and 1 <= duration <= 86400, "INVALID_DURATION")
     first_at = utc(start["started_at"])
+    terminal_at = utc(terminal["at"])
+    terminal_tick = terminal.get("elapsed_seconds")
+    require(type(terminal_tick) in (float, int) and math.isfinite(terminal_tick) and
+            terminal_tick >= 0 and terminal_at >= first_at, "TERMINAL_CHRONOLOGY")
     require(type(terminal.get("frame_count")) is int and terminal["frame_count"] == len(frames),
             "FRAME_COUNT_MISMATCH")
     require(len(frames) <= duration, "TOO_MANY_FRAMES")
@@ -95,10 +149,29 @@ def audit(path: Path) -> dict:
     require(terminal.get("missed_count") ==
             sum(e.get("count", 0) for e in events if e.get("kind") == "missed_ticks") +
             sum(e.get("kind") == "missed_frame" for e in events), "MISS_COUNT_MISMATCH")
+    resets = [e for e in events if e.get("kind") == "connection_reset"]
+    require(resets, "CONNECTION_GENERATION_MISSING")
+    reset_lookup = {}
+    last_reset_tick, last_reset_wall = 0.0, first_at
+    for index, reset in enumerate(resets, 1):
+        elapsed = reset.get("elapsed_seconds")
+        at = utc(reset["at"])
+        require(reset.get("generation") == index and
+                type(elapsed) in (float, int) and math.isfinite(elapsed) and
+                last_reset_tick <= elapsed <= terminal_tick and
+                last_reset_wall <= at <= terminal_at, "CONNECTION_GENERATION_ORDER")
+        reset_lookup[index] = (at, elapsed)
+        last_reset_tick, last_reset_wall = elapsed, at
 
     wanted: set[int] = set()
+    cutoff_frames: dict[int, list[int]] = {}
+    expected_states: dict[int, dict[str, int]] = {}
+    successor_ids: set[int] = set()
+    successor_receipts: dict[int, tuple[datetime, float]] = {}
     prior_wall = first_at
     prior_tick = 0.0
+    prior_cutoff = 0
+    reset_cursor = 0
     for index, (frame, prov) in enumerate(zip(frames, provenance), 1):
         require(set(frame) == {"id", "received_at", "quotes"}, "FRAME_SCHEMA")
         require(frame["id"] == f"bybit-{index:08d}" == prov.get("frame_id"), "FRAME_ID_MISMATCH")
@@ -108,20 +181,34 @@ def audit(path: Path) -> dict:
         require(type(tick) in (float, int) and math.isfinite(tick) and tick >= prior_tick + 1,
                 "NON_MONOTONIC_SAMPLE")
         require(at > prior_wall, "NON_MONOTONIC_FRAME_TIME")
+        require(tick < duration, "FRAME_AFTER_DURATION")
+        require(tick <= terminal_tick and at <= terminal_at, "FRAME_AFTER_TERMINAL")
         require(type(prov.get("generation")) is int and prov["generation"] >= 1,
                 "INVALID_FRAME_GENERATION")
+        while reset_cursor < len(resets) and resets[reset_cursor]["elapsed_seconds"] <= tick and utc(resets[reset_cursor]["at"]) <= at:
+            reset_cursor += 1
+        require(prov["generation"] == reset_cursor, "FRAME_RECONNECT_INVALIDATION")
+        cutoff = prov.get("raw_cutoff_seq")
+        require(type(cutoff) is int and prior_cutoff <= cutoff <= terminal["raw_count"] and cutoff >= 1,
+                "INVALID_RAW_CUTOFF")
+        cutoff_frames.setdefault(cutoff, []).append(index - 1)
+        successor_ids.add(cutoff + 1)
         seqs = prov.get("source_seqs")
         require(isinstance(seqs, dict) and set(seqs) == set(SYMBOLS), "INCOMPLETE_SOURCE_PROVENANCE")
         for symbol in SYMBOLS:
             seq = seqs[symbol]
-            require(type(seq) is int and 1 <= seq <= terminal["raw_count"], "INVALID_SOURCE_SEQ")
+            require(type(seq) is int and 1 <= seq <= cutoff, "INVALID_SOURCE_SEQ")
             wanted.add(seq)
         prior_wall, prior_tick = at, tick
+        prior_cutoff = cutoff
 
     referenced = {}
     total_raw = 0
     raw_wall = first_at
     raw_tick = 0.0
+    reconstructed = {}
+    source_clocks = {}
+    generation = 0
     for record in rows(root / "raw.jsonl"):
         total_raw += 1
         require(record.get("seq") == total_raw, "RAW_SEQUENCE_GAP")
@@ -129,13 +216,23 @@ def audit(path: Path) -> dict:
         elapsed = record.get("elapsed_seconds")
         require(type(elapsed) in (int, float) and math.isfinite(elapsed) and
                 raw_tick <= elapsed < duration and received >= raw_wall, "RAW_CHRONOLOGY")
+        require(elapsed <= terminal_tick and received <= terminal_at, "RAW_AFTER_TERMINAL")
         require(type(record.get("generation")) is int and record["generation"] >= 1,
                 "RAW_GENERATION")
+        require(record["generation"] >= generation and record["generation"] in reset_lookup,
+                "RAW_GENERATION_ORDER")
+        reset_at, reset_tick = reset_lookup[record["generation"]]
+        require(reset_at <= received and reset_tick <= elapsed, "RAW_BEFORE_CONNECTION")
+        if record["generation"] != generation:
+            reconstructed.clear()
+            source_clocks.clear()
+            generation = record["generation"]
         try:
             payload = base64.b64decode(record["payload_base64"], validate=True)
         except (KeyError, TypeError, ValueError) as exc:
             raise AuditError("RAW_BYTES_INVALID") from exc
         require(hashlib.sha256(payload).hexdigest() == record.get("sha256"), "RAW_HASH_MISMATCH")
+        apply_raw_snapshot(payload, record, reconstructed, source_clocks)
         if total_raw in wanted:
             try:
                 obj = json.loads(payload)
@@ -143,10 +240,27 @@ def audit(path: Path) -> dict:
                 raise AuditError("REFERENCED_RAW_NOT_JSON") from exc
             require(isinstance(obj, dict), "REFERENCED_RAW_NOT_OBJECT")
             referenced[total_raw] = (record, obj)
+        for frame_index in cutoff_frames.get(total_raw, ()):
+            frame_at = utc(frames[frame_index]["received_at"])
+            tick = provenance[frame_index]["sample_elapsed_seconds"]
+            require(elapsed <= tick and received <= frame_at, "CUTOFF_INCLUDES_FUTURE_RECEIPT")
+            expected_states[frame_index] = dict(reconstructed)
+        if total_raw in successor_ids:
+            successor_receipts[total_raw] = (received, elapsed)
         raw_wall, raw_tick = received, elapsed
     require(total_raw == terminal["raw_count"], "RAW_COUNT_MISMATCH")
     require(set(referenced) == wanted, "PROVENANCE_REFERENCES_MISSING")
     require(total_raw > 0 and frames, "NO_VALID_MARKET_EVIDENCE")
+    require(len(expected_states) == len(frames), "RAW_CUTOFF_MISSING")
+    for frame_index, (frame, prov) in enumerate(zip(frames, provenance)):
+        require(expected_states[frame_index] == prov["source_seqs"],
+                "FRAME_REFERENCES_INVALIDATED_SOURCE")
+        next_receipt = successor_receipts.get(prov["raw_cutoff_seq"] + 1)
+        if next_receipt is not None:
+            next_wall, next_tick = next_receipt
+            require(not (next_tick < prov["sample_elapsed_seconds"] and
+                         next_wall < utc(frame["received_at"])),
+                    "CUTOFF_OMITS_EARLIER_RECEIPT")
 
     last_by_symbol = {}
     for frame, prov in zip(frames, provenance):

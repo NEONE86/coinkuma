@@ -58,6 +58,7 @@ class ForwardTests(unittest.TestCase):
         self.assertEqual(len(frames), 1)
         Frame.parse(frames[0])
         self.assertEqual(self.rows("events")[-1]["source_seqs"], dict(zip(SYMBOLS, (1, 2, 3))))
+        self.assertEqual(self.rows("events")[-1]["raw_cutoff_seq"], 3)
 
     def test_missing_stale_and_reconnect_discard(self):
         for s in SYMBOLS: self.ingest(s)

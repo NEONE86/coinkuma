@@ -30,6 +30,17 @@ def rewrite(path: Path, transform) -> None:
                             for item in lines))
 
 
+def reconcile_terminal(folder: Path) -> None:
+    def update(events):
+        terminal = events[-1]
+        terminal["bytes_before_terminal"] = (
+            (folder / "raw.jsonl").stat().st_size +
+            (folder / "frames.jsonl").stat().st_size +
+            sum(len(json.dumps(e, sort_keys=True, separators=(",", ":")).encode()) + 1
+                for e in events[:-1]))
+    rewrite(folder / "events.jsonl", update)
+
+
 class IndependentBybitAuditTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -75,8 +86,10 @@ class IndependentBybitAuditTests(unittest.TestCase):
         def mutate(events):
             prov = next(e for e in events if e["kind"] == "frame_provenance")
             prov["source_seqs"][SYMBOLS[0]] = 4
+            prov["raw_cutoff_seq"] = 4
         rewrite(self.folder / "events.jsonl", mutate)
-        with self.assertRaisesRegex(AuditError, "SOURCE_RECEIVED_AFTER_SAMPLE_OR_STALE"):
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "CUTOFF_INCLUDES_FUTURE_RECEIPT"):
             audit(self.folder)
 
     def test_missing_terminal_is_incomplete(self):
@@ -89,9 +102,104 @@ class IndependentBybitAuditTests(unittest.TestCase):
     def test_well_formed_zero_data_capture_is_not_a_source_pass(self):
         empty = Path(self.temp.name) / "empty"
         capture = Capture(empty, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
         capture.close("NO_VALID_BOOK", BASE + timedelta(seconds=3), 3)
         with self.assertRaisesRegex(AuditError, "NO_VALID_MARKET_EVIDENCE"):
             audit(empty)
+
+    def test_later_invalidation_cannot_resurrect_old_quote(self):
+        folder = Path(self.temp.name) / "invalidated"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        bad = json.loads(message(SYMBOLS[0], 2))
+        bad["data"]["seq"] = 0
+        capture.ingest(json.dumps(bad).encode(), BASE + timedelta(seconds=2), 2)
+        capture.sample(BASE + timedelta(seconds=3), 3)  # correctly missing BTC
+        capture.close("TEST", BASE + timedelta(seconds=4), 4)
+        original_frame = json.loads((folder / "frames.jsonl").read_text().splitlines()[0])
+        def forge_frame(frames):
+            new = json.loads(json.dumps(original_frame))
+            new["id"] = "bybit-00000002"
+            new["received_at"] = (BASE + timedelta(seconds=3)).isoformat()
+            frames.append(new)
+        rewrite(folder / "frames.jsonl", forge_frame)
+        def forge_event(events):
+            events[-1]["frame_count"] = 2
+            events.insert(-1, {"kind": "frame_provenance", "frame_id": "bybit-00000002",
+                               "generation": 1, "sample_elapsed_seconds": 3,
+                               "raw_cutoff_seq": 4,
+                               "source_seqs": dict(zip(SYMBOLS, (1, 2, 3)))})
+        rewrite(folder / "events.jsonl", forge_event)
+        reconcile_terminal(folder)
+        with self.assertRaisesRegex(AuditError, "FRAME_REFERENCES_INVALIDATED_SOURCE"):
+            audit(folder)
+
+    def test_earlier_raw_update_cannot_be_hidden_by_lower_cutoff(self):
+        def forge_frame(frames):
+            second = json.loads(json.dumps(frames[0]))
+            second["id"] = "bybit-00000002"
+            second["received_at"] = (BASE + timedelta(seconds=3)).isoformat()
+            frames.append(second)
+        rewrite(self.folder / "frames.jsonl", forge_frame)
+        def forge_event(events):
+            events[-1]["frame_count"] = 2
+            events[-1]["at"] = (BASE + timedelta(seconds=4)).isoformat()
+            events[-1]["elapsed_seconds"] = 4
+            events.insert(-1, {"kind": "frame_provenance", "frame_id": "bybit-00000002",
+                               "generation": 1, "sample_elapsed_seconds": 3,
+                               "raw_cutoff_seq": 3,
+                               "source_seqs": dict(zip(SYMBOLS, (1, 2, 3)))})
+        rewrite(self.folder / "events.jsonl", forge_event)
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "CUTOFF_OMITS_EARLIER_RECEIPT"):
+            audit(self.folder)
+
+    def test_reconnect_without_new_receipts_invalidates_prior_generation(self):
+        folder = Path(self.temp.name) / "reconnected"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        capture.reconnect(BASE + timedelta(seconds=2), 2)
+        capture.sample(BASE + timedelta(seconds=3), 3)
+        capture.close("TEST", BASE + timedelta(seconds=4), 4)
+        def forge_frame(frames):
+            additional = json.loads(json.dumps(frames[0]))
+            additional["id"] = "bybit-00000002"
+            additional["received_at"] = (BASE + timedelta(seconds=3)).isoformat()
+            frames.append(additional)
+        rewrite(folder / "frames.jsonl", forge_frame)
+        def forge_event(events):
+            events[-1]["frame_count"] = 2
+            events.insert(-1, {"kind": "frame_provenance", "frame_id": "bybit-00000002",
+                               "generation": 1, "sample_elapsed_seconds": 3,
+                               "raw_cutoff_seq": 3,
+                               "source_seqs": dict(zip(SYMBOLS, (1, 2, 3)))})
+        rewrite(folder / "events.jsonl", forge_event)
+        reconcile_terminal(folder)
+        with self.assertRaisesRegex(AuditError, "FRAME_RECONNECT_INVALIDATION"):
+            audit(folder)
+
+    def test_frame_after_declared_duration_fails(self):
+        def shorten(events):
+            events[0]["duration_seconds"] = 1
+        rewrite(self.folder / "events.jsonl", shorten)
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "FRAME_AFTER_DURATION"):
+            audit(self.folder)
+
+    def test_frame_after_terminal_fails(self):
+        def shorten(events):
+            events[-1]["at"] = (BASE + timedelta(milliseconds=500)).isoformat()
+            events[-1]["elapsed_seconds"] = 0.5
+        rewrite(self.folder / "events.jsonl", shorten)
+        reconcile_terminal(self.folder)
+        with self.assertRaisesRegex(AuditError, "FRAME_AFTER_TERMINAL"):
+            audit(self.folder)
 
 
 if __name__ == "__main__":
