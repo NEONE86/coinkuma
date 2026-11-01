@@ -226,6 +226,34 @@ class IndependentBybitAuditTests(unittest.TestCase):
         with self.assertRaisesRegex(AuditError, "FRAME_RECONNECT_INVALIDATION"):
             audit(folder)
 
+    def test_cross_clock_reset_contradiction_rejected(self):
+        folder = Path(self.temp.name) / "cross-clock"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        capture.reconnect(BASE + timedelta(seconds=4), 2)
+        capture.sample(BASE + timedelta(seconds=4), 3)
+        capture.close("TEST", BASE + timedelta(seconds=5), 5)
+        def forge_frame(frames):
+            additional = json.loads(json.dumps(frames[0]))
+            additional["id"] = "bybit-00000002"
+            # Monotonic t=3 after reset t=2, but UTC t=3 before reset t=4.
+            additional["received_at"] = (BASE + timedelta(seconds=3)).isoformat()
+            frames.append(additional)
+        rewrite(folder / "frames.jsonl", forge_frame)
+        def forge_event(events):
+            events[-1]["frame_count"] = 2
+            events.insert(-1, {"kind": "frame_provenance", "frame_id": "bybit-00000002",
+                               "generation": 1, "sample_elapsed_seconds": 3,
+                               "raw_cutoff_seq": 3,
+                               "source_seqs": dict(zip(SYMBOLS, (1, 2, 3)))})
+        rewrite(folder / "events.jsonl", forge_event)
+        reconcile_terminal(folder)
+        with self.assertRaisesRegex(AuditError, "RESET_SAMPLE_CLOCK_CONTRADICTION"):
+            audit(folder)
+
     def test_frame_after_declared_duration_fails(self):
         def shorten(events):
             events[0]["duration_seconds"] = 1
@@ -240,7 +268,7 @@ class IndependentBybitAuditTests(unittest.TestCase):
             events[-1]["elapsed_seconds"] = 0.5
         rewrite(self.folder / "events.jsonl", shorten)
         reconcile_terminal(self.folder)
-        with self.assertRaisesRegex(AuditError, "FRAME_AFTER_TERMINAL"):
+        with self.assertRaisesRegex(AuditError, "EVENT_TERMINAL_ORDER"):
             audit(self.folder)
 
 

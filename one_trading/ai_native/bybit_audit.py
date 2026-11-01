@@ -163,6 +163,37 @@ def audit(path: Path) -> dict:
         reset_lookup[index] = (at, elapsed)
         last_reset_tick, last_reset_wall = elapsed, at
 
+    # The events file is append-only in actual processing order. In particular,
+    # a reset may have a monotonic time earlier than a sampled frame but a
+    # fabricated UTC later than that frame. Checking the two clocks with an
+    # AND condition would hide that impossible ordering. Check BOTH clocks
+    # individually across the full ordered reset/frame event trace.
+    event_wall, event_tick = first_at, 0.0
+    active_generation, frame_cursor = 0, 0
+    for event in events[1:-1]:
+        kind = event.get("kind")
+        if kind == "connection_reset":
+            active_generation = event["generation"]
+            at, tick = utc(event["at"]), event["elapsed_seconds"]
+        elif kind == "frame_provenance":
+            require(frame_cursor < len(frames) and
+                    event.get("frame_id") == frames[frame_cursor].get("id"),
+                    "EVENT_FRAME_ORDER")
+            at = utc(frames[frame_cursor]["received_at"])
+            tick = event["sample_elapsed_seconds"]
+            frame_cursor += 1
+        else:
+            continue
+        require(tick >= event_tick and at >= event_wall,
+                "RESET_SAMPLE_CLOCK_CONTRADICTION")
+        if kind == "frame_provenance":
+            require(event.get("generation") == active_generation,
+                    "FRAME_RECONNECT_INVALIDATION")
+        event_tick, event_wall = tick, at
+    require(frame_cursor == len(frames) and
+            event_tick <= terminal_tick and event_wall <= terminal_at,
+            "EVENT_TERMINAL_ORDER")
+
     wanted: set[int] = set()
     cutoff_frames: dict[int, list[int]] = {}
     expected_states: dict[int, dict[str, int]] = {}
@@ -171,7 +202,6 @@ def audit(path: Path) -> dict:
     prior_wall = first_at
     prior_tick = 0.0
     prior_cutoff = 0
-    reset_cursor = 0
     for index, (frame, prov) in enumerate(zip(frames, provenance), 1):
         require(set(frame) == {"id", "received_at", "quotes"}, "FRAME_SCHEMA")
         require(frame["id"] == f"bybit-{index:08d}" == prov.get("frame_id"), "FRAME_ID_MISMATCH")
@@ -185,9 +215,6 @@ def audit(path: Path) -> dict:
         require(tick <= terminal_tick and at <= terminal_at, "FRAME_AFTER_TERMINAL")
         require(type(prov.get("generation")) is int and prov["generation"] >= 1,
                 "INVALID_FRAME_GENERATION")
-        while reset_cursor < len(resets) and resets[reset_cursor]["elapsed_seconds"] <= tick and utc(resets[reset_cursor]["at"]) <= at:
-            reset_cursor += 1
-        require(prov["generation"] == reset_cursor, "FRAME_RECONNECT_INVALIDATION")
         cutoff = prov.get("raw_cutoff_seq")
         require(type(cutoff) is int and prior_cutoff <= cutoff <= terminal["raw_count"] and cutoff >= 1,
                 "INVALID_RAW_CUTOFF")
