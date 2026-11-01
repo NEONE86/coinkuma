@@ -352,8 +352,25 @@ def audit(path: Path) -> dict:
             successor_receipts[total_raw] = (received, elapsed)
         raw_wall, raw_tick = received, elapsed
     require(total_raw == terminal["raw_count"], "RAW_COUNT_MISMATCH")
+    interrupted_interpretation = None
+    def quota_interrupted_event(expected):
+        # A raw receipt can fit while its mandatory interpretation event does
+        # not. Accept only that final, unconsumed receipt and the exact rejected
+        # event size, tied to the already validated quota stop boundary.
+        encoded = (json.dumps(expected, sort_keys=True, separators=(",", ":")) + "\n").encode()
+        return (fatal_stop is not None and total_raw > 0 and
+                expected["raw_seq"] == total_raw and
+                expected["generation"] == record["generation"] == resets[-1]["generation"] and
+                utc(expected["at"]) == utc(record["received_at"]) == terminal_at and
+                record["elapsed_seconds"] == terminal_tick and
+                fatal_stop["attempted_bytes"] == len(encoded) and
+                all(e["raw_cutoff_seq"] < total_raw for e in provenance + missed_samples))
     restart_events = [{k: e.get(k) for k in ("raw_seq", "symbol", "generation", "at")}
                       for e in events if e.get("kind") == "source_restart"]
+    if (replayed_restarts and restart_events == replayed_restarts[:-1] and
+            quota_interrupted_event(dict(kind="source_restart", **replayed_restarts[-1]))):
+        interrupted_interpretation = "source_restart"
+        replayed_restarts = replayed_restarts[:-1]
     require(restart_events == replayed_restarts, "SOURCE_RESTART_EVIDENCE_MISMATCH")
     event_cutoff, event_generation = 0, 0
     pending_restarts = []
@@ -374,10 +391,16 @@ def audit(path: Path) -> dict:
                 "SUBSCRIPTION_TERMINAL_MISMATCH")
     else:
         rejected_seq, rejected_at, rejected_tick, rejected_generation = subscription_rejection
-        require(terminal.get("reason") == "SUBSCRIPTION_REJECTED" and
-                len(subscription_events) == 1 and events[-2] is subscription_events[0],
-                "SUBSCRIPTION_TERMINAL_MISMATCH")
-        failure = subscription_events[0]
+        expected_failure = dict(kind="subscription_failure", raw_seq=rejected_seq,
+                                at=record["received_at"], generation=rejected_generation)
+        if not subscription_events and quota_interrupted_event(expected_failure):
+            interrupted_interpretation = "subscription_failure"
+            failure = expected_failure  # recomputed, NOT a claim of a persisted event
+        else:
+            require(terminal.get("reason") == "SUBSCRIPTION_REJECTED" and
+                    len(subscription_events) == 1 and events[-2] is subscription_events[0],
+                    "SUBSCRIPTION_TERMINAL_MISMATCH")
+            failure = subscription_events[0]
         require(failure.get("raw_seq") == rejected_seq and
                 failure.get("generation") == rejected_generation and
                 utc(failure["at"]) == rejected_at and
@@ -510,6 +533,7 @@ def audit(path: Path) -> dict:
             "missed_frame_count": len(missed_samples), "missed_ticks": misses-len(missed_samples),
             "unsampled_due_ticks": unsampled,
             "collection_stop_elapsed_seconds": terminal_tick, "cleanup_elapsed_seconds": cleanup_tick,
+            "quota_interrupted_interpretation": interrupted_interpretation,
             "nominal_sample_coverage": round(nominal_coverage, 6),
             "bytes": byte_count, "model_decisions": 0, "economic_alpha": "NOT_TESTED"}
 

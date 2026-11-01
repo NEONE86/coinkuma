@@ -130,6 +130,15 @@ stop evidence cannot claim a cleanup-only interval past the book deadline.
 For runs with valid frames, an exactly equal duration/book deadline must be
 reported as `DURATION`, matching the collector's tie rule.
 
+If a final raw receipt fits but its mandatory subscription-failure or restart
+event exhausts the quota, the receipt remains preserved. The auditor accepts
+that incomplete interpretation only with a validated quota stop at exactly the
+receipt's UTC/monotonic time and generation, the independently recomputed byte
+length of the missing event, and no sample consuming that final receipt. It
+reports `quota_interrupted_interpretation`; it does not claim the event was
+written or allow collection to continue. Wrong event sizes/times, missing stop
+evidence and ordinary missing restart markers still fail.
+
 Legacy files are never rewritten. Legacy frame-only traces can still be checked
 from their recorded sample times. A legacy `missed_frame` without monotonic
 sampling evidence fails explicitly with `SAMPLING_EVIDENCE_REQUIRED`; the auditor

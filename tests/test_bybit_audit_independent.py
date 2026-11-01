@@ -562,6 +562,67 @@ class ReviewBoundaryTests(unittest.TestCase):
         with self.assertRaisesRegex(AuditError, "NO_VALID_BOOK_DEADLINE_TERMINAL"):
             audit(self.folder)
 
+    def interpretation_quota(self, kind):
+        if kind == "subscription":
+            payload = b'{"op":"subscribe","success":false}'
+        else:
+            obj = json.loads(message(SYMBOLS[0], 2))
+            obj["data"].update(seq=1, u=1)
+            payload = json.dumps(obj).encode()
+        raw = dict(seq=4, received_at=(BASE+timedelta(seconds=2)).isoformat(),
+                   elapsed_seconds=2, generation=1,
+                   sha256=hashlib.sha256(payload).hexdigest(),
+                   payload_base64=base64.b64encode(payload).decode())
+        needed = len((json.dumps(raw, sort_keys=True, separators=(",", ":"))+"\n").encode())
+        original_limit = self.capture.limit
+        limit = self.capture.used+needed+4096
+        # The start record includes the decimal cap itself; solve its size.
+        limit = self.capture.used+needed+4096+len(str(limit))-len(str(original_limit))
+        folder = Path(self.temp.name)/('quota-'+kind)
+        c = Capture(folder, BASE, 0, duration=600, max_bytes=limit)
+        c.reconnect(BASE, 0)
+        for r in [json.loads(s) for s in (self.folder/'raw.jsonl').read_text().splitlines()]:
+            c.ingest(base64.b64decode(r["payload_base64"]), BASE, 0)
+        c.sample(BASE+timedelta(seconds=1), 1)
+        with self.assertRaisesRegex(StopCapture, "STORAGE_QUOTA"):
+            c.ingest(payload, BASE+timedelta(seconds=2), 2)
+        self.assertEqual(c.seq, 4)  # Original fits; the required event does not.
+        c.close("STORAGE_QUOTA", BASE+timedelta(seconds=302), 302)
+        return folder
+
+    def test_review_quota_during_subscription_event_accepts_retained_raw(self):
+        result = audit(self.interpretation_quota("subscription"))
+        self.assertEqual(result["frame_count"], 1)
+        self.assertEqual(result["terminal_reason"], "STORAGE_QUOTA")
+
+    def test_review_quota_during_restart_event_accepts_retained_raw(self):
+        result = audit(self.interpretation_quota("restart"))
+        self.assertEqual(result["frame_count"], 1)
+        self.assertEqual(result["terminal_reason"], "STORAGE_QUOTA")
+
+    def test_review_interpretation_quota_requires_exact_event_bytes(self):
+        for kind in ("subscription", "restart"):
+            with self.subTest(kind=kind):
+                folder = self.interpretation_quota(kind)
+                self.assertEqual(audit(folder)["quota_interrupted_interpretation"],
+                                 "subscription_failure" if kind == "subscription" else "source_restart")
+                def forge(events):
+                    events[-1]["fatal_stop"]["attempted_bytes"] += 1
+                rewrite(folder / "events.jsonl", forge)
+                reconcile_terminal(folder)
+                with self.assertRaisesRegex(AuditError, "SUBSCRIPTION_TERMINAL_MISMATCH|SOURCE_RESTART_EVIDENCE_MISMATCH"):
+                    audit(folder)
+
+    def test_review_interpretation_quota_requires_receipt_stop_time(self):
+        folder = self.interpretation_quota("subscription")
+        def forge(events):
+            events[-1]["fatal_stop"].update(elapsed_seconds=3, at=(BASE+timedelta(seconds=3)).isoformat())
+            events[-1]["unsampled_due_ticks"] = 1
+        rewrite(folder / "events.jsonl", forge)
+        reconcile_terminal(folder)
+        with self.assertRaisesRegex(AuditError, "SUBSCRIPTION_TERMINAL_MISMATCH"):
+            audit(folder)
+
     def test_A_raw_after_deadline_without_another_frame_rejected(self):
         self.books(2)
         self.close("TEST", 302)
