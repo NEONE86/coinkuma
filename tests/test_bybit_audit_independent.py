@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from one_trading.ai_native.bybit_audit import AuditError, audit
-from one_trading.ai_native.bybit_forward import Capture, SYMBOLS
+from one_trading.ai_native.bybit_forward import Capture, StopCapture, SYMBOLS
 
 BASE = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
@@ -312,6 +312,54 @@ class IndependentBybitAuditTests(unittest.TestCase):
         reconcile_terminal(self.folder)
         with self.assertRaisesRegex(AuditError, "EVENT_TERMINAL_ORDER"):
             audit(self.folder)
+
+    def test_genuine_subscription_rejection_has_consistent_terminal(self):
+        folder = Path(self.temp.name) / "subscription-stopped"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        rejected = b'{"op":"subscribe","success":false,"ret_msg":"failed"}'
+        with self.assertRaisesRegex(StopCapture, "SUBSCRIPTION_REJECTED"):
+            capture.ingest(rejected, BASE + timedelta(seconds=2), 2)
+        capture.close("SUBSCRIPTION_REJECTED", BASE + timedelta(seconds=3), 3)
+        result = audit(folder)
+        self.assertEqual(result["terminal_reason"], "SUBSCRIPTION_REJECTED")
+        self.assertFalse(result["complete_24h"])
+
+    def test_subscription_rejection_cannot_resume_with_fresh_books(self):
+        folder = Path(self.temp.name) / "subscription-forged-continuation"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        with self.assertRaisesRegex(StopCapture, "SUBSCRIPTION_REJECTED"):
+            capture.ingest(b'{"op":"subscribe","success":false}',
+                           BASE + timedelta(seconds=2), 2)
+        # Deliberately violate network()'s mandatory stop by appending another
+        # valid frame from new receipts after the fatal subscription response.
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 3), BASE + timedelta(seconds=3), 3)
+        capture.sample(BASE + timedelta(seconds=4), 4)
+        capture.close("DURATION", BASE + timedelta(seconds=10), 10)
+        with self.assertRaisesRegex(AuditError, "SUBSCRIPTION_CONTINUED_AFTER_REJECTION"):
+            audit(folder)
+
+    def test_subscription_rejection_cannot_be_relabelled_duration(self):
+        folder = Path(self.temp.name) / "subscription-forged-terminal"
+        capture = Capture(folder, BASE, 0, duration=10, max_bytes=20_000)
+        capture.reconnect(BASE, 0)
+        for symbol in SYMBOLS:
+            capture.ingest(message(symbol, 0), BASE, 0)
+        capture.sample(BASE + timedelta(seconds=1), 1)
+        with self.assertRaisesRegex(StopCapture, "SUBSCRIPTION_REJECTED"):
+            capture.ingest(b'{"op":"subscribe","success":false}',
+                           BASE + timedelta(seconds=2), 2)
+        capture.close("DURATION", BASE + timedelta(seconds=10), 10)
+        with self.assertRaisesRegex(AuditError, "SUBSCRIPTION_TERMINAL_MISMATCH"):
+            audit(folder)
 
 
 if __name__ == "__main__":

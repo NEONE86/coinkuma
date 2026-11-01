@@ -199,6 +199,7 @@ def audit(path: Path) -> dict:
     expected_states: dict[int, dict[str, int]] = {}
     successor_ids: set[int] = set()
     successor_receipts: dict[int, tuple[datetime, float]] = {}
+    subscription_rejection = None
     prior_wall = first_at
     prior_tick = 0.0
     prior_cutoff = 0
@@ -237,6 +238,10 @@ def audit(path: Path) -> dict:
     source_clocks = {}
     generation = 0
     for record in rows(root / "raw.jsonl"):
+        # A rejected subscription is terminal for Capture.ingest()/network().
+        # Clearing books alone is insufficient: a forged stream could present
+        # fresh snapshots and a successful completion after a mandatory stop.
+        require(subscription_rejection is None, "SUBSCRIPTION_CONTINUED_AFTER_REJECTION")
         total_raw += 1
         require(record.get("seq") == total_raw, "RAW_SEQUENCE_GAP")
         received = utc(record["received_at"])
@@ -259,6 +264,13 @@ def audit(path: Path) -> dict:
         except (KeyError, TypeError, ValueError) as exc:
             raise AuditError("RAW_BYTES_INVALID") from exc
         require(hashlib.sha256(payload).hexdigest() == record.get("sha256"), "RAW_HASH_MISMATCH")
+        try:
+            control = json.loads(payload)
+        except (UnicodeError, ValueError):
+            control = None
+        if (isinstance(control, dict) and control.get("op") == "subscribe" and
+                control.get("success") is False):
+            subscription_rejection = (total_raw, received, elapsed, generation)
         apply_raw_snapshot(payload, record, reconstructed, source_clocks)
         if total_raw in wanted:
             try:
@@ -276,6 +288,23 @@ def audit(path: Path) -> dict:
             successor_receipts[total_raw] = (received, elapsed)
         raw_wall, raw_tick = received, elapsed
     require(total_raw == terminal["raw_count"], "RAW_COUNT_MISMATCH")
+    subscription_events = [e for e in events if e.get("kind") == "subscription_failure"]
+    if subscription_rejection is None:
+        require(not subscription_events and terminal.get("reason") != "SUBSCRIPTION_REJECTED",
+                "SUBSCRIPTION_TERMINAL_MISMATCH")
+    else:
+        rejected_seq, rejected_at, rejected_tick, rejected_generation = subscription_rejection
+        require(terminal.get("reason") == "SUBSCRIPTION_REJECTED" and
+                len(subscription_events) == 1 and events[-2] is subscription_events[0],
+                "SUBSCRIPTION_TERMINAL_MISMATCH")
+        failure = subscription_events[0]
+        require(failure.get("raw_seq") == rejected_seq and
+                failure.get("generation") == rejected_generation and
+                utc(failure["at"]) == rejected_at and
+                all(p["raw_cutoff_seq"] < rejected_seq for p in provenance) and
+                (not provenance or (provenance[-1]["sample_elapsed_seconds"] <= rejected_tick and
+                                   utc(frames[-1]["received_at"]) <= rejected_at)),
+                "SUBSCRIPTION_FAILURE_PROVENANCE_MISMATCH")
     require(set(referenced) == wanted, "PROVENANCE_REFERENCES_MISSING")
     require(total_raw > 0 and frames, "NO_VALID_MARKET_EVIDENCE")
     require(len(expected_states) == len(frames), "RAW_CUTOFF_MISSING")
