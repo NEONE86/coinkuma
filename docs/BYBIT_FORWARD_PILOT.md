@@ -20,7 +20,11 @@ publish any runtime files. Output contains original WS message bytes encoded
 losslessly as base64 and their SHA-256, local UTC arrival and monotonic elapsed
 sequence, exact PAPER packet JSONL and per-packet source receipt IDs, missing
 samples, connection resets and terminal metadata. Hashes prove byte consistency,
-not exchange authenticity. There is no restart/resume or quota reset. The cap
+not exchange authenticity. There is no restart/resume or quota reset. The maximum accepted cap is 3,000,000,000 bytes (decimal 3 GB). The Python
+constructor default remains 1,000,000,000 bytes, and the CLI still requires an
+explicit --max-bytes. The 1 GB command above remains valid; a separately approved
+3 GB run would use --max-bytes 3000000000. This change does not authorize a run.
+The cap
 includes all three output files and reserves terminal space; it does not measure
 filesystem metadata. The process stops at 24 hours or the cap, whichever comes
 first. Ctrl+C stops it; no process continues in the background.
@@ -108,7 +112,7 @@ consecutive `sample_index`, monotonic `sample_elapsed_seconds`, connection
 to the same attempt. This adds metadata to existing events, not interpolated
 frames or another periodic stream. The complete outcome's bytes are reserved
 before writing, so a storage-quota stop does not advance counters without evidence.
-All metadata remains inside the unchanged 1 GB cap and terminal reserve.
+All metadata remains inside the configured cap (up to 3 GB) and terminal reserve.
 
 The independent auditor starts `next_tick` at 1 and, for each observed attempt
 at elapsed `t`, recomputes skipped ticks as `floor(t-next_tick)`, then advances

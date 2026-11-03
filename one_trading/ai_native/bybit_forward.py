@@ -22,7 +22,8 @@ from .engine import Frame, ReplayError
 ENDPOINT = "wss://stream.bybit.com/v5/public/spot"
 SYMBOLS = ("BTCUSDT", "ETHUSDT", "SOLUSDT")
 TOPICS = tuple("orderbook.1." + s for s in SYMBOLS)
-MAX_BYTES = 1_000_000_000
+MAX_BYTES = 3_000_000_000
+DEFAULT_MAX_BYTES = 1_000_000_000
 MAX_DURATION = 86_400
 TERMINAL_RESERVE = 4096
 
@@ -44,7 +45,7 @@ def line(value: dict) -> bytes:
 class Capture:
     """Append-only sink plus deterministic source-record and sampling adapter."""
     def __init__(self, output: Path, start_at: datetime, start_mono: float,
-                 duration: int = MAX_DURATION, max_bytes: int = MAX_BYTES):
+                 duration: int = MAX_DURATION, max_bytes: int = DEFAULT_MAX_BYTES):
         if not 1 <= duration <= MAX_DURATION or not TERMINAL_RESERVE + 1024 <= max_bytes <= MAX_BYTES:
             raise ValueError("invalid capture bounds")
         if not math.isfinite(start_mono):

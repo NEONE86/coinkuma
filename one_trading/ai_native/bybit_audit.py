@@ -129,7 +129,7 @@ def audit(path: Path) -> dict:
     require(start.get("sample_interval_seconds") == 1, "INTERVAL_MISMATCH")
     require(start.get("freshness_seconds_exclusive") == 5, "FRESHNESS_MISMATCH")
     maximum, duration = start.get("max_bytes"), start.get("duration_seconds")
-    require(type(maximum) is int and 5120 <= maximum <= 1_000_000_000, "INVALID_MAX_BYTES")
+    require(type(maximum) is int and 5120 <= maximum <= 3_000_000_000, "INVALID_MAX_BYTES")
     require(type(duration) is int and 1 <= duration <= 86400, "INVALID_DURATION")
     first_at = utc(start["started_at"])
     terminal_at = utc(terminal["at"])
