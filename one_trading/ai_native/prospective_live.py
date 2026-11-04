@@ -41,9 +41,11 @@ def consume_approval(approval):
     state = Path.home()/'.one-trading-approval-consumption'
     state.mkdir(mode=0o700, exist_ok=True)
     reference = approval['approval_reference']
-    write_new(state/(sha256(reference)+'.json'), {
+    claim = {
         'approval_sha256': sha256(approval), 'claimed_at': now().isoformat(),
-        'run_id': approval['run_id'], 'source_commit': approval['source_commit']})
+        'run_id': approval['run_id'], 'source_commit': approval['source_commit']}
+    write_new(state/(sha256(reference)+'.json'), claim)
+    return claim
 
 
 class Tail:
@@ -161,10 +163,12 @@ def run(root, config, *, enable_public_network=False, approval=None):
                 any(approval[k] != config[k] for k in ('duration_seconds','max_bytes','decision_interval_seconds')) or
                 instant(approval['expires_at']) <= now()):
             raise ValueError('APPROVAL_IDENTITY_MISMATCH')
-        consume_approval(approval)
+        approval_claim = consume_approval(approval)
     elif config['cost_limit_usdt'] != '0':
         raise ValueError('FREE_PROBE_REQUIRES_ZERO_BUDGET')
     root.mkdir(mode=0o700)
+    if approval:
+        write_new(root/'approval-claim.json', approval_claim)
     write_new(root/"source-manifest.json", {"commit": head, "files": source_hashes, "sha256": sha256(source_hashes)})
     write_new(root/'config.json', dict(config, model=model.model,
         mode='LIVE_MODEL' if approval else 'FREE_PROBE_NOT_AI', approval=approval,

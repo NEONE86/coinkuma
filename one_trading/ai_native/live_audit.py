@@ -17,6 +17,25 @@ def read(path):
     return json.loads(path.read_text(encoding='utf-8'))
 
 
+def verify_approval(config, header, requests, claim):
+    a=config['approval']; policy=header['registry']['AI']
+    check(a.get('model_calls_authorized') is True and bool(a.get('approval_reference')), 'APPROVAL_DENIED')
+    for name in ('source_commit','run_id','max_calls','cost_limit_usdt','duration_seconds','max_bytes','decision_interval_seconds'):
+        check(a[name]==config[name], 'APPROVAL_CONFIG_MISMATCH:'+name)
+    check(a['source_commit']==header['collector_commit'] and a['run_id']==header['run_id'] and
+          a['model']==policy['model']==config['model'] and policy['prompt_sha256']==config['prompt_sha256'],
+          'APPROVAL_MODEL_SOURCE_MISMATCH')
+    check(type(a['max_calls']) is int and 0 < a['max_calls'] == policy['call_limit'] and
+          policy['cost_limit_usdt']==a['cost_limit_usdt'] and len(requests)<=a['max_calls'], 'APPROVAL_CAPS')
+    check(Decimal(a['reserve_per_call_usdt'])>0 and Decimal(a['cost_limit_usdt'])>0 and a['usd_usdt']=='1', 'APPROVAL_COST')
+    check(claim['approval_sha256']==digest(a) and claim['run_id']==a['run_id'] and
+          claim['source_commit']==a['source_commit'], 'APPROVAL_CLAIM_MISMATCH')
+    for row in requests.values():
+        p=row['payload']
+        check(at(claim['claimed_at'])<=at(row['at'])<at(a['expires_at']), 'APPROVAL_EXPIRED_REQUEST')
+        check(p['model']==a['model'] and p['reserve_cost_usdt']==a['reserve_per_call_usdt'], 'APPROVAL_REQUEST_MISMATCH')
+
+
 def verify(root):
     root = Path(root)
     config = read(root/'config.json')
@@ -33,6 +52,11 @@ def verify(root):
     check(rows[0]['payload']['collector_commit'] == config['source_commit'], 'SOURCE_IDENTITY')
     check(rows[0]['payload']['execution_delay_seconds']==paper['protocol']['execution_delay_seconds'],
           'DECISION_PAPER_DELAY_MISMATCH')
+    if rows[0]['payload']['source_class']=='LIVE_PUBLIC':
+        with (root/'source/events.jsonl').open(encoding='utf-8') as stream:
+            source_start=json.loads(stream.readline())
+        check(source_start['duration_seconds']==config['duration_seconds'] and
+              source_start['max_bytes']==config['max_bytes'], 'SOURCE_CONFIG_LIMIT_MISMATCH')
     persisted = [json.loads(line) for line in (root/'paper-events.jsonl').read_bytes().splitlines()]
     check(persisted == paper['ledger'], 'PAPER_JOURNAL_MISMATCH')
     frozen = {r['payload']['frame']['id']: r['payload']['frame'] for r in rows if r['kind']=='input_frozen'}
@@ -62,6 +86,10 @@ def verify(root):
             p=d['plan']
             check((p['action'],p['symbol'],p['fraction'])==expected, 'CONTROL_RULE_CHANGED')
     requests = {r['payload']['request_id']: r for r in rows if r['kind']=='decision_requested'}
+    if config['mode']=='LIVE_MODEL':
+        verify_approval(config,rows[0]['payload'],requests,read(root/'approval-claim.json'))
+    else:
+        check(config['mode']=='FREE_PROBE_NOT_AI', 'UNKNOWN_MODEL_MODE')
     responses = {r['payload']['request_id']: r for r in rows if r['kind']=='decision_received'}
     accepted = {r['payload']['request_id']: r for r in rows if r['kind']=='proposal_validated'}
     ai = {r['payload']['source_frame']: r['payload'] for r in paper['ledger']
@@ -88,8 +116,10 @@ def verify(root):
             check(provider['kind']=='OPENAI_USAGE_PRICED_NOT_INVOICE', 'PROVIDER_TYPE')
             env = json.loads(provider['provider_raw_utf8'])
             check(env==provider['provider_response'], 'PROVIDER_RAW_MISMATCH')
+            check(env.get('model')==config['model'], 'PROVIDER_MODEL_MISMATCH')
             check(json.loads(provider['request_body']['input'])==context, 'PROVIDER_INPUT_CHANGED')
             check(provider['request_body']['model']==config['model'], 'MODEL_CHANGED')
+            check(provider['request_body']['max_output_tokens']==config['approval']['max_output_tokens'], 'OUTPUT_CAP_CHANGED')
             check(digest(provider['request_body']['instructions'])==config['prompt_sha256'] and
                   provider['request_body']['tools']==[] and provider['request_body']['store'] is False,
                   'MODEL_PROMPT_OR_TOOLS_CHANGED')

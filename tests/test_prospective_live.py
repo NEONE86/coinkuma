@@ -32,6 +32,27 @@ class Sequence:
 
 
 class LiveTests(unittest.TestCase):
+    def test_review_independent_approval_reconciliation(self):
+        from one_trading.ai_native.live_audit import verify_approval
+        from one_trading.ai_native.audit import digest
+        a=dict(model_calls_authorized=True,approval_reference='fixture-approval',source_commit='a'*40,
+            run_id='fixture',max_calls=2,cost_limit_usdt='.10',duration_seconds=90,max_bytes=1000000,
+            decision_interval_seconds=15,model='fixture-model',reserve_per_call_usdt='.05',usd_usdt='1',
+            expires_at='2099-01-01T00:00:00+00:00')
+        c=dict(a,approval=a,prompt_sha256='b'*64)
+        h=dict(collector_commit='a'*40,run_id='fixture',registry={'AI':dict(model='fixture-model',
+            prompt_sha256='b'*64,call_limit=2,cost_limit_usdt='.10')})
+        requests={'r':dict(at=BASE.isoformat(),payload=dict(model='fixture-model',reserve_cost_usdt='.05'))}
+        def claim(approval):return dict(approval_sha256=digest(approval),run_id='fixture',source_commit='a'*40,
+                                        claimed_at=(BASE-timedelta(seconds=1)).isoformat())
+        verify_approval(c,h,requests,claim(a))
+        for key,value in [('model_calls_authorized',False),('max_calls',0),('model','other'),
+                          ('source_commit','f'*40),('expires_at','2000-01-01T00:00:00+00:00'),
+                          ('cost_limit_usdt','0')]:
+            with self.subTest(key=key):
+                bad=copy.deepcopy(c);bad['approval'][key]=value
+                with self.assertRaises(AuditError):verify_approval(bad,h,requests,claim(bad['approval']))
+
     def test_review_shortened_paper_protocol_cannot_pass_cross_audit(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);self.fixture(root,protocol=Protocol(execution_delay_seconds=0))
@@ -54,8 +75,6 @@ class LiveTests(unittest.TestCase):
             rows[-1]['payload']['unresolved_requests']=[]
             from test_prospective_evidence import rehash
             path.write_bytes(rehash(rows))
-            cfg=json.loads((root/'config.json').read_text());cfg['mode']='LIVE_MODEL'
-            (root/'config.json').write_text(json.dumps(cfg))
             r=verify_live(root)
             self.assertEqual(r['source_decision_audit']['unresolved_requests'],0)
             self.assertEqual(r['status'],'INCOMPLETE')
