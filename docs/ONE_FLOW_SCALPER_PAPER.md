@@ -18,6 +18,13 @@ WebSocket**의 `orderbook.1` 및 `publicTrade`를 별도로 구독한다.
 
 Python 3.12 이상을 기준으로 테스트했다.
 
+**Windows에서 제일 빠른 방법:** 이 저장소를 다운로드해 압축 해제한 다음
+`START_PAPER_WINDOWS.cmd`를 더블클릭한다. Python 3이 설치되어 있으면
+필요한 WebSocket 패키지를 설치하고 5분간 공개 데이터를 관찰하며
+PAPER 매매를 한 뒤 기록을 자동 검증한다. 결과는 압축 해제 폴더의
+`paper_runs`에 **새 폴더**로 남는다. 최초 실행에서 Windows의 `py` 또는
+`python` 명령을 찾지 못하면 Python 설치가 필요하다.
+
 ```sh
 python -m unittest discover -s tests -p test_scalp_flow.py -v
 python -m pip install websockets==16.0

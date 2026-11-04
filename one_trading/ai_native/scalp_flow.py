@@ -666,7 +666,7 @@ def main(argv: list[str] | None = None) -> int:
     online.add_argument("--output-dir", required=True)
     online.add_argument("--duration-seconds", type=int, default=300)
     online.add_argument("--max-inputs", type=int, default=100_000)
-    audit = sub.add_parser("verify", help="Independent hash-chain and decision replay")
+    audit = sub.add_parser("verify", help="Hash-chain and deterministic decision replay")
     audit.add_argument("--events", required=True)
     for command in (offline, online):
         command.add_argument("--symbol", default="SOLUSDT", choices=["BTCUSDT", "ETHUSDT", "SOLUSDT"])
