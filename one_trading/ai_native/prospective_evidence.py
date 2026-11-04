@@ -95,7 +95,7 @@ class EvidenceRecorder:
         identity(run_id)
         if source_class not in ("SYNTHETIC", "LIVE_PUBLIC"):
             raise ReplayError("SOURCE_CLASS")
-        if not isinstance(collector_commit, str) or not HEX.fullmatch(collector_commit):
+        if not isinstance(collector_commit, str) or not re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", collector_commit):
             raise ReplayError("SOURCE_COMMIT")
         if type(model_calls_authorized) is not bool:
             raise ReplayError("MODEL_AUTH_FLAG")

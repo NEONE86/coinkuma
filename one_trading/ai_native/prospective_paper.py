@@ -62,7 +62,7 @@ def replay(path: Path, *, source_dir: Path | None = None) -> dict:
             if latency < 0:
                 raise ReplayError("PRE_RECEIPT_PROPOSAL")
             decisions.setdefault(req["policy_id"], {})[req["frame_id"]] = ModelDecision(
-                payload["plan"], latency)
+                payload["plan"], latency, valid_until=payload["valid_until"])
     if len(frames) < 2:
         raise ReplayError("INSUFFICIENT_PAPER_RECEIPTS")
     planners = {"CASH": CashPlanner()}

@@ -63,7 +63,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     arms = {name: {"cash": cash_start, "positions": {}, "realized": 0.0,
                    "fills": 0, "rejections": 0, "unavailable": 0,
                    "decisions": {}, "pending": None, "episodes": {}, "matured": [],
-                   "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
+                   "model_costs": 0.0, "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
                    "peak": cash_start, "worst_drawdown": 0.0, "halted": False}
             for name in record["summary"]}
     check("CASH" in arms, "NO_CASH_CONTROL")
@@ -71,6 +71,8 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     check(isinstance(ledger, list) and bool(ledger), "EMPTY_LEDGER")
     tip = "0" * 64
     last = None
+    previous_receipt = None
+    pre_cost_context = {}
     receipt = None
     seen = set()
     symbols = None
@@ -86,6 +88,19 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             arm["worst_drawdown"] = max(arm["worst_drawdown"], 1 - marked / arm["peak"])
             if marked / arm["peak"] <= 1 - protocol["max_drawdown_fraction"]:
                 arm["halted"] = True
+    def context_for(name):
+        arm = arms[name]
+        history = {s: {"previous_mid": ((previous_receipt["quotes"][s]["bid"] + previous_receipt["quotes"][s]["ask"])/2) if previous_receipt else None,
+                       "current_bid": float(q["bid"]), "current_ask": float(q["ask"]), "current_mid": (q["bid"]+q["ask"])/2,
+                       "current_spread_bps": (q["ask"]-q["bid"])/((q["bid"]+q["ask"])/2)*10000,
+                       "quote_exchange_at": at(q["exchange_at"]).isoformat()}
+                   for s,q in receipt["quotes"].items()}
+        equity = arm["cash"] + sum(p["quantity"]*receipt["quotes"][s]["bid"] for s,p in arm["positions"].items())
+        return dict(frame_id=receipt["id"], cutoff=at(receipt["received_at"]).isoformat(), history=history,
+                    universe=sorted(receipt["quotes"]), cash=arm["cash"], equity=equity,
+                    positions={s: {"quantity": p["quantity"], "cost_basis": p["basis"]} for s,p in arm["positions"].items()},
+                    pending_order=bool(arm["pending"]), halted=arm["halted"],
+                    resolved_memory=arm["matured"][-30:], protocol=protocol)
     for seq, row in enumerate(ledger):
         check(row.get("seq") == seq and row.get("previous_hash") == tip,
               "BROKEN_APPEND_ONLY_CHAIN")
@@ -110,7 +125,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                   "DUPLICATE_OR_BACKDATED_RECEIPT")
             seen.add(raw["id"])
             last = current
+            previous_receipt = receipt
             receipt = raw
+            pre_cost_context.clear()
             check(isinstance(raw["quotes"], dict) and raw["quotes"], "NO_QUOTES")
             check(entry["symbols"] == sorted(raw["quotes"]), "SYMBOL_PROJECTION")
             if symbols is None:
@@ -136,6 +153,23 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
         check(receipt is not None, "EVENT_WITHOUT_RECEIPT")
         arm = arms.get(entry.get("arm"))
         check(arm is not None, "UNKNOWN_ARM")
+        if kind == "model_cost":
+            amount = entry["amount"]
+            check(type(amount) in (float, int) and math.isfinite(amount) and amount > 0
+                  and entry["frame_id"] == receipt["id"], "INVALID_MODEL_COST")
+            check(entry["arm"] not in pre_cost_context, "DUPLICATE_MODEL_CHARGE")
+            pre_cost_context[entry["arm"]] = context_for(entry["arm"])
+            arm["cash"] -= amount
+            arm["model_costs"] += amount
+            approx(entry["cash_after"], arm["cash"], label="model_cost_cash")
+            track_equity(receipt)
+            continue
+        if kind in ("decision", "decision_unavailable"):
+            check(not due_settlements, "MISSING_ELIGIBLE_SETTLEMENT")
+            expected_context = pre_cost_context.get(entry["arm"], context_for(entry["arm"]))
+            check(entry["context_hash"] == digest(expected_context), "CONTEXT_RECALCULATION")
+            if "context" in entry:
+                check(digest(entry["context"]) == digest(expected_context), "CONTEXT_BYTES_CHANGED")
         if kind == "decision_unavailable":
             check(entry["frame_id"] == receipt["id"], "UNAVAILABLE_FRAME_MISMATCH")
             arm["unavailable"] += 1
@@ -176,6 +210,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                   at(entry["eligible_at"]) ==
                   at(entry["decision_at"]) + timedelta(seconds=protocol["execution_delay_seconds"]),
                   "ORDER_ELIGIBILITY")
+            check(entry.get("valid_until") == decision.get("valid_until"), "ORDER_EXPIRY_MISMATCH")
             arm["pending"] = entry.copy()
             arm["pending"].pop("arm", None)
             continue
@@ -196,7 +231,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             equity = arm["cash"] + mark
             fraction = min(order["fraction"], protocol["max_position_fraction"])
             expected_rejection = None
-            if not 0 <= age <= protocol["max_quote_age_seconds"]:
+            if order.get("valid_until") and last > at(order["valid_until"]):
+                expected_rejection = "PROPOSAL_EXPIRED"
+            elif not 0 <= age <= protocol["max_quote_age_seconds"]:
                 expected_rejection = "STALE_QUOTE"
             elif spread > protocol["max_spread_bps"]:
                 expected_rejection = "SPREAD_LIMIT"
@@ -314,6 +351,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     track_equity(receipt)
     for name, arm in arms.items():
         report = record["summary"][name]
+        approx(report.get("model_costs_paid", 0), arm["model_costs"], label="model_cost_total")
         exposure = sum(pos["quantity"] * receipt["quotes"][symbol]["bid"]
                        for symbol, pos in arm["positions"].items())
         equity = arm["cash"] + exposure

@@ -171,6 +171,8 @@ class ModelDecision:
 
     plan: dict[str, Any]
     latency_seconds: float
+    model_cost_usdt: float = 0.0
+    valid_until: str | None = None
 
 
 class Chain:
@@ -208,6 +210,7 @@ class Arm:
     rejected_orders: int = 0
     fills: int = 0
     decisions: int = 0
+    model_costs_paid: float = 0.0
     fees_paid: float = 0.0
     slippage_paid: float = 0.0
     gross_turnover: float = 0.0
@@ -285,6 +288,8 @@ class Experiment:
         error = None
         if frame.id == order["source_frame"] or frame.received_at <= instant(order["decision_at"]):
             error = "SAME_OR_PRE_DECISION_RECEIPT"
+        elif order.get("valid_until") and frame.received_at > instant(order["valid_until"]):
+            error = "PROPOSAL_EXPIRED"
         elif not 0 <= age <= self.protocol.max_quote_age_seconds:
             error = "STALE_QUOTE"
         elif quote.spread_bps > self.protocol.max_spread_bps:
@@ -390,6 +395,7 @@ class Experiment:
                                       for s, p in arm.positions.items()},
                            pending_order=bool(arm.pending), halted=arm.halted,
                            resolved_memory=memory[-30:], protocol=dict(vars(self.protocol)))
+            valid_until = None
             start = time.monotonic()
             try:
                 proposal = arm.planner.propose(context)
@@ -400,6 +406,18 @@ class Experiment:
                     latency = numeric(proposal.latency_seconds)
                     if latency < 0:
                         raise ReplayError("INVALID_RECORDED_MODEL_LATENCY")
+                    charge = numeric(proposal.model_cost_usdt)
+                    if charge < 0:
+                        raise ReplayError("NEGATIVE_MODEL_COST")
+                    if charge:
+                        arm.cash -= charge
+                        arm.model_costs_paid += charge
+                        self.ledger.append("model_cost", dict(arm=arm.name, frame_id=frame.id,
+                            amount=charge, cash_after=arm.cash))
+                        self._mark_risk(arm, frame)
+                    valid_until = proposal.valid_until
+                    if valid_until is not None and instant(valid_until) < frame.received_at:
+                        raise ReplayError("EXPIRED_MODEL_DECISION")
                     raw = proposal.plan
                 else:
                     raw = proposal
@@ -414,8 +432,10 @@ class Experiment:
             decision_id = sha256([arm.name, frame.id, sha256(raw)])
             event = dict(id=decision_id, arm=arm.name, source_frame=frame.id,
                          observed_at=frame.received_at.isoformat(), ready_at=ready.isoformat(),
-                         model_latency_seconds=latency, context_hash=sha256(context),
+                         model_latency_seconds=latency, context_hash=sha256(context), context=context,
                          memory_ids=[m["id"] for m in memory[-30:]], plan=raw)
+            if valid_until is not None:
+                event["valid_until"] = valid_until
             self.ledger.append("decision", event)
             arm.decisions += 1
             if arm.last_episode_due is None or frame.received_at >= arm.last_episode_due:
@@ -431,6 +451,8 @@ class Experiment:
                         symbol=plan.symbol, fraction=plan.fraction, source_frame=frame.id,
                         decision_at=ready.isoformat(),
                         eligible_at=(ready+timedelta(seconds=self.protocol.execution_delay_seconds)).isoformat())
+                    if valid_until is not None:
+                        arm.pending["valid_until"] = valid_until
                     self.ledger.append("order_intent", dict(arm=arm.name, **arm.pending))
 
     def finish(self) -> dict[str, Any]:
@@ -444,7 +466,7 @@ class Experiment:
                 return_fraction=equity/self.protocol.capital_usdt-1, realized_pnl=arm.realized_pnl,
                 open_exposure_marked_at_bid=exposure, open_positions=len(arm.positions),
                 pending_order=arm.pending is not None, fills=arm.fills,
-                decisions=arm.decisions, fees_paid=arm.fees_paid,
+                decisions=arm.decisions, fees_paid=arm.fees_paid, model_costs_paid=arm.model_costs_paid,
                 modeled_slippage_paid=arm.slippage_paid,
                 gross_turnover_usdt=arm.gross_turnover,
                 max_observed_drawdown_fraction=arm.worst_drawdown,
