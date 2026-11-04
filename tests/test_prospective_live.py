@@ -32,6 +32,54 @@ class Sequence:
 
 
 class LiveTests(unittest.TestCase):
+    def test_review_shortened_paper_protocol_cannot_pass_cross_audit(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);self.fixture(root,protocol=Protocol(execution_delay_seconds=0))
+            # Producer and its own auditor agree on zero delay; cross-audit must not.
+            verify(json.loads((root/'paper.json').read_text()))
+            with self.assertRaisesRegex(AuditError,'UNPINNED_PAPER_PROTOCOL'):verify_live(root)
+
+    def test_review_unknown_completion_cannot_become_free_failed_success(self):
+        class Unknown(FreeProbe):
+            def respond(self,c):raise TimeoutError('synthetic uncertainty')
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);self.fixture(root,model=Unknown())
+            path=root/'decisions.jsonl'
+            rows=[json.loads(x) for x in path.read_bytes().splitlines()]
+            req=next(r for r in rows if r['kind']=='decision_requested')
+            failed=copy.deepcopy(req);failed['kind']='decision_failed'
+            failed['payload']=dict(request_id=req['payload']['request_id'],failure_reason='UNKNOWN_COMPLETION',
+                                   actual_cost_usdt='0',input_tokens=0,output_tokens=0)
+            rows.insert(rows.index(req)+1,failed)
+            rows[-1]['payload']['unresolved_requests']=[]
+            from test_prospective_evidence import rehash
+            path.write_bytes(rehash(rows))
+            cfg=json.loads((root/'config.json').read_text());cfg['mode']='LIVE_MODEL'
+            (root/'config.json').write_text(json.dumps(cfg))
+            r=verify_live(root)
+            self.assertEqual(r['source_decision_audit']['unresolved_requests'],0)
+            self.assertEqual(r['status'],'INCOMPLETE')
+
+    def test_review_approval_claim_is_atomic_across_runtime_parents(self):
+        from one_trading.ai_native.prospective_live import consume_approval
+        from concurrent.futures import ThreadPoolExecutor
+        approval=dict(approval_reference='same-approval',run_id='same-basename',source_commit='a'*40)
+        def claim(_):
+            try:consume_approval(approval);return 'claimed'
+            except FileExistsError:return 'refused'
+        with tempfile.TemporaryDirectory() as d, patch('pathlib.Path.home',return_value=Path(d)):
+            with ThreadPoolExecutor(max_workers=2) as pool:
+                self.assertEqual(sorted(pool.map(claim,range(2))),['claimed','refused'])
+
+    def test_review_expiry_checked_at_provider_dispatch(self):
+        approval=dict(model_calls_authorized=True,approval_reference='synthetic',usd_usdt='1',
+            rates={'input':'.75','cached':'.075','output':'4.5'},reserve_per_call_usdt='.05',
+            max_output_tokens=1024,model='synthetic-model',expires_at='2000-01-01T00:00:00+00:00')
+        with patch.dict('os.environ',{'OPENAI_API_KEY':'synthetic-not-secret'}),patch('urllib.request.build_opener') as opener:
+            model=ResponsesModel(approval)
+            with self.assertRaisesRegex(ValueError,'APPROVAL_EXPIRED'):model.respond({})
+            opener.assert_not_called()
+
     def test_model_cost_not_backdated_to_input_frame(self):
         class Slow:
             def propose(self,c):
@@ -51,7 +99,7 @@ class LiveTests(unittest.TestCase):
         from unittest.mock import MagicMock
         approval=dict(model_calls_authorized=True,approval_reference='synthetic',usd_usdt='1',
             rates={'input':'.75','cached':'.075','output':'4.5'},reserve_per_call_usdt='.05',
-            max_output_tokens=1024,model='synthetic-model')
+            max_output_tokens=1024,model='synthetic-model',expires_at='2099-01-01T00:00:00+00:00')
         answer=plan('HOLD','CASH',0.,'fixture')
         envelope={'status':'completed','usage':{'input_tokens':100,'input_tokens_details':{'cached_tokens':0},'output_tokens':20},
                   'output':[{'type':'message','content':[{'type':'output_text','text':json.dumps(answer)}]}]}
@@ -66,34 +114,37 @@ class LiveTests(unittest.TestCase):
         self.assertEqual(json.loads(receipt['provider_raw_utf8']),envelope)
         self.assertEqual(opener.open.call_count,1)
 
+    def fixture(self, root, model=None, protocol=None):
+        registry={k:dict(version=v,model=None,prompt_sha256=None,call_limit=0,cost_limit_usdt='0')
+                  for k,v in [('CASH','cash-v1'),('PRICE_ONLY','momentum-v1')]}
+        registry['AI']=dict(version='live-v1',model='free-probe-not-ai',prompt_sha256='b'*64,
+                            call_limit=2,cost_limit_usdt='0')
+        rec=EvidenceRecorder(root/'decisions.jsonl',run_id='fixture',source_class='SYNTHETIC',
+            collector_commit='a'*40,registry=registry,start_at=BASE,model_calls_authorized=True)
+        cfg=dict(max_calls=2,decision_interval_seconds=10,duration_seconds=90,cost_limit_usdt='0',source_commit='a'*40)
+        planner=LivePlanner(rec,model or FreeProbe(),root,100,cfg)
+        e=Experiment(protocol or Protocol(),{'CASH':ScheduledControl(CashPlanner(),planner),
+            'PRICE_ONLY':ScheduledControl(MomentumPlanner(),planner),'AI':planner},data_use='SYNTHETIC')
+        for i in range(5):
+            f=packet(i,100+i,second_step=5)
+            t=BASE+timedelta(seconds=i*5+.1)
+            rec.freeze(f,source_receipts={'BTCUSDT':{'seq':i+1,'sha256':'c'*64,'received_at':f['received_at']}},
+                       raw_cutoff_seq=i+1,memory=[],at=t,elapsed=i*5+.1)
+            with patch('one_trading.ai_native.prospective_live.now',return_value=t), \
+                 patch('one_trading.ai_native.prospective_live.time.monotonic',return_value=100+i*5+.25):
+                planner.select_epoch(f);e.observe(f,source_received_at={'BTCUSDT':f['received_at']})
+        rec.close(at=BASE+timedelta(seconds=30),elapsed=30)
+        paper=e.finish()
+        write_new(root/'paper.json',paper)
+        from one_trading.ai_native.engine import canonical
+        (root/'paper-events.jsonl').write_bytes(b''.join(canonical(r)+b'\n' for r in paper['ledger']))
+        write_new(root/'config.json',dict(cfg,mode='FREE_PROBE_NOT_AI'))
+        write_new(root/'termination.json',dict(error=None,collector_returncode=0,model_uncertain=False))
+
     def test_full_local_transport_common_epochs_and_independent_binding(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d)
-            registry={k:dict(version=v,model=None,prompt_sha256=None,call_limit=0,cost_limit_usdt='0')
-                      for k,v in [('CASH','cash-v1'),('PRICE_ONLY','momentum-v1')]}
-            registry['AI']=dict(version='live-v1',model='free-probe-not-ai',prompt_sha256='b'*64,
-                                call_limit=2,cost_limit_usdt='0')
-            rec=EvidenceRecorder(root/'decisions.jsonl',run_id='fixture',source_class='SYNTHETIC',
-                collector_commit='a'*40,registry=registry,start_at=BASE,model_calls_authorized=True)
-            cfg=dict(max_calls=2,decision_interval_seconds=10,duration_seconds=90,cost_limit_usdt='0',source_commit='a'*40)
-            planner=LivePlanner(rec,FreeProbe(),root,100,cfg)
-            e=Experiment(Protocol(),{'CASH':ScheduledControl(CashPlanner(),planner),
-                'PRICE_ONLY':ScheduledControl(MomentumPlanner(),planner),'AI':planner},data_use='SYNTHETIC')
-            for i in range(5):
-                f=packet(i,100+i,second_step=5)
-                t=BASE+timedelta(seconds=i*5+.1)
-                rec.freeze(f,source_receipts={'BTCUSDT':{'seq':i+1,'sha256':'c'*64,'received_at':f['received_at']}},
-                           raw_cutoff_seq=i+1,memory=[],at=t,elapsed=i*5+.1)
-                with patch('one_trading.ai_native.prospective_live.now',return_value=t), \
-                     patch('one_trading.ai_native.prospective_live.time.monotonic',return_value=100+i*5+.25):
-                    planner.select_epoch(f);e.observe(f,source_received_at={'BTCUSDT':f['received_at']})
-            rec.close(at=BASE+timedelta(seconds=30),elapsed=30)
-            paper=e.finish()
-            write_new(root/'paper.json',paper)
-            from one_trading.ai_native.engine import canonical
-            (root/'paper-events.jsonl').write_bytes(b''.join(canonical(r)+b'\n' for r in paper['ledger']))
-            write_new(root/'config.json',dict(cfg,mode='FREE_PROBE_NOT_AI'))
-            write_new(root/'termination.json',dict(error=None,collector_returncode=0,model_uncertain=False))
+            self.fixture(root)
             r=verify_live(root)
             self.assertEqual(r['status'],'PASS_CONNECTION_ONLY')
             self.assertEqual(r['summary']['AI']['fills'],2)

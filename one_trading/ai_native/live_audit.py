@@ -22,9 +22,17 @@ def verify(root):
     config = read(root/'config.json')
     evidence = decision_verify(root/'decisions.jsonl', source_dir=root/'source')
     paper = read(root/'paper.json')
+    expected_protocol = dict(capital_usdt=10000., execution_delay_seconds=2.,
+        max_quote_age_seconds=30., fee_bps_per_side=10., slippage_bps_per_side=5.,
+        max_spread_bps=20., max_book_participation=.01, max_position_fraction=.125,
+        max_total_exposure_fraction=.4, max_drawdown_fraction=.15,
+        min_notional_usdt=10., label_horizon_seconds=3600.)
+    check(paper['protocol']==expected_protocol, 'UNPINNED_PAPER_PROTOCOL')
     recalculation = paper_verify(paper)
     rows = [json.loads(line) for line in (root/'decisions.jsonl').read_bytes().splitlines()]
     check(rows[0]['payload']['collector_commit'] == config['source_commit'], 'SOURCE_IDENTITY')
+    check(rows[0]['payload']['execution_delay_seconds']==paper['protocol']['execution_delay_seconds'],
+          'DECISION_PAPER_DELAY_MISMATCH')
     persisted = [json.loads(line) for line in (root/'paper-events.jsonl').read_bytes().splitlines()]
     check(persisted == paper['ledger'], 'PAPER_JOURNAL_MISMATCH')
     frozen = {r['payload']['frame']['id']: r['payload']['frame'] for r in rows if r['kind']=='input_frozen'}
@@ -64,12 +72,13 @@ def verify(root):
     cost_events = {r['payload']['source_frame']: r['payload'] for r in paper['ledger'] if r['kind']=='model_cost_scheduled' and r['payload']['arm']=='AI'}
     proposals = {r['payload']['request_id']: r for r in rows if r['kind'] in ('proposal_validated','proposal_rejected')}
     expected_charges = {}
+    unknown_outcomes = set(requests)-set(responses)
     for rid, row in requests.items():
         request = row['payload']; fid = request['frame_id']
         context = read(root/(rid+'-input.json'))
         check(context['frame_id']==fid and context['cutoff']==frozen[fid]['received_at'], 'MODEL_INPUT_IDENTITY')
         if rid not in responses:
-            continue  # Explicit unresolved request; result below cannot be PASS.
+            continue  # Any failed/unknown outcome needs a provider bill before PASS.
         response = responses[rid]['payload']
         provider = read(root/(rid+'-provider.json'))
         check(provider['cost']==response['actual_cost_usdt'], 'PROVIDER_COST_MISMATCH')
@@ -106,11 +115,15 @@ def verify(root):
                   decision['plan']==json.loads(base64.b64decode(response['response_base64'])), 'MODEL_PLAN_CHANGED')
             check(at(decision['ready_at'])==at(validated['at']) and
                   decision.get('valid_until')==validated['payload']['valid_until'], 'MODEL_TIMING_CHANGED')
+            for order in (r['payload'] for r in paper['ledger'] if r['kind']=='order_intent'
+                          and r['payload']['arm']=='AI' and r['payload']['decision_id']==decision['id']):
+                check(at(order['eligible_at'])==at(validated['payload']['eligible_after']),
+                      'MODEL_EXECUTION_DELAY_CHANGED')
     check(charges==expected_charges, 'MODEL_COST_NOT_DEBITED')
     approx(paper['summary']['AI']['model_costs_paid']+paper['summary']['AI'].get('pending_model_cost_usdt',0), float(evidence['model_cost_usdt']['AI']), label='all_model_costs')
     termination = read(root/'termination.json')
     complete = (not termination['error'] and termination['collector_returncode']==0 and
-                not evidence['unresolved_requests'] and not termination['model_uncertain']
+                not unknown_outcomes and not evidence['unresolved_requests'] and not termination['model_uncertain']
                 and paper['summary']['AI'].get('pending_model_cost_usdt',0)==0)
     return {'status': 'PASS_CONNECTION_ONLY' if complete and config['mode']=='FREE_PROBE_NOT_AI'
             else 'PASS_PRICED_PAPER_ONLY' if complete else 'INCOMPLETE',

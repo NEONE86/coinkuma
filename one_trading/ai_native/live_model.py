@@ -2,9 +2,10 @@
 import json
 import os
 import urllib.request
+from datetime import datetime, timezone
 from decimal import Decimal, ROUND_CEILING
 
-from .engine import canonical, ReplayError
+from .engine import canonical, ReplayError, instant
 from .planners import MODEL_INSTRUCTION, MODEL_SCHEMA, plan
 
 
@@ -72,6 +73,8 @@ class ResponsesModel:
             raise ReplayError('MODEL_CREDENTIAL_UNAVAILABLE')
 
     def respond(self, context):
+        if instant(self.approval['expires_at']) <= datetime.now(timezone.utc):
+            raise ReplayError('APPROVAL_EXPIRED_BEFORE_DISPATCH')
         body = dict(model=self.model, instructions=MODEL_INSTRUCTION,
                     input=canonical(context).decode(), tools=[], store=False,
                     max_output_tokens=self.approval['max_output_tokens'],

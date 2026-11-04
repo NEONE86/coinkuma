@@ -32,6 +32,20 @@ def write_new(path, value):
         os.fsync(stream.fileno())
 
 
+def consume_approval(approval):
+    """One durable claim per approval reference, independent of runtime path.
+
+    Failed launches do not refund this claim. A new attempt requires a new
+    approval; changing parents or concurrently launching cannot reset budget.
+    """
+    state = Path.home()/'.one-trading-approval-consumption'
+    state.mkdir(mode=0o700, exist_ok=True)
+    reference = approval['approval_reference']
+    write_new(state/(sha256(reference)+'.json'), {
+        'approval_sha256': sha256(approval), 'claimed_at': now().isoformat(),
+        'run_id': approval['run_id'], 'source_commit': approval['source_commit']})
+
+
 class Tail:
     def __init__(self, path):
         self.path, self.offset = Path(path), 0
@@ -61,6 +75,8 @@ class LivePlanner:
     def select_epoch(self, frame):
         elapsed = time.monotonic()-self.start
         age = (now()-instant(frame['received_at'])).total_seconds()
+        if hasattr(self.model, 'approval') and instant(self.model.approval['expires_at']) <= now():
+            self.failed = True
         self.enabled = (not self.failed and self.calls < self.config['max_calls']
             and elapsed >= self.next_call and 0 <= age <= 4
             and elapsed < self.config['duration_seconds']-35
@@ -145,6 +161,7 @@ def run(root, config, *, enable_public_network=False, approval=None):
                 any(approval[k] != config[k] for k in ('duration_seconds','max_bytes','decision_interval_seconds')) or
                 instant(approval['expires_at']) <= now()):
             raise ValueError('APPROVAL_IDENTITY_MISMATCH')
+        consume_approval(approval)
     elif config['cost_limit_usdt'] != '0':
         raise ValueError('FREE_PROBE_REQUIRES_ZERO_BUDGET')
     root.mkdir(mode=0o700)
