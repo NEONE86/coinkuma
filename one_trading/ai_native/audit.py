@@ -73,6 +73,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     last = None
     previous_receipt = None
     receipt = None
+    source_received_at = None
     seen = set()
     symbols = None
     due_settlements: dict[str, dict[str, Any]] = {}
@@ -126,6 +127,10 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             last = current
             previous_receipt = receipt
             receipt = raw
+            source_received_at = entry.get('source_received_at')
+            if source_received_at is not None:
+                check(set(source_received_at)==set(raw['quotes']) and
+                      all(at(t)<=current for t in source_received_at.values()), 'SOURCE_RECEIPT_TIMES')
             check(isinstance(raw["quotes"], dict) and raw["quotes"], "NO_QUOTES")
             check(entry["symbols"] == sorted(raw["quotes"]), "SYMBOL_PROJECTION")
             if symbols is None:
@@ -246,6 +251,8 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             expected_rejection = None
             if order.get("valid_until") and last > at(order["valid_until"]):
                 expected_rejection = "PROPOSAL_EXPIRED"
+            elif source_received_at is not None and at(source_received_at[order['symbol']]) <= at(order['decision_at']):
+                expected_rejection = "PRE_DECISION_SOURCE_QUOTE"
             elif not 0 <= age <= protocol["max_quote_age_seconds"]:
                 expected_rejection = "STALE_QUOTE"
             elif spread > protocol["max_spread_bps"]:

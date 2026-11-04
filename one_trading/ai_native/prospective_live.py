@@ -195,7 +195,7 @@ def run(root, config, *, enable_public_network=False, approval=None):
                         rec.freeze(frame, source_receipts={s: raw[n] for s,n in p['source_seqs'].items()},
                             raw_cutoff_seq=p['raw_cutoff_seq'], memory=[], at=now(), elapsed=time.monotonic()-start)
                         planner.select_epoch(frame)
-                        engine.observe(frame)
+                        engine.observe(frame, source_received_at={s: raw[n]['received_at'] for s,n in p['source_seqs'].items()})
                         for row in engine.ledger.records[persisted:]:
                             journal.write(canonical(row)+b'\n')
                         journal.flush(); os.fsync(journal.fileno())

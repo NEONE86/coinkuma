@@ -86,7 +86,7 @@ class LiveTests(unittest.TestCase):
                            raw_cutoff_seq=i+1,memory=[],at=t,elapsed=i*5+.1)
                 with patch('one_trading.ai_native.prospective_live.now',return_value=t), \
                      patch('one_trading.ai_native.prospective_live.time.monotonic',return_value=100+i*5+.25):
-                    planner.select_epoch(f);e.observe(f)
+                    planner.select_epoch(f);e.observe(f,source_received_at={'BTCUSDT':f['received_at']})
             rec.close(at=BASE+timedelta(seconds=30),elapsed=30)
             paper=e.finish()
             write_new(root/'paper.json',paper)
@@ -119,6 +119,15 @@ class LiveTests(unittest.TestCase):
         self.assertEqual(r['summary']['AI']['open_positions'],0)
         self.assertEqual(r['summary']['CASH']['pnl_marked_at_bid'],0)
         self.assertLess(r['summary']['AI']['pnl_marked_at_bid'],0)
+
+    def test_new_sample_of_old_quote_cannot_fill(self):
+        e=Experiment(Protocol(),{'CASH':CashPlanner(),'AI':Sequence()},data_use='SYNTHETIC')
+        e.observe(packet(0,100,second_step=5),source_received_at={'BTCUSDT':BASE.isoformat()})
+        e.observe(packet(1,100,second_step=5),source_received_at={'BTCUSDT':BASE.isoformat()})
+        r=e.finish();verify(r)
+        self.assertEqual(r['summary']['AI']['fills'],0)
+        self.assertEqual(next(x['payload']['reason'] for x in r['ledger'] if x['kind']=='order_rejected'),
+                         'PRE_DECISION_SOURCE_QUOTE')
 
     def test_expired_proposal_never_fills(self):
         r=self.result(expiry=3); verify(r)

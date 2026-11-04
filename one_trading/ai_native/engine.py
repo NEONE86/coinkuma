@@ -241,6 +241,7 @@ class Experiment:
         self._universe: set[str] | None = None
         self._frames = 0
         self._raw_frames: list[dict[str, Any]] = []
+        self._source_received_at: dict[str, str] | None = None
 
     def _equity(self, arm: Arm, frame: Frame) -> tuple[float, float]:
         # Mark open positions at bid, which is closer to an executable exit.
@@ -297,6 +298,9 @@ class Experiment:
             error = "SAME_OR_PRE_DECISION_RECEIPT"
         elif order.get("valid_until") and frame.received_at > instant(order["valid_until"]):
             error = "PROPOSAL_EXPIRED"
+        elif (self._source_received_at is not None and
+              instant(self._source_received_at[order["symbol"]]) <= instant(order["decision_at"])):
+            error = "PRE_DECISION_SOURCE_QUOTE"
         elif not 0 <= age <= self.protocol.max_quote_age_seconds:
             error = "STALE_QUOTE"
         elif quote.spread_bps > self.protocol.max_spread_bps:
@@ -361,8 +365,13 @@ class Experiment:
                               fee=fee, cash_after=arm.cash, realized_pnl=arm.realized_pnl,
                               type="CONDITIONAL_VISIBLE_DEPTH_PAPER"))
 
-    def observe(self, raw: dict[str, Any]) -> None:
+    def observe(self, raw: dict[str, Any], *, source_received_at: dict[str, str] | None = None) -> None:
         frame = Frame.parse(raw)
+        if source_received_at is not None:
+            if (set(source_received_at) != set(frame.quotes) or
+                    any(instant(t) > frame.received_at for t in source_received_at.values())):
+                raise ReplayError("SOURCE_RECEIPT_TIMES")
+        self._source_received_at = source_received_at
         if frame.id in self._seen or (self._last and frame.received_at <= self._last.received_at):
             raise ReplayError("DUPLICATE_OR_BACKDATED_RECEIPT")
         if self._universe is None:
@@ -372,9 +381,12 @@ class Experiment:
         self._seen.add(frame.id)
         self._frames += 1
         self._raw_frames.append(raw)
-        self.ledger.append("receipt", dict(id=frame.id, received_at=frame.received_at.isoformat(),
+        receipt = dict(id=frame.id, received_at=frame.received_at.isoformat(),
                           raw_sha256=frame.raw_hash, symbols=sorted(frame.quotes),
-                          raw=raw))
+                          raw=raw)
+        if source_received_at is not None:
+            receipt['source_received_at'] = dict(source_received_at)
+        self.ledger.append("receipt", receipt)
         for arm in self.arms.values():
             for cost in list(arm.pending_costs):
                 if frame.received_at >= instant(cost["ready_at"]):

@@ -30,6 +30,11 @@ def verify(root):
     frozen = {r['payload']['frame']['id']: r['payload']['frame'] for r in rows if r['kind']=='input_frozen'}
     receipts = [r['payload']['raw'] for r in paper['ledger'] if r['kind']=='receipt']
     check(receipts == list(frozen.values()), 'DIFFERENT_POLICY_INPUT_TIMELINE')
+    source_times = {r['payload']['frame']['id']: {s: ref['received_at'] for s,ref in r['payload']['source_receipts'].items()}
+                    for r in rows if r['kind']=='input_frozen'}
+    for r in paper['ledger']:
+        if r['kind']=='receipt':
+            check(r['payload'].get('source_received_at')==source_times[r['payload']['id']], 'PAPER_SOURCE_RECEIPT_BINDING')
     epochs = [r['payload']['frame_id'] for r in rows if r['kind']=='decision_requested']
     for control in ('CASH', 'PRICE_ONLY'):
         decisions = [r['payload'] for r in paper['ledger']
