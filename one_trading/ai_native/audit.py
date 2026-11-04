@@ -61,9 +61,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     fee_rate = protocol["fee_bps_per_side"] / 10_000
     slippage = protocol["slippage_bps_per_side"] / 10_000
     arms = {name: {"cash": cash_start, "positions": {}, "realized": 0.0,
-                   "fills": 0, "rejections": 0, "unavailable": 0,
+                   "fills": 0, "rejections": 0, "unavailable": 0, "skipped": 0,
                    "decisions": {}, "pending": None, "episodes": {}, "matured": [],
-                   "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
+                   "pending_costs": {}, "model_costs": 0.0, "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
                    "peak": cash_start, "worst_drawdown": 0.0, "halted": False}
             for name in record["summary"]}
     check("CASH" in arms, "NO_CASH_CONTROL")
@@ -71,7 +71,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     check(isinstance(ledger, list) and bool(ledger), "EMPTY_LEDGER")
     tip = "0" * 64
     last = None
+    previous_receipt = None
     receipt = None
+    source_received_at = None
     seen = set()
     symbols = None
     due_settlements: dict[str, dict[str, Any]] = {}
@@ -86,6 +88,19 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             arm["worst_drawdown"] = max(arm["worst_drawdown"], 1 - marked / arm["peak"])
             if marked / arm["peak"] <= 1 - protocol["max_drawdown_fraction"]:
                 arm["halted"] = True
+    def context_for(name):
+        arm = arms[name]
+        history = {s: {"previous_mid": ((previous_receipt["quotes"][s]["bid"] + previous_receipt["quotes"][s]["ask"])/2) if previous_receipt else None,
+                       "current_bid": float(q["bid"]), "current_ask": float(q["ask"]), "current_mid": (q["bid"]+q["ask"])/2,
+                       "current_spread_bps": (q["ask"]-q["bid"])/((q["bid"]+q["ask"])/2)*10000,
+                       "quote_exchange_at": at(q["exchange_at"]).isoformat()}
+                   for s,q in receipt["quotes"].items()}
+        equity = arm["cash"] + sum(p["quantity"]*receipt["quotes"][s]["bid"] for s,p in arm["positions"].items())
+        return dict(frame_id=receipt["id"], cutoff=at(receipt["received_at"]).isoformat(), history=history,
+                    universe=sorted(receipt["quotes"]), cash=arm["cash"], equity=equity,
+                    positions={s: {"quantity": p["quantity"], "cost_basis": p["basis"]} for s,p in arm["positions"].items()},
+                    pending_order=bool(arm["pending"]), halted=arm["halted"],
+                    resolved_memory=arm["matured"][-30:], protocol=protocol)
     for seq, row in enumerate(ledger):
         check(row.get("seq") == seq and row.get("previous_hash") == tip,
               "BROKEN_APPEND_ONLY_CHAIN")
@@ -110,7 +125,12 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                   "DUPLICATE_OR_BACKDATED_RECEIPT")
             seen.add(raw["id"])
             last = current
+            previous_receipt = receipt
             receipt = raw
+            source_received_at = entry.get('source_received_at')
+            if source_received_at is not None:
+                check(set(source_received_at)==set(raw['quotes']) and
+                      all(at(t)<=current for t in source_received_at.values()), 'SOURCE_RECEIPT_TIMES')
             check(isinstance(raw["quotes"], dict) and raw["quotes"], "NO_QUOTES")
             check(entry["symbols"] == sorted(raw["quotes"]), "SYMBOL_PROJECTION")
             if symbols is None:
@@ -136,6 +156,37 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
         check(receipt is not None, "EVENT_WITHOUT_RECEIPT")
         arm = arms.get(entry.get("arm"))
         check(arm is not None, "UNKNOWN_ARM")
+        if kind == "model_cost_scheduled":
+            check(entry["source_frame"] == receipt["id"] and at(entry["ready_at"]) >= last,
+                  "COST_BEFORE_INPUT")
+            amount = entry["amount"]
+            check(type(amount) in (int,float) and math.isfinite(amount) and amount > 0,
+                  "INVALID_MODEL_COST")
+            check(entry["source_frame"] not in arm["pending_costs"], "DUPLICATE_MODEL_CHARGE")
+            arm["pending_costs"][entry["source_frame"]] = entry
+            continue
+        if kind == "model_cost":
+            amount = entry["amount"]
+            check(type(amount) in (float, int) and math.isfinite(amount) and amount > 0
+                  and entry["frame_id"] == receipt["id"], "INVALID_MODEL_COST")
+            scheduled = arm["pending_costs"].pop(entry["source_frame"], None)
+            check(scheduled is not None and scheduled["amount"] == amount and
+                  at(scheduled["ready_at"]) <= last, "EARLY_OR_UNKNOWN_MODEL_COST")
+            arm["cash"] -= amount
+            arm["model_costs"] += amount
+            approx(entry["cash_after"], arm["cash"], label="model_cost_cash")
+            track_equity(receipt)
+            continue
+        if kind in ("decision", "decision_unavailable", "decision_skipped"):
+            check(not due_settlements, "MISSING_ELIGIBLE_SETTLEMENT")
+            expected_context = context_for(entry["arm"])
+            check(entry["context_hash"] == digest(expected_context), "CONTEXT_RECALCULATION")
+            if "context" in entry:
+                check(digest(entry["context"]) == digest(expected_context), "CONTEXT_BYTES_CHANGED")
+        if kind == "decision_skipped":
+            check(entry["frame_id"] == receipt["id"] and entry["reason"] == "OUTSIDE_COMMON_EPOCH", "SKIP_IDENTITY")
+            arm["skipped"] += 1
+            continue
         if kind == "decision_unavailable":
             check(entry["frame_id"] == receipt["id"], "UNAVAILABLE_FRAME_MISMATCH")
             arm["unavailable"] += 1
@@ -176,10 +227,12 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
                   at(entry["eligible_at"]) ==
                   at(entry["decision_at"]) + timedelta(seconds=protocol["execution_delay_seconds"]),
                   "ORDER_ELIGIBILITY")
+            check(entry.get("valid_until") == decision.get("valid_until"), "ORDER_EXPIRY_MISMATCH")
             arm["pending"] = entry.copy()
             arm["pending"].pop("arm", None)
             continue
         if kind in ("paper_fill", "order_rejected"):
+            check(not any(at(c["ready_at"]) <= last for c in arm["pending_costs"].values()), "UNPAID_DUE_MODEL_COST")
             order = entry["order"]
             check(due_settlements.get(entry["arm"]) == order,
                   "SETTLEMENT_NOT_DUE_ON_THIS_RECEIPT")
@@ -196,7 +249,11 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             equity = arm["cash"] + mark
             fraction = min(order["fraction"], protocol["max_position_fraction"])
             expected_rejection = None
-            if not 0 <= age <= protocol["max_quote_age_seconds"]:
+            if order.get("valid_until") and last > at(order["valid_until"]):
+                expected_rejection = "PROPOSAL_EXPIRED"
+            elif source_received_at is not None and at(source_received_at[order['symbol']]) <= at(order['decision_at']):
+                expected_rejection = "PRE_DECISION_SOURCE_QUOTE"
+            elif not 0 <= age <= protocol["max_quote_age_seconds"]:
                 expected_rejection = "STALE_QUOTE"
             elif spread > protocol["max_spread_bps"]:
                 expected_rejection = "SPREAD_LIMIT"
@@ -314,6 +371,10 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     track_equity(receipt)
     for name, arm in arms.items():
         report = record["summary"][name]
+        check(report.get("decisions_skipped", 0) == arm["skipped"], "SKIPPED_COUNT")
+        approx(report.get("pending_model_cost_usdt", 0), sum(c["amount"] for c in arm["pending_costs"].values()), label="pending_model_cost")
+        check(not any(at(c["ready_at"]) <= last for c in arm["pending_costs"].values()), "UNPAID_DUE_MODEL_COST")
+        approx(report.get("model_costs_paid", 0), arm["model_costs"], label="model_cost_total")
         exposure = sum(pos["quantity"] * receipt["quotes"][symbol]["bid"]
                        for symbol, pos in arm["positions"].items())
         equity = arm["cash"] + exposure

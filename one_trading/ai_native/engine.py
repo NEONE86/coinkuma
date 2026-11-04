@@ -171,6 +171,13 @@ class ModelDecision:
 
     plan: dict[str, Any]
     latency_seconds: float
+    model_cost_usdt: float = 0.0
+    valid_until: str | None = None
+
+
+@dataclass(frozen=True)
+class DecisionSkipped:
+    reason: str = "OUTSIDE_COMMON_EPOCH"
 
 
 class Chain:
@@ -204,10 +211,13 @@ class Arm:
     realized_pnl: float = 0.0
     peak_equity: float = 0.0
     halted: bool = False
+    decisions_skipped: int = 0
     model_unavailable: int = 0
     rejected_orders: int = 0
     fills: int = 0
     decisions: int = 0
+    pending_costs: list[dict] = field(default_factory=list)
+    model_costs_paid: float = 0.0
     fees_paid: float = 0.0
     slippage_paid: float = 0.0
     gross_turnover: float = 0.0
@@ -231,6 +241,7 @@ class Experiment:
         self._universe: set[str] | None = None
         self._frames = 0
         self._raw_frames: list[dict[str, Any]] = []
+        self._source_received_at: dict[str, str] | None = None
 
     def _equity(self, arm: Arm, frame: Frame) -> tuple[float, float]:
         # Mark open positions at bid, which is closer to an executable exit.
@@ -285,6 +296,11 @@ class Experiment:
         error = None
         if frame.id == order["source_frame"] or frame.received_at <= instant(order["decision_at"]):
             error = "SAME_OR_PRE_DECISION_RECEIPT"
+        elif order.get("valid_until") and frame.received_at > instant(order["valid_until"]):
+            error = "PROPOSAL_EXPIRED"
+        elif (self._source_received_at is not None and
+              instant(self._source_received_at[order["symbol"]]) <= instant(order["decision_at"])):
+            error = "PRE_DECISION_SOURCE_QUOTE"
         elif not 0 <= age <= self.protocol.max_quote_age_seconds:
             error = "STALE_QUOTE"
         elif quote.spread_bps > self.protocol.max_spread_bps:
@@ -349,8 +365,13 @@ class Experiment:
                               fee=fee, cash_after=arm.cash, realized_pnl=arm.realized_pnl,
                               type="CONDITIONAL_VISIBLE_DEPTH_PAPER"))
 
-    def observe(self, raw: dict[str, Any]) -> None:
+    def observe(self, raw: dict[str, Any], *, source_received_at: dict[str, str] | None = None) -> None:
         frame = Frame.parse(raw)
+        if source_received_at is not None:
+            if (set(source_received_at) != set(frame.quotes) or
+                    any(instant(t) > frame.received_at for t in source_received_at.values())):
+                raise ReplayError("SOURCE_RECEIPT_TIMES")
+        self._source_received_at = source_received_at
         if frame.id in self._seen or (self._last and frame.received_at <= self._last.received_at):
             raise ReplayError("DUPLICATE_OR_BACKDATED_RECEIPT")
         if self._universe is None:
@@ -360,10 +381,20 @@ class Experiment:
         self._seen.add(frame.id)
         self._frames += 1
         self._raw_frames.append(raw)
-        self.ledger.append("receipt", dict(id=frame.id, received_at=frame.received_at.isoformat(),
+        receipt = dict(id=frame.id, received_at=frame.received_at.isoformat(),
                           raw_sha256=frame.raw_hash, symbols=sorted(frame.quotes),
-                          raw=raw))
+                          raw=raw)
+        if source_received_at is not None:
+            receipt['source_received_at'] = dict(source_received_at)
+        self.ledger.append("receipt", receipt)
         for arm in self.arms.values():
+            for cost in list(arm.pending_costs):
+                if frame.received_at >= instant(cost["ready_at"]):
+                    arm.cash -= cost["amount"]
+                    arm.model_costs_paid += cost["amount"]
+                    arm.pending_costs.remove(cost)
+                    self.ledger.append("model_cost", dict(arm=arm.name, frame_id=frame.id,
+                        source_frame=cost["source_frame"], amount=cost["amount"], cash_after=arm.cash))
             # Existing positions can cross the halt threshold on this receipt.
             # Latch the current mark before permitting a pending BUY to settle.
             self._mark_risk(arm, frame)
@@ -390,16 +421,33 @@ class Experiment:
                                       for s, p in arm.positions.items()},
                            pending_order=bool(arm.pending), halted=arm.halted,
                            resolved_memory=memory[-30:], protocol=dict(vars(self.protocol)))
+            valid_until = None
             start = time.monotonic()
             try:
                 proposal = arm.planner.propose(context)
                 latency = time.monotonic() - start
+                if isinstance(proposal, DecisionSkipped):
+                    arm.decisions_skipped += 1
+                    self.ledger.append("decision_skipped", dict(arm=arm.name, frame_id=frame.id,
+                        context_hash=sha256(context), reason=proposal.reason))
+                    continue
                 if proposal is None:
                     raise ReplayError("MODEL_UNAVAILABLE_NOT_CASH")
                 if isinstance(proposal, ModelDecision):
                     latency = numeric(proposal.latency_seconds)
                     if latency < 0:
                         raise ReplayError("INVALID_RECORDED_MODEL_LATENCY")
+                    charge = numeric(proposal.model_cost_usdt)
+                    if charge < 0:
+                        raise ReplayError("NEGATIVE_MODEL_COST")
+                    if charge:
+                        cost = dict(source_frame=frame.id, amount=charge,
+                                    ready_at=(frame.received_at+timedelta(seconds=latency)).isoformat())
+                        arm.pending_costs.append(cost)
+                        self.ledger.append("model_cost_scheduled", dict(arm=arm.name, **cost))
+                    valid_until = proposal.valid_until
+                    if valid_until is not None and instant(valid_until) < frame.received_at:
+                        raise ReplayError("EXPIRED_MODEL_DECISION")
                     raw = proposal.plan
                 else:
                     raw = proposal
@@ -414,8 +462,10 @@ class Experiment:
             decision_id = sha256([arm.name, frame.id, sha256(raw)])
             event = dict(id=decision_id, arm=arm.name, source_frame=frame.id,
                          observed_at=frame.received_at.isoformat(), ready_at=ready.isoformat(),
-                         model_latency_seconds=latency, context_hash=sha256(context),
+                         model_latency_seconds=latency, context_hash=sha256(context), context=context,
                          memory_ids=[m["id"] for m in memory[-30:]], plan=raw)
+            if valid_until is not None:
+                event["valid_until"] = valid_until
             self.ledger.append("decision", event)
             arm.decisions += 1
             if arm.last_episode_due is None or frame.received_at >= arm.last_episode_due:
@@ -431,6 +481,8 @@ class Experiment:
                         symbol=plan.symbol, fraction=plan.fraction, source_frame=frame.id,
                         decision_at=ready.isoformat(),
                         eligible_at=(ready+timedelta(seconds=self.protocol.execution_delay_seconds)).isoformat())
+                    if valid_until is not None:
+                        arm.pending["valid_until"] = valid_until
                     self.ledger.append("order_intent", dict(arm=arm.name, **arm.pending))
 
     def finish(self) -> dict[str, Any]:
@@ -444,11 +496,13 @@ class Experiment:
                 return_fraction=equity/self.protocol.capital_usdt-1, realized_pnl=arm.realized_pnl,
                 open_exposure_marked_at_bid=exposure, open_positions=len(arm.positions),
                 pending_order=arm.pending is not None, fills=arm.fills,
-                decisions=arm.decisions, fees_paid=arm.fees_paid,
+                decisions=arm.decisions, fees_paid=arm.fees_paid, model_costs_paid=arm.model_costs_paid,
+                pending_model_cost_usdt=sum(c["amount"] for c in arm.pending_costs),
                 modeled_slippage_paid=arm.slippage_paid,
                 gross_turnover_usdt=arm.gross_turnover,
                 max_observed_drawdown_fraction=arm.worst_drawdown,
                 rejected_orders=arm.rejected_orders, model_unavailable=arm.model_unavailable,
+                decisions_skipped=arm.decisions_skipped,
                 matured_independent_labels=len(arm.matured),
                 pending_labels=sum(x["status"]=="PENDING" for x in arm.episodes),
                 drawdown_halted=arm.halted)

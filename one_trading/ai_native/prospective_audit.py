@@ -211,7 +211,7 @@ def verify(path: Path, *, source_dir: Path | None = None) -> dict[str, Any]:
                                   "model_calls_authorized", "execution_delay_seconds", "proposal_ttl_seconds"},
                         "RUN_HEADER_SCHEMA")
                 require(ident(p["run_id"]) and p["source_class"] in ("SYNTHETIC", "LIVE_PUBLIC") and
-                        isinstance(p["collector_commit"], str) and HEX.fullmatch(p["collector_commit"]) is not None,
+                        isinstance(p["collector_commit"], str) and re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", p["collector_commit"]) is not None,
                         "RUN_IDENTITY")
                 require(type(p["model_calls_authorized"]) is bool, "MODEL_AUTH_FLAG")
                 d, ttl = num(p["execution_delay_seconds"], positive=True), num(p["proposal_ttl_seconds"], positive=True)
