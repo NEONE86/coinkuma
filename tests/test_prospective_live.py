@@ -32,6 +32,40 @@ class Sequence:
 
 
 class LiveTests(unittest.TestCase):
+    def test_model_cost_not_backdated_to_input_frame(self):
+        class Slow:
+            def propose(self,c):
+                if c['frame_id']=='source-0':
+                    return ModelDecision(plan('BUY','BTCUSDT',.1,'slow fixture'),10,2)
+                return None
+        e=Experiment(Protocol(),{'CASH':CashPlanner(),'AI':Slow()},data_use='SYNTHETIC')
+        for i in range(4): e.observe(packet(i,100,second_step=5))
+        r=e.finish();verify(r)
+        charge=next(x['payload'] for x in r['ledger'] if x['kind']=='model_cost')
+        self.assertEqual(charge['frame_id'],'source-2')
+        fill=next(x['payload'] for x in r['ledger'] if x['kind']=='paper_fill')
+        self.assertEqual(fill['quote_frame'],'source-3')
+
+    def test_mock_provider_preserves_original_usage_and_response(self):
+        import io
+        from unittest.mock import MagicMock
+        approval=dict(model_calls_authorized=True,approval_reference='synthetic',usd_usdt='1',
+            rates={'input':'.75','cached':'.075','output':'4.5'},reserve_per_call_usdt='.05',
+            max_output_tokens=1024,model='synthetic-model')
+        answer=plan('HOLD','CASH',0.,'fixture')
+        envelope={'status':'completed','usage':{'input_tokens':100,'input_tokens_details':{'cached_tokens':0},'output_tokens':20},
+                  'output':[{'type':'message','content':[{'type':'output_text','text':json.dumps(answer)}]}]}
+        response=MagicMock();response.__enter__.return_value=response
+        response.read.return_value=json.dumps(envelope).encode()
+        opener=MagicMock();opener.open.return_value=response
+        with patch.dict('os.environ',{'OPENAI_API_KEY':'synthetic-not-secret'}), \
+             patch('urllib.request.build_opener',return_value=opener):
+            model=ResponsesModel(approval);raw,receipt=model.respond({'frame_id':'fixture'})
+        self.assertEqual(json.loads(raw),answer)
+        self.assertEqual(receipt['cost'],'0.00016500')
+        self.assertEqual(json.loads(receipt['provider_raw_utf8']),envelope)
+        self.assertEqual(opener.open.call_count,1)
+
     def test_full_local_transport_common_epochs_and_independent_binding(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d)
@@ -114,7 +148,8 @@ class LiveTests(unittest.TestCase):
             def propose(self, c): return ModelDecision(None,1,3)
         e=Experiment(Protocol(),{'CASH':CashPlanner(),'AI':Failed()},data_use='SYNTHETIC')
         e.observe(packet(0));e.observe(packet(1));r=e.finish();verify(r)
-        self.assertEqual(r['summary']['AI']['cash'],9994)
+        self.assertEqual(r['summary']['AI']['cash'],9997)
+        self.assertEqual(r['summary']['AI']['pending_model_cost_usdt'],3)
         self.assertEqual(r['summary']['AI']['model_unavailable'],2)
 
     def test_usage_pricing_cached_tokens_and_round_up(self):

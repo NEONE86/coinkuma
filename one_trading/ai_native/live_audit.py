@@ -53,9 +53,11 @@ def verify(root):
     accepted = {r['payload']['request_id']: r for r in rows if r['kind']=='proposal_validated'}
     ai = {r['payload']['source_frame']: r['payload'] for r in paper['ledger']
           if r['kind']=='decision' and r['payload']['arm']=='AI'}
-    charges = {r['payload']['frame_id']: r['payload']['amount'] for r in paper['ledger']
-               if r['kind']=='model_cost' and r['payload']['arm']=='AI'}
+    charges = {r['payload']['source_frame']: r['payload']['amount'] for r in paper['ledger']
+               if r['kind']=='model_cost_scheduled' and r['payload']['arm']=='AI'}
     check(len(ai)==len(accepted), 'HIDDEN_OR_FABRICATED_AI_DECISION')
+    cost_events = {r['payload']['source_frame']: r['payload'] for r in paper['ledger'] if r['kind']=='model_cost_scheduled' and r['payload']['arm']=='AI'}
+    proposals = {r['payload']['request_id']: r for r in rows if r['kind'] in ('proposal_validated','proposal_rejected')}
     expected_charges = {}
     for rid, row in requests.items():
         request = row['payload']; fid = request['frame_id']
@@ -89,7 +91,9 @@ def verify(root):
             if env.get('status') != 'completed': text = ''
             check(text.encode()==base64.b64decode(response['response_base64']), 'MODEL_RESPONSE_SUBSTITUTED')
         amount = float(response['actual_cost_usdt'])
-        if amount: expected_charges[fid] = amount
+        if amount:
+            expected_charges[fid] = amount
+            check(fid in cost_events and rid in proposals and at(cost_events[fid]['ready_at'])==at(proposals[rid]['at']), 'MODEL_COST_TIME_CHANGED')
         if rid in accepted:
             validated = accepted[rid]; decision = ai.get(fid)
             check(decision is not None and decision['context_hash']==digest(context), 'MODEL_CONTEXT_CHANGED')
@@ -98,10 +102,11 @@ def verify(root):
             check(at(decision['ready_at'])==at(validated['at']) and
                   decision.get('valid_until')==validated['payload']['valid_until'], 'MODEL_TIMING_CHANGED')
     check(charges==expected_charges, 'MODEL_COST_NOT_DEBITED')
-    approx(paper['summary']['AI']['model_costs_paid'], float(evidence['model_cost_usdt']['AI']), label='all_model_costs')
+    approx(paper['summary']['AI']['model_costs_paid']+paper['summary']['AI'].get('pending_model_cost_usdt',0), float(evidence['model_cost_usdt']['AI']), label='all_model_costs')
     termination = read(root/'termination.json')
     complete = (not termination['error'] and termination['collector_returncode']==0 and
-                not evidence['unresolved_requests'] and not termination['model_uncertain'])
+                not evidence['unresolved_requests'] and not termination['model_uncertain']
+                and paper['summary']['AI'].get('pending_model_cost_usdt',0)==0)
     return {'status': 'PASS_CONNECTION_ONLY' if complete and config['mode']=='FREE_PROBE_NOT_AI'
             else 'PASS_PRICED_PAPER_ONLY' if complete else 'INCOMPLETE',
             'mode': config['mode'], 'source_decision_audit': evidence,

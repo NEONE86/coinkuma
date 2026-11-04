@@ -61,9 +61,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     fee_rate = protocol["fee_bps_per_side"] / 10_000
     slippage = protocol["slippage_bps_per_side"] / 10_000
     arms = {name: {"cash": cash_start, "positions": {}, "realized": 0.0,
-                   "fills": 0, "rejections": 0, "unavailable": 0,
+                   "fills": 0, "rejections": 0, "unavailable": 0, "skipped": 0,
                    "decisions": {}, "pending": None, "episodes": {}, "matured": [],
-                   "model_costs": 0.0, "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
+                   "pending_costs": {}, "model_costs": 0.0, "fees": 0.0, "slippage": 0.0, "turnover": 0.0,
                    "peak": cash_start, "worst_drawdown": 0.0, "halted": False}
             for name in record["summary"]}
     check("CASH" in arms, "NO_CASH_CONTROL")
@@ -72,7 +72,6 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     tip = "0" * 64
     last = None
     previous_receipt = None
-    pre_cost_context = {}
     receipt = None
     seen = set()
     symbols = None
@@ -127,7 +126,6 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             last = current
             previous_receipt = receipt
             receipt = raw
-            pre_cost_context.clear()
             check(isinstance(raw["quotes"], dict) and raw["quotes"], "NO_QUOTES")
             check(entry["symbols"] == sorted(raw["quotes"]), "SYMBOL_PROJECTION")
             if symbols is None:
@@ -153,23 +151,37 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
         check(receipt is not None, "EVENT_WITHOUT_RECEIPT")
         arm = arms.get(entry.get("arm"))
         check(arm is not None, "UNKNOWN_ARM")
+        if kind == "model_cost_scheduled":
+            check(entry["source_frame"] == receipt["id"] and at(entry["ready_at"]) >= last,
+                  "COST_BEFORE_INPUT")
+            amount = entry["amount"]
+            check(type(amount) in (int,float) and math.isfinite(amount) and amount > 0,
+                  "INVALID_MODEL_COST")
+            check(entry["source_frame"] not in arm["pending_costs"], "DUPLICATE_MODEL_CHARGE")
+            arm["pending_costs"][entry["source_frame"]] = entry
+            continue
         if kind == "model_cost":
             amount = entry["amount"]
             check(type(amount) in (float, int) and math.isfinite(amount) and amount > 0
                   and entry["frame_id"] == receipt["id"], "INVALID_MODEL_COST")
-            check(entry["arm"] not in pre_cost_context, "DUPLICATE_MODEL_CHARGE")
-            pre_cost_context[entry["arm"]] = context_for(entry["arm"])
+            scheduled = arm["pending_costs"].pop(entry["source_frame"], None)
+            check(scheduled is not None and scheduled["amount"] == amount and
+                  at(scheduled["ready_at"]) <= last, "EARLY_OR_UNKNOWN_MODEL_COST")
             arm["cash"] -= amount
             arm["model_costs"] += amount
             approx(entry["cash_after"], arm["cash"], label="model_cost_cash")
             track_equity(receipt)
             continue
-        if kind in ("decision", "decision_unavailable"):
+        if kind in ("decision", "decision_unavailable", "decision_skipped"):
             check(not due_settlements, "MISSING_ELIGIBLE_SETTLEMENT")
-            expected_context = pre_cost_context.get(entry["arm"], context_for(entry["arm"]))
+            expected_context = context_for(entry["arm"])
             check(entry["context_hash"] == digest(expected_context), "CONTEXT_RECALCULATION")
             if "context" in entry:
                 check(digest(entry["context"]) == digest(expected_context), "CONTEXT_BYTES_CHANGED")
+        if kind == "decision_skipped":
+            check(entry["frame_id"] == receipt["id"] and entry["reason"] == "OUTSIDE_COMMON_EPOCH", "SKIP_IDENTITY")
+            arm["skipped"] += 1
+            continue
         if kind == "decision_unavailable":
             check(entry["frame_id"] == receipt["id"], "UNAVAILABLE_FRAME_MISMATCH")
             arm["unavailable"] += 1
@@ -215,6 +227,7 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
             arm["pending"].pop("arm", None)
             continue
         if kind in ("paper_fill", "order_rejected"):
+            check(not any(at(c["ready_at"]) <= last for c in arm["pending_costs"].values()), "UNPAID_DUE_MODEL_COST")
             order = entry["order"]
             check(due_settlements.get(entry["arm"]) == order,
                   "SETTLEMENT_NOT_DUE_ON_THIS_RECEIPT")
@@ -351,6 +364,9 @@ def verify(record: dict[str, Any]) -> dict[str, Any]:
     track_equity(receipt)
     for name, arm in arms.items():
         report = record["summary"][name]
+        check(report.get("decisions_skipped", 0) == arm["skipped"], "SKIPPED_COUNT")
+        approx(report.get("pending_model_cost_usdt", 0), sum(c["amount"] for c in arm["pending_costs"].values()), label="pending_model_cost")
+        check(not any(at(c["ready_at"]) <= last for c in arm["pending_costs"].values()), "UNPAID_DUE_MODEL_COST")
         approx(report.get("model_costs_paid", 0), arm["model_costs"], label="model_cost_total")
         exposure = sum(pos["quantity"] * receipt["quotes"][symbol]["bid"]
                        for symbol, pos in arm["positions"].items())

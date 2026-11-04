@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
 
-from .engine import Experiment, Protocol, ModelDecision, canonical, instant, sha256
+from .engine import Experiment, Protocol, ModelDecision, DecisionSkipped, canonical, instant, sha256
 from .planners import CashPlanner, MomentumPlanner, MODEL_INSTRUCTION
 from .prospective_evidence import EvidenceRecorder
 from .live_model import FreeProbe, ResponsesModel
@@ -69,7 +69,9 @@ class LivePlanner:
     def propose(self, context):
         elapsed = time.monotonic()-self.start
         age = (now()-instant(context['cutoff'])).total_seconds()
-        if not self.enabled or not 0 <= age <= 5:
+        if not self.enabled:
+            return DecisionSkipped()
+        if not 0 <= age <= 5:
             return None
         if (self.recorder.spent['AI'] + Decimal(self.model.reserve) >
                 Decimal(self.config['cost_limit_usdt'])):
@@ -113,7 +115,7 @@ class ScheduledControl:
 
     def propose(self, context):
         if not self.schedule.enabled:
-            return None
+            return DecisionSkipped()
         return self.planner.propose(context)
 
 
@@ -139,7 +141,9 @@ def run(root, config, *, enable_public_network=False, approval=None):
     if approval:
         if (approval['source_commit'] != config['source_commit'] or
                 approval['run_id'] != root.name or approval['max_calls'] != config['max_calls'] or
-                approval['cost_limit_usdt'] != config['cost_limit_usdt']):
+                approval['cost_limit_usdt'] != config['cost_limit_usdt'] or
+                any(approval[k] != config[k] for k in ('duration_seconds','max_bytes','decision_interval_seconds')) or
+                instant(approval['expires_at']) <= now()):
             raise ValueError('APPROVAL_IDENTITY_MISMATCH')
     elif config['cost_limit_usdt'] != '0':
         raise ValueError('FREE_PROBE_REQUIRES_ZERO_BUDGET')
@@ -242,6 +246,8 @@ def main():
     result = run(args.output_dir, config, enable_public_network=args.enable_public_network,
                  approval=json.loads(args.approval.read_text()) if args.approval else None)
     print(json.dumps(result))
+    if not result['status'].startswith('PASS_'):
+        raise SystemExit(2)
 
 
 if __name__ == '__main__':

@@ -51,6 +51,11 @@ Remaining exposure is marked at bid and reported separately from realized PnL.
 No execution advantage is claimed from L1 modeled fills.
 
 Model charges debit PAPER cash before later fills and position sizing. The
+charge becomes available only at the recorded response/validation time; quotes
+received while inference was still pending cannot see that future cost. An
+unsettled end-of-run charge is explicit and prevents a complete live audit.
+Non-epoch frames are `decision_skipped`, not model failures.
+The
 independent verifier recalculates context from cash/positions/history, checks
 the exact response plan and timing against PAPER decisions, recomputes controls,
 fees/slippage/capital, and reconciles provider usage at pinned approved rates.
@@ -72,6 +77,26 @@ The adapter sends only frozen context, requests schema-constrained responses,
 disables tools and storage, and does not retry. Refusals/invalid/late answers
 cannot generate orders. Model quality, provider access and actual latency need
 a separately approved live call; mock transport tests do not establish them.
+
+### Proposed next trial — NOT APPROVED
+
+- Provider: OpenAI Responses API; model snapshot `gpt-5.4-mini-2026-03-17`.
+- Maximum 10 calls, 0.50 USDT total, 0.05 USDT reserved per request; no retries.
+- Duration 600 seconds, 100 MB public source cap, common decision cadence 30 s.
+- Output cap 1,024 tokens, no tools. USD=USDT=1 is an explicit accounting
+  assumption, not an exchange-rate measurement or an invoice claim.
+- Rates per million tokens: input USD 0.75, cached input 0.075, output 4.50;
+  [official model page](https://developers.openai.com/api/docs/models/gpt-5.4-mini),
+  checked 2026-11-04. Recheck before any separately approved execution.
+- Illustrative 2,000 input + 500 output tokens: USD 0.00375/call, USD 0.0375
+  for 10 calls. These are estimates, not measured bills. Actual usage controls
+  the recorded expense; the reservation gate can stop earlier.
+- Stop new model attempts on exhausted call/cost budget, unknown provider
+  completion, input older than 5 seconds, source termination, changed source,
+  invalid/expired approval or cost overrun. Late/invalid answers do not fill.
+- Approval must bind exact final commit, new run ID, expiry, duration, source
+  cap, cadence, model, rates and budget. Existing authorization is still zero.
+  No approval JSON with `model_calls_authorized=true` is supplied by this PR.
 
 ## Verification / evidence handoff
 

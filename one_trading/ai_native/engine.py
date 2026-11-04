@@ -175,6 +175,11 @@ class ModelDecision:
     valid_until: str | None = None
 
 
+@dataclass(frozen=True)
+class DecisionSkipped:
+    reason: str = "OUTSIDE_COMMON_EPOCH"
+
+
 class Chain:
     def __init__(self) -> None:
         self.records: list[dict[str, Any]] = []
@@ -206,10 +211,12 @@ class Arm:
     realized_pnl: float = 0.0
     peak_equity: float = 0.0
     halted: bool = False
+    decisions_skipped: int = 0
     model_unavailable: int = 0
     rejected_orders: int = 0
     fills: int = 0
     decisions: int = 0
+    pending_costs: list[dict] = field(default_factory=list)
     model_costs_paid: float = 0.0
     fees_paid: float = 0.0
     slippage_paid: float = 0.0
@@ -369,6 +376,13 @@ class Experiment:
                           raw_sha256=frame.raw_hash, symbols=sorted(frame.quotes),
                           raw=raw))
         for arm in self.arms.values():
+            for cost in list(arm.pending_costs):
+                if frame.received_at >= instant(cost["ready_at"]):
+                    arm.cash -= cost["amount"]
+                    arm.model_costs_paid += cost["amount"]
+                    arm.pending_costs.remove(cost)
+                    self.ledger.append("model_cost", dict(arm=arm.name, frame_id=frame.id,
+                        source_frame=cost["source_frame"], amount=cost["amount"], cash_after=arm.cash))
             # Existing positions can cross the halt threshold on this receipt.
             # Latch the current mark before permitting a pending BUY to settle.
             self._mark_risk(arm, frame)
@@ -400,6 +414,11 @@ class Experiment:
             try:
                 proposal = arm.planner.propose(context)
                 latency = time.monotonic() - start
+                if isinstance(proposal, DecisionSkipped):
+                    arm.decisions_skipped += 1
+                    self.ledger.append("decision_skipped", dict(arm=arm.name, frame_id=frame.id,
+                        context_hash=sha256(context), reason=proposal.reason))
+                    continue
                 if proposal is None:
                     raise ReplayError("MODEL_UNAVAILABLE_NOT_CASH")
                 if isinstance(proposal, ModelDecision):
@@ -410,11 +429,10 @@ class Experiment:
                     if charge < 0:
                         raise ReplayError("NEGATIVE_MODEL_COST")
                     if charge:
-                        arm.cash -= charge
-                        arm.model_costs_paid += charge
-                        self.ledger.append("model_cost", dict(arm=arm.name, frame_id=frame.id,
-                            amount=charge, cash_after=arm.cash))
-                        self._mark_risk(arm, frame)
+                        cost = dict(source_frame=frame.id, amount=charge,
+                                    ready_at=(frame.received_at+timedelta(seconds=latency)).isoformat())
+                        arm.pending_costs.append(cost)
+                        self.ledger.append("model_cost_scheduled", dict(arm=arm.name, **cost))
                     valid_until = proposal.valid_until
                     if valid_until is not None and instant(valid_until) < frame.received_at:
                         raise ReplayError("EXPIRED_MODEL_DECISION")
@@ -467,10 +485,12 @@ class Experiment:
                 open_exposure_marked_at_bid=exposure, open_positions=len(arm.positions),
                 pending_order=arm.pending is not None, fills=arm.fills,
                 decisions=arm.decisions, fees_paid=arm.fees_paid, model_costs_paid=arm.model_costs_paid,
+                pending_model_cost_usdt=sum(c["amount"] for c in arm.pending_costs),
                 modeled_slippage_paid=arm.slippage_paid,
                 gross_turnover_usdt=arm.gross_turnover,
                 max_observed_drawdown_fraction=arm.worst_drawdown,
                 rejected_orders=arm.rejected_orders, model_unavailable=arm.model_unavailable,
+                decisions_skipped=arm.decisions_skipped,
                 matured_independent_labels=len(arm.matured),
                 pending_labels=sum(x["status"]=="PENDING" for x in arm.episodes),
                 drawdown_halted=arm.halted)
