@@ -108,12 +108,12 @@ def percentile(values,q):
 
 
 def summarize(records,rr):
-    closed=[x for x in records if x['status']=='CLOSED'];clean=[x for x in closed if not x['gap_uncertain']]
+    closed=[x for x in records if x['status']=='CLOSED'];clean=[x for x in closed if not (x['gap_uncertain'] or x.get('trade_gap_uncertain',False))]
     touches={s:sum(x['touch']==s for x in clean) for s in ('TARGET','STOP','NEITHER')}
     binary=touches['TARGET']+touches['STOP']
     return dict(attempts=len(records),closed=len(closed),clean_observed=len(clean),right_censored=sum(x['status']=='RIGHT_CENSORED' for x in records),
         entry_depth_rejected=sum(x['status']=='ENTRY_DEPTH_REJECTED' for x in records),exit_rejected=sum(bool(x.get('exit_rejection')) for x in records),
-        uncertain_or_open=sum(x['status']=='OPEN_UNLIQUIDATED' or x.get('gap_uncertain',False) for x in records),touches=touches,
+        uncertain_or_open=sum(x['status']=='OPEN_UNLIQUIDATED' or x.get('gap_uncertain',False) or x.get('trade_gap_uncertain',False) for x in records),touches=touches,
         binary_break_even=1/(rr+1),target_first_rate=touches['TARGET']/binary if binary else None,
         actual_positive_return_rate=sum(x['net_return']>0 for x in clean)/len(clean) if clean else None,
         mean_net_return=sum(x['net_return'] for x in clean)/len(clean) if clean else None,
@@ -132,8 +132,10 @@ def analyze(tape,p,grid):
             risk=max(p['stop_vol_floor_fraction'],f['windows']['300']['realized_vol'])+f['round_trip_cost_bps']/10000
             for horizon in p['horizons_seconds']:
                 for rr in p['net_reward_risk']:
-                    r=simulate(tape,p,i,s,horizon,rr,risk)
-                    r['partition']='DISCOVERY' if ts[i]+horizon+2.5<split else 'VALIDATION' if ts[i]>=split else 'PURGED_CROSS_SPLIT'
+                    partition='DISCOVERY' if ts[i]+horizon+2.5<split else 'VALIDATION' if ts[i]>=split else 'PURGED_CROSS_SPLIT'
+                    outcome_tape={k:v[:bisect.bisect_left(ts,split)] for k,v in tape.items()} if partition=='DISCOVERY' else tape
+                    r=simulate(outcome_tape,p,i,s,horizon,rr,risk)
+                    r['partition']=partition
                     opps.append(r)
     for name in p['strategies']:
         for horizon in p['horizons_seconds']:
@@ -157,9 +159,9 @@ def analyze(tape,p,grid):
                         equity+=r['pnl'];peak=max(peak,r['peak_equity'],equity);dd=max(dd,1-equity/peak)
                         lossrun=lossrun+1 if r['pnl']<0 else 0;maxloss=max(maxloss,lossrun)
                         halted=r['status']!='CLOSED' or dd>=p['max_drawdown_fraction']
-                    clean=[r for r in trades if r['status']=='CLOSED' and not r['gap_uncertain']]
+                    clean=[r for r in trades if r['status']=='CLOSED' and not (r['gap_uncertain'] or r.get('trade_gap_uncertain',False))]
                     growth=math.log(equity/p['capital_usdt'])
-                    uncertain=any(r.get('gap_uncertain') or r['status']=='OPEN_UNLIQUIDATED' for r in trades)
+                    uncertain=any(r.get('gap_uncertain') or r.get('trade_gap_uncertain') or r['status']=='OPEN_UNLIQUIDATED' for r in trades)
                     verdict='INSUFFICIENT'
                     if partition=='VALIDATION' and not uncertain:
                         if len(clean)>=p['candidate_min_validation_trades'] and growth>0:verdict='CANDIDATE'

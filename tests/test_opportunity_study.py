@@ -6,7 +6,7 @@ from pathlib import Path
 from test_ai_native import packet
 from one_trading.ai_native.engine import instant, Protocol
 from one_trading.ai_native.causal_features import build
-from one_trading.ai_native.opportunity_study import feature_grid, simulate, signal, analyze
+from one_trading.ai_native.opportunity_study import feature_grid, simulate, signal, analyze, summarize
 
 
 def protocol():
@@ -87,4 +87,42 @@ class Opportunity(unittest.TestCase):
         for key,value in [('pnl',999),('entry_index',0),('risk',.1),('touch','STOP'),('fees',0),('mfe_net',1)]:
             changed=copy.deepcopy(r);target=next(x for x in changed['opportunities'] if x['status']=='CLOSED');target[key]=value
             with self.subTest(key=key),self.assertRaises(ValueError):verify(changed,f,p)
+
+    def test_discovery_open_opportunity_cannot_mark_on_validation(self):
+        f=[packet(i,100,second_step=1,bid_depth=.001) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p))
+        for row in r['opportunities']:
+            if row['partition']=='DISCOVERY' and row['exit_index'] is not None:self.assertLess(row['exit_index'],800)
+
+    def test_execution_gap_excludes_clean_label(self):
+        f=[packet(i,100,second_step=1) for i in range(320) if i not in (301,302,303)]
+        r=simulate(tape(f),protocol(),0,'BTCUSDT',300,2,.004)
+        self.assertTrue(r['trade_gap_uncertain'])
+        self.assertEqual(summarize([r],2)['clean_observed'],0)
+
+    def test_audit_rejects_false_promotion_and_summaries(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p))
+        for kind in ('promotion','summary','group'):
+            changed=copy.deepcopy(r)
+            if kind=='promotion':changed['strategies'][0]['verdict']='CANDIDATE'
+            if kind=='summary':changed['strategies'][0]['summary']['clean_observed']=999
+            if kind=='group':changed['opportunity_groups'][0]['mean_net_return']=1
+            with self.subTest(kind=kind),self.assertRaises(ValueError):verify(changed,f,p)
+
+    def test_audit_rejects_repriced_later_exit(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p));x=next(x for x in r['opportunities'] if x['touch']=='TARGET')
+        # Reprice every arithmetic field consistently, leaving the original first-touch label.
+        x['exit_trigger_index']=x['decision_index']+300;x['exit_index']=x['exit_trigger_index']+3
+        bid=f[x['exit_index']]['quotes']['BTCUSDT']['bid'];sell=bid*.9995;qty=x['quantity']
+        x.update(exit_price=sell,pnl=qty*sell*.999-x['entry_spend'],fees=x['entry_notional']*.001+qty*sell*.001,
+                 slippage=qty*(f[x['entry_index']]['quotes']['BTCUSDT']['ask']+bid)*.0005)
+        x['net_return']=x['pnl']/x['entry_spend'];x['log_growth']=math.log1p(x['pnl']/x['start_equity'])
+        with self.assertRaises(ValueError):verify(r,f,p)
 
