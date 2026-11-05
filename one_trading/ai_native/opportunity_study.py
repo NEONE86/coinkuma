@@ -81,7 +81,7 @@ def simulate(tape,p,i,symbol,horizon,rr,risk,equity=10000., prior_peak=None):
     exit_index=bisect.bisect_left(ts,ts[trigger]+delay)
     exit_rejection=None
     def feasible(j,k):
-        return j<len(ts) and quote_ok(j,ts[k]+p['decision_latency_seconds']) and qty<=fs[j]['quotes'][symbol]['bid_size']*p['max_book_participation']
+        return j<len(ts) and quote_ok(j,ts[k]+p['decision_latency_seconds']) and qty<=fs[j]['quotes'][symbol]['bid_size']*p['max_book_participation'] and qty*fs[j]['quotes'][symbol]['bid']*(1-slip)>=p['min_notional_usdt']
     if not feasible(exit_index,trigger):
         exit_rejection='EXIT_DEPTH_OR_QUOTE_REJECTED'
         trigger=end;exit_index=bisect.bisect_left(ts,ts[end]+delay)

@@ -58,6 +58,11 @@ class Opportunity(unittest.TestCase):
         self.assertEqual(r['status'],'OPEN_UNLIQUIDATED')
         self.assertEqual(r['mark_or_fill'],'FINAL_BID_MARK_NOT_FILL')
 
+    def test_sell_below_minimum_notional_is_not_a_fill(self):
+        f=[packet(i,100 if i<5 else 50,second_step=1) for i in range(50)]
+        r=simulate(tape(f),protocol(),0,'BTCUSDT',30,2,.004)
+        self.assertEqual(r['status'],'OPEN_UNLIQUIDATED')
+
     def test_gap_and_prior_peak_drawdown(self):
         f=[packet(i,second_step=1) for i in range(50) if i not in (15,16,17)]
         r=simulate(tape(f),protocol(),0,'BTCUSDT',30,2,.004,prior_peak=11000)
@@ -72,4 +77,14 @@ class Opportunity(unittest.TestCase):
             if s['partition']=='DISCOVERY':
                 for tr in s['trades']:
                     if tr['exit_index'] is not None:self.assertLess(t['times'][tr['exit_index']],(t['times'][0]+t['times'][-1])/2)
+
+    def test_independent_audit_and_semantic_tampering(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p))
+        self.assertGreater(verify(r,f,p)['checked_positions'],0)
+        for key,value in [('pnl',999),('entry_index',0),('risk',.1),('touch','STOP'),('fees',0),('mfe_net',1)]:
+            changed=copy.deepcopy(r);target=next(x for x in changed['opportunities'] if x['status']=='CLOSED');target[key]=value
+            with self.subTest(key=key),self.assertRaises(ValueError):verify(changed,f,p)
 
