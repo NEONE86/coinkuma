@@ -1,0 +1,50 @@
+{
+  "version": "opportunity-v1-fixed",
+  "data_use": "REUSED_HISTORICAL_NOT_FORWARD_AI",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+  "decision_stride_seconds": 300,
+  "warmup_seconds": 300,
+  "horizons_seconds": [
+    300,
+    900,
+    3600,
+    14400
+  ],
+  "net_reward_risk": [
+    2,
+    3,
+    5,
+    8
+  ],
+  "fee_per_side": 0.001,
+  "slippage_per_side": 0.0005,
+  "decision_latency_seconds": 0.5,
+  "execution_delay_seconds": 2,
+  "max_quote_age_seconds": 30,
+  "max_spread_bps": 20,
+  "max_book_participation": 0.01,
+  "position_fraction": 0.0011,
+  "max_position_fraction": 0.125,
+  "max_total_exposure_fraction": 0.4,
+  "capital_usdt": 10000,
+  "max_drawdown_fraction": 0.15,
+  "min_notional_usdt": 10,
+  "stop_vol_floor_fraction": 0.001,
+  "max_observation_gap_seconds": 2.5,
+  "split_fraction": 0.5,
+  "candidate_min_validation_trades": 20,
+  "reject_min_validation_trades": 5,
+  "strategies": {
+    "TREND": "return300>round_trip_cost AND return60>0",
+    "REVERSION": "position300<=0.2 AND return30>0 AND rv300>=round_trip_cost/2",
+    "IMBALANCE_ASSIST": "TREND AND current_L1_imbalance>=0.2",
+    "CASH": "no trade"
+  },
+  "selection": "one long position across symbols; highest absolute return300, symbol tie-break; first12h discovery, second12h validation; crossing split labels purged; thresholds never fitted",
+  "exit": "first observed executable-bid net-return target/stop trigger; exit at first later sampled quote after2.5s; depth rejection holds until horizon; horizon exit attempt after2.5s; failed horizon exit remains open, valued at final bid with hypothetical liquidation costs; stop further entries",
+  "opportunity": "all eligible grid/asset combinations regardless of strategy; overlapping labels NOT independent; MFE is retrospective upper bound, never an entry signal"
+}
