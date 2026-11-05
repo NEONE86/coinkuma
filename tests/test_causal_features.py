@@ -79,3 +79,12 @@ class RiskPaths(unittest.TestCase):
         self.assertIn("INSUFFICIENT_VISIBLE_BID",[x["payload"]["reason"] for x in r["ledger"] if x["kind"]=="order_rejected"])
         self.assertEqual(r["summary"]["TEST"]["fills"],1)
         self.assertEqual(r["summary"]["TEST"]["open_positions"],1)
+
+    def test_injected_replay_is_byte_reproducible(self):
+        from one_trading.ai_native.offline_input_study import InjectedPlans,FrozenCash
+        f=[packet(i,100+i*.01,second_step=3) for i in range(25)]
+        def replay():
+            e=Experiment(Protocol(),{"CASH":FrozenCash(),"INJECTED_NOT_AI":InjectedPlans(f)},data_use="REUSED_HISTORICAL")
+            for x in f:e.observe(x)
+            r=e.finish();verify(r);return r
+        self.assertEqual(replay(),replay())

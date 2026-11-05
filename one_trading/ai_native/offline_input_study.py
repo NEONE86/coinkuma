@@ -12,6 +12,11 @@ from .live_audit import verify as verify_original
 from .bybit_audit import audit
 from .causal_features import enrich
 
+class FrozenCash(CashPlanner):
+    def propose(self, context):
+        return ModelDecision(super().propose(context), .5)
+
+
 class InjectedPlans:
     def __init__(self, frames):
         self.actions={frames[0]["id"]:"BUY",frames[20]["id"]:"SELL"}
@@ -37,7 +42,7 @@ def study(root, output):
         c=json.loads(f.read_text());e=enrich(c,frames)
         (output/f.name).write_bytes(canonical(e));examples.append(dict(request=f.name,original_sha256=sha256(c),enhanced_sha256=sha256(e),available_seconds=e["market_features"]["available_seconds"]))
     feature_seconds=time.perf_counter()-start
-    e=Experiment(Protocol(),{"CASH":CashPlanner(),"INJECTED_NOT_AI":InjectedPlans(frames)},data_use="REUSED_HISTORICAL")
+    e=Experiment(Protocol(),{"CASH":FrozenCash(),"INJECTED_NOT_AI":InjectedPlans(frames)},data_use="REUSED_HISTORICAL")
     for f in frames:
         refs=provenance[f["id"]]["source_seqs"]
         e.observe(f,source_received_at={s:raw[n]["received_at"] for s,n in refs.items()})
