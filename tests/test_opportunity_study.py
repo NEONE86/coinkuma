@@ -154,3 +154,18 @@ class Opportunity(unittest.TestCase):
             else:changed['opportunities'].pop()
             with self.assertRaisesRegex(ValueError,'OPPORTUNITY_COVERAGE'):verify(changed,f,p)
 
+    def test_opportunity_capital_cannot_invent_minimum_rejection(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p))
+        for x in r['opportunities']:
+            x['start_equity']=1
+            if x['status']!='RIGHT_CENSORED':
+                for key in list(x):
+                    if key not in ('decision_index','symbol','horizon','rr','risk','start_equity','entry_index','exit_index','status','touch','partition'):del x[key]
+                x.update(status='MIN_NOTIONAL',entry_index=None,exit_index=None,touch=None)
+        for group in r['opportunity_groups']:
+            group.update(summarize([x for x in r['opportunities'] if (x['symbol'],x['horizon'],x['rr'])==(group['symbol'],group['horizon'],group['rr'])],group['rr']))
+        with self.assertRaisesRegex(ValueError,'OPPORTUNITY_CAPITAL'):verify(r,f,p,t['source_times'])
+

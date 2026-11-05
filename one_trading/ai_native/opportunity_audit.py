@@ -110,7 +110,9 @@ def verify(result, frames, p, source_times=None):
         trade_gap=any(times[j]-times[j-1]>p['max_observation_gap_seconds'] for j in range(entry+1,exit+1))
         if (r['gap_uncertain'],r['trade_gap_uncertain'])!=(gap,trade_gap):raise ValueError('GAP_EVIDENCE')
         checked+=1
-    for r in result['opportunities']:check(r)
+    for r in result['opportunities']:
+        if r['start_equity']!=p['capital_usdt']:raise ValueError('OPPORTUNITY_CAPITAL')
+        check(r)
     expected_opportunities=set()
     for i in grid:
         start=bisect.bisect_right(times,times[i]-300)-1
