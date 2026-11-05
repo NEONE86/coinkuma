@@ -113,6 +113,8 @@ class LivePlanner:
             event = json.loads((self.root/"decisions.jsonl").read_bytes().splitlines()[-1])
             ready = instant(event['at'])
             accepted = event['kind'] == 'proposal_validated'
+            if not accepted:
+                self.failed = True
             if Decimal(receipt['cost']) > Decimal(self.model.reserve):
                 self.failed = True
                 accepted = False
@@ -123,7 +125,8 @@ class LivePlanner:
             # Preserve unknown completion as unresolved; no fabricated zero bill.
             self.failed = True
             write_new(self.root/(rid+'-failure.json'), {'error_type': type(exc).__name__,
-                'at': now().isoformat(), 'status': 'UNRESOLVED_NO_RETRY'})
+                'at': now().isoformat(), 'status': 'UNRESOLVED_NO_RETRY',
+                'transport': getattr(exc, 'receipt', None)})
             return None
 
 
@@ -171,6 +174,7 @@ def run(root, config, *, enable_public_network=False, approval=None):
         write_new(root/'approval-claim.json', approval_claim)
     write_new(root/"source-manifest.json", {"commit": head, "files": source_hashes, "sha256": sha256(source_hashes)})
     write_new(root/'config.json', dict(config, model=model.model,
+        transport_evidence_version=2,
         mode='LIVE_MODEL' if approval else 'FREE_PROBE_NOT_AI', approval=approval,
         run_id=root.name, prompt_sha256=sha256(MODEL_INSTRUCTION)))
     registry = {name: dict(version=version, model=None, prompt_sha256=None,
@@ -221,6 +225,8 @@ def run(root, config, *, enable_public_network=False, approval=None):
                             journal.write(canonical(row)+b'\n')
                         journal.flush(); os.fsync(journal.fileno())
                         persisted = len(engine.ledger.records)
+                        if planner.failed:
+                            raise ValueError('MODEL_FAILURE_STOP_NO_RETRY')
                     if proc.poll() is not None:
                         if exited:
                             if queue:
@@ -244,7 +250,7 @@ def run(root, config, *, enable_public_network=False, approval=None):
     try:
         result = verify(root)
     except Exception as exc:
-        result = {'status': 'FAIL_INDEPENDENT_AUDIT', 'error': type(exc).__name__+':'+str(exc),
+        result = {'status': 'INCOMPLETE' if failure else 'FAIL_INDEPENDENT_AUDIT', 'error': type(exc).__name__+':'+str(exc),
                   'model_calls_external': planner.calls if approval else 0,
                   'economic_alpha': 'NOT_ESTABLISHED'}
     write_new(root/'audit.json', result)

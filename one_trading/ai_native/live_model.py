@@ -2,11 +2,27 @@
 import json
 import os
 import urllib.request
+import urllib.error
+import uuid
+import re
 from datetime import datetime, timezone
 from decimal import Decimal, ROUND_CEILING
 
 from .engine import canonical, ReplayError, instant
 from .planners import MODEL_INSTRUCTION, MODEL_SCHEMA, plan
+
+
+class ModelTransportError(ReplayError):
+    def __init__(self, receipt):
+        super().__init__('MODEL_TRANSPORT_FAILED')
+        self.receipt = receipt
+
+
+def safe_label(value, secret):
+    # Only bounded machine labels. Never retain arbitrary error messages/bodies.
+    if not isinstance(value, str) or secret in value or re.search(r'(sk-|Bearer|@)', value, re.I):
+        return None
+    return value if re.fullmatch(r'[A-Za-z0-9_.:-]{1,128}', value) else None
 
 
 def usage_cost(usage, rates):
@@ -87,20 +103,54 @@ class ResponsesModel:
             raise ReplayError('REQUEST_EXCEEDS_RESERVED_COST')
         request = urllib.request.Request('https://api.openai.com/v1/responses', data=wire,
             headers={'Authorization': 'Bearer '+self.key, 'Content-Type': 'application/json'})
-        with urllib.request.build_opener(NoRedirect).open(request, timeout=30) as response:
-            raw = response.read(1000001)
-            if len(raw) > 1000000:
-                raise ReplayError('MODEL_RESPONSE_TOO_LARGE')
-        envelope = json.loads(raw)
-        cost = usage_cost(envelope['usage'], self.approval['rates'])
-        text = ''.join(c['text'] for item in envelope.get('output', [])
-                       if item.get('type') == 'message' for c in item.get('content', [])
-                       if c.get('type') == 'output_text')
-        if envelope.get('status') != 'completed':
-            text = ''  # Charge and preserve incomplete/refused output, no plan.
+        metadata = dict(client_request_id=str(uuid.uuid4()), request_at=datetime.now(timezone.utc).isoformat(),
+                        response_at=None, http_status=None, request_id=None,
+                        completion='UNKNOWN_COMPLETION', response_complete=False,
+                        error_type=None, error_code=None, message_omitted=True)
+        request.add_header('X-Client-Request-Id', metadata['client_request_id'])
+        try:
+            with urllib.request.build_opener(NoRedirect).open(request, timeout=30) as response:
+                status = response.status
+                metadata['http_status'] = status if type(status) is int else None
+                metadata['request_id'] = safe_label(response.headers.get('x-request-id'), self.key)
+                raw = response.read(1000001)
+                metadata['response_at'] = datetime.now(timezone.utc).isoformat()
+                if len(raw) > 1000000:
+                    raise ReplayError('MODEL_RESPONSE_TOO_LARGE')
+            envelope = json.loads(raw)
+            cost = usage_cost(envelope['usage'], self.approval['rates'])
+            text = ''.join(c['text'] for item in envelope.get('output', [])
+                           if item.get('type') == 'message' for c in item.get('content', [])
+                           if c.get('type') == 'output_text')
+            if envelope.get('status') != 'completed':
+                text = ''  # Charge and preserve incomplete/refused output, no plan.
+        except urllib.error.HTTPError as exc:
+            metadata.update(http_status=exc.code,
+                response_at=datetime.now(timezone.utc).isoformat(),
+                request_id=safe_label(exc.headers.get('x-request-id'), self.key))
+            try:
+                body = exc.read(8193)
+                if len(body) <= 8192:
+                    error = json.loads(body).get('error', {})
+                    metadata['error_type'] = safe_label(error.get('type'), self.key)
+                    metadata['error_code'] = safe_label(error.get('code'), self.key)
+                    metadata['response_complete'] = True
+            except Exception:
+                pass
+            finally:
+                metadata['response_at'] = datetime.now(timezone.utc).isoformat()
+                exc.close()
+            if metadata['response_complete'] and 400 <= exc.code < 500:
+                metadata['completion'] = 'REJECTED_HTTP'
+            raise ModelTransportError(metadata) from None
+        except Exception as exc:
+            metadata.update(response_at=datetime.now(timezone.utc).isoformat(),
+                            error_type=type(exc).__name__)
+            raise ModelTransportError(metadata) from None
+        metadata.update(response_complete=True, completion=envelope.get('status'))
         # Preserve the full provider response, even a refusal/incomplete result.
         return text.encode(), {'kind': 'OPENAI_USAGE_PRICED_NOT_INVOICE', 'cost': cost,
             'input_tokens': envelope['usage']['input_tokens'],
             'output_tokens': envelope['usage']['output_tokens'],
             'provider_response': envelope, 'provider_raw_utf8': raw.decode(),
-            'request_body': body}
+            'request_body': body, 'transport': metadata}
