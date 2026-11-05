@@ -119,6 +119,11 @@ class ResponsesModel:
                     raise ReplayError('MODEL_RESPONSE_TOO_LARGE')
             envelope = json.loads(raw)
             cost = usage_cost(envelope['usage'], self.approval['rates'])
+            text = ''.join(c['text'] for item in envelope.get('output', [])
+                           if item.get('type') == 'message' for c in item.get('content', [])
+                           if c.get('type') == 'output_text')
+            if envelope.get('status') != 'completed':
+                text = ''  # Charge and preserve incomplete/refused output, no plan.
         except urllib.error.HTTPError as exc:
             metadata.update(http_status=exc.code,
                 response_at=datetime.now(timezone.utc).isoformat(),
@@ -133,6 +138,7 @@ class ResponsesModel:
             except Exception:
                 pass
             finally:
+                metadata['response_at'] = datetime.now(timezone.utc).isoformat()
                 exc.close()
             if metadata['response_complete'] and 400 <= exc.code < 500:
                 metadata['completion'] = 'REJECTED_HTTP'
@@ -142,11 +148,6 @@ class ResponsesModel:
                             error_type=type(exc).__name__)
             raise ModelTransportError(metadata) from None
         metadata.update(response_complete=True, completion=envelope.get('status'))
-        text = ''.join(c['text'] for item in envelope.get('output', [])
-                       if item.get('type') == 'message' for c in item.get('content', [])
-                       if c.get('type') == 'output_text')
-        if envelope.get('status') != 'completed':
-            text = ''  # Charge and preserve incomplete/refused output, no plan.
         # Preserve the full provider response, even a refusal/incomplete result.
         return text.encode(), {'kind': 'OPENAI_USAGE_PRICED_NOT_INVOICE', 'cost': cost,
             'input_tokens': envelope['usage']['input_tokens'],

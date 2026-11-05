@@ -29,7 +29,7 @@ class ModelErrorTests(unittest.TestCase):
                 self.assertEqual(opener.open.call_args.args[0].get_header("X-client-request-id"),r["client_request_id"])
                 self.assertLessEqual(r["request_at"],r["response_at"])
     def test_timeout_and_corruption_unknown(self):
-        for fault in (TimeoutError("secret-fixture"), b"broken-json"):
+        for fault in (TimeoutError("secret-fixture"), b"broken-json", b'{"usage":{"input_tokens":1,"output_tokens":1,"input_tokens_details":{"cached_tokens":0}},"output":[null]}'):
             with patch.dict("os.environ",{"OPENAI_API_KEY":"secret-fixture"}):
                 opener=MagicMock()
                 if isinstance(fault,Exception):opener.open.side_effect=fault
