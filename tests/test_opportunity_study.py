@@ -135,3 +135,22 @@ class Opportunity(unittest.TestCase):
         target['partition']='VALIDATION'
         with self.assertRaisesRegex(ValueError,'STRATEGY_TIME'):verify(r,f,p)
 
+    def test_off_grid_decisions_rejected(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        altered=dict(p,warmup_seconds=301);t=tape(f)
+        r=analyze(t,altered,feature_grid(t,altered))
+        with self.assertRaisesRegex(ValueError,'DECISION_GRID'):verify(r,f,p)
+
+    def test_opportunity_omission_and_duplicate_rejected(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p))
+        for duplicate in (False,True):
+            changed=copy.deepcopy(r)
+            if duplicate:changed['opportunities'].append(copy.deepcopy(changed['opportunities'][0]))
+            else:changed['opportunities'].pop()
+            with self.assertRaisesRegex(ValueError,'OPPORTUNITY_COVERAGE'):verify(changed,f,p)
+

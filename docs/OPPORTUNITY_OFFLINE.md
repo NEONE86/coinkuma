@@ -75,8 +75,8 @@ python -B -X utf8 scripts/run_observer_audit.py --out NEW_OFFLINE_AUDIT
 Before running, independently verify the capture against its original SHA256
 manifest and the existing Bybit source auditor. `opportunity_audit` independently
 rebuilds trade arithmetic, causal volatility risk, touch order, delays, source
-receipt availability, depth, partition boundaries and portfolio drawdown. It does
-not certify exhaustive strategy signal enumeration or genuine investment alpha.
+receipt availability, depth, partition boundaries and portfolio drawdown. It also independently enumerates the decision grid, expected strategy schedule
+and opportunity coverage. It does not certify genuine investment alpha.
 Unit tests include bounded/full-prefix parity, future-prefix invariance, first
 touch, tail censoring, depth, stale/pre-decision quotes, minimum notional, cash,
 partition isolation, compound arithmetic, and six semantic tamper controls.

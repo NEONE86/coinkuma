@@ -1,6 +1,6 @@
 """Independent arithmetic/chronology verifier; does not call the study simulator.
 
-This verifies recorded outcomes, not profitability or an exhaustive signal search.
+This verifies frozen recorded outcomes and schedule completeness, not profitability.
 Source identity is additionally established by the existing Bybit raw audit.
 """
 import argparse
@@ -19,9 +19,14 @@ def verify(result, frames, p, source_times=None):
     def near(a,b):
         if not math.isclose(a,b,rel_tol=1e-9,abs_tol=1e-9):raise ValueError('ARITHMETIC_MISMATCH')
     split=times[0]+(times[-1]-times[0])*p['split_fraction']
+    grid=[];target=times[0]+p['warmup_seconds']
+    while target<=times[-1]:
+        grid.append(bisect.bisect_left(times,target));target+=p['decision_stride_seconds']
+    allowed=set(grid)
     def check(r,partition=None):
         nonlocal checked
         i=r['decision_index'];s=r['symbol'];entry=r['entry_index'];exit=r['exit_index']
+        if i not in allowed:raise ValueError('DECISION_GRID')
         partition=partition or r.get('partition')
         bound=bisect.bisect_left(times,split) if partition=='DISCOVERY' else len(times)
         end=bisect.bisect_left(times,times[i]+r['horizon']);expected_entry=bisect.bisect_left(times,times[i]+delay)
@@ -106,6 +111,16 @@ def verify(result, frames, p, source_times=None):
         if (r['gap_uncertain'],r['trade_gap_uncertain'])!=(gap,trade_gap):raise ValueError('GAP_EVIDENCE')
         checked+=1
     for r in result['opportunities']:check(r)
+    expected_opportunities=set()
+    for i in grid:
+        start=bisect.bisect_right(times,times[i]-300)-1
+        if start<0 or times[i]-300-times[start]>p['max_observation_gap_seconds']:continue
+        if any(times[j]-times[j-1]>p['max_observation_gap_seconds'] for j in range(start+1,i+1)):continue
+        for symbol in p['symbols']:
+            if any(times[j]-datetime.fromisoformat(frames[j]['quotes'][symbol]['exchange_at']).timestamp()>p['max_quote_age_seconds'] for j in range(start,i+1)):continue
+            expected_opportunities.update((i,symbol,h,rr) for h in p['horizons_seconds'] for rr in p['net_reward_risk'])
+    actual_opportunities=[(r['decision_index'],r['symbol'],r['horizon'],r['rr']) for r in result['opportunities']]
+    if len(actual_opportunities)!=len(set(actual_opportunities)) or set(actual_opportunities)!=expected_opportunities:raise ValueError('OPPORTUNITY_COVERAGE')
     signal_cache={}
     def selected_asset(index,name):
         key=(index,name)
@@ -141,9 +156,11 @@ def verify(result, frames, p, source_times=None):
             near(r['start_equity'],equity);check(r,strategy['partition'])
             if r.get('exit_index') is None:continue
             if strategy['partition']=='DISCOVERY' and times[r['exit_index']]>=times[0]+(times[-1]-times[0])*p['split_fraction']:raise ValueError('CROSS_SPLIT_LEAK')
+            trade_dd=0
             for j in range(r['entry_index'],r['exit_index']+1):
                 mark=equity-r['entry_spend']+r['quantity']*frames[j]['quotes'][r['symbol']]['bid']*(1-slip)*(1-fee)
-                peak=max(peak,mark);dd=max(dd,1-mark/peak)
+                peak=max(peak,mark);dd=max(dd,1-mark/peak);trade_dd=max(trade_dd,1-mark/peak)
+            near(r['intratrade_drawdown'],trade_dd);near(r['peak_equity'],peak)
             equity+=r['pnl'];last=r['exit_index']
             lossrun=lossrun+1 if r['pnl']<0 else 0;maxloss=max(maxloss,lossrun)
         near(strategy['equity'],equity);near(strategy['pnl'],equity-p['capital_usdt'])
@@ -158,9 +175,22 @@ def verify(result, frames, p, source_times=None):
         if strategy['verdict']!=expected:raise ValueError('PROMOTION_VERDICT')
         mean=math.log(equity/p['capital_usdt'])/len(clean) if clean and len(clean)==sum('pnl' in r for r in strategy['trades']) else None
         if strategy['mean_log_growth']!=mean or strategy['max_consecutive_losses']!=maxloss:raise ValueError('GROWTH_OR_LOSS_RUN')
+        cursor=0;busy=-1;halted=False
+        for i in grid:
+            if halted or i<=busy or times[i]<lo or times[i]+strategy['horizon']+delay>=hi:continue
+            symbol=selected_asset(i,strategy['strategy'])
+            if symbol is None:continue
+            if cursor>=len(strategy['trades']):raise ValueError('MISSING_STRATEGY_DECISION')
+            row=strategy['trades'][cursor];cursor+=1
+            if (row['decision_index'],row['symbol'])!=(i,symbol):raise ValueError('STRATEGY_SCHEDULE')
+            if row['entry_index'] is not None:
+                busy=row['exit_index'];halted=row['status']!='CLOSED' or row['intratrade_drawdown']>=p['max_drawdown_fraction']
+        if cursor!=len(strategy['trades']):raise ValueError('EXTRA_STRATEGY_DECISION')
     keys=[(s['strategy'],s['horizon'],s['rr'],s['partition']) for s in result['strategies']]
     expected_keys={(s,h,rr,part) for s in p['strategies'] for h in p['horizons_seconds'] for rr in p['net_reward_risk'] for part in ('DISCOVERY','VALIDATION')}
     if len(keys)!=len(set(keys)) or set(keys)!=expected_keys:raise ValueError('STRATEGY_COVERAGE')
+    group_keys=[(g['symbol'],g['horizon'],g['rr']) for g in result['opportunity_groups']]
+    if len(group_keys)!=len(set(group_keys)) or set(group_keys)!={(s,h,rr) for s in p['symbols'] for h in p['horizons_seconds'] for rr in p['net_reward_risk']}:raise ValueError('GROUP_COVERAGE')
     for group in result['opportunity_groups']:
         records=[r for r in result['opportunities'] if (r['symbol'],r['horizon'],r['rr'])==(group['symbol'],group['horizon'],group['rr'])]
         validate_summary({k:v for k,v in group.items() if k not in ('symbol','horizon','rr','independent_time_blocks_upper_bound')},records,group['rr'])
