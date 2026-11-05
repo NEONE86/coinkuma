@@ -106,9 +106,37 @@ def verify(result, frames, p, source_times=None):
         if (r['gap_uncertain'],r['trade_gap_uncertain'])!=(gap,trade_gap):raise ValueError('GAP_EVIDENCE')
         checked+=1
     for r in result['opportunities']:check(r)
+    signal_cache={}
+    def selected_asset(index,name):
+        key=(index,name)
+        if key in signal_cache:return signal_cache[key]
+        candidates=[]
+        for symbol in frames[index]['quotes']:
+            anchors={n:bisect.bisect_right(times,times[index]-n)-1 for n in (30,60,300)}
+            start=anchors[300]
+            if start<0 or any(times[index]-n-times[k]>p['max_observation_gap_seconds'] for n,k in anchors.items()):continue
+            if any(times[j]-times[j-1]>p['max_observation_gap_seconds'] for j in range(start+1,index+1)):continue
+            if any(times[j]-datetime.fromisoformat(frames[j]['quotes'][symbol]['exchange_at']).timestamp()>p['max_quote_age_seconds'] for j in range(start,index+1)):continue
+            mids=[(frames[j]['quotes'][symbol]['bid']+frames[j]['quotes'][symbol]['ask'])/2 for j in range(start,index+1)]
+            returns={n:mids[-1]/mids[k-start]-1 for n,k in anchors.items()}
+            q=frames[index]['quotes'][symbol];cost=2*(fee+slip)+(q['ask']-q['bid'])/mids[-1]
+            vol=math.sqrt(sum(math.log(b/a)**2 for a,b in zip(mids,mids[1:])))
+            trend=returns[300]>cost and returns[60]>0
+            position=(mids[-1]-min(mids))/(max(mids)-min(mids)) if max(mids)>min(mids) else None
+            eligible=(name=='TREND' and trend) or (name=='IMBALANCE_ASSIST' and trend and (q['bid_size']-q['ask_size'])/(q['bid_size']+q['ask_size'])>=.2) or (name=='REVERSION' and position is not None and position<=.2 and returns[30]>0 and vol>=cost/2)
+            if eligible:candidates.append((abs(returns[300]),symbol))
+        signal_cache[key]=max(candidates)[1] if candidates else None
+        return signal_cache[key]
     for strategy in result['strategies']:
         equity=p['capital_usdt'];last=-1;peak=equity;dd=0;lossrun=0;maxloss=0
+        if strategy['partition'] not in ('DISCOVERY','VALIDATION'):raise ValueError('STRATEGY_PARTITION')
+        lo,hi=(times[0],split) if strategy['partition']=='DISCOVERY' else (split,times[-1])
         for r in strategy['trades']:
+            decision=times[r['decision_index']]
+            if decision<lo or decision+r['horizon']+delay>=hi:raise ValueError('STRATEGY_TIME')
+            if (r['horizon'],r['rr'])!=(strategy['horizon'],strategy['rr']):raise ValueError('STRATEGY_SPEC')
+            if selected_asset(r['decision_index'],strategy['strategy'])!=r['symbol']:raise ValueError('STRATEGY_SIGNAL')
+            if dd>=p['max_drawdown_fraction']:raise ValueError('DRAWDOWN_HALT')
             if r['decision_index']<=last:raise ValueError('OVERLAPPING_POSITIONS')
             near(r['start_equity'],equity);check(r,strategy['partition'])
             if r.get('exit_index') is None:continue
@@ -130,6 +158,9 @@ def verify(result, frames, p, source_times=None):
         if strategy['verdict']!=expected:raise ValueError('PROMOTION_VERDICT')
         mean=math.log(equity/p['capital_usdt'])/len(clean) if clean and len(clean)==sum('pnl' in r for r in strategy['trades']) else None
         if strategy['mean_log_growth']!=mean or strategy['max_consecutive_losses']!=maxloss:raise ValueError('GROWTH_OR_LOSS_RUN')
+    keys=[(s['strategy'],s['horizon'],s['rr'],s['partition']) for s in result['strategies']]
+    expected_keys={(s,h,rr,part) for s in p['strategies'] for h in p['horizons_seconds'] for rr in p['net_reward_risk'] for part in ('DISCOVERY','VALIDATION')}
+    if len(keys)!=len(set(keys)) or set(keys)!=expected_keys:raise ValueError('STRATEGY_COVERAGE')
     for group in result['opportunity_groups']:
         records=[r for r in result['opportunities'] if (r['symbol'],r['horizon'],r['rr'])==(group['symbol'],group['horizon'],group['rr'])]
         validate_summary({k:v for k,v in group.items() if k not in ('symbol','horizon','rr','independent_time_blocks_upper_bound')},records,group['rr'])

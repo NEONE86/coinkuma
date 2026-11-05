@@ -126,3 +126,12 @@ class Opportunity(unittest.TestCase):
         x['net_return']=x['pnl']/x['entry_spend'];x['log_growth']=math.log1p(x['pnl']/x['start_equity'])
         with self.assertRaises(ValueError):verify(r,f,p)
 
+    def test_discovery_cannot_be_relabeled_validation(self):
+        from one_trading.ai_native.opportunity_audit import verify
+        f=[packet(i,100+i*.01,second_step=1) for i in range(1600)]
+        p=protocol();p.update(horizons_seconds=[300],net_reward_risk=[2],symbols=['BTCUSDT'])
+        t=tape(f);r=analyze(t,p,feature_grid(t,p))
+        target=next(s for s in r['strategies'] if s['partition']=='DISCOVERY' and s['trades'])
+        target['partition']='VALIDATION'
+        with self.assertRaisesRegex(ValueError,'STRATEGY_TIME'):verify(r,f,p)
+
