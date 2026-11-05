@@ -17,6 +17,37 @@ def read(path):
     return json.loads(path.read_text(encoding='utf-8'))
 
 
+def verify_transport(root):
+    """Reconcile bounded transport outcomes even when early stop lacks two frames."""
+    root = Path(root)
+    rows = [json.loads(x) for x in (root/'decisions.jsonl').read_bytes().splitlines()]
+    requests = [r for r in rows if r['kind']=='decision_requested']
+    responses = {r['payload']['request_id']:r for r in rows if r['kind']=='decision_received'}
+    ids = set(); counts = dict(success=0, rejected=0, unknown=0)
+    for r in requests:
+        rid = r['payload']['request_id']
+        success = rid in responses
+        record = read(root/(rid+('-provider.json' if success else '-failure.json')))
+        t = record['transport']
+        check(isinstance(t,dict) and len(json.dumps(t)) <= 4096, 'TRANSPORT_SIZE')
+        client = t['client_request_id']
+        import uuid
+        check(str(uuid.UUID(client))==client and client not in ids, 'DUPLICATE_TRANSPORT_REQUEST')
+        ids.add(client)
+        check(at(r['at']) <= at(t['request_at']) <= at(t['response_at']), 'TRANSPORT_TIME')
+        if success:
+            check(at(t['response_at']) <= at(responses[rid]['at']), 'TRANSPORT_RESPONSE_TIME')
+            check(t['http_status']==200 and t['response_complete'] is True, 'TRANSPORT_SUCCESS')
+            counts['success' if t['completion']=='completed' else 'rejected'] += 1
+        else:
+            check(t['completion'] in ('REJECTED_HTTP','UNKNOWN_COMPLETION'), 'FALSE_FAILURE_COMPLETION')
+            if t['completion']=='REJECTED_HTTP':
+                check(type(t['http_status']) is int and 400 <= t['http_status'] < 500 and
+                      t['response_complete'] is True, 'FALSE_HTTP_REJECTION')
+            counts['rejected' if t['completion']=='REJECTED_HTTP' else 'unknown'] += 1
+    return dict(status='PASS_TRANSPORT_RECONCILIATION_ONLY', requests=len(requests), **counts)
+
+
 def verify_approval(config, header, requests, claim):
     a=config['approval']; policy=header['registry']['AI']
     check(a.get('model_calls_authorized') is True and bool(a.get('approval_reference')), 'APPROVAL_DENIED')
@@ -39,6 +70,8 @@ def verify_approval(config, header, requests, claim):
 def verify(root):
     root = Path(root)
     config = read(root/'config.json')
+    if config.get('transport_evidence_version')==2 and config['mode']=='LIVE_MODEL':
+        verify_transport(root)
     evidence = decision_verify(root/'decisions.jsonl', source_dir=root/'source')
     paper = read(root/'paper.json')
     expected_protocol = dict(capital_usdt=10000., execution_delay_seconds=2.,
